@@ -1,0 +1,1562 @@
+{
+  "nodes": [
+    {
+      "node_id": "reconstruction_root",
+      "parent_id": null,
+      "name": "reconstruction",
+      "description": "Ingested pipeline from reconstruction",
+      "concept_type": "custom",
+      "inputs": [],
+      "outputs": [],
+      "status": "decomposed",
+      "children": [
+        "gan_patch_reconstruction",
+        "windowed_signal_reconstruction"
+      ],
+      "depth": 0,
+      "type_signature": "",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "gan_patch_reconstruction",
+      "parent_id": "reconstruction_root",
+      "name": "GAN Patch Reconstruction",
+      "description": "Generates a reconstructed signal patch from clean PPG context and injected noise using a provided generator on a specified device.",
+      "concept_type": "signal_transform",
+      "inputs": [
+        {
+          "name": "ppg_clean",
+          "type_desc": "np.ndarray",
+          "constraints": "Shape compatible with generator input"
+        },
+        {
+          "name": "noise",
+          "type_desc": "np.ndarray",
+          "constraints": "Shape compatible with generator input"
+        },
+        {
+          "name": "sampling_rate",
+          "type_desc": "float",
+          "constraints": "Positive"
+        },
+        {
+          "name": "generator",
+          "type_desc": "Callable",
+          "constraints": "Stateless from this graph perspective"
+        },
+        {
+          "name": "device",
+          "type_desc": "str",
+          "constraints": "Valid runtime device"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "reconstructed_patch",
+          "type_desc": "np.ndarray",
+          "constraints": "Aligned to target patch length"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "initialize_reconstruction_state",
+        "evaluate_reconstruction_completion",
+        "normalize_and_batch_clean_context",
+        "generate_noise_candidate_patch",
+        "align_and_stitch_signals_by_peak_boundaries",
+        "resample_stitched_signal_to_native_scale",
+        "update_iteration_state_from_stitched_signal"
+      ],
+      "depth": 1,
+      "type_signature": "(ppg_clean: array-like signal segment, noise: array-like latent/noise tensor, sampling_rate: float|int, generator: callable/model, device: string|device handle) -> array-like signal segment",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "Conditional Latent-to-Segment Generative Synthesis. Maps a conditioning signal segment and a latent random tensor through a learned nonlinear generator to produce a synthetic output segment with matched structural length. The conditioning input constrains coarse morphology, while the latent input injects fine-scale variability drawn from the generator's learned distribution. Execution is an inference-time forward pass on a specified compute target, with no parameter updates in this step.. Applications: Reconstructing short corrupted windows in industrial sensor streams using neighboring clean context plus latent variability., Generating localized texture patches in materials microscopy conditioned on surrounding microstructure tiles., Synthesizing missing waveform fragments in acoustic monitoring conditioned on adjacent clean temporal context., Imputing partial trajectory segments in robotic telemetry conditioned on recent kinematic state history.",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "initialize_reconstruction_state",
+      "parent_id": "gan_patch_reconstruction",
+      "name": "initialize_reconstruction_state",
+      "description": "Derive fixed reconstruction window settings and initialize iterative state from inputs.",
+      "concept_type": "arithmetic",
+      "inputs": [
+        {
+          "name": "ppg_clean",
+          "type_desc": "np.ndarray",
+          "constraints": "1D clean context segment"
+        },
+        {
+          "name": "noise",
+          "type_desc": "list",
+          "constraints": "target noise sequence; only its length is used"
+        },
+        {
+          "name": "sampling_rate",
+          "type_desc": "int",
+          "constraints": "> 0"
+        },
+        {
+          "name": "shifting_step_seconds",
+          "type_desc": "float",
+          "constraints": "constant 5 in current implementation"
+        },
+        {
+          "name": "upsampling_rate",
+          "type_desc": "float",
+          "constraints": "external constant (UPSAMPLING_RATE)"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ppg_clean_current",
+          "type_desc": "np.ndarray",
+          "constraints": "initial loop context"
+        },
+        {
+          "name": "target_noise_len",
+          "type_desc": "int",
+          "constraints": "len(noise)"
+        },
+        {
+          "name": "len_rec",
+          "type_desc": "int",
+          "constraints": "int(shifting_step_seconds * sampling_rate)"
+        },
+        {
+          "name": "reconstructed_noise_current",
+          "type_desc": "list[float]",
+          "constraints": "initialized empty"
+        },
+        {
+          "name": "remaining_noise_current",
+          "type_desc": "int",
+          "constraints": "initialized to target_noise_len"
+        },
+        {
+          "name": "current_reconstructed_len",
+          "type_desc": "int",
+          "constraints": "initialized to 0"
+        },
+        {
+          "name": "sampling_rate_state",
+          "type_desc": "int",
+          "constraints": "pass-through"
+        },
+        {
+          "name": "upsampling_rate_state",
+          "type_desc": "float",
+          "constraints": "pass-through"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(ppg_clean: np.ndarray, noise: list, sampling_rate: int, shifting_step_seconds: int|float, upsampling_rate: float|int) -> tuple[np.ndarray, int, int, list[float], int, int, int, float|int]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "evaluate_reconstruction_completion",
+      "parent_id": "gan_patch_reconstruction",
+      "name": "evaluate_reconstruction_completion",
+      "description": "Check whether reconstruction should continue based on current and target lengths.",
+      "concept_type": "analysis",
+      "inputs": [
+        {
+          "name": "current_reconstructed_len",
+          "type_desc": "int",
+          "constraints": ">= 0"
+        },
+        {
+          "name": "target_noise_len",
+          "type_desc": "int",
+          "constraints": ">= 0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "continue_flag",
+          "type_desc": "bool",
+          "constraints": "true when current_reconstructed_len < target_noise_len"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(current_reconstructed_len: int, target_noise_len: int) -> bool",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "normalize_and_batch_clean_context",
+      "parent_id": "gan_patch_reconstruction",
+      "name": "normalize_and_batch_clean_context",
+      "description": "Scale clean context and replicate it into a batch tensor for generator inference.",
+      "concept_type": "signal_transform",
+      "inputs": [
+        {
+          "name": "ppg_clean_current",
+          "type_desc": "np.ndarray",
+          "constraints": "1D signal segment"
+        },
+        {
+          "name": "batch_size",
+          "type_desc": "int",
+          "constraints": "constant 256 in current implementation"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ppg_clean_norm",
+          "type_desc": "np.ndarray",
+          "constraints": "scaled clean context"
+        },
+        {
+          "name": "generator_input",
+          "type_desc": "Tensor",
+          "constraints": "shape [batch_size, 1, signal_len]"
+        },
+        {
+          "name": "clean_len",
+          "type_desc": "int",
+          "constraints": "len(ppg_clean_norm)"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(ppg_clean_current: np.ndarray, batch_size: int) -> tuple[np.ndarray, torch.FloatTensor, int]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "generate_noise_candidate_patch",
+      "parent_id": "gan_patch_reconstruction",
+      "name": "generate_noise_candidate_patch",
+      "description": "Run generator on prepared batch and extract one reconstructed candidate patch.",
+      "concept_type": "probabilistic_oracle",
+      "inputs": [
+        {
+          "name": "generator_input",
+          "type_desc": "Tensor",
+          "constraints": "batched input tensor"
+        },
+        {
+          "name": "generator",
+          "type_desc": "Callable",
+          "constraints": "returns (rec_test, aux)"
+        },
+        {
+          "name": "device",
+          "type_desc": "str",
+          "constraints": "valid compute device"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "noise_candidate",
+          "type_desc": "np.ndarray",
+          "constraints": "1D generated patch from first batch item"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(generator_input: torch.FloatTensor, generator: callable/model, device: str|torch.device) -> np.ndarray",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "align_and_stitch_signals_by_peak_boundaries",
+      "parent_id": "gan_patch_reconstruction",
+      "name": "align_and_stitch_signals_by_peak_boundaries",
+      "description": "Upsample clean and generated signals, detect peaks, and stitch them at physiologic boundary points.",
+      "concept_type": "searching",
+      "inputs": [
+        {
+          "name": "ppg_clean_norm",
+          "type_desc": "np.ndarray",
+          "constraints": "scaled clean context"
+        },
+        {
+          "name": "noise_candidate",
+          "type_desc": "np.ndarray",
+          "constraints": "generated patch"
+        },
+        {
+          "name": "sampling_rate_state",
+          "type_desc": "int",
+          "constraints": "> 0"
+        },
+        {
+          "name": "upsampling_rate_state",
+          "type_desc": "float",
+          "constraints": "> 0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "stitched_signal_upsampled",
+          "type_desc": "list[float]",
+          "constraints": "clean prefix + generated suffix in upsampled domain"
+        },
+        {
+          "name": "stitched_native_len",
+          "type_desc": "int",
+          "constraints": "len(ppg_clean_norm) + len(noise_candidate)"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(ppg_clean_norm: np.ndarray, noise_candidate: np.ndarray, sampling_rate_state: int, upsampling_rate_state: float|int) -> tuple[list[float], int]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "resample_stitched_signal_to_native_scale",
+      "parent_id": "gan_patch_reconstruction",
+      "name": "resample_stitched_signal_to_native_scale",
+      "description": "Project stitched upsampled signal back to native sample count.",
+      "concept_type": "signal_transform",
+      "inputs": [
+        {
+          "name": "stitched_signal_upsampled",
+          "type_desc": "list[float]",
+          "constraints": "stitched signal in upsampled domain"
+        },
+        {
+          "name": "stitched_native_len",
+          "type_desc": "int",
+          "constraints": "> 0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "stitched_signal_native",
+          "type_desc": "np.ndarray",
+          "constraints": "resampled to native length"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(stitched_signal_upsampled: list[float], stitched_native_len: int) -> np.ndarray",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "update_iteration_state_from_stitched_signal",
+      "parent_id": "gan_patch_reconstruction",
+      "name": "update_iteration_state_from_stitched_signal",
+      "description": "Extract next reconstructed chunk, update remaining target, append accumulation, and slide clean context window.",
+      "concept_type": "custom",
+      "inputs": [
+        {
+          "name": "stitched_signal_native",
+          "type_desc": "np.ndarray",
+          "constraints": "native-length stitched signal"
+        },
+        {
+          "name": "clean_len",
+          "type_desc": "int",
+          "constraints": "> 0"
+        },
+        {
+          "name": "len_rec",
+          "type_desc": "int",
+          "constraints": "> 0"
+        },
+        {
+          "name": "remaining_noise_current",
+          "type_desc": "int",
+          "constraints": ">= 0"
+        },
+        {
+          "name": "reconstructed_noise_current",
+          "type_desc": "list[float]",
+          "constraints": "accumulator before this iteration"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "reconstructed_noise_next",
+          "type_desc": "list[float]",
+          "constraints": "accumulator after append"
+        },
+        {
+          "name": "remaining_noise_next",
+          "type_desc": "int",
+          "constraints": "decremented by min(len_rec, remaining_noise_current)"
+        },
+        {
+          "name": "ppg_clean_next",
+          "type_desc": "np.ndarray",
+          "constraints": "shifted context window for next iteration"
+        },
+        {
+          "name": "current_reconstructed_len_next",
+          "type_desc": "int",
+          "constraints": "len(reconstructed_noise_next)"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(stitched_signal_native: np.ndarray, clean_len: int, len_rec: int, remaining_noise_current: int, reconstructed_noise_current: list[float]) -> tuple[list[float], int, np.ndarray, int]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "windowed_signal_reconstruction",
+      "parent_id": "reconstruction_root",
+      "name": "Windowed Signal Reconstruction",
+      "description": "Constructs a full reconstructed signal from clean/noisy index partitions, with optional filtering controlled by input flag.",
+      "concept_type": "signal_filter",
+      "inputs": [
+        {
+          "name": "sig",
+          "type_desc": "np.ndarray",
+          "constraints": "1D or channel-first signal supported by implementation"
+        },
+        {
+          "name": "clean_indices",
+          "type_desc": "np.ndarray",
+          "constraints": "Valid indices into sig"
+        },
+        {
+          "name": "noisy_indices",
+          "type_desc": "np.ndarray",
+          "constraints": "Valid indices into sig; may be disjoint from clean_indices"
+        },
+        {
+          "name": "sampling_rate",
+          "type_desc": "float",
+          "constraints": "Positive"
+        },
+        {
+          "name": "filter_signal",
+          "type_desc": "object",
+          "constraints": "If truthy/callable, applies filtering path"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "reconstructed_signal",
+          "type_desc": "np.ndarray",
+          "constraints": "Same length/index domain as input sig"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "load_reconstruction_model_runtime",
+        "harmonize_sampling_and_partitions",
+        "apply_optional_bandpass_filter",
+        "derive_scaled_signal_and_window_budget",
+        "identify_eligible_noise_windows",
+        "generate_noise_reconstructions",
+        "build_upsampled_alignment_context",
+        "merge_segments_with_peak_alignment",
+        "backproject_descale_and_reassess_quality",
+        "select_effective_signal_and_partitions",
+        "finalize_output_rate_and_partition_groups"
+      ],
+      "depth": 1,
+      "type_signature": "(sig: array-like full signal, clean_indices: index array/list, noisy_indices: index array/list, sampling_rate: float|int, filter_signal: bool|callable) -> array-like full signal",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "Partitioned Sequence Recomposition with Conditional Denoising. Reassembles an ordered numeric sequence/tensor by writing values back into a shared index domain from multiple index-defined partitions. The method preserves global alignment by enforcing index-consistent placement across all provided subsets. A conditional post-processing branch (boolean- or callable-triggered) optionally applies a smoothing/filtering operator parameterized by a positive sampling-density scalar.. Applications: Reconstructing electrophysiology traces from artifact-marked vs artifact-free sample partitions with optional denoising., Rebuilding seismic waveform streams from trusted and contaminated time windows before frequency-selective cleanup., Composing robotics sensor trajectories from reliable and degraded intervals, then applying optional low-pass stabilization., Reassembling packet-level network telemetry series from validated and suspect segments with optional noise suppression.",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "load_reconstruction_model_runtime",
+      "parent_id": "windowed_signal_reconstruction",
+      "name": "load_reconstruction_model_runtime",
+      "description": "Prepare GAN runtime artifacts by resolving the trained generator weights and execution device.",
+      "concept_type": "custom",
+      "inputs": [
+        {
+          "name": "model_path",
+          "type_desc": "str",
+          "constraints": "Path to GAN checkpoint directory"
+        },
+        {
+          "name": "model_file_name",
+          "type_desc": "str",
+          "constraints": "Checkpoint filename"
+        },
+        {
+          "name": "generator_class",
+          "type_desc": "object",
+          "constraints": "Compatible with saved checkpoint"
+        },
+        {
+          "name": "cuda_available",
+          "type_desc": "bool",
+          "constraints": "Hardware capability flag"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "generator",
+          "type_desc": "object",
+          "constraints": "Loaded for inference"
+        },
+        {
+          "name": "device",
+          "type_desc": "object",
+          "constraints": "cpu or cuda:0"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(model_path: str, model_file_name: str, generator_class: type, cuda_available: bool) -> tuple[torch.nn.Module, torch.device]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "harmonize_sampling_and_partitions",
+      "parent_id": "windowed_signal_reconstruction",
+      "name": "harmonize_sampling_and_partitions",
+      "description": "Convert signal and index partitions to the model sampling frequency when needed; otherwise normalize clean indices to a flat representation.",
+      "concept_type": "sampler",
+      "inputs": [
+        {
+          "name": "sig",
+          "type_desc": "np.ndarray",
+          "constraints": "1-D signal"
+        },
+        {
+          "name": "clean_indices",
+          "type_desc": "list[list[int]]",
+          "constraints": "Grouped clean index ranges"
+        },
+        {
+          "name": "noisy_indices",
+          "type_desc": "list[list[int]]",
+          "constraints": "Grouped noisy index ranges"
+        },
+        {
+          "name": "sampling_rate",
+          "type_desc": "int",
+          "constraints": "Input signal sampling frequency"
+        },
+        {
+          "name": "model_sampling_rate",
+          "type_desc": "int",
+          "constraints": "Target reconstruction sampling frequency"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "sig_working",
+          "type_desc": "np.ndarray",
+          "constraints": "Signal at working sampling rate"
+        },
+        {
+          "name": "sampling_rate_working",
+          "type_desc": "int",
+          "constraints": "Equals model_sampling_rate after conversion"
+        },
+        {
+          "name": "resampling_flag",
+          "type_desc": "bool",
+          "constraints": "True iff input was resampled"
+        },
+        {
+          "name": "sampling_rate_original",
+          "type_desc": "Optional[int]",
+          "constraints": "Set only when resampling_flag is True"
+        },
+        {
+          "name": "resampling_rate",
+          "type_desc": "Optional[float]",
+          "constraints": "Original/model rate ratio when resampled"
+        },
+        {
+          "name": "clean_indices_flat",
+          "type_desc": "list[int]",
+          "constraints": "Flattened clean indices at working rate"
+        },
+        {
+          "name": "noisy_indices_grouped",
+          "type_desc": "list[list[int]]",
+          "constraints": "Grouped noisy indices at working rate"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(sig: np.ndarray, clean_indices: list[list[int]], noisy_indices: list[list[int]], sampling_rate: int, model_sampling_rate: int) -> tuple[np.ndarray, int, bool, int|null, float|null, list[int], list[list[int]]]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "apply_optional_bandpass_filter",
+      "parent_id": "windowed_signal_reconstruction",
+      "name": "apply_optional_bandpass_filter",
+      "description": "Condition the working-rate signal with a 0.5-3 Hz bandpass when filtering is requested.",
+      "concept_type": "signal_filter",
+      "inputs": [
+        {
+          "name": "sig_working",
+          "type_desc": "np.ndarray",
+          "constraints": "Working-rate signal"
+        },
+        {
+          "name": "sampling_rate_working",
+          "type_desc": "int",
+          "constraints": "Filter design sampling frequency"
+        },
+        {
+          "name": "filter_signal",
+          "type_desc": "bool",
+          "constraints": "Apply filter only when True"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "sig_conditioned",
+          "type_desc": "np.ndarray",
+          "constraints": "Filtered or passthrough signal"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(sig_working: np.ndarray, sampling_rate_working: int, filter_signal: bool) -> np.ndarray",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "derive_scaled_signal_and_window_budget",
+      "parent_id": "windowed_signal_reconstruction",
+      "name": "derive_scaled_signal_and_window_budget",
+      "description": "Standardize the conditioned signal and compute the maximum reconstructable noisy-window length.",
+      "concept_type": "analysis",
+      "inputs": [
+        {
+          "name": "sig_conditioned",
+          "type_desc": "np.ndarray",
+          "constraints": "Signal used for reconstruction workflow"
+        },
+        {
+          "name": "sampling_rate_working",
+          "type_desc": "int",
+          "constraints": "Working-rate frequency"
+        },
+        {
+          "name": "max_reconstruction_length_sec",
+          "type_desc": "float",
+          "constraints": "Configured max reconstruction duration"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "sig_scaled",
+          "type_desc": "np.ndarray",
+          "constraints": "Zero-mean/unit-variance signal"
+        },
+        {
+          "name": "max_rec_length",
+          "type_desc": "int",
+          "constraints": "Max noisy window size in samples"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(sig_conditioned: np.ndarray, sampling_rate_working: int, max_reconstruction_length_sec: float) -> tuple[np.ndarray, int]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "identify_eligible_noise_windows",
+      "parent_id": "windowed_signal_reconstruction",
+      "name": "identify_eligible_noise_windows",
+      "description": "Select noisy segments that are short enough and have a fully clean preceding context window.",
+      "concept_type": "searching",
+      "inputs": [
+        {
+          "name": "noisy_indices_grouped",
+          "type_desc": "list[list[int]]",
+          "constraints": "Grouped noisy segments at working rate"
+        },
+        {
+          "name": "clean_indices_flat",
+          "type_desc": "list[int]",
+          "constraints": "Flattened clean indices"
+        },
+        {
+          "name": "max_rec_length",
+          "type_desc": "int",
+          "constraints": "Context and noisy-length limit"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "candidate_windows",
+          "type_desc": "list[dict]",
+          "constraints": "Each item includes noise indices and reconstruction context bounds"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(noisy_indices_grouped: list[list[int]], clean_indices_flat: list[int], max_rec_length: int) -> list[dict]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "generate_noise_reconstructions",
+      "parent_id": "windowed_signal_reconstruction",
+      "name": "generate_noise_reconstructions",
+      "description": "Run GAN inference per eligible noisy segment using preceding clean context.",
+      "concept_type": "probabilistic_oracle",
+      "inputs": [
+        {
+          "name": "candidate_windows",
+          "type_desc": "list[dict]",
+          "constraints": "Eligible reconstruction jobs"
+        },
+        {
+          "name": "sig_conditioned",
+          "type_desc": "np.ndarray",
+          "constraints": "Source signal for context extraction"
+        },
+        {
+          "name": "sampling_rate_working",
+          "type_desc": "int",
+          "constraints": "Model inference rate"
+        },
+        {
+          "name": "generator",
+          "type_desc": "object",
+          "constraints": "Loaded GAN generator"
+        },
+        {
+          "name": "device",
+          "type_desc": "object",
+          "constraints": "Inference device"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "reconstructed_windows",
+          "type_desc": "list[dict]",
+          "constraints": "Each item adds GAN-reconstructed noisy signal"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(candidate_windows: list[dict], sig_conditioned: np.ndarray, sampling_rate_working: int, generator: torch.nn.Module, device: torch.device) -> list[dict]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "build_upsampled_alignment_context",
+      "parent_id": "windowed_signal_reconstruction",
+      "name": "build_upsampled_alignment_context",
+      "description": "Upsample reconstructed and neighboring clean segments and collect peak markers needed for boundary alignment.",
+      "concept_type": "sampler",
+      "inputs": [
+        {
+          "name": "reconstructed_windows",
+          "type_desc": "list[dict]",
+          "constraints": "GAN outputs with noisy-window metadata"
+        },
+        {
+          "name": "sig_scaled",
+          "type_desc": "np.ndarray",
+          "constraints": "Scaled full signal"
+        },
+        {
+          "name": "sampling_rate_working",
+          "type_desc": "int",
+          "constraints": "Peak spacing reference"
+        },
+        {
+          "name": "upsampling_rate",
+          "type_desc": "float",
+          "constraints": "Temporal upsampling factor"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "alignment_contexts",
+          "type_desc": "list[dict]",
+          "constraints": "Upsampled segments plus detected peaks and validity metadata"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(reconstructed_windows: list[dict], sig_scaled: np.ndarray, sampling_rate_working: int, upsampling_rate: float) -> list[dict]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "merge_segments_with_peak_alignment",
+      "parent_id": "windowed_signal_reconstruction",
+      "name": "merge_segments_with_peak_alignment",
+      "description": "Construct stitched full-signal candidates by peak-aligned concatenation, skipping contexts that cannot be robustly aligned.",
+      "concept_type": "custom",
+      "inputs": [
+        {
+          "name": "alignment_contexts",
+          "type_desc": "list[dict]",
+          "constraints": "Upsampled components with optional peak anchors"
+        },
+        {
+          "name": "sampling_rate_working",
+          "type_desc": "int",
+          "constraints": "Duration threshold basis"
+        },
+        {
+          "name": "upsampling_rate",
+          "type_desc": "float",
+          "constraints": "Used for length thresholds"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "stitched_signals",
+          "type_desc": "list[np.ndarray]",
+          "constraints": "Candidate reconstructed full signals (upsampled domain)"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(alignment_contexts: list[dict], sampling_rate_working: int, upsampling_rate: float) -> list[np.ndarray]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "backproject_descale_and_reassess_quality",
+      "parent_id": "windowed_signal_reconstruction",
+      "name": "backproject_descale_and_reassess_quality",
+      "description": "Project stitched candidates back to working length, descale to physiological range, and recompute clean/noisy partitions via SQA.",
+      "concept_type": "custom",
+      "inputs": [
+        {
+          "name": "stitched_signals",
+          "type_desc": "list[np.ndarray]",
+          "constraints": "Merged reconstruction candidates"
+        },
+        {
+          "name": "sig_scaled",
+          "type_desc": "np.ndarray",
+          "constraints": "Reference length for backprojection"
+        },
+        {
+          "name": "sig_conditioned",
+          "type_desc": "np.ndarray",
+          "constraints": "Provides mean/std for descaling"
+        },
+        {
+          "name": "sampling_rate_working",
+          "type_desc": "int",
+          "constraints": "SQA sampling rate"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "reconstruction_states",
+          "type_desc": "list[dict]",
+          "constraints": "Sequential successful states with ppg_descaled and updated partitions"
+        },
+        {
+          "name": "reconstruction_flag",
+          "type_desc": "bool",
+          "constraints": "True iff at least one candidate passed"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(stitched_signals: list[np.ndarray], sig_scaled: np.ndarray, sig_conditioned: np.ndarray, sampling_rate_working: int) -> tuple[list[dict], bool]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "select_effective_signal_and_partitions",
+      "parent_id": "windowed_signal_reconstruction",
+      "name": "select_effective_signal_and_partitions",
+      "description": "Choose the last successful reconstruction state when available; otherwise keep the conditioned signal and current partitions.",
+      "concept_type": "greedy",
+      "inputs": [
+        {
+          "name": "reconstruction_states",
+          "type_desc": "list[dict]",
+          "constraints": "Ordered successful reconstruction updates"
+        },
+        {
+          "name": "reconstruction_flag",
+          "type_desc": "bool",
+          "constraints": "Indicates whether a valid reconstruction exists"
+        },
+        {
+          "name": "sig_conditioned",
+          "type_desc": "np.ndarray",
+          "constraints": "Fallback signal when reconstruction fails"
+        },
+        {
+          "name": "clean_indices_flat",
+          "type_desc": "list[int]",
+          "constraints": "Fallback clean indices in flat form"
+        },
+        {
+          "name": "noisy_indices_grouped",
+          "type_desc": "list[list[int]]",
+          "constraints": "Fallback noisy partitions"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ppg_working",
+          "type_desc": "np.ndarray",
+          "constraints": "Selected working-rate signal"
+        },
+        {
+          "name": "clean_indices_flat_effective",
+          "type_desc": "list[int]",
+          "constraints": "Effective clean indices at working rate"
+        },
+        {
+          "name": "noisy_indices_grouped_effective",
+          "type_desc": "list[list[int]]",
+          "constraints": "Effective noisy partitions at working rate"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(reconstruction_states: list[dict], reconstruction_flag: bool, sig_conditioned: np.ndarray, clean_indices_flat: list[int], noisy_indices_grouped: list[list[int]]) -> tuple[np.ndarray, list[int], list[list[int]]]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "finalize_output_rate_and_partition_groups",
+      "parent_id": "windowed_signal_reconstruction",
+      "name": "finalize_output_rate_and_partition_groups",
+      "description": "Return signal and partitions at original sampling rate when needed, and ensure clean/noisy indices are grouped into consecutive segments.",
+      "concept_type": "sampler",
+      "inputs": [
+        {
+          "name": "ppg_working",
+          "type_desc": "np.ndarray",
+          "constraints": "Selected working-rate signal"
+        },
+        {
+          "name": "clean_indices_flat_effective",
+          "type_desc": "list[int]",
+          "constraints": "Flat clean indices at working rate"
+        },
+        {
+          "name": "noisy_indices_grouped_effective",
+          "type_desc": "list[list[int]]",
+          "constraints": "Noisy groups at working rate"
+        },
+        {
+          "name": "resampling_flag",
+          "type_desc": "bool",
+          "constraints": "Whether to map back to original rate"
+        },
+        {
+          "name": "sampling_rate_working",
+          "type_desc": "int",
+          "constraints": "Current rate before final mapping"
+        },
+        {
+          "name": "sampling_rate_original",
+          "type_desc": "Optional[int]",
+          "constraints": "Required when resampling_flag is True"
+        },
+        {
+          "name": "resampling_rate",
+          "type_desc": "Optional[float]",
+          "constraints": "Index mapping ratio when returning to original rate"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ppg_signal",
+          "type_desc": "np.ndarray",
+          "constraints": "Final output signal at original or working rate"
+        },
+        {
+          "name": "clean_indices",
+          "type_desc": "list[list[int]]",
+          "constraints": "Grouped clean index segments"
+        },
+        {
+          "name": "noisy_indices",
+          "type_desc": "list[list[int]]",
+          "constraints": "Grouped noisy index segments"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 2,
+      "type_signature": "(ppg_working: np.ndarray, clean_indices_flat_effective: list[int], noisy_indices_grouped_effective: list[list[int]], resampling_flag: bool, sampling_rate_working: int, sampling_rate_original: int|null, resampling_rate: float|null) -> tuple[np.ndarray, list[list[int]], list[list[int]]]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    }
+  ],
+  "edges": [
+    {
+      "source_id": "initialize_reconstruction_state",
+      "target_id": "evaluate_reconstruction_completion",
+      "output_name": "current_reconstructed_len",
+      "input_name": "current_reconstructed_len",
+      "source_type": "int",
+      "target_type": "int",
+      "requires_glue": false
+    },
+    {
+      "source_id": "initialize_reconstruction_state",
+      "target_id": "evaluate_reconstruction_completion",
+      "output_name": "target_noise_len",
+      "input_name": "target_noise_len",
+      "source_type": "int",
+      "target_type": "int",
+      "requires_glue": false
+    },
+    {
+      "source_id": "evaluate_reconstruction_completion",
+      "target_id": "normalize_and_batch_clean_context",
+      "output_name": "continue_flag",
+      "input_name": "continue_flag",
+      "source_type": "bool",
+      "target_type": "bool",
+      "requires_glue": false
+    },
+    {
+      "source_id": "initialize_reconstruction_state",
+      "target_id": "normalize_and_batch_clean_context",
+      "output_name": "ppg_clean_current",
+      "input_name": "ppg_clean_current",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "requires_glue": false
+    },
+    {
+      "source_id": "normalize_and_batch_clean_context",
+      "target_id": "generate_noise_candidate_patch",
+      "output_name": "generator_input",
+      "input_name": "generator_input",
+      "source_type": "torch.FloatTensor",
+      "target_type": "torch.FloatTensor",
+      "requires_glue": false
+    },
+    {
+      "source_id": "normalize_and_batch_clean_context",
+      "target_id": "align_and_stitch_signals_by_peak_boundaries",
+      "output_name": "ppg_clean_norm",
+      "input_name": "ppg_clean_norm",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "requires_glue": false
+    },
+    {
+      "source_id": "generate_noise_candidate_patch",
+      "target_id": "align_and_stitch_signals_by_peak_boundaries",
+      "output_name": "noise_candidate",
+      "input_name": "noise_candidate",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "requires_glue": false
+    },
+    {
+      "source_id": "initialize_reconstruction_state",
+      "target_id": "align_and_stitch_signals_by_peak_boundaries",
+      "output_name": "sampling_rate_state",
+      "input_name": "sampling_rate_state",
+      "source_type": "int",
+      "target_type": "int",
+      "requires_glue": false
+    },
+    {
+      "source_id": "initialize_reconstruction_state",
+      "target_id": "align_and_stitch_signals_by_peak_boundaries",
+      "output_name": "upsampling_rate_state",
+      "input_name": "upsampling_rate_state",
+      "source_type": "float|int",
+      "target_type": "float|int",
+      "requires_glue": false
+    },
+    {
+      "source_id": "resample_stitched_signal_to_native_scale",
+      "target_id": "update_iteration_state_from_stitched_signal",
+      "output_name": "stitched_signal_native",
+      "input_name": "stitched_signal_native",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "requires_glue": false
+    },
+    {
+      "source_id": "initialize_reconstruction_state",
+      "target_id": "update_iteration_state_from_stitched_signal",
+      "output_name": "len_rec",
+      "input_name": "len_rec",
+      "source_type": "int",
+      "target_type": "int",
+      "requires_glue": false
+    },
+    {
+      "source_id": "initialize_reconstruction_state",
+      "target_id": "update_iteration_state_from_stitched_signal",
+      "output_name": "remaining_noise_current",
+      "input_name": "remaining_noise_current",
+      "source_type": "int",
+      "target_type": "int",
+      "requires_glue": false
+    },
+    {
+      "source_id": "initialize_reconstruction_state",
+      "target_id": "update_iteration_state_from_stitched_signal",
+      "output_name": "reconstructed_noise_current",
+      "input_name": "reconstructed_noise_current",
+      "source_type": "list[float]",
+      "target_type": "list[float]",
+      "requires_glue": false
+    },
+    {
+      "source_id": "update_iteration_state_from_stitched_signal",
+      "target_id": "evaluate_reconstruction_completion",
+      "output_name": "current_reconstructed_len_next",
+      "input_name": "current_reconstructed_len",
+      "source_type": "int",
+      "target_type": "int",
+      "requires_glue": false
+    },
+    {
+      "source_id": "update_iteration_state_from_stitched_signal",
+      "target_id": "normalize_and_batch_clean_context",
+      "output_name": "ppg_clean_next",
+      "input_name": "ppg_clean_current",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "requires_glue": false
+    },
+    {
+      "source_id": "load_reconstruction_model_runtime",
+      "target_id": "generate_noise_reconstructions",
+      "output_name": "generator",
+      "input_name": "generator",
+      "source_type": "torch.nn.Module",
+      "target_type": "torch.nn.Module",
+      "requires_glue": false
+    },
+    {
+      "source_id": "load_reconstruction_model_runtime",
+      "target_id": "generate_noise_reconstructions",
+      "output_name": "device",
+      "input_name": "device",
+      "source_type": "torch.device",
+      "target_type": "torch.device",
+      "requires_glue": false
+    },
+    {
+      "source_id": "harmonize_sampling_and_partitions",
+      "target_id": "apply_optional_bandpass_filter",
+      "output_name": "sig_working",
+      "input_name": "sig_working",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "requires_glue": false
+    },
+    {
+      "source_id": "harmonize_sampling_and_partitions",
+      "target_id": "apply_optional_bandpass_filter",
+      "output_name": "sampling_rate_working",
+      "input_name": "sampling_rate_working",
+      "source_type": "int",
+      "target_type": "int",
+      "requires_glue": false
+    },
+    {
+      "source_id": "apply_optional_bandpass_filter",
+      "target_id": "derive_scaled_signal_and_window_budget",
+      "output_name": "sig_conditioned",
+      "input_name": "sig_conditioned",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "requires_glue": false
+    },
+    {
+      "source_id": "derive_scaled_signal_and_window_budget",
+      "target_id": "identify_eligible_noise_windows",
+      "output_name": "max_rec_length",
+      "input_name": "max_rec_length",
+      "source_type": "int",
+      "target_type": "int",
+      "requires_glue": false
+    },
+    {
+      "source_id": "harmonize_sampling_and_partitions",
+      "target_id": "identify_eligible_noise_windows",
+      "output_name": "clean_indices_flat",
+      "input_name": "clean_indices_flat",
+      "source_type": "list[int]",
+      "target_type": "list[int]",
+      "requires_glue": false
+    },
+    {
+      "source_id": "harmonize_sampling_and_partitions",
+      "target_id": "identify_eligible_noise_windows",
+      "output_name": "noisy_indices_grouped",
+      "input_name": "noisy_indices_grouped",
+      "source_type": "list[list[int]]",
+      "target_type": "list[list[int]]",
+      "requires_glue": false
+    },
+    {
+      "source_id": "identify_eligible_noise_windows",
+      "target_id": "generate_noise_reconstructions",
+      "output_name": "candidate_windows",
+      "input_name": "candidate_windows",
+      "source_type": "list[dict]",
+      "target_type": "list[dict]",
+      "requires_glue": false
+    },
+    {
+      "source_id": "apply_optional_bandpass_filter",
+      "target_id": "generate_noise_reconstructions",
+      "output_name": "sig_conditioned",
+      "input_name": "sig_conditioned",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "requires_glue": false
+    },
+    {
+      "source_id": "harmonize_sampling_and_partitions",
+      "target_id": "generate_noise_reconstructions",
+      "output_name": "sampling_rate_working",
+      "input_name": "sampling_rate_working",
+      "source_type": "int",
+      "target_type": "int",
+      "requires_glue": false
+    },
+    {
+      "source_id": "generate_noise_reconstructions",
+      "target_id": "build_upsampled_alignment_context",
+      "output_name": "reconstructed_windows",
+      "input_name": "reconstructed_windows",
+      "source_type": "list[dict]",
+      "target_type": "list[dict]",
+      "requires_glue": false
+    },
+    {
+      "source_id": "derive_scaled_signal_and_window_budget",
+      "target_id": "build_upsampled_alignment_context",
+      "output_name": "sig_scaled",
+      "input_name": "sig_scaled",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "requires_glue": false
+    },
+    {
+      "source_id": "harmonize_sampling_and_partitions",
+      "target_id": "build_upsampled_alignment_context",
+      "output_name": "sampling_rate_working",
+      "input_name": "sampling_rate_working",
+      "source_type": "int",
+      "target_type": "int",
+      "requires_glue": false
+    },
+    {
+      "source_id": "build_upsampled_alignment_context",
+      "target_id": "merge_segments_with_peak_alignment",
+      "output_name": "alignment_contexts",
+      "input_name": "alignment_contexts",
+      "source_type": "list[dict]",
+      "target_type": "list[dict]",
+      "requires_glue": false
+    },
+    {
+      "source_id": "harmonize_sampling_and_partitions",
+      "target_id": "merge_segments_with_peak_alignment",
+      "output_name": "sampling_rate_working",
+      "input_name": "sampling_rate_working",
+      "source_type": "int",
+      "target_type": "int",
+      "requires_glue": false
+    },
+    {
+      "source_id": "merge_segments_with_peak_alignment",
+      "target_id": "backproject_descale_and_reassess_quality",
+      "output_name": "stitched_signals",
+      "input_name": "stitched_signals",
+      "source_type": "list[np.ndarray]",
+      "target_type": "list[np.ndarray]",
+      "requires_glue": false
+    },
+    {
+      "source_id": "derive_scaled_signal_and_window_budget",
+      "target_id": "backproject_descale_and_reassess_quality",
+      "output_name": "sig_scaled",
+      "input_name": "sig_scaled",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "requires_glue": false
+    },
+    {
+      "source_id": "apply_optional_bandpass_filter",
+      "target_id": "backproject_descale_and_reassess_quality",
+      "output_name": "sig_conditioned",
+      "input_name": "sig_conditioned",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "requires_glue": false
+    },
+    {
+      "source_id": "harmonize_sampling_and_partitions",
+      "target_id": "backproject_descale_and_reassess_quality",
+      "output_name": "sampling_rate_working",
+      "input_name": "sampling_rate_working",
+      "source_type": "int",
+      "target_type": "int",
+      "requires_glue": false
+    },
+    {
+      "source_id": "backproject_descale_and_reassess_quality",
+      "target_id": "select_effective_signal_and_partitions",
+      "output_name": "reconstruction_states",
+      "input_name": "reconstruction_states",
+      "source_type": "list[dict]",
+      "target_type": "list[dict]",
+      "requires_glue": false
+    },
+    {
+      "source_id": "backproject_descale_and_reassess_quality",
+      "target_id": "select_effective_signal_and_partitions",
+      "output_name": "reconstruction_flag",
+      "input_name": "reconstruction_flag",
+      "source_type": "bool",
+      "target_type": "bool",
+      "requires_glue": false
+    },
+    {
+      "source_id": "apply_optional_bandpass_filter",
+      "target_id": "select_effective_signal_and_partitions",
+      "output_name": "sig_conditioned",
+      "input_name": "sig_conditioned",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "requires_glue": false
+    },
+    {
+      "source_id": "harmonize_sampling_and_partitions",
+      "target_id": "select_effective_signal_and_partitions",
+      "output_name": "clean_indices_flat",
+      "input_name": "clean_indices_flat",
+      "source_type": "list[int]",
+      "target_type": "list[int]",
+      "requires_glue": false
+    },
+    {
+      "source_id": "harmonize_sampling_and_partitions",
+      "target_id": "select_effective_signal_and_partitions",
+      "output_name": "noisy_indices_grouped",
+      "input_name": "noisy_indices_grouped",
+      "source_type": "list[list[int]]",
+      "target_type": "list[list[int]]",
+      "requires_glue": false
+    },
+    {
+      "source_id": "select_effective_signal_and_partitions",
+      "target_id": "finalize_output_rate_and_partition_groups",
+      "output_name": "ppg_working",
+      "input_name": "ppg_working",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "requires_glue": false
+    },
+    {
+      "source_id": "select_effective_signal_and_partitions",
+      "target_id": "finalize_output_rate_and_partition_groups",
+      "output_name": "clean_indices_flat_effective",
+      "input_name": "clean_indices_flat_effective",
+      "source_type": "list[int]",
+      "target_type": "list[int]",
+      "requires_glue": false
+    },
+    {
+      "source_id": "select_effective_signal_and_partitions",
+      "target_id": "finalize_output_rate_and_partition_groups",
+      "output_name": "noisy_indices_grouped_effective",
+      "input_name": "noisy_indices_grouped_effective",
+      "source_type": "list[list[int]]",
+      "target_type": "list[list[int]]",
+      "requires_glue": false
+    },
+    {
+      "source_id": "harmonize_sampling_and_partitions",
+      "target_id": "finalize_output_rate_and_partition_groups",
+      "output_name": "resampling_flag",
+      "input_name": "resampling_flag",
+      "source_type": "bool",
+      "target_type": "bool",
+      "requires_glue": false
+    },
+    {
+      "source_id": "harmonize_sampling_and_partitions",
+      "target_id": "finalize_output_rate_and_partition_groups",
+      "output_name": "sampling_rate_working",
+      "input_name": "sampling_rate_working",
+      "source_type": "int",
+      "target_type": "int",
+      "requires_glue": false
+    },
+    {
+      "source_id": "harmonize_sampling_and_partitions",
+      "target_id": "finalize_output_rate_and_partition_groups",
+      "output_name": "sampling_rate_original",
+      "input_name": "sampling_rate_original",
+      "source_type": "int|null",
+      "target_type": "int|null",
+      "requires_glue": false
+    },
+    {
+      "source_id": "harmonize_sampling_and_partitions",
+      "target_id": "finalize_output_rate_and_partition_groups",
+      "output_name": "resampling_rate",
+      "input_name": "resampling_rate",
+      "source_type": "float|null",
+      "target_type": "float|null",
+      "requires_glue": false
+    }
+  ],
+  "metadata": {
+    "source": "ingester",
+    "class_name": "reconstruction"
+  }
+}

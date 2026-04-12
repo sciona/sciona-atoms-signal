@@ -1,0 +1,332 @@
+[
+  {
+    "pdg_node": {
+      "predicate_id": "normalizesignal",
+      "statement": "(arr: numeric array) -> numeric array",
+      "informal_desc": "Normalizes a raw array to a standard scale, producing a unit-normalized output suitable for downstream comparison or scoring.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "normalizesignal",
+          "type_signature": "(arr: numeric array) -> numeric array",
+          "docstring": "Normalizes a raw array to a standard scale, producing a unit-normalized output suitable for downstream comparison or scoring.",
+          "conceptual_summary": "MagnitudeInvariantVectorRescaling. Maps a finite, non-empty numeric vector from its native magnitude space into a standardized unit range by computing a global rescaling factor derived from the vector's own statistical or geometric properties (e.g., L2 norm, min-max span, or standard deviation). The transform is strictly algebraic and elementwise: each scalar component is divided by the same derived constant, preserving the internal ratio structure of the original sequence. The resulting vector occupies a canonical magnitude envelope, making it directly comparable to any other vector that has undergone the same normalization contract.. Applications: Computational neuroscience: rescaling multi-electrode spike-rate arrays from different subjects or sessions onto a common magnitude envelope before population-level decoding, eliminating between-subject gain differences without altering relative firing-rate ratios, Robotics / sensor fusion: standardizing heterogeneous inertial measurement unit (IMU) channel readings (accelerometer, gyroscope, magnetometer) that carry vastly different physical units and dynamic ranges before fusing them in a Kalman filter state vector, Natural language processing / embedding retrieval: projecting raw token frequency count vectors onto the unit hypersphere prior to cosine-similarity search, ensuring that document length does not dominate semantic distance measurements in a high-dimensional latent space, Materials science / spectroscopy: normalizing raw X-ray diffraction intensity profiles acquired under different beam-flux conditions to a common peak-height scale, enabling instrument-agnostic peak-position and relative-intensity comparison across experimental runs",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "normalizesignal",
+          "type_signature": "(arr: numeric array) -> numeric array",
+          "docstring": "Normalizes a raw array to a standard scale, producing a unit-normalized output suitable for downstream comparison or scoring.",
+          "conceptual_summary": "MagnitudeInvariantVectorRescaling. Maps a finite, non-empty numeric vector from its native magnitude space into a standardized unit range by computing a global rescaling factor derived from the vector's own statistical or geometric properties (e.g., L2 norm, min-max span, or standard deviation). The transform is strictly algebraic and elementwise: each scalar component is divided by the same derived constant, preserving the internal ratio structure of the original sequence. The resulting vector occupies a canonical magnitude envelope, making it directly comparable to any other vector that has undergone the same normalization contract.. Applications: Computational neuroscience: rescaling multi-electrode spike-rate arrays from different subjects or sessions onto a common magnitude envelope before population-level decoding, eliminating between-subject gain differences without altering relative firing-rate ratios, Robotics / sensor fusion: standardizing heterogeneous inertial measurement unit (IMU) channel readings (accelerometer, gyroscope, magnetometer) that carry vastly different physical units and dynamic ranges before fusing them in a Kalman filter state vector, Natural language processing / embedding retrieval: projecting raw token frequency count vectors onto the unit hypersphere prior to cosine-similarity search, ensuring that document length does not dominate semantic distance measurements in a high-dimensional latent space, Materials science / spectroscopy: normalizing raw X-ray diffraction intensity profiles acquired under different beam-flux conditions to a common peak-height scale, enabling instrument-agnostic peak-position and relative-intensity comparison across experimental runs",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "normalizesignal",
+            "type_signature": "(arr: numeric array) -> numeric array",
+            "docstring": "Normalizes a raw array to a standard scale, producing a unit-normalized output suitable for downstream comparison or scoring.",
+            "conceptual_summary": "MagnitudeInvariantVectorRescaling. Maps a finite, non-empty numeric vector from its native magnitude space into a standardized unit range by computing a global rescaling factor derived from the vector's own statistical or geometric properties (e.g., L2 norm, min-max span, or standard deviation). The transform is strictly algebraic and elementwise: each scalar component is divided by the same derived constant, preserving the internal ratio structure of the original sequence. The resulting vector occupies a canonical magnitude envelope, making it directly comparable to any other vector that has undergone the same normalization contract.. Applications: Computational neuroscience: rescaling multi-electrode spike-rate arrays from different subjects or sessions onto a common magnitude envelope before population-level decoding, eliminating between-subject gain differences without altering relative firing-rate ratios, Robotics / sensor fusion: standardizing heterogeneous inertial measurement unit (IMU) channel readings (accelerometer, gyroscope, magnetometer) that carry vastly different physical units and dynamic ranges before fusing them in a Kalman filter state vector, Natural language processing / embedding retrieval: projecting raw token frequency count vectors onto the unit hypersphere prior to cosine-similarity search, ensuring that document length does not dominate semantic distance measurements in a high-dimensional latent space, Materials science / spectroscopy: normalizing raw X-ray diffraction intensity profiles acquired under different beam-flux conditions to a common peak-height scale, enabling instrument-agnostic peak-position and relative-intensity comparison across experimental runs",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "normalize_prediction_signal",
+      "statement": "(prediction: numpy.ndarray) -> numpy.ndarray",
+      "informal_desc": "Applies normalization to the raw model prediction array to produce a scaled signal suitable for threshold-based peak detection.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "normalize_prediction_signal",
+          "type_signature": "(prediction: numpy.ndarray) -> numpy.ndarray",
+          "docstring": "Applies normalization to the raw model prediction array to produce a scaled signal suitable for threshold-based peak detection.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "normalize_prediction_signal",
+          "type_signature": "(prediction: numpy.ndarray) -> numpy.ndarray",
+          "docstring": "Applies normalization to the raw model prediction array to produce a scaled signal suitable for threshold-based peak detection.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "normalize_prediction_signal",
+            "type_signature": "(prediction: numpy.ndarray) -> numpy.ndarray",
+            "docstring": "Applies normalization to the raw model prediction array to produce a scaled signal suitable for threshold-based peak detection.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "detect_peak_candidates",
+      "statement": "(normalized_prediction: numpy.ndarray, raw_signal: numpy.ndarray) -> list of int",
+      "informal_desc": "Scans the normalized prediction using a sliding window (size 15, or 7 near the end) to locate candidate peak indices. For each window where the threshold \u2265 0.70 is met, finds the position of the maximum normalized value; if ties exist, resolves them by selecting the position of the maximum in the corresponding raw signal window. Advances the cursor by the window size after each match, or by 1 otherwise.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "detect_peak_candidates",
+          "type_signature": "(normalized_prediction: numpy.ndarray, raw_signal: numpy.ndarray) -> list of int",
+          "docstring": "Scans the normalized prediction using a sliding window (size 15, or 7 near the end) to locate candidate peak indices. For each window where the threshold \u2265 0.70 is met, finds the position of the maximum normalized value; if ties exist, resolves them by selecting the position of the maximum in the corresponding raw signal window. Advances the cursor by the window size after each match, or by 1 otherwise.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "detect_peak_candidates",
+          "type_signature": "(normalized_prediction: numpy.ndarray, raw_signal: numpy.ndarray) -> list of int",
+          "docstring": "Scans the normalized prediction using a sliding window (size 15, or 7 near the end) to locate candidate peak indices. For each window where the threshold \u2265 0.70 is met, finds the position of the maximum normalized value; if ties exist, resolves them by selecting the position of the maximum in the corresponding raw signal window. Advances the cursor by the window size after each match, or by 1 otherwise.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "detect_peak_candidates",
+            "type_signature": "(normalized_prediction: numpy.ndarray, raw_signal: numpy.ndarray) -> list of int",
+            "docstring": "Scans the normalized prediction using a sliding window (size 15, or 7 near the end) to locate candidate peak indices. For each window where the threshold \u2265 0.70 is met, finds the position of the maximum normalized value; if ties exist, resolves them by selecting the position of the maximum in the corresponding raw signal window. Advances the cursor by the window size after each match, or by 1 otherwise.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "suppress_nearby_duplicate_peaks",
+      "statement": "(candidate_indices: list of int, raw_signal: numpy.ndarray) -> list of int",
+      "informal_desc": "Iterates through candidate peak indices and removes duplicates that are closer than 35 samples apart, keeping the one with the higher raw signal amplitude. Ensures no two retained peaks are within the minimum separation distance.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "suppress_nearby_duplicate_peaks",
+          "type_signature": "(candidate_indices: list of int, raw_signal: numpy.ndarray) -> list of int",
+          "docstring": "Iterates through candidate peak indices and removes duplicates that are closer than 35 samples apart, keeping the one with the higher raw signal amplitude. Ensures no two retained peaks are within the minimum separation distance.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "suppress_nearby_duplicate_peaks",
+          "type_signature": "(candidate_indices: list of int, raw_signal: numpy.ndarray) -> list of int",
+          "docstring": "Iterates through candidate peak indices and removes duplicates that are closer than 35 samples apart, keeping the one with the higher raw signal amplitude. Ensures no two retained peaks are within the minimum separation distance.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "suppress_nearby_duplicate_peaks",
+            "type_signature": "(candidate_indices: list of int, raw_signal: numpy.ndarray) -> list of int",
+            "docstring": "Iterates through candidate peak indices and removes duplicates that are closer than 35 samples apart, keeping the one with the higher raw signal amplitude. Ensures no two retained peaks are within the minimum separation distance.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "filter_nonpositive_peaks",
+      "statement": "(deduped_indices: list of int, raw_signal: numpy.ndarray) -> numpy.ndarray",
+      "informal_desc": "Removes any peak indices whose corresponding raw signal value is less than or equal to zero, retaining only physiologically valid (positive-amplitude) peaks.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "filter_nonpositive_peaks",
+          "type_signature": "(deduped_indices: list of int, raw_signal: numpy.ndarray) -> numpy.ndarray",
+          "docstring": "Removes any peak indices whose corresponding raw signal value is less than or equal to zero, retaining only physiologically valid (positive-amplitude) peaks.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "filter_nonpositive_peaks",
+          "type_signature": "(deduped_indices: list of int, raw_signal: numpy.ndarray) -> numpy.ndarray",
+          "docstring": "Removes any peak indices whose corresponding raw signal value is less than or equal to zero, retaining only physiologically valid (positive-amplitude) peaks.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "filter_nonpositive_peaks",
+            "type_signature": "(deduped_indices: list of int, raw_signal: numpy.ndarray) -> numpy.ndarray",
+            "docstring": "Removes any peak indices whose corresponding raw signal value is less than or equal to zero, retaining only physiologically valid (positive-amplitude) peaks.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  }
+]

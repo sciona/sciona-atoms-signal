@@ -1,0 +1,134 @@
+[
+  {
+    "pdg_node": {
+      "predicate_id": "zhao2018hrvanalysis",
+      "statement": "(ecg_cleaned: array-like, rpeaks: array-like, sampling_rate: numeric, window: numeric or tuple, mode: string) -> dict or array",
+      "informal_desc": "Applies Zhao et al. 2018 method to analyze heart rate variability from ECG signals using windowed processing",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "zhao2018hrvanalysis",
+          "type_signature": "(ecg_cleaned: array-like, rpeaks: array-like, sampling_rate: numeric, window: numeric or tuple, mode: string) -> dict or array",
+          "docstring": "Applies Zhao et al. 2018 method to analyze heart rate variability from ECG signals using windowed processing",
+          "conceptual_summary": "windowed_inter_event_variability_extractor. Converts a 1D continuous signal and a sequence of discrete event markers into a set of statistical variability features by first computing inter-event temporal intervals, then applying windowed segmentation and extracting distributional moments, frequency-domain characteristics, and entropy measures within each segment. This is a dimensionality-reducing lossy transform from a time-indexed event sequence to a compact feature vector characterizing temporal regularity/irregularity.. Applications: Seismology: Characterize earthquake clustering patterns by analyzing variability in inter-event times between seismic events within moving time windows to distinguish Poissonian from correlated seismicity., Network traffic engineering: Detect congestion, DDoS attacks, or protocol anomalies by computing variability features from packet or connection inter-arrival times over sliding windows., Manufacturing quality control: Monitor machine health by tracking variability in cycle completion intervals or defect occurrence times, flagging increased irregularity as early wear indicators., Neuroscience: Classify neuronal firing patterns (bursting vs. regular spiking) by extracting inter-spike interval variability features from electrophysiology recordings in sliding temporal windows.",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "zhao2018hrvanalysis",
+          "type_signature": "(ecg_cleaned: array-like, rpeaks: array-like, sampling_rate: numeric, window: numeric or tuple, mode: string) -> dict or array",
+          "docstring": "Applies Zhao et al. 2018 method to analyze heart rate variability from ECG signals using windowed processing",
+          "conceptual_summary": "windowed_inter_event_variability_extractor. Converts a 1D continuous signal and a sequence of discrete event markers into a set of statistical variability features by first computing inter-event temporal intervals, then applying windowed segmentation and extracting distributional moments, frequency-domain characteristics, and entropy measures within each segment. This is a dimensionality-reducing lossy transform from a time-indexed event sequence to a compact feature vector characterizing temporal regularity/irregularity.. Applications: Seismology: Characterize earthquake clustering patterns by analyzing variability in inter-event times between seismic events within moving time windows to distinguish Poissonian from correlated seismicity., Network traffic engineering: Detect congestion, DDoS attacks, or protocol anomalies by computing variability features from packet or connection inter-arrival times over sliding windows., Manufacturing quality control: Monitor machine health by tracking variability in cycle completion intervals or defect occurrence times, flagging increased irregularity as early wear indicators., Neuroscience: Classify neuronal firing patterns (bursting vs. regular spiking) by extracting inter-spike interval variability features from electrophysiology recordings in sliding temporal windows.",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "zhao2018hrvanalysis",
+            "type_signature": "(ecg_cleaned: array-like, rpeaks: array-like, sampling_rate: numeric, window: numeric or tuple, mode: string) -> dict or array",
+            "docstring": "Applies Zhao et al. 2018 method to analyze heart rate variability from ECG signals using windowed processing",
+            "conceptual_summary": "windowed_inter_event_variability_extractor. Converts a 1D continuous signal and a sequence of discrete event markers into a set of statistical variability features by first computing inter-event temporal intervals, then applying windowed segmentation and extracting distributional moments, frequency-domain characteristics, and entropy measures within each segment. This is a dimensionality-reducing lossy transform from a time-indexed event sequence to a compact feature vector characterizing temporal regularity/irregularity.. Applications: Seismology: Characterize earthquake clustering patterns by analyzing variability in inter-event times between seismic events within moving time windows to distinguish Poissonian from correlated seismicity., Network traffic engineering: Detect congestion, DDoS attacks, or protocol anomalies by computing variability features from packet or connection inter-arrival times over sliding windows., Manufacturing quality control: Monitor machine health by tracking variability in cycle completion intervals or defect occurrence times, flagging increased irregularity as early wear indicators., Neuroscience: Classify neuronal firing patterns (bursting vs. regular spiking) by extracting inter-spike interval variability features from electrophysiology recordings in sliding temporal windows.",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "averageqrstemplate",
+      "statement": "(ecg_cleaned: array-like, rpeaks: array-like, sampling_rate: numeric) -> array",
+      "informal_desc": "Computes averaged QRS complex template by aligning and averaging heartbeat waveforms around R-peaks",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "averageqrstemplate",
+          "type_signature": "(ecg_cleaned: array-like, rpeaks: array-like, sampling_rate: numeric) -> array",
+          "docstring": "Computes averaged QRS complex template by aligning and averaging heartbeat waveforms around R-peaks",
+          "conceptual_summary": "Landmark-Aligned Ensemble Waveform Averaging. Extracts a prototypical pattern from a repetitive signal by windowing segments around predefined landmarks, aligning them temporally to a common reference frame, and computing the pointwise mean across all instances. This reduces noise and variability to isolate the stable, recurring structure while discarding transient or uncorrelated components.. Applications: Seismology: Generate station-specific earthquake waveform templates by averaging seismic traces aligned to P-wave or S-wave arrival times for matched filter detection, Neuroscience: Construct spike waveform templates for extracellular neural recordings by aligning and averaging action potentials at their peaks for multi-unit spike sorting, Astronomy: Create standard supernova or variable star light curve templates by time-aligning and averaging multiple observations at peak luminosity or phase markers, Industrial vibration analysis: Build reference vibration signatures for rotating machinery by averaging acceleration waveforms aligned to shaft rotation markers for anomaly detection",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "averageqrstemplate",
+          "type_signature": "(ecg_cleaned: array-like, rpeaks: array-like, sampling_rate: numeric) -> array",
+          "docstring": "Computes averaged QRS complex template by aligning and averaging heartbeat waveforms around R-peaks",
+          "conceptual_summary": "Landmark-Aligned Ensemble Waveform Averaging. Extracts a prototypical pattern from a repetitive signal by windowing segments around predefined landmarks, aligning them temporally to a common reference frame, and computing the pointwise mean across all instances. This reduces noise and variability to isolate the stable, recurring structure while discarding transient or uncorrelated components.. Applications: Seismology: Generate station-specific earthquake waveform templates by averaging seismic traces aligned to P-wave or S-wave arrival times for matched filter detection, Neuroscience: Construct spike waveform templates for extracellular neural recordings by aligning and averaging action potentials at their peaks for multi-unit spike sorting, Astronomy: Create standard supernova or variable star light curve templates by time-aligning and averaging multiple observations at peak luminosity or phase markers, Industrial vibration analysis: Build reference vibration signatures for rotating machinery by averaging acceleration waveforms aligned to shaft rotation markers for anomaly detection",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "averageqrstemplate",
+            "type_signature": "(ecg_cleaned: array-like, rpeaks: array-like, sampling_rate: numeric) -> array",
+            "docstring": "Computes averaged QRS complex template by aligning and averaging heartbeat waveforms around R-peaks",
+            "conceptual_summary": "Landmark-Aligned Ensemble Waveform Averaging. Extracts a prototypical pattern from a repetitive signal by windowing segments around predefined landmarks, aligning them temporally to a common reference frame, and computing the pointwise mean across all instances. This reduces noise and variability to isolate the stable, recurring structure while discarding transient or uncorrelated components.. Applications: Seismology: Generate station-specific earthquake waveform templates by averaging seismic traces aligned to P-wave or S-wave arrival times for matched filter detection, Neuroscience: Construct spike waveform templates for extracellular neural recordings by aligning and averaging action potentials at their peaks for multi-unit spike sorting, Astronomy: Create standard supernova or variable star light curve templates by time-aligning and averaging multiple observations at peak luminosity or phase markers, Industrial vibration analysis: Build reference vibration signatures for rotating machinery by averaging acceleration waveforms aligned to shaft rotation markers for anomaly detection",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  }
+]

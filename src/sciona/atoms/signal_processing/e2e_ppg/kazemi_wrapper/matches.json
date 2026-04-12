@@ -1,0 +1,332 @@
+[
+  {
+    "pdg_node": {
+      "predicate_id": "normalizepredictionforpeakscoring",
+      "statement": "(prediction: numpy.ndarray) -> numpy.ndarray",
+      "informal_desc": "Scale the prediction signal into a normalized score space used by downstream peak detection.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "normalizepredictionforpeakscoring",
+          "type_signature": "(prediction: numpy.ndarray) -> numpy.ndarray",
+          "docstring": "Scale the prediction signal into a normalized score space used by downstream peak detection.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "normalizepredictionforpeakscoring",
+          "type_signature": "(prediction: numpy.ndarray) -> numpy.ndarray",
+          "docstring": "Scale the prediction signal into a normalized score space used by downstream peak detection.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "normalizepredictionforpeakscoring",
+            "type_signature": "(prediction: numpy.ndarray) -> numpy.ndarray",
+            "docstring": "Scale the prediction signal into a normalized score space used by downstream peak detection.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "detectcandidatepeakswithadaptivewindows",
+      "statement": "(normalized_prediction: numpy.ndarray, raw_signal: numpy.ndarray) -> list[int]",
+      "informal_desc": "Scan normalized scores left-to-right, trigger on threshold crossings, and select one candidate index per window using raw-signal tie-breaking when multiple maxima occur.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "detectcandidatepeakswithadaptivewindows",
+          "type_signature": "(normalized_prediction: numpy.ndarray, raw_signal: numpy.ndarray) -> list[int]",
+          "docstring": "Scan normalized scores left-to-right, trigger on threshold crossings, and select one candidate index per window using raw-signal tie-breaking when multiple maxima occur.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "detectcandidatepeakswithadaptivewindows",
+          "type_signature": "(normalized_prediction: numpy.ndarray, raw_signal: numpy.ndarray) -> list[int]",
+          "docstring": "Scan normalized scores left-to-right, trigger on threshold crossings, and select one candidate index per window using raw-signal tie-breaking when multiple maxima occur.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "detectcandidatepeakswithadaptivewindows",
+            "type_signature": "(normalized_prediction: numpy.ndarray, raw_signal: numpy.ndarray) -> list[int]",
+            "docstring": "Scan normalized scores left-to-right, trigger on threshold crossings, and select one candidate index per window using raw-signal tie-breaking when multiple maxima occur.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "suppresspeakscloserthanminimumdistance",
+      "statement": "(candidate_indices: list[int], raw_signal: numpy.ndarray) -> list[int]",
+      "informal_desc": "Resolve neighboring candidate peaks that are too close by greedily keeping the one with higher raw-signal amplitude.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "suppresspeakscloserthanminimumdistance",
+          "type_signature": "(candidate_indices: list[int], raw_signal: numpy.ndarray) -> list[int]",
+          "docstring": "Resolve neighboring candidate peaks that are too close by greedily keeping the one with higher raw-signal amplitude.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "suppresspeakscloserthanminimumdistance",
+          "type_signature": "(candidate_indices: list[int], raw_signal: numpy.ndarray) -> list[int]",
+          "docstring": "Resolve neighboring candidate peaks that are too close by greedily keeping the one with higher raw-signal amplitude.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "suppresspeakscloserthanminimumdistance",
+            "type_signature": "(candidate_indices: list[int], raw_signal: numpy.ndarray) -> list[int]",
+            "docstring": "Resolve neighboring candidate peaks that are too close by greedily keeping the one with higher raw-signal amplitude.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "filternonpositivepeaksandfinalize",
+      "statement": "(distance_filtered_indices: list[int], raw_signal: numpy.ndarray) -> numpy.ndarray",
+      "informal_desc": "Remove peaks whose raw-signal amplitude is non-positive and return the remaining indices as a numpy array.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "filternonpositivepeaksandfinalize",
+          "type_signature": "(distance_filtered_indices: list[int], raw_signal: numpy.ndarray) -> numpy.ndarray",
+          "docstring": "Remove peaks whose raw-signal amplitude is non-positive and return the remaining indices as a numpy array.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "filternonpositivepeaksandfinalize",
+          "type_signature": "(distance_filtered_indices: list[int], raw_signal: numpy.ndarray) -> numpy.ndarray",
+          "docstring": "Remove peaks whose raw-signal amplitude is non-positive and return the remaining indices as a numpy array.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "filternonpositivepeaksandfinalize",
+            "type_signature": "(distance_filtered_indices: list[int], raw_signal: numpy.ndarray) -> numpy.ndarray",
+            "docstring": "Remove peaks whose raw-signal amplitude is non-positive and return the remaining indices as a numpy array.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "signalarraynormalization",
+      "statement": "(arr: array-like numeric values) -> array-like numeric values",
+      "informal_desc": "Pure stateless normalization of an input numeric array.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "signalarraynormalization",
+          "type_signature": "(arr: array-like numeric values) -> array-like numeric values",
+          "docstring": "Pure stateless normalization of an input numeric array.",
+          "conceptual_summary": "DeterministicNumericArrayRescaling. Transforms a finite numeric array by applying a deterministic scaling rule parameterized by summary statistics of that same array (for example, magnitude, extrema, or dispersion). The mapping preserves the original shape while converting values to a standardized scale so comparisons are less sensitive to absolute magnitude. This is a one-pass, stateless canonicalization step used to make downstream computations scale-consistent.. Applications: Preconditioning multichannel instrument readings in autonomous systems before sensor fusion, Standardizing voxel/intensity arrays in volumetric imaging pipelines prior to segmentation or registration, Normalizing high-throughput molecular measurement vectors before clustering or manifold learning, Rescaling node or edge feature vectors in graph-based infrastructure simulations before optimization",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "signalarraynormalization",
+          "type_signature": "(arr: array-like numeric values) -> array-like numeric values",
+          "docstring": "Pure stateless normalization of an input numeric array.",
+          "conceptual_summary": "DeterministicNumericArrayRescaling. Transforms a finite numeric array by applying a deterministic scaling rule parameterized by summary statistics of that same array (for example, magnitude, extrema, or dispersion). The mapping preserves the original shape while converting values to a standardized scale so comparisons are less sensitive to absolute magnitude. This is a one-pass, stateless canonicalization step used to make downstream computations scale-consistent.. Applications: Preconditioning multichannel instrument readings in autonomous systems before sensor fusion, Standardizing voxel/intensity arrays in volumetric imaging pipelines prior to segmentation or registration, Normalizing high-throughput molecular measurement vectors before clustering or manifold learning, Rescaling node or edge feature vectors in graph-based infrastructure simulations before optimization",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "signalarraynormalization",
+            "type_signature": "(arr: array-like numeric values) -> array-like numeric values",
+            "docstring": "Pure stateless normalization of an input numeric array.",
+            "conceptual_summary": "DeterministicNumericArrayRescaling. Transforms a finite numeric array by applying a deterministic scaling rule parameterized by summary statistics of that same array (for example, magnitude, extrema, or dispersion). The mapping preserves the original shape while converting values to a standardized scale so comparisons are less sensitive to absolute magnitude. This is a one-pass, stateless canonicalization step used to make downstream computations scale-consistent.. Applications: Preconditioning multichannel instrument readings in autonomous systems before sensor fusion, Standardizing voxel/intensity arrays in volumetric imaging pipelines prior to segmentation or registration, Normalizing high-throughput molecular measurement vectors before clustering or manifold learning, Rescaling node or edge feature vectors in graph-based infrastructure simulations before optimization",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  }
+]

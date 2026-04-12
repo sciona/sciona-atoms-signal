@@ -1,0 +1,1190 @@
+[
+  {
+    "pdg_node": {
+      "predicate_id": "initialize_reconstruction_state",
+      "statement": "(ppg_clean: np.ndarray, noise: list, sampling_rate: int, shifting_step_seconds: int|float, upsampling_rate: float|int) -> tuple[np.ndarray, int, int, list[float], int, int, int, float|int]",
+      "informal_desc": "Derive fixed reconstruction window settings and initialize iterative state from inputs.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "initialize_reconstruction_state",
+          "type_signature": "(ppg_clean: np.ndarray, noise: list, sampling_rate: int, shifting_step_seconds: int|float, upsampling_rate: float|int) -> tuple[np.ndarray, int, int, list[float], int, int, int, float|int]",
+          "docstring": "Derive fixed reconstruction window settings and initialize iterative state from inputs.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "initialize_reconstruction_state",
+          "type_signature": "(ppg_clean: np.ndarray, noise: list, sampling_rate: int, shifting_step_seconds: int|float, upsampling_rate: float|int) -> tuple[np.ndarray, int, int, list[float], int, int, int, float|int]",
+          "docstring": "Derive fixed reconstruction window settings and initialize iterative state from inputs.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "initialize_reconstruction_state",
+            "type_signature": "(ppg_clean: np.ndarray, noise: list, sampling_rate: int, shifting_step_seconds: int|float, upsampling_rate: float|int) -> tuple[np.ndarray, int, int, list[float], int, int, int, float|int]",
+            "docstring": "Derive fixed reconstruction window settings and initialize iterative state from inputs.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "evaluate_reconstruction_completion",
+      "statement": "(current_reconstructed_len: int, target_noise_len: int) -> bool",
+      "informal_desc": "Check whether reconstruction should continue based on current and target lengths.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "evaluate_reconstruction_completion",
+          "type_signature": "(current_reconstructed_len: int, target_noise_len: int) -> bool",
+          "docstring": "Check whether reconstruction should continue based on current and target lengths.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "evaluate_reconstruction_completion",
+          "type_signature": "(current_reconstructed_len: int, target_noise_len: int) -> bool",
+          "docstring": "Check whether reconstruction should continue based on current and target lengths.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "evaluate_reconstruction_completion",
+            "type_signature": "(current_reconstructed_len: int, target_noise_len: int) -> bool",
+            "docstring": "Check whether reconstruction should continue based on current and target lengths.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "normalize_and_batch_clean_context",
+      "statement": "(ppg_clean_current: np.ndarray, batch_size: int) -> tuple[np.ndarray, torch.FloatTensor, int]",
+      "informal_desc": "Scale clean context and replicate it into a batch tensor for generator inference.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "normalize_and_batch_clean_context",
+          "type_signature": "(ppg_clean_current: np.ndarray, batch_size: int) -> tuple[np.ndarray, torch.FloatTensor, int]",
+          "docstring": "Scale clean context and replicate it into a batch tensor for generator inference.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "normalize_and_batch_clean_context",
+          "type_signature": "(ppg_clean_current: np.ndarray, batch_size: int) -> tuple[np.ndarray, torch.FloatTensor, int]",
+          "docstring": "Scale clean context and replicate it into a batch tensor for generator inference.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "normalize_and_batch_clean_context",
+            "type_signature": "(ppg_clean_current: np.ndarray, batch_size: int) -> tuple[np.ndarray, torch.FloatTensor, int]",
+            "docstring": "Scale clean context and replicate it into a batch tensor for generator inference.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "generate_noise_candidate_patch",
+      "statement": "(generator_input: torch.FloatTensor, generator: callable/model, device: str|torch.device) -> np.ndarray",
+      "informal_desc": "Run generator on prepared batch and extract one reconstructed candidate patch.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "generate_noise_candidate_patch",
+          "type_signature": "(generator_input: torch.FloatTensor, generator: callable/model, device: str|torch.device) -> np.ndarray",
+          "docstring": "Run generator on prepared batch and extract one reconstructed candidate patch.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "generate_noise_candidate_patch",
+          "type_signature": "(generator_input: torch.FloatTensor, generator: callable/model, device: str|torch.device) -> np.ndarray",
+          "docstring": "Run generator on prepared batch and extract one reconstructed candidate patch.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "generate_noise_candidate_patch",
+            "type_signature": "(generator_input: torch.FloatTensor, generator: callable/model, device: str|torch.device) -> np.ndarray",
+            "docstring": "Run generator on prepared batch and extract one reconstructed candidate patch.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "align_and_stitch_signals_by_peak_boundaries",
+      "statement": "(ppg_clean_norm: np.ndarray, noise_candidate: np.ndarray, sampling_rate_state: int, upsampling_rate_state: float|int) -> tuple[list[float], int]",
+      "informal_desc": "Upsample clean and generated signals, detect peaks, and stitch them at physiologic boundary points.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "align_and_stitch_signals_by_peak_boundaries",
+          "type_signature": "(ppg_clean_norm: np.ndarray, noise_candidate: np.ndarray, sampling_rate_state: int, upsampling_rate_state: float|int) -> tuple[list[float], int]",
+          "docstring": "Upsample clean and generated signals, detect peaks, and stitch them at physiologic boundary points.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "align_and_stitch_signals_by_peak_boundaries",
+          "type_signature": "(ppg_clean_norm: np.ndarray, noise_candidate: np.ndarray, sampling_rate_state: int, upsampling_rate_state: float|int) -> tuple[list[float], int]",
+          "docstring": "Upsample clean and generated signals, detect peaks, and stitch them at physiologic boundary points.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "align_and_stitch_signals_by_peak_boundaries",
+            "type_signature": "(ppg_clean_norm: np.ndarray, noise_candidate: np.ndarray, sampling_rate_state: int, upsampling_rate_state: float|int) -> tuple[list[float], int]",
+            "docstring": "Upsample clean and generated signals, detect peaks, and stitch them at physiologic boundary points.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "resample_stitched_signal_to_native_scale",
+      "statement": "(stitched_signal_upsampled: list[float], stitched_native_len: int) -> np.ndarray",
+      "informal_desc": "Project stitched upsampled signal back to native sample count.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "resample_stitched_signal_to_native_scale",
+          "type_signature": "(stitched_signal_upsampled: list[float], stitched_native_len: int) -> np.ndarray",
+          "docstring": "Project stitched upsampled signal back to native sample count.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "resample_stitched_signal_to_native_scale",
+          "type_signature": "(stitched_signal_upsampled: list[float], stitched_native_len: int) -> np.ndarray",
+          "docstring": "Project stitched upsampled signal back to native sample count.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "resample_stitched_signal_to_native_scale",
+            "type_signature": "(stitched_signal_upsampled: list[float], stitched_native_len: int) -> np.ndarray",
+            "docstring": "Project stitched upsampled signal back to native sample count.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "update_iteration_state_from_stitched_signal",
+      "statement": "(stitched_signal_native: np.ndarray, clean_len: int, len_rec: int, remaining_noise_current: int, reconstructed_noise_current: list[float]) -> tuple[list[float], int, np.ndarray, int]",
+      "informal_desc": "Extract next reconstructed chunk, update remaining target, append accumulation, and slide clean context window.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "update_iteration_state_from_stitched_signal",
+          "type_signature": "(stitched_signal_native: np.ndarray, clean_len: int, len_rec: int, remaining_noise_current: int, reconstructed_noise_current: list[float]) -> tuple[list[float], int, np.ndarray, int]",
+          "docstring": "Extract next reconstructed chunk, update remaining target, append accumulation, and slide clean context window.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "update_iteration_state_from_stitched_signal",
+          "type_signature": "(stitched_signal_native: np.ndarray, clean_len: int, len_rec: int, remaining_noise_current: int, reconstructed_noise_current: list[float]) -> tuple[list[float], int, np.ndarray, int]",
+          "docstring": "Extract next reconstructed chunk, update remaining target, append accumulation, and slide clean context window.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "update_iteration_state_from_stitched_signal",
+            "type_signature": "(stitched_signal_native: np.ndarray, clean_len: int, len_rec: int, remaining_noise_current: int, reconstructed_noise_current: list[float]) -> tuple[list[float], int, np.ndarray, int]",
+            "docstring": "Extract next reconstructed chunk, update remaining target, append accumulation, and slide clean context window.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "load_reconstruction_model_runtime",
+      "statement": "(model_path: str, model_file_name: str, generator_class: type, cuda_available: bool) -> tuple[torch.nn.Module, torch.device]",
+      "informal_desc": "Prepare GAN runtime artifacts by resolving the trained generator weights and execution device.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "load_reconstruction_model_runtime",
+          "type_signature": "(model_path: str, model_file_name: str, generator_class: type, cuda_available: bool) -> tuple[torch.nn.Module, torch.device]",
+          "docstring": "Prepare GAN runtime artifacts by resolving the trained generator weights and execution device.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "load_reconstruction_model_runtime",
+          "type_signature": "(model_path: str, model_file_name: str, generator_class: type, cuda_available: bool) -> tuple[torch.nn.Module, torch.device]",
+          "docstring": "Prepare GAN runtime artifacts by resolving the trained generator weights and execution device.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "load_reconstruction_model_runtime",
+            "type_signature": "(model_path: str, model_file_name: str, generator_class: type, cuda_available: bool) -> tuple[torch.nn.Module, torch.device]",
+            "docstring": "Prepare GAN runtime artifacts by resolving the trained generator weights and execution device.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "harmonize_sampling_and_partitions",
+      "statement": "(sig: np.ndarray, clean_indices: list[list[int]], noisy_indices: list[list[int]], sampling_rate: int, model_sampling_rate: int) -> tuple[np.ndarray, int, bool, int|null, float|null, list[int], list[list[int]]]",
+      "informal_desc": "Convert signal and index partitions to the model sampling frequency when needed; otherwise normalize clean indices to a flat representation.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "harmonize_sampling_and_partitions",
+          "type_signature": "(sig: np.ndarray, clean_indices: list[list[int]], noisy_indices: list[list[int]], sampling_rate: int, model_sampling_rate: int) -> tuple[np.ndarray, int, bool, int|null, float|null, list[int], list[list[int]]]",
+          "docstring": "Convert signal and index partitions to the model sampling frequency when needed; otherwise normalize clean indices to a flat representation.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "harmonize_sampling_and_partitions",
+          "type_signature": "(sig: np.ndarray, clean_indices: list[list[int]], noisy_indices: list[list[int]], sampling_rate: int, model_sampling_rate: int) -> tuple[np.ndarray, int, bool, int|null, float|null, list[int], list[list[int]]]",
+          "docstring": "Convert signal and index partitions to the model sampling frequency when needed; otherwise normalize clean indices to a flat representation.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "harmonize_sampling_and_partitions",
+            "type_signature": "(sig: np.ndarray, clean_indices: list[list[int]], noisy_indices: list[list[int]], sampling_rate: int, model_sampling_rate: int) -> tuple[np.ndarray, int, bool, int|null, float|null, list[int], list[list[int]]]",
+            "docstring": "Convert signal and index partitions to the model sampling frequency when needed; otherwise normalize clean indices to a flat representation.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "apply_optional_bandpass_filter",
+      "statement": "(sig_working: np.ndarray, sampling_rate_working: int, filter_signal: bool) -> np.ndarray",
+      "informal_desc": "Condition the working-rate signal with a 0.5-3 Hz bandpass when filtering is requested.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "apply_optional_bandpass_filter",
+          "type_signature": "(sig_working: np.ndarray, sampling_rate_working: int, filter_signal: bool) -> np.ndarray",
+          "docstring": "Condition the working-rate signal with a 0.5-3 Hz bandpass when filtering is requested.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "apply_optional_bandpass_filter",
+          "type_signature": "(sig_working: np.ndarray, sampling_rate_working: int, filter_signal: bool) -> np.ndarray",
+          "docstring": "Condition the working-rate signal with a 0.5-3 Hz bandpass when filtering is requested.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "apply_optional_bandpass_filter",
+            "type_signature": "(sig_working: np.ndarray, sampling_rate_working: int, filter_signal: bool) -> np.ndarray",
+            "docstring": "Condition the working-rate signal with a 0.5-3 Hz bandpass when filtering is requested.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "derive_scaled_signal_and_window_budget",
+      "statement": "(sig_conditioned: np.ndarray, sampling_rate_working: int, max_reconstruction_length_sec: float) -> tuple[np.ndarray, int]",
+      "informal_desc": "Standardize the conditioned signal and compute the maximum reconstructable noisy-window length.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "derive_scaled_signal_and_window_budget",
+          "type_signature": "(sig_conditioned: np.ndarray, sampling_rate_working: int, max_reconstruction_length_sec: float) -> tuple[np.ndarray, int]",
+          "docstring": "Standardize the conditioned signal and compute the maximum reconstructable noisy-window length.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "derive_scaled_signal_and_window_budget",
+          "type_signature": "(sig_conditioned: np.ndarray, sampling_rate_working: int, max_reconstruction_length_sec: float) -> tuple[np.ndarray, int]",
+          "docstring": "Standardize the conditioned signal and compute the maximum reconstructable noisy-window length.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "derive_scaled_signal_and_window_budget",
+            "type_signature": "(sig_conditioned: np.ndarray, sampling_rate_working: int, max_reconstruction_length_sec: float) -> tuple[np.ndarray, int]",
+            "docstring": "Standardize the conditioned signal and compute the maximum reconstructable noisy-window length.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "identify_eligible_noise_windows",
+      "statement": "(noisy_indices_grouped: list[list[int]], clean_indices_flat: list[int], max_rec_length: int) -> list[dict]",
+      "informal_desc": "Select noisy segments that are short enough and have a fully clean preceding context window.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "identify_eligible_noise_windows",
+          "type_signature": "(noisy_indices_grouped: list[list[int]], clean_indices_flat: list[int], max_rec_length: int) -> list[dict]",
+          "docstring": "Select noisy segments that are short enough and have a fully clean preceding context window.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "identify_eligible_noise_windows",
+          "type_signature": "(noisy_indices_grouped: list[list[int]], clean_indices_flat: list[int], max_rec_length: int) -> list[dict]",
+          "docstring": "Select noisy segments that are short enough and have a fully clean preceding context window.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "identify_eligible_noise_windows",
+            "type_signature": "(noisy_indices_grouped: list[list[int]], clean_indices_flat: list[int], max_rec_length: int) -> list[dict]",
+            "docstring": "Select noisy segments that are short enough and have a fully clean preceding context window.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "generate_noise_reconstructions",
+      "statement": "(candidate_windows: list[dict], sig_conditioned: np.ndarray, sampling_rate_working: int, generator: torch.nn.Module, device: torch.device) -> list[dict]",
+      "informal_desc": "Run GAN inference per eligible noisy segment using preceding clean context.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "generate_noise_reconstructions",
+          "type_signature": "(candidate_windows: list[dict], sig_conditioned: np.ndarray, sampling_rate_working: int, generator: torch.nn.Module, device: torch.device) -> list[dict]",
+          "docstring": "Run GAN inference per eligible noisy segment using preceding clean context.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "generate_noise_reconstructions",
+          "type_signature": "(candidate_windows: list[dict], sig_conditioned: np.ndarray, sampling_rate_working: int, generator: torch.nn.Module, device: torch.device) -> list[dict]",
+          "docstring": "Run GAN inference per eligible noisy segment using preceding clean context.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "generate_noise_reconstructions",
+            "type_signature": "(candidate_windows: list[dict], sig_conditioned: np.ndarray, sampling_rate_working: int, generator: torch.nn.Module, device: torch.device) -> list[dict]",
+            "docstring": "Run GAN inference per eligible noisy segment using preceding clean context.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "build_upsampled_alignment_context",
+      "statement": "(reconstructed_windows: list[dict], sig_scaled: np.ndarray, sampling_rate_working: int, upsampling_rate: float) -> list[dict]",
+      "informal_desc": "Upsample reconstructed and neighboring clean segments and collect peak markers needed for boundary alignment.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "build_upsampled_alignment_context",
+          "type_signature": "(reconstructed_windows: list[dict], sig_scaled: np.ndarray, sampling_rate_working: int, upsampling_rate: float) -> list[dict]",
+          "docstring": "Upsample reconstructed and neighboring clean segments and collect peak markers needed for boundary alignment.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "build_upsampled_alignment_context",
+          "type_signature": "(reconstructed_windows: list[dict], sig_scaled: np.ndarray, sampling_rate_working: int, upsampling_rate: float) -> list[dict]",
+          "docstring": "Upsample reconstructed and neighboring clean segments and collect peak markers needed for boundary alignment.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "build_upsampled_alignment_context",
+            "type_signature": "(reconstructed_windows: list[dict], sig_scaled: np.ndarray, sampling_rate_working: int, upsampling_rate: float) -> list[dict]",
+            "docstring": "Upsample reconstructed and neighboring clean segments and collect peak markers needed for boundary alignment.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "merge_segments_with_peak_alignment",
+      "statement": "(alignment_contexts: list[dict], sampling_rate_working: int, upsampling_rate: float) -> list[np.ndarray]",
+      "informal_desc": "Construct stitched full-signal candidates by peak-aligned concatenation, skipping contexts that cannot be robustly aligned.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "merge_segments_with_peak_alignment",
+          "type_signature": "(alignment_contexts: list[dict], sampling_rate_working: int, upsampling_rate: float) -> list[np.ndarray]",
+          "docstring": "Construct stitched full-signal candidates by peak-aligned concatenation, skipping contexts that cannot be robustly aligned.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "merge_segments_with_peak_alignment",
+          "type_signature": "(alignment_contexts: list[dict], sampling_rate_working: int, upsampling_rate: float) -> list[np.ndarray]",
+          "docstring": "Construct stitched full-signal candidates by peak-aligned concatenation, skipping contexts that cannot be robustly aligned.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "merge_segments_with_peak_alignment",
+            "type_signature": "(alignment_contexts: list[dict], sampling_rate_working: int, upsampling_rate: float) -> list[np.ndarray]",
+            "docstring": "Construct stitched full-signal candidates by peak-aligned concatenation, skipping contexts that cannot be robustly aligned.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "backproject_descale_and_reassess_quality",
+      "statement": "(stitched_signals: list[np.ndarray], sig_scaled: np.ndarray, sig_conditioned: np.ndarray, sampling_rate_working: int) -> tuple[list[dict], bool]",
+      "informal_desc": "Project stitched candidates back to working length, descale to physiological range, and recompute clean/noisy partitions via SQA.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "backproject_descale_and_reassess_quality",
+          "type_signature": "(stitched_signals: list[np.ndarray], sig_scaled: np.ndarray, sig_conditioned: np.ndarray, sampling_rate_working: int) -> tuple[list[dict], bool]",
+          "docstring": "Project stitched candidates back to working length, descale to physiological range, and recompute clean/noisy partitions via SQA.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "backproject_descale_and_reassess_quality",
+          "type_signature": "(stitched_signals: list[np.ndarray], sig_scaled: np.ndarray, sig_conditioned: np.ndarray, sampling_rate_working: int) -> tuple[list[dict], bool]",
+          "docstring": "Project stitched candidates back to working length, descale to physiological range, and recompute clean/noisy partitions via SQA.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "backproject_descale_and_reassess_quality",
+            "type_signature": "(stitched_signals: list[np.ndarray], sig_scaled: np.ndarray, sig_conditioned: np.ndarray, sampling_rate_working: int) -> tuple[list[dict], bool]",
+            "docstring": "Project stitched candidates back to working length, descale to physiological range, and recompute clean/noisy partitions via SQA.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "select_effective_signal_and_partitions",
+      "statement": "(reconstruction_states: list[dict], reconstruction_flag: bool, sig_conditioned: np.ndarray, clean_indices_flat: list[int], noisy_indices_grouped: list[list[int]]) -> tuple[np.ndarray, list[int], list[list[int]]]",
+      "informal_desc": "Choose the last successful reconstruction state when available; otherwise keep the conditioned signal and current partitions.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "select_effective_signal_and_partitions",
+          "type_signature": "(reconstruction_states: list[dict], reconstruction_flag: bool, sig_conditioned: np.ndarray, clean_indices_flat: list[int], noisy_indices_grouped: list[list[int]]) -> tuple[np.ndarray, list[int], list[list[int]]]",
+          "docstring": "Choose the last successful reconstruction state when available; otherwise keep the conditioned signal and current partitions.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "select_effective_signal_and_partitions",
+          "type_signature": "(reconstruction_states: list[dict], reconstruction_flag: bool, sig_conditioned: np.ndarray, clean_indices_flat: list[int], noisy_indices_grouped: list[list[int]]) -> tuple[np.ndarray, list[int], list[list[int]]]",
+          "docstring": "Choose the last successful reconstruction state when available; otherwise keep the conditioned signal and current partitions.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "select_effective_signal_and_partitions",
+            "type_signature": "(reconstruction_states: list[dict], reconstruction_flag: bool, sig_conditioned: np.ndarray, clean_indices_flat: list[int], noisy_indices_grouped: list[list[int]]) -> tuple[np.ndarray, list[int], list[list[int]]]",
+            "docstring": "Choose the last successful reconstruction state when available; otherwise keep the conditioned signal and current partitions.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "finalize_output_rate_and_partition_groups",
+      "statement": "(ppg_working: np.ndarray, clean_indices_flat_effective: list[int], noisy_indices_grouped_effective: list[list[int]], resampling_flag: bool, sampling_rate_working: int, sampling_rate_original: int|null, resampling_rate: float|null) -> tuple[np.ndarray, list[list[int]], list[list[int]]]",
+      "informal_desc": "Return signal and partitions at original sampling rate when needed, and ensure clean/noisy indices are grouped into consecutive segments.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "finalize_output_rate_and_partition_groups",
+          "type_signature": "(ppg_working: np.ndarray, clean_indices_flat_effective: list[int], noisy_indices_grouped_effective: list[list[int]], resampling_flag: bool, sampling_rate_working: int, sampling_rate_original: int|null, resampling_rate: float|null) -> tuple[np.ndarray, list[list[int]], list[list[int]]]",
+          "docstring": "Return signal and partitions at original sampling rate when needed, and ensure clean/noisy indices are grouped into consecutive segments.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "finalize_output_rate_and_partition_groups",
+          "type_signature": "(ppg_working: np.ndarray, clean_indices_flat_effective: list[int], noisy_indices_grouped_effective: list[list[int]], resampling_flag: bool, sampling_rate_working: int, sampling_rate_original: int|null, resampling_rate: float|null) -> tuple[np.ndarray, list[list[int]], list[list[int]]]",
+          "docstring": "Return signal and partitions at original sampling rate when needed, and ensure clean/noisy indices are grouped into consecutive segments.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "finalize_output_rate_and_partition_groups",
+            "type_signature": "(ppg_working: np.ndarray, clean_indices_flat_effective: list[int], noisy_indices_grouped_effective: list[list[int]], resampling_flag: bool, sampling_rate_working: int, sampling_rate_original: int|null, resampling_rate: float|null) -> tuple[np.ndarray, list[list[int]], list[list[int]]]",
+            "docstring": "Return signal and partitions at original sampling rate when needed, and ensure clean/noisy indices are grouped into consecutive segments.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  }
+]

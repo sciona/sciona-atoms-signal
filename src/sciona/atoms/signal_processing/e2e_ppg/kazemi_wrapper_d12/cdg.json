@@ -1,0 +1,90 @@
+{
+  "nodes": [
+    {
+      "node_id": "kazemi_wrapper_d12_root",
+      "parent_id": null,
+      "name": "KazemiWrapperFamily",
+      "description": "Canonical CDG for the refined-ingest Kazemi peak-detection helper wrappers.",
+      "concept_type": "custom",
+      "inputs": [],
+      "outputs": [],
+      "status": "decomposed",
+      "children": [
+        "normalizesignal",
+        "wrapperevaluate"
+      ],
+      "depth": 0,
+      "type_signature": "",
+      "matched_primitive": null,
+      "primitive_binding_confidence": 0.0,
+      "primitive_binding_source": "",
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "normalizesignal",
+      "parent_id": "kazemi_wrapper_d12_root",
+      "name": "NormalizeSignal",
+      "description": "Normalize a prediction trace into the unit interval used by the vendored Kazemi peak wrapper.",
+      "concept_type": "signal_filter",
+      "inputs": [
+        {"name": "arr", "type_desc": "ndarray", "constraints": "non-empty numeric vector", "required": true, "default_value_repr": ""}
+      ],
+      "outputs": [
+        {"name": "normalized_arr", "type_desc": "ndarray", "constraints": "same shape as input, values in [0, 1]", "required": true, "default_value_repr": ""}
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(arr: ndarray) -> ndarray",
+      "matched_primitive": null,
+      "primitive_binding_confidence": 0.0,
+      "primitive_binding_source": "",
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "wrapperevaluate",
+      "parent_id": "kazemi_wrapper_d12_root",
+      "name": "WrapperEvaluate",
+      "description": "Apply the vendored Kazemi post-processing loop to prediction scores and the raw signal to extract peak indices.",
+      "concept_type": "searching",
+      "inputs": [
+        {"name": "prediction", "type_desc": "ndarray", "constraints": "model prediction trace", "required": true, "default_value_repr": ""},
+        {"name": "raw_signal", "type_desc": "ndarray", "constraints": "raw signal aligned to prediction", "required": true, "default_value_repr": ""}
+      ],
+      "outputs": [
+        {"name": "peak_indices", "type_desc": "ndarray", "constraints": "monotonic integer peak indices", "required": true, "default_value_repr": ""}
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(prediction: ndarray, raw_signal: ndarray) -> ndarray",
+      "matched_primitive": null,
+      "primitive_binding_confidence": 0.0,
+      "primitive_binding_source": "",
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    }
+  ],
+  "edges": [],
+  "metadata": {
+    "source": "manual_compaction",
+    "family": "e2e_ppg_kazemi_wrapper_d12"
+  }
+}

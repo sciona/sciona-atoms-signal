@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "ageoa.e2e_ppg.kazemi_wrapper_d12.normalizesignal@ageoa/e2e_ppg/kazemi_wrapper_d12/atoms.py:16": {
+      "references": [
+        {
+          "ref_id": "kazemi2022ppg",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Exact E2E-PPG peak detection attribution."
+          }
+        },
+        {
+          "ref_id": "feli2023pipeline",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Primary E2E-PPG pipeline paper."
+          }
+        },
+        {
+          "ref_id": "repo_e2e_ppg",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Upstream implementation is mapped to the vendored E2E-PPG repository."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "ageoa.e2e_ppg.kazemi_wrapper_d12.wrapperevaluate@ageoa/e2e_ppg/kazemi_wrapper_d12/atoms.py:33": {
+      "references": [
+        {
+          "ref_id": "kazemi2022ppg",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Exact E2E-PPG peak detection attribution."
+          }
+        },
+        {
+          "ref_id": "feli2023pipeline",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Primary E2E-PPG pipeline paper."
+          }
+        },
+        {
+          "ref_id": "repo_e2e_ppg",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Upstream implementation is mapped to the vendored E2E-PPG repository."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}
