@@ -1,0 +1,794 @@
+[
+  {
+    "pdg_node": {
+      "predicate_id": "validatedetectorstreamspresent",
+      "statement": "(detector_1: array-like, detector_2: array-like) -> tuple[array-like, array-like]",
+      "informal_desc": "Ensure both detector streams are provided; otherwise fail fast with an input error.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "validatedetectorstreamspresent",
+          "type_signature": "(detector_1: array-like, detector_2: array-like) -> tuple[array-like, array-like]",
+          "docstring": "Ensure both detector streams are provided; otherwise fail fast with an input error.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "validatedetectorstreamspresent",
+          "type_signature": "(detector_1: array-like, detector_2: array-like) -> tuple[array-like, array-like]",
+          "docstring": "Ensure both detector streams are provided; otherwise fail fast with an input error.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "validatedetectorstreamspresent",
+            "type_signature": "(detector_1: array-like, detector_2: array-like) -> tuple[array-like, array-like]",
+            "docstring": "Ensure both detector streams are provided; otherwise fail fast with an input error.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "convertsearchwindowtosamples",
+      "statement": "(search_window: float or int, fs: float) -> int",
+      "informal_desc": "Transform the search window from milliseconds to an integer number of samples using sampling frequency.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "convertsearchwindowtosamples",
+          "type_signature": "(search_window: float or int, fs: float) -> int",
+          "docstring": "Transform the search window from milliseconds to an integer number of samples using sampling frequency.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "convertsearchwindowtosamples",
+          "type_signature": "(search_window: float or int, fs: float) -> int",
+          "docstring": "Transform the search window from milliseconds to an integer number of samples using sampling frequency.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "convertsearchwindowtosamples",
+            "type_signature": "(search_window: float or int, fs: float) -> int",
+            "docstring": "Transform the search window from milliseconds to an integer number of samples using sampling frequency.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "countcrossdetectorbeatmatches",
+      "statement": "(detector_1_validated: array-like of int, detector_2_validated: array-like of int, search_window_samples: int) -> int",
+      "informal_desc": "Count how many beats in detector_1 have at least one detector_2 beat within the temporal search window.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "countcrossdetectorbeatmatches",
+          "type_signature": "(detector_1_validated: array-like of int, detector_2_validated: array-like of int, search_window_samples: int) -> int",
+          "docstring": "Count how many beats in detector_1 have at least one detector_2 beat within the temporal search window.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "countcrossdetectorbeatmatches",
+          "type_signature": "(detector_1_validated: array-like of int, detector_2_validated: array-like of int, search_window_samples: int) -> int",
+          "docstring": "Count how many beats in detector_1 have at least one detector_2 beat within the temporal search window.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "countcrossdetectorbeatmatches",
+            "type_signature": "(detector_1_validated: array-like of int, detector_2_validated: array-like of int, search_window_samples: int) -> int",
+            "docstring": "Count how many beats in detector_1 have at least one detector_2 beat within the temporal search window.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "computeagreementscorebymode",
+      "statement": "(mode: string, both_count: int, detector_1_validated: array-like, detector_2_validated: array-like) -> float",
+      "informal_desc": "Select the requested SQI formula and compute the final agreement score from match count and detector lengths.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "computeagreementscorebymode",
+          "type_signature": "(mode: string, both_count: int, detector_1_validated: array-like, detector_2_validated: array-like) -> float",
+          "docstring": "Select the requested SQI formula and compute the final agreement score from match count and detector lengths.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "computeagreementscorebymode",
+          "type_signature": "(mode: string, both_count: int, detector_1_validated: array-like, detector_2_validated: array-like) -> float",
+          "docstring": "Select the requested SQI formula and compute the final agreement score from match count and detector lengths.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "computeagreementscorebymode",
+            "type_signature": "(mode: string, both_count: int, detector_1_validated: array-like, detector_2_validated: array-like) -> float",
+            "docstring": "Select the requested SQI formula and compute the final agreement score from match count and detector lengths.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "ensuresignalprovided",
+      "statement": "(ecg_signal: array-like) -> array-like",
+      "informal_desc": "Validate that an ECG signal is present before any spectral computation.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "ensuresignalprovided",
+          "type_signature": "(ecg_signal: array-like) -> array-like",
+          "docstring": "Validate that an ECG signal is present before any spectral computation.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "ensuresignalprovided",
+          "type_signature": "(ecg_signal: array-like) -> array-like",
+          "docstring": "Validate that an ECG signal is present before any spectral computation.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "ensuresignalprovided",
+            "type_signature": "(ecg_signal: array-like) -> array-like",
+            "docstring": "Validate that an ECG signal is present before any spectral computation.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "estimatesignalpowerspectrum",
+      "statement": "(validated_ecg_signal: array-like, fs: float, nseg: int) -> tuple[array-like, array-like]",
+      "informal_desc": "Estimate one-sided power spectral density and corresponding frequency bins using Welch's method.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "estimatesignalpowerspectrum",
+          "type_signature": "(validated_ecg_signal: array-like, fs: float, nseg: int) -> tuple[array-like, array-like]",
+          "docstring": "Estimate one-sided power spectral density and corresponding frequency bins using Welch's method.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "estimatesignalpowerspectrum",
+          "type_signature": "(validated_ecg_signal: array-like, fs: float, nseg: int) -> tuple[array-like, array-like]",
+          "docstring": "Estimate one-sided power spectral density and corresponding frequency bins using Welch's method.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "estimatesignalpowerspectrum",
+            "type_signature": "(validated_ecg_signal: array-like, fs: float, nseg: int) -> tuple[array-like, array-like]",
+            "docstring": "Estimate one-sided power spectral density and corresponding frequency bins using Welch's method.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "computenumeratorbandpower",
+      "statement": "(num_spectrum: band descriptor, frequency_bins: array-like, psd_density: array-like) -> float",
+      "informal_desc": "Integrate PSD over the numerator frequency band to obtain signal power in that band.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "computenumeratorbandpower",
+          "type_signature": "(num_spectrum: band descriptor, frequency_bins: array-like, psd_density: array-like) -> float",
+          "docstring": "Integrate PSD over the numerator frequency band to obtain signal power in that band.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "computenumeratorbandpower",
+          "type_signature": "(num_spectrum: band descriptor, frequency_bins: array-like, psd_density: array-like) -> float",
+          "docstring": "Integrate PSD over the numerator frequency band to obtain signal power in that band.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "computenumeratorbandpower",
+            "type_signature": "(num_spectrum: band descriptor, frequency_bins: array-like, psd_density: array-like) -> float",
+            "docstring": "Integrate PSD over the numerator frequency band to obtain signal power in that band.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "resolvedenominatorband",
+      "statement": "(dem_spectrum: band descriptor or null, fs: float) -> band descriptor",
+      "informal_desc": "Choose the denominator frequency band, defaulting to the full spectrum when no band is provided.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "resolvedenominatorband",
+          "type_signature": "(dem_spectrum: band descriptor or null, fs: float) -> band descriptor",
+          "docstring": "Choose the denominator frequency band, defaulting to the full spectrum when no band is provided.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "resolvedenominatorband",
+          "type_signature": "(dem_spectrum: band descriptor or null, fs: float) -> band descriptor",
+          "docstring": "Choose the denominator frequency band, defaulting to the full spectrum when no band is provided.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "resolvedenominatorband",
+            "type_signature": "(dem_spectrum: band descriptor or null, fs: float) -> band descriptor",
+            "docstring": "Choose the denominator frequency band, defaulting to the full spectrum when no band is provided.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "computedenominatorbandpower",
+      "statement": "(denominator_band: band descriptor, frequency_bins: array-like, psd_density: array-like) -> float",
+      "informal_desc": "Integrate PSD over the selected denominator band to obtain reference power.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "computedenominatorbandpower",
+          "type_signature": "(denominator_band: band descriptor, frequency_bins: array-like, psd_density: array-like) -> float",
+          "docstring": "Integrate PSD over the selected denominator band to obtain reference power.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "computedenominatorbandpower",
+          "type_signature": "(denominator_band: band descriptor, frequency_bins: array-like, psd_density: array-like) -> float",
+          "docstring": "Integrate PSD over the selected denominator band to obtain reference power.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "computedenominatorbandpower",
+            "type_signature": "(denominator_band: band descriptor, frequency_bins: array-like, psd_density: array-like) -> float",
+            "docstring": "Integrate PSD over the selected denominator band to obtain reference power.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "computesqifrommode",
+      "statement": "(num_power: float, dem_power: float, mode: string) -> float",
+      "informal_desc": "Compute final spectral quality index using the selected mode ('simple' ratio or 'bas' complement of ratio).",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "computesqifrommode",
+          "type_signature": "(num_power: float, dem_power: float, mode: string) -> float",
+          "docstring": "Compute final spectral quality index using the selected mode ('simple' ratio or 'bas' complement of ratio).",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "computesqifrommode",
+          "type_signature": "(num_power: float, dem_power: float, mode: string) -> float",
+          "docstring": "Compute final spectral quality index using the selected mode ('simple' ratio or 'bas' complement of ratio).",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "computesqifrommode",
+            "type_signature": "(num_power: float, dem_power: float, mode: string) -> float",
+            "docstring": "Compute final spectral quality index using the selected mode ('simple' ratio or 'bas' complement of ratio).",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "computekurtosissqi",
+      "statement": "(signal: array-like, fisher: bool) -> float",
+      "informal_desc": "Computes kurtosis-based ECG quality score from the input signal.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "computekurtosissqi",
+          "type_signature": "(signal: array-like, fisher: bool) -> float",
+          "docstring": "Computes kurtosis-based ECG quality score from the input signal.",
+          "conceptual_summary": "Standardized Fourth-Moment Signal Concentration Score. Maps a 1-D sampled scalar sequence to a single distribution-shape statistic by computing its standardized fourth central moment. The transform quantifies tail heaviness and peak concentration relative to variance, producing either excess kurtosis (Fisher convention) or raw kurtosis (Pearson convention) based on a binary mode selector. This is a many-to-one statistical reduction from sample-level structure to a scalar quality/regularity indicator.. Applications: Mechanical condition monitoring: score impulsiveness of accelerometer streams to detect bearing or gear faults., Communications engineering: characterize burstiness/non-Gaussianity of channel noise or interference samples., Geophysical sensing: detect transient event contamination in seismic trace windows via tail-heaviness scoring., Neurosignal processing: assess artifact contamination in electrophysiology segments using fourth-moment concentration.",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "computekurtosissqi",
+          "type_signature": "(signal: array-like, fisher: bool) -> float",
+          "docstring": "Computes kurtosis-based ECG quality score from the input signal.",
+          "conceptual_summary": "Standardized Fourth-Moment Signal Concentration Score. Maps a 1-D sampled scalar sequence to a single distribution-shape statistic by computing its standardized fourth central moment. The transform quantifies tail heaviness and peak concentration relative to variance, producing either excess kurtosis (Fisher convention) or raw kurtosis (Pearson convention) based on a binary mode selector. This is a many-to-one statistical reduction from sample-level structure to a scalar quality/regularity indicator.. Applications: Mechanical condition monitoring: score impulsiveness of accelerometer streams to detect bearing or gear faults., Communications engineering: characterize burstiness/non-Gaussianity of channel noise or interference samples., Geophysical sensing: detect transient event contamination in seismic trace windows via tail-heaviness scoring., Neurosignal processing: assess artifact contamination in electrophysiology segments using fourth-moment concentration.",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "computekurtosissqi",
+            "type_signature": "(signal: array-like, fisher: bool) -> float",
+            "docstring": "Computes kurtosis-based ECG quality score from the input signal.",
+            "conceptual_summary": "Standardized Fourth-Moment Signal Concentration Score. Maps a 1-D sampled scalar sequence to a single distribution-shape statistic by computing its standardized fourth central moment. The transform quantifies tail heaviness and peak concentration relative to variance, producing either excess kurtosis (Fisher convention) or raw kurtosis (Pearson convention) based on a binary mode selector. This is a many-to-one statistical reduction from sample-level structure to a scalar quality/regularity indicator.. Applications: Mechanical condition monitoring: score impulsiveness of accelerometer streams to detect bearing or gear faults., Communications engineering: characterize burstiness/non-Gaussianity of channel noise or interference samples., Geophysical sensing: detect transient event contamination in seismic trace windows via tail-heaviness scoring., Neurosignal processing: assess artifact contamination in electrophysiology segments using fourth-moment concentration.",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "assemblezz2018sqi",
+      "statement": "(signal: array-like, detector_1: array-like beat locations, detector_2: array-like beat locations, fs: float, search_window: float, nseg: int, mode: string, b_sqi: float, f_sqi: float, k_sqi: float) -> float or label",
+      "informal_desc": "Builds the final ZZ2018 signal-quality result by combining beat, frequency, and kurtosis evidence.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "assemblezz2018sqi",
+          "type_signature": "(signal: array-like, detector_1: array-like beat locations, detector_2: array-like beat locations, fs: float, search_window: float, nseg: int, mode: string, b_sqi: float, f_sqi: float, k_sqi: float) -> float or label",
+          "docstring": "Builds the final ZZ2018 signal-quality result by combining beat, frequency, and kurtosis evidence.",
+          "conceptual_summary": "Band-Limited Spectral Energy Ratio Scorer. Transforms a 1-D sampled scalar sequence into the frequency domain using segment-based spectral estimation, then aggregates power within two user-defined frequency intervals. It maps these aggregated energies to a single scalar via a selectable ratio/normalization rule, quantifying how strongly energy is concentrated in one band relative to another. The operation is a lossy projection from a high-dimensional spectrum to a compact quality index.. Applications: Condition monitoring: quantify fault-signature harmonic concentration versus broadband background in rotating machinery vibration signals., Geophysics: score microseismic event quality by contrasting event-band energy against noise-band energy in single-station traces., Wireless systems: estimate channel occupancy quality by comparing target sub-band power to adjacent/interference bands in RF captures., Acoustics: evaluate tonal prominence versus ambient noise in environmental or industrial sound measurements.",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "assemblezz2018sqi",
+          "type_signature": "(signal: array-like, detector_1: array-like beat locations, detector_2: array-like beat locations, fs: float, search_window: float, nseg: int, mode: string, b_sqi: float, f_sqi: float, k_sqi: float) -> float or label",
+          "docstring": "Builds the final ZZ2018 signal-quality result by combining beat, frequency, and kurtosis evidence.",
+          "conceptual_summary": "Band-Limited Spectral Energy Ratio Scorer. Transforms a 1-D sampled scalar sequence into the frequency domain using segment-based spectral estimation, then aggregates power within two user-defined frequency intervals. It maps these aggregated energies to a single scalar via a selectable ratio/normalization rule, quantifying how strongly energy is concentrated in one band relative to another. The operation is a lossy projection from a high-dimensional spectrum to a compact quality index.. Applications: Condition monitoring: quantify fault-signature harmonic concentration versus broadband background in rotating machinery vibration signals., Geophysics: score microseismic event quality by contrasting event-band energy against noise-band energy in single-station traces., Wireless systems: estimate channel occupancy quality by comparing target sub-band power to adjacent/interference bands in RF captures., Acoustics: evaluate tonal prominence versus ambient noise in environmental or industrial sound measurements.",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "assemblezz2018sqi",
+            "type_signature": "(signal: array-like, detector_1: array-like beat locations, detector_2: array-like beat locations, fs: float, search_window: float, nseg: int, mode: string, b_sqi: float, f_sqi: float, k_sqi: float) -> float or label",
+            "docstring": "Builds the final ZZ2018 signal-quality result by combining beat, frequency, and kurtosis evidence.",
+            "conceptual_summary": "Band-Limited Spectral Energy Ratio Scorer. Transforms a 1-D sampled scalar sequence into the frequency domain using segment-based spectral estimation, then aggregates power within two user-defined frequency intervals. It maps these aggregated energies to a single scalar via a selectable ratio/normalization rule, quantifying how strongly energy is concentrated in one band relative to another. The operation is a lossy projection from a high-dimensional spectrum to a compact quality index.. Applications: Condition monitoring: quantify fault-signature harmonic concentration versus broadband background in rotating machinery vibration signals., Geophysics: score microseismic event quality by contrasting event-band energy against noise-band energy in single-station traces., Wireless systems: estimate channel occupancy quality by comparing target sub-band power to adjacent/interference bands in RF captures., Acoustics: evaluate tonal prominence versus ambient noise in environmental or industrial sound measurements.",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  }
+]

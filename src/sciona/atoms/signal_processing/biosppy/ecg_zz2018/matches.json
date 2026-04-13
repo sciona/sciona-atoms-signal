@@ -1,0 +1,860 @@
+[
+  {
+    "pdg_node": {
+      "predicate_id": "validatedetectorinputs",
+      "statement": "(detector_1: NDArray, detector_2: NDArray) -> bool",
+      "informal_desc": "Checks if the R-peak detector inputs are empty. If either is empty, the signal quality is immediately deemed unacceptable.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "validatedetectorinputs",
+          "type_signature": "(detector_1: NDArray, detector_2: NDArray) -> bool",
+          "docstring": "Checks if the R-peak detector inputs are empty. If either is empty, the signal quality is immediately deemed unacceptable.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "validatedetectorinputs",
+          "type_signature": "(detector_1: NDArray, detector_2: NDArray) -> bool",
+          "docstring": "Checks if the R-peak detector inputs are empty. If either is empty, the signal quality is immediately deemed unacceptable.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "validatedetectorinputs",
+            "type_signature": "(detector_1: NDArray, detector_2: NDArray) -> bool",
+            "docstring": "Checks if the R-peak detector inputs are empty. If either is empty, the signal quality is immediately deemed unacceptable.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "calculatebasesqis",
+      "statement": "(signal: NDArray, detector_1: NDArray, detector_2: NDArray, fs: float, search_window: int, nseg: int) -> tuple[float, float, float, float]",
+      "informal_desc": "Computes four fundamental Signal Quality Indices (qSQI, pSQI, kSQI, basSQI) using external specialized functions.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "calculatebasesqis",
+          "type_signature": "(signal: NDArray, detector_1: NDArray, detector_2: NDArray, fs: float, search_window: int, nseg: int) -> tuple[float, float, float, float]",
+          "docstring": "Computes four fundamental Signal Quality Indices (qSQI, pSQI, kSQI, basSQI) using external specialized functions.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "calculatebasesqis",
+          "type_signature": "(signal: NDArray, detector_1: NDArray, detector_2: NDArray, fs: float, search_window: int, nseg: int) -> tuple[float, float, float, float]",
+          "docstring": "Computes four fundamental Signal Quality Indices (qSQI, pSQI, kSQI, basSQI) using external specialized functions.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "calculatebasesqis",
+            "type_signature": "(signal: NDArray, detector_1: NDArray, detector_2: NDArray, fs: float, search_window: int, nseg: int) -> tuple[float, float, float, float]",
+            "docstring": "Computes four fundamental Signal Quality Indices (qSQI, pSQI, kSQI, basSQI) using external specialized functions.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "classifysqisheuristically",
+      "statement": "(qsqi: float, psqi: float, ksqi: float, bassqi: float, detector_1: NDArray, fs: float) -> NDArray",
+      "informal_desc": "Classifies each of the four base SQIs into discrete categories (0=unqualified, 1=suspicious, 2=optimal) based on a set of heuristic rules, some of which are adaptive to heart rate.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "classifysqisheuristically",
+          "type_signature": "(qsqi: float, psqi: float, ksqi: float, bassqi: float, detector_1: NDArray, fs: float) -> NDArray",
+          "docstring": "Classifies each of the four base SQIs into discrete categories (0=unqualified, 1=suspicious, 2=optimal) based on a set of heuristic rules, some of which are adaptive to heart rate.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "classifysqisheuristically",
+          "type_signature": "(qsqi: float, psqi: float, ksqi: float, bassqi: float, detector_1: NDArray, fs: float) -> NDArray",
+          "docstring": "Classifies each of the four base SQIs into discrete categories (0=unqualified, 1=suspicious, 2=optimal) based on a set of heuristic rules, some of which are adaptive to heart rate.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "classifysqisheuristically",
+            "type_signature": "(qsqi: float, psqi: float, ksqi: float, bassqi: float, detector_1: NDArray, fs: float) -> NDArray",
+            "docstring": "Classifies each of the four base SQIs into discrete categories (0=unqualified, 1=suspicious, 2=optimal) based on a set of heuristic rules, some of which are adaptive to heart rate.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "aggregateheuristicclasses",
+      "statement": "(class_matrix: NDArray) -> str",
+      "informal_desc": "Aggregates the discrete classifications of the SQIs by counting classes to determine the final signal quality label ('Unacceptable', 'Excellent', 'Barely acceptable').",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "aggregateheuristicclasses",
+          "type_signature": "(class_matrix: NDArray) -> str",
+          "docstring": "Aggregates the discrete classifications of the SQIs by counting classes to determine the final signal quality label ('Unacceptable', 'Excellent', 'Barely acceptable').",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "aggregateheuristicclasses",
+          "type_signature": "(class_matrix: NDArray) -> str",
+          "docstring": "Aggregates the discrete classifications of the SQIs by counting classes to determine the final signal quality label ('Unacceptable', 'Excellent', 'Barely acceptable').",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "aggregateheuristicclasses",
+            "type_signature": "(class_matrix: NDArray) -> str",
+            "docstring": "Aggregates the discrete classifications of the SQIs by counting classes to determine the final signal quality label ('Unacceptable', 'Excellent', 'Barely acceptable').",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "calculatefuzzymemberships",
+      "statement": "(qsqi: float, psqi: float, ksqi: float, bassqi: float) -> NDArray",
+      "informal_desc": "Transforms each of the four raw SQI scores into a vector of three fuzzy membership grades corresponding to 'Excellent', 'Barely acceptable', and 'Unacceptable' quality levels.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "calculatefuzzymemberships",
+          "type_signature": "(qsqi: float, psqi: float, ksqi: float, bassqi: float) -> NDArray",
+          "docstring": "Transforms each of the four raw SQI scores into a vector of three fuzzy membership grades corresponding to 'Excellent', 'Barely acceptable', and 'Unacceptable' quality levels.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "calculatefuzzymemberships",
+          "type_signature": "(qsqi: float, psqi: float, ksqi: float, bassqi: float) -> NDArray",
+          "docstring": "Transforms each of the four raw SQI scores into a vector of three fuzzy membership grades corresponding to 'Excellent', 'Barely acceptable', and 'Unacceptable' quality levels.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "calculatefuzzymemberships",
+            "type_signature": "(qsqi: float, psqi: float, ksqi: float, bassqi: float) -> NDArray",
+            "docstring": "Transforms each of the four raw SQI scores into a vector of three fuzzy membership grades corresponding to 'Excellent', 'Barely acceptable', and 'Unacceptable' quality levels.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "aggregatefuzzymemberships",
+      "statement": "(evaluation_matrix_R: NDArray) -> str",
+      "informal_desc": "Combines the fuzzy membership vectors using a weighted-average evaluation matrix to compute a final score (V), which is then mapped to a quality label.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "aggregatefuzzymemberships",
+          "type_signature": "(evaluation_matrix_R: NDArray) -> str",
+          "docstring": "Combines the fuzzy membership vectors using a weighted-average evaluation matrix to compute a final score (V), which is then mapped to a quality label.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "aggregatefuzzymemberships",
+          "type_signature": "(evaluation_matrix_R: NDArray) -> str",
+          "docstring": "Combines the fuzzy membership vectors using a weighted-average evaluation matrix to compute a final score (V), which is then mapped to a quality label.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "aggregatefuzzymemberships",
+            "type_signature": "(evaluation_matrix_R: NDArray) -> str",
+            "docstring": "Combines the fuzzy membership vectors using a weighted-average evaluation matrix to compute a final score (V), which is then mapped to a quality label.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "convertwindowtosamples",
+      "statement": "(search_window_ms: int, sampling_rate_hz: float) -> int",
+      "informal_desc": "Converts the search window from milliseconds to an integer number of samples based on the sampling frequency.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "convertwindowtosamples",
+          "type_signature": "(search_window_ms: int, sampling_rate_hz: float) -> int",
+          "docstring": "Converts the search window from milliseconds to an integer number of samples based on the sampling frequency.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "convertwindowtosamples",
+          "type_signature": "(search_window_ms: int, sampling_rate_hz: float) -> int",
+          "docstring": "Converts the search window from milliseconds to an integer number of samples based on the sampling frequency.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "convertwindowtosamples",
+            "type_signature": "(search_window_ms: int, sampling_rate_hz: float) -> int",
+            "docstring": "Converts the search window from milliseconds to an integer number of samples based on the sampling frequency.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "countmutualdetections",
+      "statement": "(primary_detections: NDArray, secondary_detections: NDArray, search_window_samples: int) -> int",
+      "informal_desc": "Counts the number of beats in the first detector's output that have a corresponding beat in the second detector's output within the search window.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "countmutualdetections",
+          "type_signature": "(primary_detections: NDArray, secondary_detections: NDArray, search_window_samples: int) -> int",
+          "docstring": "Counts the number of beats in the first detector's output that have a corresponding beat in the second detector's output within the search window.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "countmutualdetections",
+          "type_signature": "(primary_detections: NDArray, secondary_detections: NDArray, search_window_samples: int) -> int",
+          "docstring": "Counts the number of beats in the first detector's output that have a corresponding beat in the second detector's output within the search window.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "countmutualdetections",
+            "type_signature": "(primary_detections: NDArray, secondary_detections: NDArray, search_window_samples: int) -> int",
+            "docstring": "Counts the number of beats in the first detector's output that have a corresponding beat in the second detector's output within the search window.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "calculateagreementscore",
+      "statement": "(mutual_detection_count: int, detector_1_count: int, detector_2_count: int, mode: str) -> float",
+      "informal_desc": "Calculates the final bSQI score based on the number of mutual detections and the total number of detections from each source, according to the specified mode.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "calculateagreementscore",
+          "type_signature": "(mutual_detection_count: int, detector_1_count: int, detector_2_count: int, mode: str) -> float",
+          "docstring": "Calculates the final bSQI score based on the number of mutual detections and the total number of detections from each source, according to the specified mode.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "calculateagreementscore",
+          "type_signature": "(mutual_detection_count: int, detector_1_count: int, detector_2_count: int, mode: str) -> float",
+          "docstring": "Calculates the final bSQI score based on the number of mutual detections and the total number of detections from each source, according to the specified mode.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "calculateagreementscore",
+            "type_signature": "(mutual_detection_count: int, detector_1_count: int, detector_2_count: int, mode: str) -> float",
+            "docstring": "Calculates the final bSQI score based on the number of mutual detections and the total number of detections from each source, according to the specified mode.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "compute_power_spectral_density",
+      "statement": "(ecg_signal: NDArray, fs: float, nseg: int) -> tuple[NDArray, NDArray]",
+      "informal_desc": "Computes the power spectral density of the input ECG signal using Welch's method, which provides the signal's power distribution over a range of frequencies.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "compute_power_spectral_density",
+          "type_signature": "(ecg_signal: NDArray, fs: float, nseg: int) -> tuple[NDArray, NDArray]",
+          "docstring": "Computes the power spectral density of the input ECG signal using Welch's method, which provides the signal's power distribution over a range of frequencies.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "compute_power_spectral_density",
+          "type_signature": "(ecg_signal: NDArray, fs: float, nseg: int) -> tuple[NDArray, NDArray]",
+          "docstring": "Computes the power spectral density of the input ECG signal using Welch's method, which provides the signal's power distribution over a range of frequencies.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "compute_power_spectral_density",
+            "type_signature": "(ecg_signal: NDArray, fs: float, nseg: int) -> tuple[NDArray, NDArray]",
+            "docstring": "Computes the power spectral density of the input ECG signal using Welch's method, which provides the signal's power distribution over a range of frequencies.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "integrate_power_in_band",
+      "statement": "(frequencies: NDArray, power_density: NDArray, frequency_band: list[float]) -> float",
+      "informal_desc": "Calculates the total power within a specified frequency band by performing a trapezoidal integration over the power spectral density.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "integrate_power_in_band",
+          "type_signature": "(frequencies: NDArray, power_density: NDArray, frequency_band: list[float]) -> float",
+          "docstring": "Calculates the total power within a specified frequency band by performing a trapezoidal integration over the power spectral density.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "integrate_power_in_band",
+          "type_signature": "(frequencies: NDArray, power_density: NDArray, frequency_band: list[float]) -> float",
+          "docstring": "Calculates the total power within a specified frequency band by performing a trapezoidal integration over the power spectral density.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "integrate_power_in_band",
+            "type_signature": "(frequencies: NDArray, power_density: NDArray, frequency_band: list[float]) -> float",
+            "docstring": "Calculates the total power within a specified frequency band by performing a trapezoidal integration over the power spectral density.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "calculate_power_ratio",
+      "statement": "(numerator_power: float, denominator_power: float, mode: str) -> float",
+      "informal_desc": "Calculates the final SQI score from the numerator and denominator power values, applying the specified adjustment mode.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "calculate_power_ratio",
+          "type_signature": "(numerator_power: float, denominator_power: float, mode: str) -> float",
+          "docstring": "Calculates the final SQI score from the numerator and denominator power values, applying the specified adjustment mode.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "calculate_power_ratio",
+          "type_signature": "(numerator_power: float, denominator_power: float, mode: str) -> float",
+          "docstring": "Calculates the final SQI score from the numerator and denominator power values, applying the specified adjustment mode.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "calculate_power_ratio",
+            "type_signature": "(numerator_power: float, denominator_power: float, mode: str) -> float",
+            "docstring": "Calculates the final SQI score from the numerator and denominator power values, applying the specified adjustment mode.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "calculatekurtosissqi",
+      "statement": "(signal: NDArray, fisher: bool) -> float",
+      "informal_desc": "Calculates a Signal Quality Index (kSQI) based on the statistical kurtosis of the signal.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "calculatekurtosissqi",
+          "type_signature": "(signal: NDArray, fisher: bool) -> float",
+          "docstring": "Calculates a Signal Quality Index (kSQI) based on the statistical kurtosis of the signal.",
+          "conceptual_summary": "MeasureDistributionTailedness. Computes the fourth standardized moment of a 1D numerical array. This scalar value quantifies the 'tailedness' of the distribution, measuring the propensity for values to be concentrated far from the mean (outliers) relative to a Gaussian distribution. A boolean flag selects between the raw moment and the excess moment (adjusted by a constant).. Applications: Quantitative Finance: Assessing the tail risk of an asset's return distribution. High kurtosis indicates a greater probability of extreme market movements than predicted by simpler models., Industrial Process Control: Monitoring sensor data for anomalies. A change in the kurtosis of pressure or temperature readings can signal a deviation from stable operation and predict system failures., Geophysics: Characterizing the impulsiveness of seismic signals. The kurtosis of ground acceleration time-series helps differentiate between background noise and sharp, high-impact tremor events., Neuroscience: Analyzing neuronal firing patterns. The kurtosis of inter-spike interval distributions can distinguish between regular, rhythmic firing and bursty, irregular activity.",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "calculatekurtosissqi",
+          "type_signature": "(signal: NDArray, fisher: bool) -> float",
+          "docstring": "Calculates a Signal Quality Index (kSQI) based on the statistical kurtosis of the signal.",
+          "conceptual_summary": "MeasureDistributionTailedness. Computes the fourth standardized moment of a 1D numerical array. This scalar value quantifies the 'tailedness' of the distribution, measuring the propensity for values to be concentrated far from the mean (outliers) relative to a Gaussian distribution. A boolean flag selects between the raw moment and the excess moment (adjusted by a constant).. Applications: Quantitative Finance: Assessing the tail risk of an asset's return distribution. High kurtosis indicates a greater probability of extreme market movements than predicted by simpler models., Industrial Process Control: Monitoring sensor data for anomalies. A change in the kurtosis of pressure or temperature readings can signal a deviation from stable operation and predict system failures., Geophysics: Characterizing the impulsiveness of seismic signals. The kurtosis of ground acceleration time-series helps differentiate between background noise and sharp, high-impact tremor events., Neuroscience: Analyzing neuronal firing patterns. The kurtosis of inter-spike interval distributions can distinguish between regular, rhythmic firing and bursty, irregular activity.",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "calculatekurtosissqi",
+            "type_signature": "(signal: NDArray, fisher: bool) -> float",
+            "docstring": "Calculates a Signal Quality Index (kSQI) based on the statistical kurtosis of the signal.",
+            "conceptual_summary": "MeasureDistributionTailedness. Computes the fourth standardized moment of a 1D numerical array. This scalar value quantifies the 'tailedness' of the distribution, measuring the propensity for values to be concentrated far from the mean (outliers) relative to a Gaussian distribution. A boolean flag selects between the raw moment and the excess moment (adjusted by a constant).. Applications: Quantitative Finance: Assessing the tail risk of an asset's return distribution. High kurtosis indicates a greater probability of extreme market movements than predicted by simpler models., Industrial Process Control: Monitoring sensor data for anomalies. A change in the kurtosis of pressure or temperature readings can signal a deviation from stable operation and predict system failures., Geophysics: Characterizing the impulsiveness of seismic signals. The kurtosis of ground acceleration time-series helps differentiate between background noise and sharp, high-impact tremor events., Neuroscience: Analyzing neuronal firing patterns. The kurtosis of inter-spike interval distributions can distinguish between regular, rhythmic firing and bursty, irregular activity.",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  }
+]

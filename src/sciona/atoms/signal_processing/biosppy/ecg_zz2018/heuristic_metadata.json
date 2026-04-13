@@ -1,0 +1,177 @@
+{
+  "records": [
+    {
+      "atom_fqdn": "ageoa.biosppy.ecg_zz2018.calculatecompositesqi_zz2018",
+      "summary": "Composite multi-input quality score used as a gating signal before committing to one processing path.",
+      "dejargonized_summary": "Combine waveform evidence and detector agreement into one reusable quality summary that can decide whether a fixed downstream path is trustworthy.",
+      "heuristic_outputs": [
+        {
+          "output_name": "composite_sqi",
+          "output_path": "composite_sqi",
+          "role": "gating",
+          "semantic_kind": "scalar_score",
+          "heuristic": {
+            "heuristic_id": "quality_instability",
+            "display_name": "Quality Instability",
+            "dejargonized_meaning": "Local quality changes enough that one fixed path may be brittle and a gate or alternate branch may be needed.",
+            "evidence_type": "scalar_score",
+            "value_kind": "score",
+            "value_shape": "scalar",
+            "confidence": 0.84,
+            "producer_kind": "atom_output",
+            "applicability_scope": "cross_family",
+            "supported_action_classes": [
+              "gate_or_validate",
+              "branch_and_compare"
+            ],
+            "provenance_requirements": [
+              "metric_name",
+              "metric_value",
+              "threshold"
+            ],
+            "compatibility_aliases": [
+              "signal_quality_variance",
+              "signal_quality_kurtosis_cv"
+            ]
+          },
+          "provenance_notes": [
+            "This score combines waveform evidence with agreement between two event extraction views.",
+            "The output is suitable as a cross-family gate because it summarizes whether one fixed processing route looks brittle for the current window."
+          ],
+          "uncertainty_notes": [
+            "A single quality score should guide routing or validation, not replace direct inspection of downstream failure modes."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "title": "BioSPPy ECG SQI implementation",
+          "citation": "Primary upstream implementation for the ZZ2018 composite quality score.",
+          "note": "Source-backed metadata for a reusable quality heuristic producer."
+        },
+        {
+          "title": "Zhao et al. 2018 ECG SQI paper",
+          "citation": "Exact attribution for the upstream composite scoring method."
+        }
+      ],
+      "uncertainty_notes": [
+        "Composite quality scores summarize several cues and should be interpreted as gating evidence rather than direct correctness proof."
+      ],
+      "maintainers": [
+        "ageo-atoms"
+      ]
+    },
+    {
+      "atom_fqdn": "ageoa.biosppy.ecg_zz2018.calculatefrequencypowersqi",
+      "summary": "Frequency-ratio score that measures whether nuisance structure is dominating the useful content.",
+      "dejargonized_summary": "Estimate whether the current representation is still dominated by unwanted repeating structure that should be filtered or replaced before later stages trust it.",
+      "heuristic_outputs": [
+        {
+          "output_name": "frequency_power_sqi",
+          "output_path": "frequency_power_sqi",
+          "role": "advisory",
+          "semantic_kind": "scalar_score",
+          "heuristic": {
+            "heuristic_id": "dominant_nuisance_structure",
+            "display_name": "Dominant Nuisance Structure",
+            "dejargonized_meaning": "The current conditioning stage leaves too much nuisance structure relative to the useful content.",
+            "evidence_type": "scalar_score",
+            "value_kind": "score",
+            "value_shape": "scalar",
+            "confidence": 0.76,
+            "producer_kind": "atom_output",
+            "applicability_scope": "cross_family",
+            "supported_action_classes": [
+              "precondition",
+              "replace_stage"
+            ],
+            "provenance_requirements": [
+              "metric_name",
+              "metric_value",
+              "threshold"
+            ],
+            "compatibility_aliases": [
+              "snr_db"
+            ]
+          },
+          "provenance_notes": [
+            "The score is based on how much power remains in expected versus nuisance ranges of the transformed representation.",
+            "It supports stage replacement or extra conditioning when nuisance structure still dominates."
+          ],
+          "uncertainty_notes": [
+            "This metric is informative about remaining nuisance structure, but the exact threshold remains family-local."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "title": "BioSPPy ECG SQI implementation",
+          "citation": "Primary upstream implementation for the frequency-power quality score.",
+          "note": "Source-backed metadata for nuisance-structure evidence."
+        }
+      ],
+      "uncertainty_notes": [
+        "A poor score indicates a likely conditioning issue, not necessarily that the entire family is invalid."
+      ],
+      "maintainers": [
+        "ageo-atoms"
+      ]
+    },
+    {
+      "atom_fqdn": "ageoa.biosppy.ecg_zz2018.calculatebeatagreementsqi",
+      "summary": "Agreement score between two event extractors that surfaces structural alignment problems.",
+      "dejargonized_summary": "Compare two extraction views of the same stream to estimate whether downstream stages are relying on event boundaries that do not line up well enough.",
+      "heuristic_outputs": [
+        {
+          "output_name": "beat_agreement_sqi",
+          "output_path": "beat_agreement_sqi",
+          "role": "gating",
+          "semantic_kind": "scalar_score",
+          "heuristic": {
+            "heuristic_id": "alignment_error",
+            "display_name": "Alignment Error",
+            "dejargonized_meaning": "The current stage boundaries or outputs are not aligned with what the downstream stage expects.",
+            "evidence_type": "scalar_score",
+            "value_kind": "score",
+            "value_shape": "scalar",
+            "confidence": 0.79,
+            "producer_kind": "atom_output",
+            "applicability_scope": "cross_family",
+            "supported_action_classes": [
+              "gate_or_validate",
+              "replace_stage"
+            ],
+            "provenance_requirements": [
+              "metric_name",
+              "metric_value",
+              "threshold"
+            ],
+            "compatibility_aliases": [
+              "detector_agreement"
+            ]
+          },
+          "provenance_notes": [
+            "Agreement is measured between two extraction views of the same input stream.",
+            "Low agreement supports validation or stage replacement because downstream stages may be consuming misaligned boundaries."
+          ],
+          "uncertainty_notes": [
+            "Low extractor agreement can reflect either true alignment problems or two weak extractors failing together."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "title": "BioSPPy ECG SQI implementation",
+          "citation": "Primary upstream implementation for the beat-agreement quality score.",
+          "note": "Source-backed metadata for alignment evidence."
+        }
+      ],
+      "uncertainty_notes": [
+        "Agreement should be interpreted as structural evidence, not as ground truth about the extracted events."
+      ],
+      "maintainers": [
+        "ageo-atoms"
+      ]
+    }
+  ]
+}

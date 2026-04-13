@@ -1,0 +1,161 @@
+{
+  "nodes": [
+    {
+      "node_id": "zz2018_d12_root",
+      "parent_id": null,
+      "name": "ZZ2018SQIFamily",
+      "description": "Canonical CDG for the refined-ingest BioSPPy ZZ2018 SQI helper family.",
+      "concept_type": "custom",
+      "inputs": [],
+      "outputs": [],
+      "status": "decomposed",
+      "children": [
+        "computebeatagreementsqi",
+        "computefrequencysqi",
+        "computekurtosissqi",
+        "assemblezz2018sqi"
+      ],
+      "depth": 0,
+      "type_signature": "",
+      "matched_primitive": null,
+      "primitive_binding_confidence": 0.0,
+      "primitive_binding_source": "",
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "computebeatagreementsqi",
+      "parent_id": "zz2018_d12_root",
+      "name": "ComputeBeatAgreementSQI",
+      "description": "Compute the detector-agreement SQI from two beat-location streams.",
+      "concept_type": "analysis",
+      "inputs": [
+        {"name": "detector_1", "type_desc": "ndarray", "constraints": "beat locations", "required": true, "default_value_repr": ""},
+        {"name": "detector_2", "type_desc": "ndarray", "constraints": "beat locations", "required": true, "default_value_repr": ""},
+        {"name": "fs", "type_desc": "float", "constraints": "> 0", "required": false, "default_value_repr": "1000.0"},
+        {"name": "mode", "type_desc": "str", "constraints": "BioSPPy bSQI mode", "required": false, "default_value_repr": "'simple'"},
+        {"name": "search_window", "type_desc": "int", "constraints": ">= 0 milliseconds", "required": false, "default_value_repr": "150"}
+      ],
+      "outputs": [
+        {"name": "b_sqi", "type_desc": "float", "constraints": "agreement score", "required": true, "default_value_repr": ""}
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(detector_1: ndarray, detector_2: ndarray, fs: float = 1000.0, mode: str = 'simple', search_window: int = 150) -> float",
+      "matched_primitive": null,
+      "primitive_binding_confidence": 0.0,
+      "primitive_binding_source": "",
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "computefrequencysqi",
+      "parent_id": "zz2018_d12_root",
+      "name": "ComputeFrequencySQI",
+      "description": "Compute the frequency-domain SQI for an ECG waveform.",
+      "concept_type": "analysis",
+      "inputs": [
+        {"name": "ecg_signal", "type_desc": "ndarray", "constraints": "ECG samples", "required": true, "default_value_repr": ""},
+        {"name": "fs", "type_desc": "float", "constraints": "> 0", "required": false, "default_value_repr": "1000.0"},
+        {"name": "nseg", "type_desc": "int", "constraints": "> 0", "required": false, "default_value_repr": "1024"},
+        {"name": "num_spectrum", "type_desc": "ndarray", "constraints": "numerator band", "required": false, "default_value_repr": "(5.0, 20.0)"},
+        {"name": "dem_spectrum", "type_desc": "ndarray | None", "constraints": "denominator band or default", "required": false, "default_value_repr": "None"},
+        {"name": "mode", "type_desc": "str", "constraints": "BioSPPy fSQI mode", "required": false, "default_value_repr": "'simple'"}
+      ],
+      "outputs": [
+        {"name": "f_sqi", "type_desc": "float", "constraints": "band-power ratio", "required": true, "default_value_repr": ""}
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(ecg_signal: ndarray, fs: float = 1000.0, nseg: int = 1024, num_spectrum: ndarray = (5.0, 20.0), dem_spectrum: ndarray | None = None, mode: str = 'simple') -> float",
+      "matched_primitive": null,
+      "primitive_binding_confidence": 0.0,
+      "primitive_binding_source": "",
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "computekurtosissqi",
+      "parent_id": "zz2018_d12_root",
+      "name": "ComputeKurtosisSQI",
+      "description": "Compute the kurtosis-based SQI for an ECG waveform.",
+      "concept_type": "analysis",
+      "inputs": [
+        {"name": "signal", "type_desc": "ndarray", "constraints": "ECG samples", "required": true, "default_value_repr": ""},
+        {"name": "fisher", "type_desc": "bool", "constraints": "SciPy kurtosis convention", "required": false, "default_value_repr": "True"}
+      ],
+      "outputs": [
+        {"name": "k_sqi", "type_desc": "float", "constraints": "kurtosis score", "required": true, "default_value_repr": ""}
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(signal: ndarray, fisher: bool = True) -> float",
+      "matched_primitive": null,
+      "primitive_binding_confidence": 0.0,
+      "primitive_binding_source": "",
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "assemblezz2018sqi",
+      "parent_id": "zz2018_d12_root",
+      "name": "AssembleZZ2018SQI",
+      "description": "Run the composite ZZ2018 ECG signal-quality classifier from the waveform and two detector streams.",
+      "concept_type": "classification",
+      "inputs": [
+        {"name": "signal", "type_desc": "ndarray", "constraints": "ECG samples", "required": true, "default_value_repr": ""},
+        {"name": "detector_1", "type_desc": "ndarray", "constraints": "first R-peak detector output", "required": true, "default_value_repr": ""},
+        {"name": "detector_2", "type_desc": "ndarray", "constraints": "second R-peak detector output", "required": true, "default_value_repr": ""},
+        {"name": "fs", "type_desc": "float", "constraints": "> 0", "required": false, "default_value_repr": "1000.0"},
+        {"name": "search_window", "type_desc": "int", "constraints": ">= 0 milliseconds", "required": false, "default_value_repr": "100"},
+        {"name": "nseg", "type_desc": "int", "constraints": "> 0", "required": false, "default_value_repr": "1024"},
+        {"name": "mode", "type_desc": "str", "constraints": "BioSPPy ZZ2018 mode", "required": false, "default_value_repr": "'simple'"}
+      ],
+      "outputs": [
+        {"name": "noise_class", "type_desc": "str", "constraints": "ZZ2018 quality class label", "required": true, "default_value_repr": ""}
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(signal: ndarray, detector_1: ndarray, detector_2: ndarray, fs: float = 1000.0, search_window: int = 100, nseg: int = 1024, mode: str = 'simple') -> str",
+      "matched_primitive": null,
+      "primitive_binding_confidence": 0.0,
+      "primitive_binding_source": "",
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    }
+  ],
+  "edges": [],
+  "metadata": {
+    "source": "manual_compaction",
+    "family": "biosppy_ecg_zz2018_d12"
+  }
+}
