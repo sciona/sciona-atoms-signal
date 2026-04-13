@@ -1,0 +1,152 @@
+{
+  "nodes": [
+    {
+      "node_id": "online_filter_root",
+      "parent_id": null,
+      "name": "OnlineFilter",
+      "description": "Chunked filtering workflow for BioSPPy's OnlineFilter class.",
+      "concept_type": "custom",
+      "inputs": [],
+      "outputs": [],
+      "status": "decomposed",
+      "children": [
+        "filterstateinit",
+        "filterstep"
+      ],
+      "depth": 0,
+      "type_signature": "",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "filterstateinit",
+      "parent_id": "online_filter_root",
+      "name": "FilterStateInit",
+      "description": "Initialize filter coefficients and an empty streaming delay-line state.",
+      "concept_type": "state_init",
+      "inputs": [
+        {
+          "name": "b",
+          "type_desc": "np.ndarray",
+          "constraints": "1-D coefficient array, len >= 1",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "a",
+          "type_desc": "np.ndarray",
+          "constraints": "1-D coefficient array, len >= 1, a[0] != 0",
+          "required": true,
+          "default_value_repr": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "b",
+          "type_desc": "np.ndarray",
+          "constraints": "normalized numerator coefficients",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "a",
+          "type_desc": "np.ndarray",
+          "constraints": "normalized denominator coefficients",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "state",
+          "type_desc": "FilterState",
+          "constraints": "contains b, a, and optional zi",
+          "required": true,
+          "default_value_repr": ""
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(b: np.ndarray, a: np.ndarray) -> tuple[np.ndarray, np.ndarray, FilterState]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "Prepare a reusable filter state bundle for chunked linear filtering.",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "filterstep",
+      "parent_id": "online_filter_root",
+      "name": "FilterStep",
+      "description": "Filter one signal chunk and advance the delay-line state.",
+      "concept_type": "signal_filter",
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "np.ndarray",
+          "constraints": "1-D numeric signal chunk",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "state",
+          "type_desc": "FilterState",
+          "constraints": "contains filter coefficients and prior zi",
+          "required": true,
+          "default_value_repr": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "filtered_signal",
+          "type_desc": "np.ndarray",
+          "constraints": "same shape as signal",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "state_out",
+          "type_desc": "FilterState",
+          "constraints": "updated state with advanced zi",
+          "required": true,
+          "default_value_repr": ""
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(signal: np.ndarray, state: FilterState) -> tuple[np.ndarray, FilterState]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "Apply the configured filter to one chunk while threading the updated delay line.",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    }
+  ],
+  "edges": [
+    {
+      "source_id": "filterstateinit",
+      "target_id": "filterstep",
+      "output_name": "state",
+      "input_name": "state",
+      "source_type": "FilterState",
+      "target_type": "FilterState",
+      "requires_glue": false
+    }
+  ],
+  "metadata": {
+    "source": "hand_refined",
+    "class_name": "OnlineFilter"
+  }
+}

@@ -1,0 +1,530 @@
+[
+  {
+    "pdg_node": {
+      "predicate_id": "get_auth_rates",
+      "statement": "(TP: Any, FP: Any, TN: Any, FN: Any, thresholds: Any) -> Any",
+      "informal_desc": "Compute authentication rates from the confusion matrix.\n\nParameters\n----------\nTP : array\n    True Positive counts for each classifier threshold.\nFP : array\n    False Positive counts for each classifier threshold.\nTN : array\n    True Negative counts for each classifier threshold.\nFN : array\n    False Negative counts for each classifier threshold.\nthresholds : array\n    Classifier thresholds.\n\nReturns\n-------\nAcc : array\n    Accuracy at each classifier threshold.\nTAR : array\n    True Accept Rate at each classifier threshold.\nFAR : array\n    False Accept Rate at each classifier threshold.\nFRR : array\n    False Reject Rate at each classifier threshold.\nTRR : array\n    True Reject Rate at each classifier threshold.\nEER : array\n    Equal Error Rate points, with format (threshold, rate).\nErr : array\n    Error rate at each classifier threshold.\nPPV : array\n    Positive Predictive Value at each classifier threshold.\nFDR : array\n    False Discovery Rate at each classifier threshold.\nNPV : array\n    Negative Predictive Value at each classifier threshold.\nFOR : array\n    False Omission Rate at each classifier threshold.\nMCC : array\n    Matthrews Correlation Coefficient at each classifier threshold.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "get_auth_rates",
+          "type_signature": "(TP: Any, FP: Any, TN: Any, FN: Any, thresholds: Any) -> Any",
+          "docstring": "Compute authentication rates from the confusion matrix.\n\nParameters\n----------\nTP : array\n    True Positive counts for each classifier threshold.\nFP : array\n    False Positive counts for each classifier threshold.\nTN : array\n    True Negative counts for each classifier threshold.\nFN : array\n    False Negative counts for each classifier threshold.\nthresholds : array\n    Classifier thresholds.\n\nReturns\n-------\nAcc : array\n    Accuracy at each classifier threshold.\nTAR : array\n    True Accept Rate at each classifier threshold.\nFAR : array\n    False Accept Rate at each classifier threshold.\nFRR : array\n    False Reject Rate at each classifier threshold.\nTRR : array\n    True Reject Rate at each classifier threshold.\nEER : array\n    Equal Error Rate points, with format (threshold, rate).\nErr : array\n    Error rate at each classifier threshold.\nPPV : array\n    Positive Predictive Value at each classifier threshold.\nFDR : array\n    False Discovery Rate at each classifier threshold.\nNPV : array\n    Negative Predictive Value at each classifier threshold.\nFOR : array\n    False Omission Rate at each classifier threshold.\nMCC : array\n    Matthrews Correlation Coefficient at each classifier threshold.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "get_auth_rates",
+          "type_signature": "(TP: Any, FP: Any, TN: Any, FN: Any, thresholds: Any) -> Any",
+          "docstring": "Compute authentication rates from the confusion matrix.\n\nParameters\n----------\nTP : array\n    True Positive counts for each classifier threshold.\nFP : array\n    False Positive counts for each classifier threshold.\nTN : array\n    True Negative counts for each classifier threshold.\nFN : array\n    False Negative counts for each classifier threshold.\nthresholds : array\n    Classifier thresholds.\n\nReturns\n-------\nAcc : array\n    Accuracy at each classifier threshold.\nTAR : array\n    True Accept Rate at each classifier threshold.\nFAR : array\n    False Accept Rate at each classifier threshold.\nFRR : array\n    False Reject Rate at each classifier threshold.\nTRR : array\n    True Reject Rate at each classifier threshold.\nEER : array\n    Equal Error Rate points, with format (threshold, rate).\nErr : array\n    Error rate at each classifier threshold.\nPPV : array\n    Positive Predictive Value at each classifier threshold.\nFDR : array\n    False Discovery Rate at each classifier threshold.\nNPV : array\n    Negative Predictive Value at each classifier threshold.\nFOR : array\n    False Omission Rate at each classifier threshold.\nMCC : array\n    Matthrews Correlation Coefficient at each classifier threshold.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "get_auth_rates",
+            "type_signature": "(TP: Any, FP: Any, TN: Any, FN: Any, thresholds: Any) -> Any",
+            "docstring": "Compute authentication rates from the confusion matrix.\n\nParameters\n----------\nTP : array\n    True Positive counts for each classifier threshold.\nFP : array\n    False Positive counts for each classifier threshold.\nTN : array\n    True Negative counts for each classifier threshold.\nFN : array\n    False Negative counts for each classifier threshold.\nthresholds : array\n    Classifier thresholds.\n\nReturns\n-------\nAcc : array\n    Accuracy at each classifier threshold.\nTAR : array\n    True Accept Rate at each classifier threshold.\nFAR : array\n    False Accept Rate at each classifier threshold.\nFRR : array\n    False Reject Rate at each classifier threshold.\nTRR : array\n    True Reject Rate at each classifier threshold.\nEER : array\n    Equal Error Rate points, with format (threshold, rate).\nErr : array\n    Error rate at each classifier threshold.\nPPV : array\n    Positive Predictive Value at each classifier threshold.\nFDR : array\n    False Discovery Rate at each classifier threshold.\nNPV : array\n    Negative Predictive Value at each classifier threshold.\nFOR : array\n    False Omission Rate at each classifier threshold.\nMCC : array\n    Matthrews Correlation Coefficient at each classifier threshold.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "get_id_rates",
+      "statement": "(H: Any, M: Any, R: Any, N: Any, thresholds: Any) -> Any",
+      "informal_desc": "Compute identification rates from the confusion matrix.\n\nParameters\n----------\nH : array\n    Hit counts for each classifier threshold.\nM : array\n    Miss counts for each classifier threshold.\nR : array\n    Reject counts for each classifier threshold.\nN : int\n    Number of test samples.\nthresholds : array\n    Classifier thresholds.\n\nReturns\n-------\nAcc : array\n    Accuracy at each classifier threshold.\nErr : array\n    Error rate at each classifier threshold.\nMR : array\n    Miss Rate at each classifier threshold.\nRR : array\n    Reject Rate at each classifier threshold.\nEID : array\n    Error of Identification points, with format (threshold, rate).\nEER : array\n    Equal Error Rate points, with format (threshold, rate).",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "get_id_rates",
+          "type_signature": "(H: Any, M: Any, R: Any, N: Any, thresholds: Any) -> Any",
+          "docstring": "Compute identification rates from the confusion matrix.\n\nParameters\n----------\nH : array\n    Hit counts for each classifier threshold.\nM : array\n    Miss counts for each classifier threshold.\nR : array\n    Reject counts for each classifier threshold.\nN : int\n    Number of test samples.\nthresholds : array\n    Classifier thresholds.\n\nReturns\n-------\nAcc : array\n    Accuracy at each classifier threshold.\nErr : array\n    Error rate at each classifier threshold.\nMR : array\n    Miss Rate at each classifier threshold.\nRR : array\n    Reject Rate at each classifier threshold.\nEID : array\n    Error of Identification points, with format (threshold, rate).\nEER : array\n    Equal Error Rate points, with format (threshold, rate).",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "get_id_rates",
+          "type_signature": "(H: Any, M: Any, R: Any, N: Any, thresholds: Any) -> Any",
+          "docstring": "Compute identification rates from the confusion matrix.\n\nParameters\n----------\nH : array\n    Hit counts for each classifier threshold.\nM : array\n    Miss counts for each classifier threshold.\nR : array\n    Reject counts for each classifier threshold.\nN : int\n    Number of test samples.\nthresholds : array\n    Classifier thresholds.\n\nReturns\n-------\nAcc : array\n    Accuracy at each classifier threshold.\nErr : array\n    Error rate at each classifier threshold.\nMR : array\n    Miss Rate at each classifier threshold.\nRR : array\n    Reject Rate at each classifier threshold.\nEID : array\n    Error of Identification points, with format (threshold, rate).\nEER : array\n    Equal Error Rate points, with format (threshold, rate).",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "get_id_rates",
+            "type_signature": "(H: Any, M: Any, R: Any, N: Any, thresholds: Any) -> Any",
+            "docstring": "Compute identification rates from the confusion matrix.\n\nParameters\n----------\nH : array\n    Hit counts for each classifier threshold.\nM : array\n    Miss counts for each classifier threshold.\nR : array\n    Reject counts for each classifier threshold.\nN : int\n    Number of test samples.\nthresholds : array\n    Classifier thresholds.\n\nReturns\n-------\nAcc : array\n    Accuracy at each classifier threshold.\nErr : array\n    Error rate at each classifier threshold.\nMR : array\n    Miss Rate at each classifier threshold.\nRR : array\n    Reject Rate at each classifier threshold.\nEID : array\n    Error of Identification points, with format (threshold, rate).\nEER : array\n    Equal Error Rate points, with format (threshold, rate).",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "get_subject_results",
+      "statement": "(results: Any, subject: Any, thresholds: Any, subjects: Any, subject_dict: Any, subject_idx: Any) -> Any",
+      "informal_desc": "Compute authentication and identification performance metrics for a\ngiven subject.\n\nParameters\n----------\nresults : dict\n    Classification results.\nsubject : hashable\n    True subject label.\nthresholds : array\n    Classifier thresholds.\nsubjects : list\n    Target subject classes.\nsubject_dict : bidict\n    Subject-label conversion dictionary.\nsubject_idx : list\n    Subject index.\n\nReturns\n-------\nassessment : dict\n    Authentication and identification results.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "get_subject_results",
+          "type_signature": "(results: Any, subject: Any, thresholds: Any, subjects: Any, subject_dict: Any, subject_idx: Any) -> Any",
+          "docstring": "Compute authentication and identification performance metrics for a\ngiven subject.\n\nParameters\n----------\nresults : dict\n    Classification results.\nsubject : hashable\n    True subject label.\nthresholds : array\n    Classifier thresholds.\nsubjects : list\n    Target subject classes.\nsubject_dict : bidict\n    Subject-label conversion dictionary.\nsubject_idx : list\n    Subject index.\n\nReturns\n-------\nassessment : dict\n    Authentication and identification results.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "get_subject_results",
+          "type_signature": "(results: Any, subject: Any, thresholds: Any, subjects: Any, subject_dict: Any, subject_idx: Any) -> Any",
+          "docstring": "Compute authentication and identification performance metrics for a\ngiven subject.\n\nParameters\n----------\nresults : dict\n    Classification results.\nsubject : hashable\n    True subject label.\nthresholds : array\n    Classifier thresholds.\nsubjects : list\n    Target subject classes.\nsubject_dict : bidict\n    Subject-label conversion dictionary.\nsubject_idx : list\n    Subject index.\n\nReturns\n-------\nassessment : dict\n    Authentication and identification results.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "get_subject_results",
+            "type_signature": "(results: Any, subject: Any, thresholds: Any, subjects: Any, subject_dict: Any, subject_idx: Any) -> Any",
+            "docstring": "Compute authentication and identification performance metrics for a\ngiven subject.\n\nParameters\n----------\nresults : dict\n    Classification results.\nsubject : hashable\n    True subject label.\nthresholds : array\n    Classifier thresholds.\nsubjects : list\n    Target subject classes.\nsubject_dict : bidict\n    Subject-label conversion dictionary.\nsubject_idx : list\n    Subject index.\n\nReturns\n-------\nassessment : dict\n    Authentication and identification results.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "assess_classification",
+      "statement": "(results: Any, thresholds: Any) -> Any",
+      "informal_desc": "Assess the performance of a biometric classification test.\n\nParameters\n----------\nresults : dict\n    Classification results.\nthresholds : array\n    Classifier thresholds.\n\nReturns\n-------\nassessment : dict\n    Classification assessment.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "assess_classification",
+          "type_signature": "(results: Any, thresholds: Any) -> Any",
+          "docstring": "Assess the performance of a biometric classification test.\n\nParameters\n----------\nresults : dict\n    Classification results.\nthresholds : array\n    Classifier thresholds.\n\nReturns\n-------\nassessment : dict\n    Classification assessment.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "assess_classification",
+          "type_signature": "(results: Any, thresholds: Any) -> Any",
+          "docstring": "Assess the performance of a biometric classification test.\n\nParameters\n----------\nresults : dict\n    Classification results.\nthresholds : array\n    Classifier thresholds.\n\nReturns\n-------\nassessment : dict\n    Classification assessment.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "assess_classification",
+            "type_signature": "(results: Any, thresholds: Any) -> Any",
+            "docstring": "Assess the performance of a biometric classification test.\n\nParameters\n----------\nresults : dict\n    Classification results.\nthresholds : array\n    Classifier thresholds.\n\nReturns\n-------\nassessment : dict\n    Classification assessment.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "assess_runs",
+      "statement": "(results: Any, subjects: Any) -> Any",
+      "informal_desc": "Assess the performance of multiple biometric classification runs.\n\nParameters\n----------\nresults : list\n    Classification assessment for each run.\nsubjects : list\n    Common target subject classes.\n\nReturns\n-------\nassessment : dict\n    Global classification assessment.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "assess_runs",
+          "type_signature": "(results: Any, subjects: Any) -> Any",
+          "docstring": "Assess the performance of multiple biometric classification runs.\n\nParameters\n----------\nresults : list\n    Classification assessment for each run.\nsubjects : list\n    Common target subject classes.\n\nReturns\n-------\nassessment : dict\n    Global classification assessment.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "assess_runs",
+          "type_signature": "(results: Any, subjects: Any) -> Any",
+          "docstring": "Assess the performance of multiple biometric classification runs.\n\nParameters\n----------\nresults : list\n    Classification assessment for each run.\nsubjects : list\n    Common target subject classes.\n\nReturns\n-------\nassessment : dict\n    Global classification assessment.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "assess_runs",
+            "type_signature": "(results: Any, subjects: Any) -> Any",
+            "docstring": "Assess the performance of multiple biometric classification runs.\n\nParameters\n----------\nresults : list\n    Classification assessment for each run.\nsubjects : list\n    Common target subject classes.\n\nReturns\n-------\nassessment : dict\n    Global classification assessment.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "combination",
+      "statement": "(results: Any, weights: Any) -> Any",
+      "informal_desc": "Combine results from multiple classifiers.\n\nParameters\n----------\nresults : dict\n    Results for each classifier.\nweights : dict, optional\n    Weight for each classifier.\n\nReturns\n-------\ndecision : object\n    Consensus decision.\nconfidence : float\n    Confidence estimate of the decision.\ncounts : array\n    Weight for each possible decision outcome.\nclasses : array\n    List of possible decision outcomes.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "combination",
+          "type_signature": "(results: Any, weights: Any) -> Any",
+          "docstring": "Combine results from multiple classifiers.\n\nParameters\n----------\nresults : dict\n    Results for each classifier.\nweights : dict, optional\n    Weight for each classifier.\n\nReturns\n-------\ndecision : object\n    Consensus decision.\nconfidence : float\n    Confidence estimate of the decision.\ncounts : array\n    Weight for each possible decision outcome.\nclasses : array\n    List of possible decision outcomes.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "combination",
+          "type_signature": "(results: Any, weights: Any) -> Any",
+          "docstring": "Combine results from multiple classifiers.\n\nParameters\n----------\nresults : dict\n    Results for each classifier.\nweights : dict, optional\n    Weight for each classifier.\n\nReturns\n-------\ndecision : object\n    Consensus decision.\nconfidence : float\n    Confidence estimate of the decision.\ncounts : array\n    Weight for each possible decision outcome.\nclasses : array\n    List of possible decision outcomes.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "combination",
+            "type_signature": "(results: Any, weights: Any) -> Any",
+            "docstring": "Combine results from multiple classifiers.\n\nParameters\n----------\nresults : dict\n    Results for each classifier.\nweights : dict, optional\n    Weight for each classifier.\n\nReturns\n-------\ndecision : object\n    Consensus decision.\nconfidence : float\n    Confidence estimate of the decision.\ncounts : array\n    Weight for each possible decision outcome.\nclasses : array\n    List of possible decision outcomes.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "majority_rule",
+      "statement": "(labels: Any, random: Any) -> Any",
+      "informal_desc": "Determine the most frequent class label.\n\nParameters\n----------\nlabels : array, list\n    List of clas labels.\nrandom : bool, optional\n    If True, will choose randomly in case of tied classes, otherwise the\n    first element is chosen.\n\nReturns\n-------\n    decision : object\n        Consensus decision.\n    count : int\n        Number of elements of the consensus decision.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "majority_rule",
+          "type_signature": "(labels: Any, random: Any) -> Any",
+          "docstring": "Determine the most frequent class label.\n\nParameters\n----------\nlabels : array, list\n    List of clas labels.\nrandom : bool, optional\n    If True, will choose randomly in case of tied classes, otherwise the\n    first element is chosen.\n\nReturns\n-------\n    decision : object\n        Consensus decision.\n    count : int\n        Number of elements of the consensus decision.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "majority_rule",
+          "type_signature": "(labels: Any, random: Any) -> Any",
+          "docstring": "Determine the most frequent class label.\n\nParameters\n----------\nlabels : array, list\n    List of clas labels.\nrandom : bool, optional\n    If True, will choose randomly in case of tied classes, otherwise the\n    first element is chosen.\n\nReturns\n-------\n    decision : object\n        Consensus decision.\n    count : int\n        Number of elements of the consensus decision.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "majority_rule",
+            "type_signature": "(labels: Any, random: Any) -> Any",
+            "docstring": "Determine the most frequent class label.\n\nParameters\n----------\nlabels : array, list\n    List of clas labels.\nrandom : bool, optional\n    If True, will choose randomly in case of tied classes, otherwise the\n    first element is chosen.\n\nReturns\n-------\n    decision : object\n        Consensus decision.\n    count : int\n        Number of elements of the consensus decision.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "cross_validation",
+      "statement": "(labels: Any, n_iter: Any, test_size: Any, train_size: Any, random_state: Any) -> Any",
+      "informal_desc": "Return a Cross Validation (CV) iterator.\n\nWraps the StratifiedShuffleSplit iterator from sklearn.model_selection.\nThis iterator returns stratified randomized folds, which preserve the\npercentage of samples for each class.\n\nParameters\n----------\nlabels : list, array\n    List of class labels for each data sample.\nn_iter : int, optional\n    Number of splitting iterations.\ntest_size : float, int, optional\n    If float, represents the proportion of the dataset to include in the\n    test split; if int, represents the absolute number of test samples.\ntrain_size : float, int, optional\n    If float, represents the proportion of the dataset to include in the\n    train split; if int, represents the absolute number of train samples.\nrandom_state : int, RandomState, optional\n    The seed of the pseudo random number generator to use when shuffling\n    the data.\n\nReturns\n-------\ncv : CV iterator\n    Cross Validation iterator.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "cross_validation",
+          "type_signature": "(labels: Any, n_iter: Any, test_size: Any, train_size: Any, random_state: Any) -> Any",
+          "docstring": "Return a Cross Validation (CV) iterator.\n\nWraps the StratifiedShuffleSplit iterator from sklearn.model_selection.\nThis iterator returns stratified randomized folds, which preserve the\npercentage of samples for each class.\n\nParameters\n----------\nlabels : list, array\n    List of class labels for each data sample.\nn_iter : int, optional\n    Number of splitting iterations.\ntest_size : float, int, optional\n    If float, represents the proportion of the dataset to include in the\n    test split; if int, represents the absolute number of test samples.\ntrain_size : float, int, optional\n    If float, represents the proportion of the dataset to include in the\n    train split; if int, represents the absolute number of train samples.\nrandom_state : int, RandomState, optional\n    The seed of the pseudo random number generator to use when shuffling\n    the data.\n\nReturns\n-------\ncv : CV iterator\n    Cross Validation iterator.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "cross_validation",
+          "type_signature": "(labels: Any, n_iter: Any, test_size: Any, train_size: Any, random_state: Any) -> Any",
+          "docstring": "Return a Cross Validation (CV) iterator.\n\nWraps the StratifiedShuffleSplit iterator from sklearn.model_selection.\nThis iterator returns stratified randomized folds, which preserve the\npercentage of samples for each class.\n\nParameters\n----------\nlabels : list, array\n    List of class labels for each data sample.\nn_iter : int, optional\n    Number of splitting iterations.\ntest_size : float, int, optional\n    If float, represents the proportion of the dataset to include in the\n    test split; if int, represents the absolute number of test samples.\ntrain_size : float, int, optional\n    If float, represents the proportion of the dataset to include in the\n    train split; if int, represents the absolute number of train samples.\nrandom_state : int, RandomState, optional\n    The seed of the pseudo random number generator to use when shuffling\n    the data.\n\nReturns\n-------\ncv : CV iterator\n    Cross Validation iterator.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "cross_validation",
+            "type_signature": "(labels: Any, n_iter: Any, test_size: Any, train_size: Any, random_state: Any) -> Any",
+            "docstring": "Return a Cross Validation (CV) iterator.\n\nWraps the StratifiedShuffleSplit iterator from sklearn.model_selection.\nThis iterator returns stratified randomized folds, which preserve the\npercentage of samples for each class.\n\nParameters\n----------\nlabels : list, array\n    List of class labels for each data sample.\nn_iter : int, optional\n    Number of splitting iterations.\ntest_size : float, int, optional\n    If float, represents the proportion of the dataset to include in the\n    test split; if int, represents the absolute number of test samples.\ntrain_size : float, int, optional\n    If float, represents the proportion of the dataset to include in the\n    train split; if int, represents the absolute number of train samples.\nrandom_state : int, RandomState, optional\n    The seed of the pseudo random number generator to use when shuffling\n    the data.\n\nReturns\n-------\ncv : CV iterator\n    Cross Validation iterator.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  }
+]

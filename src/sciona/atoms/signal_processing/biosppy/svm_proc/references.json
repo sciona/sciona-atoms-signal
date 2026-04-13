@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "ageoa.biosppy.svm_proc.assess_classification@ageoa/biosppy/svm_proc/atoms.py:118": {
+      "references": [
+        {
+          "ref_id": "repo_biosppy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Primary BioSPPy software attribution."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "ageoa.biosppy.svm_proc.assess_runs@ageoa/biosppy/svm_proc/atoms.py:147": {
+      "references": [
+        {
+          "ref_id": "repo_biosppy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Primary BioSPPy software attribution."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "ageoa.biosppy.svm_proc.combination@ageoa/biosppy/svm_proc/atoms.py:176": {
+      "references": [
+        {
+          "ref_id": "repo_biosppy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Primary BioSPPy software attribution."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "ageoa.biosppy.svm_proc.cross_validation@ageoa/biosppy/svm_proc/atoms.py:262": {
+      "references": [
+        {
+          "ref_id": "repo_biosppy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Primary BioSPPy software attribution."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "ageoa.biosppy.svm_proc.get_auth_rates@ageoa/biosppy/svm_proc/atoms.py:21": {
+      "references": [
+        {
+          "ref_id": "repo_biosppy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Primary BioSPPy software attribution."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "ageoa.biosppy.svm_proc.get_id_rates@ageoa/biosppy/svm_proc/atoms.py:47": {
+      "references": [
+        {
+          "ref_id": "repo_biosppy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Primary BioSPPy software attribution."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "ageoa.biosppy.svm_proc.get_subject_results@ageoa/biosppy/svm_proc/atoms.py:74": {
+      "references": [
+        {
+          "ref_id": "repo_biosppy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Primary BioSPPy software attribution."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "ageoa.biosppy.svm_proc.majority_rule@ageoa/biosppy/svm_proc/atoms.py:221": {
+      "references": [
+        {
+          "ref_id": "repo_biosppy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Primary BioSPPy software attribution."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}
