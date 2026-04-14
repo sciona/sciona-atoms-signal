@@ -5,6 +5,115 @@ import math
 import numpy as np
 from scipy.ndimage import median_filter
 from scipy.signal import butter, find_peaks, sosfiltfilt
+from sciona.ghost.abstract import AbstractArray, AbstractScalar, AbstractSignal
+from sciona.ghost.registry import register_atom
+
+
+def witness_filter_signal_for_detection(
+    signal: AbstractSignal,
+    sampling_rate: AbstractScalar,
+) -> AbstractSignal:
+    """Describe a conditioned waveform with the same envelope as the input signal."""
+    return AbstractSignal(
+        shape=signal.shape,
+        dtype="float64",
+        sampling_rate=signal.sampling_rate,
+        domain=signal.domain,
+        units=signal.units,
+    )
+
+
+def witness_detect_peaks_in_signal(
+    conditioned_signal: AbstractSignal,
+    sampling_rate: AbstractScalar,
+) -> AbstractArray:
+    """Describe detected peak locations as sorted integer indices."""
+    return AbstractArray(
+        shape=(conditioned_signal.shape[0],),
+        dtype="int64",
+        is_sorted=True,
+        min_val=0,
+        max_val=max(conditioned_signal.shape[0] - 1, 0),
+    )
+
+
+def witness_compute_event_rate(
+    events: AbstractArray,
+    sampling_rate: AbstractScalar,
+) -> tuple[AbstractSignal, AbstractSignal]:
+    """Describe midpoint indices and derived event-rate values."""
+    length = max(events.shape[0] - 1, 0) if events.shape else 0
+    midpoints = AbstractSignal(
+        shape=(length,),
+        dtype="int64",
+        sampling_rate=1.0,
+        domain="index",
+        units="samples",
+    )
+    event_rate = AbstractSignal(
+        shape=(length,),
+        dtype="float64",
+        sampling_rate=1.0,
+        domain="measurement",
+        units="events_per_minute",
+    )
+    return midpoints, event_rate
+
+
+def witness_compute_event_rate_smoothed(
+    events: AbstractArray,
+    sampling_rate: AbstractScalar,
+) -> tuple[AbstractSignal, AbstractSignal]:
+    """Describe moving-average-smoothed event-rate values."""
+    return witness_compute_event_rate(events, sampling_rate)
+
+
+def witness_compute_event_rate_median_smoothed(
+    events: AbstractArray,
+    sampling_rate: AbstractScalar,
+) -> tuple[AbstractSignal, AbstractSignal]:
+    """Describe median-smoothed event-rate values."""
+    return witness_compute_event_rate(events, sampling_rate)
+
+
+def witness_assess_signal_quality(
+    signal: AbstractSignal,
+    sampling_rate: AbstractScalar,
+) -> tuple[AbstractSignal, AbstractArray]:
+    """Describe signal quality output as the original waveform plus a boolean mask."""
+    quality_mask = AbstractArray(
+        shape=signal.shape,
+        dtype="bool",
+    )
+    return signal, quality_mask
+
+
+def witness_remove_signal_jumps(
+    signal: AbstractSignal,
+    sampling_rate: AbstractScalar,
+) -> AbstractSignal:
+    """Describe a jump-corrected waveform with the same envelope as the input signal."""
+    return AbstractSignal(
+        shape=signal.shape,
+        dtype="float64",
+        sampling_rate=signal.sampling_rate,
+        domain=signal.domain,
+        units=signal.units,
+    )
+
+
+def witness_reject_outlier_intervals(
+    events: AbstractArray,
+    sampling_rate: AbstractScalar,
+) -> AbstractArray:
+    """Describe a filtered, sorted event-index array."""
+    return AbstractArray(
+        shape=events.shape,
+        dtype="int64",
+        is_sorted=True,
+        min_val=events.min_val,
+        max_val=events.max_val,
+    )
 
 
 def _coerce_signal(signal: np.ndarray) -> np.ndarray:
@@ -39,6 +148,7 @@ def _robust_scale(values: np.ndarray) -> float:
     return std if std > 0 else 1.0
 
 
+@register_atom(witness_filter_signal_for_detection)
 def filter_signal_for_detection(
     signal: np.ndarray,
     sampling_rate: float | int,
@@ -86,6 +196,7 @@ def _pick_peak_orientation(
     return neg_peaks if neg_score > pos_score else pos_peaks
 
 
+@register_atom(witness_detect_peaks_in_signal)
 def detect_peaks_in_signal(
     conditioned_signal: np.ndarray,
     sampling_rate: float | int,
@@ -106,6 +217,7 @@ def detect_peaks_in_signal(
     return np.asarray(peaks, dtype=np.int64)
 
 
+@register_atom(witness_compute_event_rate)
 def compute_event_rate(
     events: np.ndarray,
     sampling_rate: float | int,
@@ -132,6 +244,7 @@ def compute_event_rate(
     return midpoints.astype(np.int64), event_rate.astype(np.float64)
 
 
+@register_atom(witness_compute_event_rate_smoothed)
 def compute_event_rate_smoothed(
     events: np.ndarray,
     sampling_rate: float | int,
@@ -149,6 +262,7 @@ def compute_event_rate_smoothed(
     return midpoints, smoothed.astype(np.float64)
 
 
+@register_atom(witness_compute_event_rate_median_smoothed)
 def compute_event_rate_median_smoothed(
     events: np.ndarray,
     sampling_rate: float | int,
@@ -170,6 +284,7 @@ def compute_event_rate_median_smoothed(
     return midpoints, np.asarray(smoothed, dtype=np.float64)
 
 
+@register_atom(witness_assess_signal_quality)
 def assess_signal_quality(
     signal: np.ndarray,
     sampling_rate: float | int,
@@ -202,6 +317,7 @@ def assess_signal_quality(
     return values, mask
 
 
+@register_atom(witness_remove_signal_jumps)
 def remove_signal_jumps(
     signal: np.ndarray,
     sampling_rate: float | int,
@@ -232,6 +348,7 @@ def remove_signal_jumps(
     return result
 
 
+@register_atom(witness_reject_outlier_intervals)
 def reject_outlier_intervals(
     events: np.ndarray,
     sampling_rate: float | int,

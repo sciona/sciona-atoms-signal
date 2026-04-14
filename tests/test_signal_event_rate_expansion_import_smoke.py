@@ -4,12 +4,18 @@ import importlib
 import json
 from pathlib import Path
 
+from sciona.ghost.registry import list_registered
+
 
 def test_signal_event_rate_expansion_import_smoke() -> None:
     atoms = importlib.import_module("sciona.atoms.expansion.signal_event_rate")
     probes = importlib.import_module("sciona.probes.expansion.signal_event_rate")
     assert hasattr(atoms, "filter_signal_for_detection")
     assert hasattr(probes, "SIGNAL_EVENT_RATE_PROBE_TARGETS")
+    registered = set(list_registered())
+    assert "filter_signal_for_detection" in registered
+    assert "detect_peaks_in_signal" in registered
+    assert "compute_event_rate" in registered
 
 
 def test_signal_event_rate_expansion_asset_smoke() -> None:
