@@ -1,12 +1,10 @@
 from __future__ import annotations
-"""Auto-generated atom wrappers following the ageoa pattern."""
-
-from typing import Any
+"""Auto-generated atom wrappers following the sciona pattern."""
 
 import numpy as np
 import icontract
 
-from ageoa.ghost.registry import register_atom
+from sciona.ghost.registry import register_atom
 from neurokit2.ecg.ecg_quality import _ecg_quality_averageQRS, _ecg_quality_zhao2018
 
 from .witnesses import witness_averageqrstemplate, witness_zhao2018hrvanalysis
@@ -23,7 +21,7 @@ def zhao2018hrvanalysis(
     ecg_cleaned: np.ndarray,
     rpeaks: np.ndarray | None = None,
     sampling_rate: int | float = 1000,
-    window: int | float | tuple[Any, ...] = 1024,
+    window: int | float | tuple[object, ...] = 1024,
     mode: str = "simple",
 ) -> str:
     """Compute the Zhao 2018 ECG quality verdict over a cleaned ECG trace."""

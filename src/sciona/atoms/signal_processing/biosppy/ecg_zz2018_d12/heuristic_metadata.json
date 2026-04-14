@@ -1,60 +1,64 @@
 {
-  "atom_fqdn": "ageoa.biosppy.ecg_zz2018_d12.assemblezz2018sqi",
-  "summary": "Composite ECG quality classifier output used as a reusable gating signal.",
-  "dejargonized_summary": "Summarize whether a signal window looks clean enough for downstream analysis by combining two detector streams and the waveform itself.",
-  "heuristic_outputs": [
+  "records": [
     {
-      "output_name": "noise_class",
-      "output_path": "noise_class",
-      "role": "gating",
-      "semantic_kind": "categorical_label",
-      "heuristic": {
-        "heuristic_id": "quality_instability",
-        "display_name": "Quality Instability",
-        "dejargonized_meaning": "A window varies enough in quality that one fixed conditioning path may be brittle.",
-        "evidence_type": "categorical_label",
-        "value_kind": "str",
-        "value_shape": "",
-        "confidence": 0.82,
-        "producer_kind": "atom_output",
-        "applicability_scope": "cross_family",
-        "supported_action_classes": [
-          "gate_or_validate",
-          "branch_and_compare"
-        ],
-        "provenance_requirements": [
-          "windowed waveform quality summary",
-          "detector comparison evidence"
-        ],
-        "compatibility_aliases": [
-          "signal_quality_variance",
-          "signal_quality_kurtosis_cv"
-        ]
-      },
-      "provenance_notes": [
-        "Composite ECG SQI label derived from the waveform and two detector streams.",
-        "In ECG quality scoring this label indicates whether the window is trustworthy enough for downstream analysis."
+      "atom_fqdn": "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.assemblezz2018sqi",
+      "summary": "Composite ECG quality classifier output used as a reusable gating signal.",
+      "dejargonized_summary": "Summarize whether a signal window looks clean enough for downstream analysis by combining two detector streams and the waveform itself.",
+      "heuristic_outputs": [
+        {
+          "output_name": "noise_class",
+          "output_path": "noise_class",
+          "role": "gating",
+          "semantic_kind": "categorical_label",
+          "heuristic": {
+            "heuristic_id": "quality_instability",
+            "display_name": "Quality Instability",
+            "dejargonized_meaning": "A window varies enough in quality that one fixed conditioning path may be brittle.",
+            "evidence_type": "categorical_label",
+            "value_kind": "str",
+            "value_shape": "",
+            "confidence": 0.82,
+            "producer_kind": "atom_output",
+            "applicability_scope": "cross_family",
+            "supported_action_classes": [
+              "gate_or_validate",
+              "branch_and_compare"
+            ],
+            "provenance_requirements": [
+              "windowed waveform quality summary",
+              "detector comparison evidence"
+            ],
+            "compatibility_aliases": [
+              "signal_quality_variance",
+              "signal_quality_kurtosis_cv"
+            ]
+          },
+          "provenance_notes": [
+            "Composite ECG SQI label derived from the waveform and two detector streams.",
+            "In ECG quality scoring this label indicates whether the window is trustworthy enough for downstream analysis."
+          ],
+          "uncertainty_notes": [
+            "This output is a heuristic quality indicator, not a ground-truth physiological label."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "title": "BioSPPy ECG SQI implementation",
+          "citation": "Primary upstream implementation for the composite ECG quality classifier.",
+          "note": "Source-backed atom-side metadata for the signal-processing heuristic output."
+        },
+        {
+          "title": "Zhao et al. 2018 ECG SQI paper",
+          "citation": "Exact attribution for the ZZ2018 quality classifier family."
+        }
       ],
       "uncertainty_notes": [
-        "This output is a heuristic quality indicator, not a ground-truth physiological label."
+        "Quality labels are heuristics and should be used as gating evidence, not as direct physiological truth."
+      ],
+      "maintainers": [
+        "sciona-atoms-signal"
       ]
     }
-  ],
-  "references": [
-    {
-      "title": "BioSPPy ECG SQI implementation",
-      "citation": "Primary upstream implementation for the composite ECG quality classifier.",
-      "note": "Source-backed atom-side metadata for the signal-processing heuristic output."
-    },
-    {
-      "title": "Zhao et al. 2018 ECG SQI paper",
-      "citation": "Exact attribution for the ZZ2018 quality classifier family."
-    }
-  ],
-  "uncertainty_notes": [
-    "Quality labels are heuristics and should be used as gating evidence, not as direct physiological truth."
-  ],
-  "maintainers": [
-    "ageo-atoms"
   ]
 }

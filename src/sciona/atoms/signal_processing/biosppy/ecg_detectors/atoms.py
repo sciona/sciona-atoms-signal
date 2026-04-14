@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 
 import icontract
-from ageoa.ghost.registry import register_atom
+from sciona.ghost.registry import register_atom
 from biosppy.signals.ecg import ASI_segmenter
 from biosppy.signals.ecg import christov_segmenter as _christov_segmenter
 from biosppy.signals.ecg import engzee_segmenter as _engzee_segmenter
@@ -33,6 +33,7 @@ def thresholdbasedsignalsegmentation(
     sampling_rate: float = 1000.0,
     Pth: float = 5.0,
 ) -> np.ndarray:
+    """Run the BioSPPy ASI detector and return R-peak indices."""
     return ASI_segmenter(signal=signal, sampling_rate=sampling_rate, Pth=Pth)["rpeaks"]
 
 
@@ -41,6 +42,7 @@ def thresholdbasedsignalsegmentation(
 @icontract.require(lambda Pth: isinstance(Pth, (float, int, np.number)), "Pth must be numeric")
 @icontract.ensure(lambda result: result is not None, "ASI_signal_segmenter output must not be None")
 def asi_signal_segmenter(signal: np.ndarray, sampling_rate: float, Pth: float) -> np.ndarray:
+    """Run the ASI ECG segmenter and return detected R-peaks."""
     return ASI_segmenter(signal=signal, sampling_rate=sampling_rate, Pth=Pth)["rpeaks"]
 
 
@@ -53,6 +55,7 @@ def asi_signal_segmenter(signal: np.ndarray, sampling_rate: float, Pth: float) -
 @icontract.ensure(lambda result: isinstance(result, np.ndarray), "result must be ndarray")
 @icontract.ensure(lambda result: result.ndim == 1, "result must be 1-D")
 def christovqrsdetect(signal: np.ndarray, sampling_rate: float) -> np.ndarray:
+    """Run the Christov QRS detector and return detected R-peaks."""
     return _christov_segmenter(signal=signal, sampling_rate=sampling_rate)["rpeaks"]
 
 
@@ -60,6 +63,7 @@ def christovqrsdetect(signal: np.ndarray, sampling_rate: float) -> np.ndarray:
 @icontract.require(lambda sampling_rate: isinstance(sampling_rate, (float, int, np.number)), "sampling_rate must be numeric")
 @icontract.ensure(lambda result: result is not None, "christov_qrs_segmenter output must not be None")
 def christov_qrs_segmenter(signal: np.ndarray, sampling_rate: float) -> np.ndarray:
+    """Alias the Christov QRS detector under the segmenter naming surface."""
     return _christov_segmenter(signal=signal, sampling_rate=sampling_rate)["rpeaks"]
 
 
@@ -74,6 +78,7 @@ def christov_qrs_segmenter(signal: np.ndarray, sampling_rate: float) -> np.ndarr
 @icontract.ensure(lambda result: isinstance(result, np.ndarray), "result must be ndarray")
 @icontract.ensure(lambda result: result.ndim == 1, "result must be 1-D")
 def engzee_signal_segmentation(signal: np.ndarray, sampling_rate: float, threshold: float) -> np.ndarray:
+    """Run the Engzee detector and return detected R-peaks."""
     return _engzee_segmenter(signal=signal, sampling_rate=sampling_rate, threshold=threshold)["rpeaks"]
 
 
@@ -81,6 +86,7 @@ def engzee_signal_segmentation(signal: np.ndarray, sampling_rate: float, thresho
 @icontract.require(lambda sampling_rate: isinstance(sampling_rate, (float, int, np.number)), "sampling_rate must be numeric")
 @icontract.ensure(lambda result: result is not None, "engzee_qrs_segmentation output must not be None")
 def engzee_qrs_segmentation(signal: np.ndarray, sampling_rate: float, threshold: float) -> np.ndarray:
+    """Alias the Engzee detector under the QRS segmentation naming surface."""
     return _engzee_segmenter(signal=signal, sampling_rate=sampling_rate, threshold=threshold)["rpeaks"]
 
 
@@ -90,6 +96,7 @@ def engzee_qrs_segmentation(signal: np.ndarray, sampling_rate: float, threshold:
 @icontract.require(lambda tol: isinstance(tol, (float, int, np.number)), "tol must be numeric")
 @icontract.ensure(lambda result: result is not None, "gamboa_segmentation output must not be None")
 def gamboa_segmentation(signal: np.ndarray, sampling_rate: float, tol: float) -> np.ndarray:
+    """Run the Gamboa detector and return detected R-peaks."""
     return _gamboa_segmenter(signal=signal, sampling_rate=sampling_rate, tol=tol)["rpeaks"]
 
 
@@ -97,6 +104,7 @@ def gamboa_segmentation(signal: np.ndarray, sampling_rate: float, tol: float) ->
 @icontract.require(lambda tol: isinstance(tol, (float, int, np.number)), "tol must be numeric")
 @icontract.ensure(lambda result: result is not None, "gamboa_segmenter output must not be None")
 def gamboa_segmenter(signal: np.ndarray, sampling_rate: float, tol: float) -> np.ndarray:
+    """Alias the Gamboa detector under the segmenter naming surface."""
     return _gamboa_segmenter(signal=signal, sampling_rate=sampling_rate, tol=tol)["rpeaks"]
 
 
@@ -104,6 +112,7 @@ def gamboa_segmenter(signal: np.ndarray, sampling_rate: float, tol: float) -> np
 @icontract.require(lambda signal: isinstance(signal, np.ndarray), "signal must be a numpy array")
 @icontract.ensure(lambda result: result is not None, "hamilton_segmentation output must not be None")
 def hamilton_segmentation(signal: np.ndarray, sampling_rate: int) -> np.ndarray:
+    """Run the Hamilton detector and return detected R-peaks."""
     return np.asarray(_hamilton_segmenter(signal=signal, sampling_rate=sampling_rate)["rpeaks"], dtype=int)
 
 
@@ -111,4 +120,5 @@ def hamilton_segmentation(signal: np.ndarray, sampling_rate: int) -> np.ndarray:
 @icontract.require(lambda sampling_rate: isinstance(sampling_rate, (float, int, np.number)), "sampling_rate must be numeric")
 @icontract.ensure(lambda result: result is not None, "hamilton_segmenter output must not be None")
 def hamilton_segmenter(signal: np.ndarray, sampling_rate: float) -> np.ndarray:
+    """Alias the Hamilton detector under the segmenter naming surface."""
     return _hamilton_segmenter(signal=signal, sampling_rate=sampling_rate)["rpeaks"]

@@ -7,6 +7,7 @@ def estimate_snr(
     signal: np.ndarray,
     noise_floor: float = 0.0,
 ) -> tuple[float, bool]:
+    """Estimate signal-to-noise ratio in dB and flag whether it is acceptable."""
     s = np.asarray(signal, dtype=np.float64).ravel()
     if len(s) < 2:
         return 0.0, False
@@ -30,6 +31,7 @@ def analyze_peak_threshold_sensitivity(
     peaks: np.ndarray,
     threshold: float,
 ) -> tuple[float, bool]:
+    """Measure how many detected peaks sit near the decision threshold."""
     p = np.asarray(peaks, dtype=np.float64).ravel()
     if len(p) == 0 or threshold == 0:
         return 0.0, True
@@ -44,6 +46,7 @@ def check_event_rate_stationarity(
     event_times: np.ndarray,
     n_bins: int = 10,
 ) -> tuple[float, bool]:
+    """Estimate whether event arrivals remain roughly stationary over time."""
     t = np.asarray(event_times, dtype=np.float64).ravel()
     if len(t) < 2:
         return 0.0, True
@@ -68,6 +71,7 @@ def estimate_false_positive_rate(
     noise_std: float,
     threshold: float,
 ) -> tuple[float, bool]:
+    """Estimate the fraction of detections that are suspiciously close to noise."""
     d = np.asarray(detected_amplitudes, dtype=np.float64).ravel()
     if len(d) == 0 or noise_std <= 0:
         return 0.0, True

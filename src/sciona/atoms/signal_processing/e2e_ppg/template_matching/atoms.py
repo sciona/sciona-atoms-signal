@@ -4,7 +4,7 @@ from collections.abc import Sequence
 
 import icontract
 import numpy as np
-from ageoa.ghost.registry import register_atom
+from sciona.ghost.registry import register_atom
 
 from .._vendor import load_e2e_ppg_module
 from .witnesses import witness_templatefeaturecomputation
@@ -16,6 +16,7 @@ from .witnesses import witness_templatefeaturecomputation
 def templatefeaturecomputation(
     hc: Sequence[Sequence[float]] | np.ndarray,
 ) -> tuple[float, float]:
+    """Compute average template-distance and correlation features for beats."""
     module = load_e2e_ppg_module("ppg_sqa")
     normalized_hc = [np.asarray(beat, dtype=float) for beat in hc]
     tm_ave_eu, tm_ave_corr = module.template_matching_features(hc=normalized_hc)

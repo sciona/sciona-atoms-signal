@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING
 
 import icontract
 import numpy as np
-from ageoa.ghost.registry import register_atom
+from sciona.ghost.registry import register_atom
 
 from .._vendor import load_e2e_ppg_module
 from .witnesses import witness_gan_reconstruction, witness_generatereconstructedppg
@@ -26,6 +26,7 @@ def generatereconstructedppg(
     generator: "torch.nn.Module",
     device: str | "torch.device",
 ) -> np.ndarray | "torch.Tensor":
+    """Generate a reconstructed PPG waveform with the upstream GAN model."""
     module = load_e2e_ppg_module("ppg_reconstruction")
     return module.gan_rec(
         ppg_clean=ppg_clean,
@@ -47,9 +48,10 @@ def gan_reconstruction(
     ppg_clean: np.ndarray,
     noise: list[int] | np.ndarray,
     sampling_rate: int,
-    generator: Any,
-    device: Any,
-) -> Any:
+    generator: "torch.nn.Module",
+    device: str | "torch.device",
+) -> np.ndarray | "torch.Tensor":
+    """Generate a reconstructed PPG waveform through the GAN wrapper surface."""
     module = load_e2e_ppg_module("ppg_reconstruction")
     return module.gan_rec(
         ppg_clean=ppg_clean,

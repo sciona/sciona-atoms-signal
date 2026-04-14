@@ -1,14 +1,14 @@
 from __future__ import annotations
-"""Auto-generated atom wrappers following the ageoa pattern."""
+"""Auto-generated atom wrappers following the sciona pattern."""
 
 
 from collections.abc import Hashable, Iterator, Mapping, Sequence
-from typing import Any, Union
+from typing import Union
 import numpy as np
 
 import icontract
 import biosppy.biometrics as biometrics
-from ageoa.ghost.registry import register_atom
+from sciona.ghost.registry import register_atom
 from .witnesses import witness_assess_classification, witness_assess_runs, witness_combination, witness_cross_validation, witness_get_auth_rates, witness_get_id_rates, witness_get_subject_results, witness_majority_rule
 
 # Witness functions should be imported from the generated witnesses module
@@ -74,13 +74,13 @@ def get_id_rates(H: np.ndarray, M: np.ndarray, R: np.ndarray, N: int, thresholds
 @icontract.require(lambda subject_idx: subject_idx is not None, "subject_idx cannot be None")
 @icontract.ensure(lambda result: result is not None, "Get Subject Results output must not be None")
 def get_subject_results(
-    results: dict[str, Any],
+    results: dict[str, object],
     subject: Hashable,
     thresholds: np.ndarray,
     subjects: Sequence[Hashable],
     subject_dict: Mapping[Hashable, int],
     subject_idx: Sequence[int],
-) -> dict[str, Any]:
+) -> dict[str, object]:
     """Compute authentication and identification performance metrics for a
 given subject.
 

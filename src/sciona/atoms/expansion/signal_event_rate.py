@@ -48,6 +48,7 @@ def filter_signal_for_detection(
     low_cutoff_hz: float = 3.0,
     high_cutoff_hz: float = 25.0,
 ) -> np.ndarray:
+    """Band-limit and clip a waveform before event detection."""
     rate = _coerce_sampling_rate(sampling_rate)
     values = _coerce_signal(signal)
     if values.size == 0:
@@ -92,6 +93,7 @@ def detect_peaks_in_signal(
     prominence_scale: float = 1.5,
     refractory_scale: float = 0.45,
 ) -> np.ndarray:
+    """Detect robust event peaks in a conditioned waveform."""
     rate = _coerce_sampling_rate(sampling_rate)
     values = _coerce_signal(conditioned_signal)
     if values.size == 0:
@@ -108,6 +110,7 @@ def compute_event_rate(
     events: np.ndarray,
     sampling_rate: float | int,
 ) -> tuple[np.ndarray, np.ndarray]:
+    """Convert ordered event indices into midpoint locations and rate values."""
     rate = _coerce_sampling_rate(sampling_rate)
     event_idx = np.asarray(events, dtype=np.int64).reshape(-1)
     if event_idx.size < 2:
@@ -135,6 +138,7 @@ def compute_event_rate_smoothed(
     *,
     smoothing_window: int = 5,
 ) -> tuple[np.ndarray, np.ndarray]:
+    """Convert event indices into a moving-average-smoothed rate estimate."""
     midpoints, event_rate = compute_event_rate(events, sampling_rate)
     if event_rate.size == 0:
         return midpoints, event_rate
@@ -151,6 +155,7 @@ def compute_event_rate_median_smoothed(
     *,
     smoothing_window: int = 5,
 ) -> tuple[np.ndarray, np.ndarray]:
+    """Convert event indices into a median-smoothed rate estimate."""
     midpoints, event_rate = compute_event_rate(events, sampling_rate)
     if event_rate.size == 0:
         return midpoints, event_rate
@@ -172,6 +177,7 @@ def assess_signal_quality(
     window_seconds: float = 10.0,
     min_kurtosis: float = 1.5,
 ) -> tuple[np.ndarray, np.ndarray]:
+    """Mark time windows whose local waveform statistics look unreliable."""
     rate = _coerce_sampling_rate(sampling_rate)
     values = _coerce_signal(signal)
     if values.size == 0:
@@ -202,6 +208,7 @@ def remove_signal_jumps(
     *,
     jump_threshold_scale: float = 5.0,
 ) -> np.ndarray:
+    """Remove large step discontinuities by flattening detected jumps."""
     _coerce_sampling_rate(sampling_rate)
     values = _coerce_signal(signal)
     if values.size < 2:
@@ -231,6 +238,7 @@ def reject_outlier_intervals(
     *,
     mad_scale: float = 3.0,
 ) -> np.ndarray:
+    """Drop event indices that participate in implausible local intervals."""
     _coerce_sampling_rate(sampling_rate)
     idx = np.asarray(events, dtype=np.int64).reshape(-1)
     if idx.size < 3:
@@ -295,4 +303,3 @@ SIGNAL_EVENT_RATE_DECLARATIONS = {
         "Remove events creating physiologically implausible intervals.",
     ),
 }
-
