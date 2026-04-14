@@ -12,6 +12,50 @@ quality diagnostics:
 from __future__ import annotations
 
 import numpy as np
+from sciona.ghost.abstract import AbstractArray, AbstractScalar
+from sciona.ghost.registry import register_atom
+
+
+def witness_validate_graph_connectivity(
+    adjacency: AbstractArray,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe connected-component count and connectedness flag."""
+    return (
+        AbstractScalar(dtype="int64", min_val=0.0),
+        AbstractScalar(dtype="bool"),
+    )
+
+
+def witness_check_laplacian_symmetry(
+    laplacian: AbstractArray,
+    tolerance: AbstractScalar,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe symmetry error and symmetry flag."""
+    return (
+        AbstractScalar(dtype="float64", min_val=0.0),
+        AbstractScalar(dtype="bool"),
+    )
+
+
+def witness_analyze_spectral_gap(
+    eigenvalues: AbstractArray,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe spectral gap and graph-connectivity quality flag."""
+    return (
+        AbstractScalar(dtype="float64", min_val=0.0),
+        AbstractScalar(dtype="bool"),
+    )
+
+
+def witness_validate_filter_response(
+    filter_response: AbstractArray,
+    eigenvalues: AbstractArray,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe filter gain and stability flag."""
+    return (
+        AbstractScalar(dtype="float64", min_val=0.0),
+        AbstractScalar(dtype="bool"),
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -19,6 +63,7 @@ import numpy as np
 # ---------------------------------------------------------------------------
 
 
+@register_atom(witness_validate_graph_connectivity)
 def validate_graph_connectivity(
     adjacency: np.ndarray,
 ) -> tuple[int, bool]:
@@ -69,6 +114,7 @@ def validate_graph_connectivity(
 # ---------------------------------------------------------------------------
 
 
+@register_atom(witness_check_laplacian_symmetry)
 def check_laplacian_symmetry(
     laplacian: np.ndarray,
     tolerance: float = 1e-10,
@@ -103,6 +149,7 @@ def check_laplacian_symmetry(
 # ---------------------------------------------------------------------------
 
 
+@register_atom(witness_analyze_spectral_gap)
 def analyze_spectral_gap(
     eigenvalues: np.ndarray,
 ) -> tuple[float, bool]:
@@ -133,6 +180,7 @@ def analyze_spectral_gap(
 # ---------------------------------------------------------------------------
 
 
+@register_atom(witness_validate_filter_response)
 def validate_filter_response(
     filter_response: np.ndarray,
     eigenvalues: np.ndarray,

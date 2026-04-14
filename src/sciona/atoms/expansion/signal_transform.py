@@ -12,6 +12,52 @@ quality diagnostics:
 from __future__ import annotations
 
 import numpy as np
+from sciona.ghost.abstract import AbstractArray, AbstractScalar
+from sciona.ghost.registry import register_atom
+
+
+def witness_analyze_window_leakage(
+    windowed: AbstractArray,
+    original: AbstractArray,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe window leakage ratio and severity flag."""
+    return (
+        AbstractScalar(dtype="float64", min_val=0.0, max_val=1.0),
+        AbstractScalar(dtype="bool"),
+    )
+
+
+def witness_detect_spectral_aliasing(
+    spectrum: AbstractArray,
+    nyquist_fraction: AbstractScalar,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe alias-energy fraction and aliasing flag."""
+    return (
+        AbstractScalar(dtype="float64", min_val=0.0, max_val=1.0),
+        AbstractScalar(dtype="bool"),
+    )
+
+
+def witness_validate_parseval_energy(
+    time_domain: AbstractArray,
+    freq_domain: AbstractArray,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe Parseval relative error and validity flag."""
+    return (
+        AbstractScalar(dtype="float64", min_val=0.0),
+        AbstractScalar(dtype="bool"),
+    )
+
+
+def witness_check_inverse_reconstruction(
+    original: AbstractArray,
+    reconstructed: AbstractArray,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe reconstruction relative error and fidelity flag."""
+    return (
+        AbstractScalar(dtype="float64", min_val=0.0),
+        AbstractScalar(dtype="bool"),
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -19,6 +65,7 @@ import numpy as np
 # ---------------------------------------------------------------------------
 
 
+@register_atom(witness_analyze_window_leakage)
 def analyze_window_leakage(
     windowed: np.ndarray,
     original: np.ndarray,
@@ -56,6 +103,7 @@ def analyze_window_leakage(
 # ---------------------------------------------------------------------------
 
 
+@register_atom(witness_detect_spectral_aliasing)
 def detect_spectral_aliasing(
     spectrum: np.ndarray,
     nyquist_fraction: float = 0.9,
@@ -96,6 +144,7 @@ def detect_spectral_aliasing(
 # ---------------------------------------------------------------------------
 
 
+@register_atom(witness_validate_parseval_energy)
 def validate_parseval_energy(
     time_domain: np.ndarray,
     freq_domain: np.ndarray,
@@ -134,6 +183,7 @@ def validate_parseval_energy(
 # ---------------------------------------------------------------------------
 
 
+@register_atom(witness_check_inverse_reconstruction)
 def check_inverse_reconstruction(
     original: np.ndarray,
     reconstructed: np.ndarray,

@@ -1,8 +1,56 @@
 from __future__ import annotations
 
 import numpy as np
+from sciona.ghost.abstract import AbstractArray, AbstractScalar
+from sciona.ghost.registry import register_atom
 
 
+def witness_estimate_snr(
+    signal: AbstractArray,
+    noise_floor: AbstractScalar,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe SNR estimate and whether it clears the quality threshold."""
+    return (
+        AbstractScalar(dtype="float64"),
+        AbstractScalar(dtype="bool"),
+    )
+
+
+def witness_analyze_peak_threshold_sensitivity(
+    peaks: AbstractArray,
+    threshold: AbstractScalar,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe threshold sensitivity and robustness flag."""
+    return (
+        AbstractScalar(dtype="float64", min_val=0.0, max_val=1.0),
+        AbstractScalar(dtype="bool"),
+    )
+
+
+def witness_check_event_rate_stationarity(
+    event_times: AbstractArray,
+    n_bins: AbstractScalar,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe stationarity coefficient-of-variation and pass/fail flag."""
+    return (
+        AbstractScalar(dtype="float64", min_val=0.0),
+        AbstractScalar(dtype="bool"),
+    )
+
+
+def witness_estimate_false_positive_rate(
+    detected_amplitudes: AbstractArray,
+    noise_std: AbstractScalar,
+    threshold: AbstractScalar,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe false-positive-rate estimate and reliability flag."""
+    return (
+        AbstractScalar(dtype="float64", min_val=0.0, max_val=1.0),
+        AbstractScalar(dtype="bool"),
+    )
+
+
+@register_atom(witness_estimate_snr)
 def estimate_snr(
     signal: np.ndarray,
     noise_floor: float = 0.0,
@@ -27,6 +75,7 @@ def estimate_snr(
     return float(snr_db), snr_db > 10.0
 
 
+@register_atom(witness_analyze_peak_threshold_sensitivity)
 def analyze_peak_threshold_sensitivity(
     peaks: np.ndarray,
     threshold: float,
@@ -42,6 +91,7 @@ def analyze_peak_threshold_sensitivity(
     return sensitivity, sensitivity < 0.2
 
 
+@register_atom(witness_check_event_rate_stationarity)
 def check_event_rate_stationarity(
     event_times: np.ndarray,
     n_bins: int = 10,
@@ -66,6 +116,7 @@ def check_event_rate_stationarity(
     return cv, cv < 0.5
 
 
+@register_atom(witness_estimate_false_positive_rate)
 def estimate_false_positive_rate(
     detected_amplitudes: np.ndarray,
     noise_std: float,

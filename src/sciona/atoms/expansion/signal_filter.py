@@ -12,6 +12,51 @@ application diagnostics:
 from __future__ import annotations
 
 import numpy as np
+from sciona.ghost.abstract import AbstractArray, AbstractScalar
+from sciona.ghost.registry import register_atom
+
+
+def witness_analyze_pole_stability(
+    poles: AbstractArray,
+    margin: AbstractScalar,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe pole magnitude diagnostics and stability flag."""
+    return (
+        AbstractScalar(dtype="float64", min_val=0.0),
+        AbstractScalar(dtype="bool"),
+    )
+
+
+def witness_measure_passband_ripple(
+    freq_response_db: AbstractArray,
+    passband_mask: AbstractArray,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe passband ripple and acceptability flag."""
+    return (
+        AbstractScalar(dtype="float64", min_val=0.0),
+        AbstractScalar(dtype="bool"),
+    )
+
+
+def witness_analyze_group_delay_variation(
+    group_delay: AbstractArray,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe group-delay variation and linear-phase flag."""
+    return (
+        AbstractScalar(dtype="float64", min_val=0.0),
+        AbstractScalar(dtype="bool"),
+    )
+
+
+def witness_detect_transient_response(
+    output: AbstractArray,
+    n_transient_samples: AbstractScalar,
+) -> tuple[AbstractScalar, AbstractScalar]:
+    """Describe transient length and transient-energy fraction."""
+    return (
+        AbstractScalar(dtype="int64", min_val=0.0),
+        AbstractScalar(dtype="float64", min_val=0.0, max_val=1.0),
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -19,6 +64,7 @@ import numpy as np
 # ---------------------------------------------------------------------------
 
 
+@register_atom(witness_analyze_pole_stability)
 def analyze_pole_stability(
     poles: np.ndarray,
     margin: float = 0.01,
@@ -51,6 +97,7 @@ def analyze_pole_stability(
 # ---------------------------------------------------------------------------
 
 
+@register_atom(witness_measure_passband_ripple)
 def measure_passband_ripple(
     freq_response_db: np.ndarray,
     passband_mask: np.ndarray,
@@ -86,6 +133,7 @@ def measure_passband_ripple(
 # ---------------------------------------------------------------------------
 
 
+@register_atom(witness_analyze_group_delay_variation)
 def analyze_group_delay_variation(
     group_delay: np.ndarray,
 ) -> tuple[float, bool]:
@@ -118,6 +166,7 @@ def analyze_group_delay_variation(
 # ---------------------------------------------------------------------------
 
 
+@register_atom(witness_detect_transient_response)
 def detect_transient_response(
     output: np.ndarray,
     n_transient_samples: int = 0,
