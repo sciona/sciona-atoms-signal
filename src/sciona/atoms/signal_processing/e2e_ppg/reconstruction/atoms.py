@@ -1,11 +1,11 @@
 from __future__ import annotations
-"""Auto-generated atom wrappers following the ageoa pattern."""
+"""Auto-generated atom wrappers following the sciona pattern."""
 
 from collections.abc import Sequence
 
 import numpy as np
 import icontract
-from ageoa.ghost.registry import register_atom
+from sciona.ghost.registry import register_atom
 
 from .._vendor import with_reconstruction_model_compat
 from .witnesses import witness_gan_patch_reconstruction, witness_windowed_signal_reconstruction

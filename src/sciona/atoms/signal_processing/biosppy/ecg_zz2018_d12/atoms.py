@@ -1,12 +1,12 @@
 from __future__ import annotations
-"""Auto-generated atom wrappers following the ageoa pattern."""
+"""Auto-generated atom wrappers following the sciona pattern."""
 
 import numpy as np
 import scipy.integrate as scipy_integrate
 from numpy.typing import ArrayLike
 
 import icontract
-from ageoa.ghost.registry import register_atom
+from sciona.ghost.registry import register_atom
 from biosppy.signals.ecg import ZZ2018, bSQI, fSQI, kSQI
 
 from .witnesses import (
