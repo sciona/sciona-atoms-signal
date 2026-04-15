@@ -1,7 +1,7 @@
 {
   "records": [
     {
-      "atom_fqdn": "ageoa.biosppy.ecg_zz2018.calculatecompositesqi_zz2018",
+      "atom_fqdn": "sciona.atoms.signal_processing.biosppy.ecg_zz2018.calculatecompositesqi_zz2018",
       "summary": "Composite multi-input quality score used as a gating signal before committing to one processing path.",
       "dejargonized_summary": "Combine waveform evidence and detector agreement into one reusable quality summary that can decide whether a fixed downstream path is trustworthy.",
       "heuristic_outputs": [
@@ -58,11 +58,11 @@
         "Composite quality scores summarize several cues and should be interpreted as gating evidence rather than direct correctness proof."
       ],
       "maintainers": [
-        "ageo-atoms"
+        "sciona-atoms-signal"
       ]
     },
     {
-      "atom_fqdn": "ageoa.biosppy.ecg_zz2018.calculatefrequencypowersqi",
+      "atom_fqdn": "sciona.atoms.signal_processing.biosppy.ecg_zz2018.calculatefrequencypowersqi",
       "summary": "Frequency-ratio score that measures whether nuisance structure is dominating the useful content.",
       "dejargonized_summary": "Estimate whether the current representation is still dominated by unwanted repeating structure that should be filtered or replaced before later stages trust it.",
       "heuristic_outputs": [
@@ -114,11 +114,11 @@
         "A poor score indicates a likely conditioning issue, not necessarily that the entire family is invalid."
       ],
       "maintainers": [
-        "ageo-atoms"
+        "sciona-atoms-signal"
       ]
     },
     {
-      "atom_fqdn": "ageoa.biosppy.ecg_zz2018.calculatebeatagreementsqi",
+      "atom_fqdn": "sciona.atoms.signal_processing.biosppy.ecg_zz2018.calculatebeatagreementsqi",
       "summary": "Agreement score between two event extractors that surfaces structural alignment problems.",
       "dejargonized_summary": "Compare two extraction views of the same stream to estimate whether downstream stages are relying on event boundaries that do not line up well enough.",
       "heuristic_outputs": [
@@ -170,7 +170,7 @@
         "Agreement should be interpreted as structural evidence, not as ground truth about the extracted events."
       ],
       "maintainers": [
-        "ageo-atoms"
+        "sciona-atoms-signal"
       ]
     }
   ]

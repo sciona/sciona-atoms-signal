@@ -15,7 +15,6 @@ def resolve_e2e_ppg_root() -> Path:
     here = Path(__file__).resolve()
     for parent in here.parents:
         candidates.append(parent / "third_party" / "E2E-PPG")
-        candidates.append(parent / "ageo-atoms" / "third_party" / "E2E-PPG")
 
     seen: set[Path] = set()
     for candidate in candidates:

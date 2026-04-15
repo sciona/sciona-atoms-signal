@@ -8,6 +8,139 @@ import biosppy.signals.ecg as biosppy_ecg
 import biosppy.signals.tools as biosppy_tools
 import icontract
 import numpy as np
+from sciona.ghost.abstract import AbstractArray, AbstractScalar, AbstractSignal
+from sciona.ghost.registry import register_atom
+
+
+def witness_bandpass_filter(signal: AbstractSignal, sampling_rate: AbstractScalar) -> AbstractSignal:
+    """Describe a filtered ECG waveform with the same envelope as the input signal."""
+    return AbstractSignal(
+        shape=signal.shape,
+        dtype='float64',
+        sampling_rate=signal.sampling_rate,
+        domain=signal.domain,
+        units=signal.units,
+    )
+
+
+def witness_r_peak_detection(filtered: AbstractSignal, sampling_rate: AbstractScalar) -> AbstractArray:
+    """Describe detected ECG peaks as sorted sample indices."""
+    return AbstractArray(
+        shape=(filtered.shape[0],),
+        dtype='int64',
+        is_sorted=True,
+        min_val=0,
+        max_val=max(filtered.shape[0] - 1, 0),
+    )
+
+
+def witness_peak_correction(
+    signal: AbstractSignal,
+    rpeaks: AbstractArray,
+    sampling_rate: AbstractScalar,
+    tol: AbstractScalar,
+) -> AbstractArray:
+    """Describe corrected peaks as an integer index array aligned to the input peaks."""
+    return AbstractArray(
+        shape=rpeaks.shape,
+        dtype='int64',
+        is_sorted=True,
+        min_val=0,
+        max_val=max(signal.shape[0] - 1, 0),
+    )
+
+
+def witness_reject_outlier_intervals(
+    rpeaks: AbstractArray,
+    sampling_rate: AbstractScalar,
+    mad_scale: AbstractScalar,
+    min_interval_s: AbstractScalar,
+    max_interval_s: AbstractScalar,
+) -> AbstractArray:
+    """Describe a filtered RR-event index array."""
+    return AbstractArray(
+        shape=rpeaks.shape,
+        dtype='int64',
+        is_sorted=True,
+        min_val=rpeaks.min_val,
+        max_val=rpeaks.max_val,
+    )
+
+
+def witness_template_extraction(
+    signal: AbstractSignal,
+    rpeaks: AbstractArray,
+    sampling_rate: AbstractScalar,
+    before: AbstractScalar,
+    after: AbstractScalar,
+) -> tuple[AbstractArray, AbstractArray]:
+    """Describe extracted heartbeat templates plus aligned peak indices."""
+    templates = AbstractArray(
+        shape=(rpeaks.shape[0], signal.shape[0]),
+        dtype='float64',
+    )
+    corrected = AbstractArray(
+        shape=rpeaks.shape,
+        dtype='int64',
+        is_sorted=True,
+        min_val=0,
+        max_val=max(signal.shape[0] - 1, 0),
+    )
+    return templates, corrected
+
+
+def witness_heart_rate_computation(
+    rpeaks: AbstractArray,
+    sampling_rate: AbstractScalar,
+) -> tuple[AbstractArray, AbstractSignal]:
+    """Describe midpoint indices and instantaneous heart-rate values."""
+    length = max(rpeaks.shape[0] - 1, 0) if rpeaks.shape else 0
+    indices = AbstractArray(
+        shape=(length,),
+        dtype='int64',
+        is_sorted=True,
+        min_val=0,
+        max_val=rpeaks.max_val,
+    )
+    heart_rate = AbstractSignal(
+        shape=(length,),
+        dtype='float64',
+        sampling_rate=1.0,
+        domain='measurement',
+        units='beats_per_minute',
+    )
+    return indices, heart_rate
+
+
+def witness_heart_rate_computation_median_smoothed(
+    rpeaks: AbstractArray,
+    sampling_rate: AbstractScalar,
+    smoothing_window: AbstractScalar,
+) -> tuple[AbstractArray, AbstractSignal]:
+    """Describe median-smoothed instantaneous heart-rate outputs."""
+    return witness_heart_rate_computation(rpeaks, sampling_rate)
+
+
+def witness_ssf_segmenter(signal: AbstractSignal, sampling_rate: AbstractScalar) -> AbstractArray:
+    """Describe SSF detector output as sorted ECG peak indices."""
+    return AbstractArray(
+        shape=(signal.shape[0],),
+        dtype='int64',
+        is_sorted=True,
+        min_val=0,
+        max_val=max(signal.shape[0] - 1, 0),
+    )
+
+
+def witness_christov_segmenter(signal: AbstractSignal, sampling_rate: AbstractScalar) -> AbstractArray:
+    """Describe Christov detector output as sorted ECG peak indices."""
+    return AbstractArray(
+        shape=(signal.shape[0],),
+        dtype='int64',
+        is_sorted=True,
+        min_val=0,
+        max_val=max(signal.shape[0] - 1, 0),
+    )
 
 
 def _is_vector(array: np.ndarray) -> bool:
@@ -20,7 +153,7 @@ def _valid_sampling_rate(sampling_rate: float) -> bool:
 
 def _extract_rpeaks(result: Any) -> np.ndarray:
     if isinstance(result, dict):
-        return np.asarray(result["rpeaks"], dtype=int)
+        return np.asarray(result['rpeaks'], dtype=int)
     return np.asarray(result[0], dtype=int)
 
 
@@ -30,17 +163,17 @@ def _rr_irregularity(rpeaks: np.ndarray) -> float:
     rr = np.diff(rpeaks)
     mean_rr = float(np.mean(rr))
     if mean_rr <= 0.0:
-        return float("inf")
+        return float('inf')
     return float(np.std(rr) / mean_rr)
 
 
 def _mean_heart_rate_bpm(rpeaks: np.ndarray, sampling_rate: float) -> float:
     if len(rpeaks) < 2:
-        return float("nan")
+        return float('nan')
     rr = np.diff(rpeaks) / float(sampling_rate)
     mean_rr = float(np.mean(rr))
     if mean_rr <= 0.0:
-        return float("nan")
+        return float('nan')
     return 60.0 / mean_rr
 
 
@@ -49,16 +182,17 @@ def _plausible_segmenter_output(rpeaks: np.ndarray, sampling_rate: float) -> boo
     return len(rpeaks) >= 2 and 40.0 <= mean_hr <= 200.0 and _rr_irregularity(rpeaks) <= 0.25
 
 
-@icontract.require(lambda signal: _is_vector(signal), "signal must be a 1D numpy array")
-@icontract.require(_valid_sampling_rate, "sampling_rate must be positive")
-@icontract.ensure(lambda result: result is not None, "Bandpass Filter output must not be None")
+@register_atom(witness_bandpass_filter)
+@icontract.require(lambda signal: _is_vector(signal), 'signal must be a 1D numpy array')
+@icontract.require(_valid_sampling_rate, 'sampling_rate must be positive')
+@icontract.ensure(lambda result: result is not None, 'Bandpass Filter output must not be None')
 def bandpass_filter(signal: np.ndarray, *, sampling_rate: float = 1000.0) -> np.ndarray:
     """Apply FIR bandpass filtering to an ECG waveform."""
     order = int(0.3 * float(sampling_rate))
     filtered, _, _ = biosppy_tools.filter_signal(
         signal=signal,
-        ftype="FIR",
-        band="bandpass",
+        ftype='FIR',
+        band='bandpass',
         order=order,
         frequency=[3, 45],
         sampling_rate=float(sampling_rate),
@@ -66,18 +200,20 @@ def bandpass_filter(signal: np.ndarray, *, sampling_rate: float = 1000.0) -> np.
     return filtered
 
 
-@icontract.require(lambda filtered: _is_vector(filtered), "filtered must be a 1D numpy array")
-@icontract.require(_valid_sampling_rate, "sampling_rate must be positive")
-@icontract.ensure(lambda result: result is not None, "R-Peak Detection output must not be None")
+@register_atom(witness_r_peak_detection)
+@icontract.require(lambda filtered: _is_vector(filtered), 'filtered must be a 1D numpy array')
+@icontract.require(_valid_sampling_rate, 'sampling_rate must be positive')
+@icontract.ensure(lambda result: result is not None, 'R-Peak Detection output must not be None')
 def r_peak_detection(filtered: np.ndarray, *, sampling_rate: float = 1000.0) -> np.ndarray:
     """Detect R-peak sample indices from a filtered ECG signal."""
-    return biosppy_ecg.hamilton_segmenter(signal=filtered, sampling_rate=float(sampling_rate))["rpeaks"]
+    return biosppy_ecg.hamilton_segmenter(signal=filtered, sampling_rate=float(sampling_rate))['rpeaks']
 
 
-@icontract.require(lambda signal: _is_vector(signal), "signal must be a 1D numpy array")
-@icontract.require(lambda rpeaks: _is_vector(rpeaks), "rpeaks must be a 1D numpy array")
-@icontract.require(_valid_sampling_rate, "sampling_rate must be positive")
-@icontract.ensure(lambda result: result is not None, "Peak Correction output must not be None")
+@register_atom(witness_peak_correction)
+@icontract.require(lambda signal: _is_vector(signal), 'signal must be a 1D numpy array')
+@icontract.require(lambda rpeaks: _is_vector(rpeaks), 'rpeaks must be a 1D numpy array')
+@icontract.require(_valid_sampling_rate, 'sampling_rate must be positive')
+@icontract.ensure(lambda result: result is not None, 'Peak Correction output must not be None')
 def peak_correction(
     signal: np.ndarray,
     rpeaks: np.ndarray,
@@ -91,16 +227,17 @@ def peak_correction(
         rpeaks=rpeaks,
         sampling_rate=float(sampling_rate),
         tol=float(tol),
-    )["rpeaks"]
+    )['rpeaks']
 
 
-@icontract.require(lambda rpeaks: _is_vector(rpeaks), "rpeaks must be a 1D numpy array")
-@icontract.require(_valid_sampling_rate, "sampling_rate must be positive")
+@register_atom(witness_reject_outlier_intervals)
+@icontract.require(lambda rpeaks: _is_vector(rpeaks), 'rpeaks must be a 1D numpy array')
+@icontract.require(_valid_sampling_rate, 'sampling_rate must be positive')
 @icontract.require(
     lambda mad_scale: isinstance(mad_scale, (float, int, np.number)) and float(mad_scale) > 0.0,
-    "mad_scale must be positive",
+    'mad_scale must be positive',
 )
-@icontract.ensure(lambda result: result is not None, "Outlier Interval Rejection output must not be None")
+@icontract.ensure(lambda result: result is not None, 'Outlier Interval Rejection output must not be None')
 def reject_outlier_intervals(
     rpeaks: np.ndarray,
     *,
@@ -143,10 +280,11 @@ def reject_outlier_intervals(
     return cleaned.astype(int, copy=False)
 
 
-@icontract.require(lambda signal: _is_vector(signal), "signal must be a 1D numpy array")
-@icontract.require(lambda rpeaks: _is_vector(rpeaks), "rpeaks must be a 1D numpy array")
-@icontract.require(_valid_sampling_rate, "sampling_rate must be positive")
-@icontract.ensure(lambda result: all(item is not None for item in result), "Template Extraction outputs must not be None")
+@register_atom(witness_template_extraction)
+@icontract.require(lambda signal: _is_vector(signal), 'signal must be a 1D numpy array')
+@icontract.require(lambda rpeaks: _is_vector(rpeaks), 'rpeaks must be a 1D numpy array')
+@icontract.require(_valid_sampling_rate, 'sampling_rate must be positive')
+@icontract.ensure(lambda result: all(item is not None for item in result), 'Template Extraction outputs must not be None')
 def template_extraction(
     signal: np.ndarray,
     rpeaks: np.ndarray,
@@ -163,21 +301,23 @@ def template_extraction(
         before=float(before),
         after=float(after),
     )
-    return result["templates"], result["rpeaks"]
+    return result['templates'], result['rpeaks']
 
 
-@icontract.require(lambda rpeaks: _is_vector(rpeaks), "rpeaks must be a 1D numpy array")
-@icontract.require(_valid_sampling_rate, "sampling_rate must be positive")
-@icontract.ensure(lambda result: all(item is not None for item in result), "Heart Rate Computation outputs must not be None")
+@register_atom(witness_heart_rate_computation)
+@icontract.require(lambda rpeaks: _is_vector(rpeaks), 'rpeaks must be a 1D numpy array')
+@icontract.require(_valid_sampling_rate, 'sampling_rate must be positive')
+@icontract.ensure(lambda result: all(item is not None for item in result), 'Heart Rate Computation outputs must not be None')
 def heart_rate_computation(rpeaks: np.ndarray, *, sampling_rate: float = 1000.0) -> tuple[np.ndarray, np.ndarray]:
     """Compute instantaneous heart rate from R-peak indices."""
     result = biosppy_tools.get_heart_rate(beats=rpeaks, sampling_rate=float(sampling_rate), smooth=False)
-    return result["index"], result["heart_rate"]
+    return result['index'], result['heart_rate']
 
 
-@icontract.require(lambda rpeaks: _is_vector(rpeaks), "rpeaks must be a 1D numpy array")
-@icontract.require(_valid_sampling_rate, "sampling_rate must be positive")
-@icontract.ensure(lambda result: all(item is not None for item in result), "Robust Smoothed Heart Rate Computation outputs must not be None")
+@register_atom(witness_heart_rate_computation_median_smoothed)
+@icontract.require(lambda rpeaks: _is_vector(rpeaks), 'rpeaks must be a 1D numpy array')
+@icontract.require(_valid_sampling_rate, 'sampling_rate must be positive')
+@icontract.ensure(lambda result: all(item is not None for item in result), 'Robust Smoothed Heart Rate Computation outputs must not be None')
 def heart_rate_computation_median_smoothed(
     rpeaks: np.ndarray,
     *,
@@ -198,16 +338,17 @@ def heart_rate_computation_median_smoothed(
     if window <= 1:
         return np.asarray(indices, dtype=int), rate
 
-    padded = np.pad(rate, (window // 2, window // 2), mode="edge")
+    padded = np.pad(rate, (window // 2, window // 2), mode='edge')
     smoothed = np.empty_like(rate)
     for idx in range(rate.size):
         smoothed[idx] = float(np.median(padded[idx : idx + window]))
     return np.asarray(indices, dtype=int), smoothed
 
 
-@icontract.require(lambda signal: _is_vector(signal), "signal must be a 1D numpy array")
-@icontract.require(_valid_sampling_rate, "sampling_rate must be positive")
-@icontract.ensure(lambda result: result is not None, "SSF Segmenter output must not be None")
+@register_atom(witness_ssf_segmenter)
+@icontract.require(lambda signal: _is_vector(signal), 'signal must be a 1D numpy array')
+@icontract.require(_valid_sampling_rate, 'sampling_rate must be positive')
+@icontract.ensure(lambda result: result is not None, 'SSF Segmenter output must not be None')
 def ssf_segmenter(signal: np.ndarray, *, sampling_rate: float = 1000.0) -> np.ndarray:
     """Detect ECG peaks with the slope-sum-function segmenter."""
     thresholds = (20.0, 5.0, 1.0, 0.2, 0.1, 0.05)
@@ -224,9 +365,10 @@ def ssf_segmenter(signal: np.ndarray, *, sampling_rate: float = 1000.0) -> np.nd
     return _extract_rpeaks(biosppy_ecg.hamilton_segmenter(signal=signal, sampling_rate=float(sampling_rate)))
 
 
-@icontract.require(lambda signal: _is_vector(signal), "signal must be a 1D numpy array")
-@icontract.require(_valid_sampling_rate, "sampling_rate must be positive")
-@icontract.ensure(lambda result: result is not None, "Christov Segmenter output must not be None")
+@register_atom(witness_christov_segmenter)
+@icontract.require(lambda signal: _is_vector(signal), 'signal must be a 1D numpy array')
+@icontract.require(_valid_sampling_rate, 'sampling_rate must be positive')
+@icontract.ensure(lambda result: result is not None, 'Christov Segmenter output must not be None')
 def christov_segmenter(signal: np.ndarray, *, sampling_rate: float = 1000.0) -> np.ndarray:
     """Detect ECG peaks with the Christov segmenter."""
     result = biosppy_ecg.christov_segmenter(signal=signal, sampling_rate=float(sampling_rate))

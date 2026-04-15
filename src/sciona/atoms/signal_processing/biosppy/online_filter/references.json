@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "atoms": {
-    "ageoa.biosppy.online_filter.filterstateinit@ageoa/biosppy/online_filter/atoms.py:24": {
+    "sciona.atoms.signal_processing.biosppy.online_filter.filterstateinit@sciona/atoms/signal_processing/biosppy/online_filter/atoms.py:24": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -16,7 +16,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "ageoa.biosppy.online_filter.filterstep@ageoa/biosppy/online_filter/atoms.py:54": {
+    "sciona.atoms.signal_processing.biosppy.online_filter.filterstep@sciona/atoms/signal_processing/biosppy/online_filter/atoms.py:54": {
       "references": [
         {
           "ref_id": "repo_biosppy",
