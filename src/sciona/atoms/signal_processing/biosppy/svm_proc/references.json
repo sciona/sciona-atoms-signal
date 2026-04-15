@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "atoms": {
-    "sciona.atoms.signal_processing.biosppy.svm_proc.assess_classification@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:118": {
+    "sciona.atoms.signal_processing.biosppy.svm_proc.atoms.assess_classification@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:118": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -16,7 +16,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.svm_proc.assess_runs@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:147": {
+    "sciona.atoms.signal_processing.biosppy.svm_proc.atoms.assess_runs@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:147": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -31,7 +31,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.svm_proc.combination@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:176": {
+    "sciona.atoms.signal_processing.biosppy.svm_proc.atoms.combination@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:176": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -46,7 +46,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.svm_proc.cross_validation@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:262": {
+    "sciona.atoms.signal_processing.biosppy.svm_proc.atoms.cross_validation@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:262": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -61,7 +61,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.svm_proc.get_auth_rates@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:21": {
+    "sciona.atoms.signal_processing.biosppy.svm_proc.atoms.get_auth_rates@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:21": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -76,7 +76,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.svm_proc.get_id_rates@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:47": {
+    "sciona.atoms.signal_processing.biosppy.svm_proc.atoms.get_id_rates@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:47": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -91,7 +91,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.svm_proc.get_subject_results@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:74": {
+    "sciona.atoms.signal_processing.biosppy.svm_proc.atoms.get_subject_results@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:74": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -106,7 +106,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.svm_proc.majority_rule@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:221": {
+    "sciona.atoms.signal_processing.biosppy.svm_proc.atoms.majority_rule@sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py:221": {
       "references": [
         {
           "ref_id": "repo_biosppy",

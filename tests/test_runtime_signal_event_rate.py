@@ -9,6 +9,7 @@ from sciona.expansion_atoms.runtime_signal_event_rate import (
     compute_event_rate_smoothed,
     compute_event_rate_median_smoothed,
     detect_peaks_in_signal,
+    estimate_event_rate_from_signal,
     filter_signal_for_detection,
 )
 
@@ -121,3 +122,13 @@ class TestComputeEventRateMedianSmoothed:
         assert not np.allclose(s1, s2), (
             "Different smoothing windows should produce different outputs"
         )
+
+
+class TestEstimateEventRateFromSignal:
+    def test_returns_detected_events_and_rate_series(self, synthetic_signal):
+        signal, rate = synthetic_signal
+        events, midpoints, event_rate = estimate_event_rate_from_signal(signal, rate)
+
+        assert events.dtype == np.int64
+        assert np.all(np.diff(events) >= 0)
+        assert len(midpoints) == len(event_rate)

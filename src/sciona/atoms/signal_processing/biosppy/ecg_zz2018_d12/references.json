@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "atoms": {
-    "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.assemblezz2018sqi@sciona/atoms/signal_processing/biosppy/ecg_zz2018_d12/atoms.py:77": {
+    "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.atoms.assemblezz2018sqi@sciona/atoms/signal_processing/biosppy/ecg_zz2018_d12/atoms.py:77": {
       "references": [
         {
           "ref_id": "zhao2018ecgsqi",
@@ -26,7 +26,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.computebeatagreementsqi@sciona/atoms/signal_processing/biosppy/ecg_zz2018_d12/atoms.py:20": {
+    "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.atoms.computebeatagreementsqi@sciona/atoms/signal_processing/biosppy/ecg_zz2018_d12/atoms.py:20": {
       "references": [
         {
           "ref_id": "zhao2018ecgsqi",
@@ -51,7 +51,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.computefrequencysqi@sciona/atoms/signal_processing/biosppy/ecg_zz2018_d12/atoms.py:38": {
+    "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.atoms.computefrequencysqi@sciona/atoms/signal_processing/biosppy/ecg_zz2018_d12/atoms.py:38": {
       "references": [
         {
           "ref_id": "zhao2018ecgsqi",
@@ -76,7 +76,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.computekurtosissqi@sciona/atoms/signal_processing/biosppy/ecg_zz2018_d12/atoms.py:58": {
+    "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.atoms.computekurtosissqi@sciona/atoms/signal_processing/biosppy/ecg_zz2018_d12/atoms.py:58": {
       "references": [
         {
           "ref_id": "zhao2018ecgsqi",

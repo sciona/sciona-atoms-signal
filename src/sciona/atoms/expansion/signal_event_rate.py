@@ -76,6 +76,22 @@ def witness_compute_event_rate_median_smoothed(
     return witness_compute_event_rate(events, sampling_rate)
 
 
+def witness_estimate_event_rate_from_signal(
+    signal: AbstractSignal,
+    sampling_rate: AbstractScalar,
+) -> tuple[AbstractArray, AbstractSignal, AbstractSignal]:
+    """Describe detected events plus midpoint/rate outputs for a full signal-to-rate atom."""
+    events = AbstractArray(
+        shape=(signal.shape[0],),
+        dtype="int64",
+        is_sorted=True,
+        min_val=0,
+        max_val=max(signal.shape[0] - 1, 0),
+    )
+    midpoints, event_rate = witness_compute_event_rate_median_smoothed(events, sampling_rate)
+    return events, midpoints, event_rate
+
+
 def witness_assess_signal_quality(
     signal: AbstractSignal,
     sampling_rate: AbstractScalar,
@@ -284,6 +300,25 @@ def compute_event_rate_median_smoothed(
     return midpoints, np.asarray(smoothed, dtype=np.float64)
 
 
+@register_atom(witness_estimate_event_rate_from_signal)
+def estimate_event_rate_from_signal(
+    signal: np.ndarray,
+    sampling_rate: float | int,
+    *,
+    smoothing_window: int = 5,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Estimate event locations and a robust event-rate series directly from a raw signal."""
+    conditioned = filter_signal_for_detection(signal, sampling_rate)
+    events = detect_peaks_in_signal(conditioned, sampling_rate)
+    filtered_events = reject_outlier_intervals(events, sampling_rate)
+    midpoints, event_rate = compute_event_rate_median_smoothed(
+        filtered_events,
+        sampling_rate,
+        smoothing_window=smoothing_window,
+    )
+    return filtered_events, midpoints, event_rate
+
+
 @register_atom(witness_assess_signal_quality)
 def assess_signal_quality(
     signal: np.ndarray,
@@ -403,6 +438,11 @@ SIGNAL_EVENT_RATE_DECLARATIONS = {
         "sciona.atoms.expansion.signal_event_rate.compute_event_rate_median_smoothed",
         "np.ndarray, float -> tuple[np.ndarray, np.ndarray]",
         "Convert ordered event indices into a robust median-smoothed rate estimate.",
+    ),
+    "estimate_event_rate_from_signal": (
+        "sciona.atoms.expansion.signal_event_rate.estimate_event_rate_from_signal",
+        "np.ndarray, float -> tuple[np.ndarray, np.ndarray, np.ndarray]",
+        "Estimate event locations and a robust event-rate trace directly from a raw signal.",
     ),
     "assess_signal_quality": (
         "sciona.atoms.expansion.signal_event_rate.assess_signal_quality",

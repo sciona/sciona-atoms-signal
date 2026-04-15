@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "atoms": {
-    "sciona.atoms.signal_processing.biosppy.ecg_detectors.thresholdbasedsignalsegmentation": {
+    "sciona.atoms.signal_processing.biosppy.ecg_detectors.atoms.thresholdbasedsignalsegmentation": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -16,7 +16,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.ecg_detectors.asi_signal_segmenter": {
+    "sciona.atoms.signal_processing.biosppy.ecg_detectors.atoms.asi_signal_segmenter": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -31,7 +31,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.ecg_detectors.christovqrsdetect": {
+    "sciona.atoms.signal_processing.biosppy.ecg_detectors.atoms.christovqrsdetect": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -46,7 +46,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.ecg_detectors.christov_qrs_segmenter": {
+    "sciona.atoms.signal_processing.biosppy.ecg_detectors.atoms.christov_qrs_segmenter": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -61,7 +61,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.ecg_detectors.engzee_signal_segmentation": {
+    "sciona.atoms.signal_processing.biosppy.ecg_detectors.atoms.engzee_signal_segmentation": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -76,7 +76,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.ecg_detectors.engzee_qrs_segmentation": {
+    "sciona.atoms.signal_processing.biosppy.ecg_detectors.atoms.engzee_qrs_segmentation": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -91,7 +91,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.ecg_detectors.gamboa_segmentation": {
+    "sciona.atoms.signal_processing.biosppy.ecg_detectors.atoms.gamboa_segmentation": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -106,7 +106,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.ecg_detectors.gamboa_segmenter": {
+    "sciona.atoms.signal_processing.biosppy.ecg_detectors.atoms.gamboa_segmenter": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -121,7 +121,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.ecg_detectors.hamilton_segmentation": {
+    "sciona.atoms.signal_processing.biosppy.ecg_detectors.atoms.hamilton_segmentation": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -136,7 +136,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.ecg_detectors.hamilton_segmenter": {
+    "sciona.atoms.signal_processing.biosppy.ecg_detectors.atoms.hamilton_segmenter": {
       "references": [
         {
           "ref_id": "repo_biosppy",
