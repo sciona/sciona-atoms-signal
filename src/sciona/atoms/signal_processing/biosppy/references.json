@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.signal_processing.biosppy.ecg.heart_rate_computation_median_smoothed": {
+      "references": [
+        {
+          "ref_id": "repo_biosppy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "BioSPPy repository attribution for the ECG heart-rate computation wrapper with local median smoothing."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.signal_processing.biosppy.ecg.reject_outlier_intervals": {
+      "references": [
+        {
+          "ref_id": "repo_biosppy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "BioSPPy repository attribution for the ECG processing family that owns this RR-interval cleaning helper."
+          }
+        },
+        {
+          "ref_id": "thuraisingham2006_rr_preprocessing",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Supports the artifact-rejection and RR-interval preprocessing rationale behind this local helper."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}
