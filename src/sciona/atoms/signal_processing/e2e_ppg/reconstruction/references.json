@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "atoms": {
-    "sciona.atoms.signal_processing.e2e_ppg.reconstruction.atoms.gan_patch_reconstruction@sciona/atoms/signal_processing/e2e_ppg/reconstruction/atoms.py:19": {
+    "sciona.atoms.signal_processing.e2e_ppg.reconstruction.gan_patch_reconstruction": {
       "references": [
         {
           "ref_id": "wang2022ppg",
@@ -36,7 +36,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.e2e_ppg.reconstruction.atoms.windowed_signal_reconstruction@sciona/atoms/signal_processing/e2e_ppg/reconstruction/atoms.py:40": {
+    "sciona.atoms.signal_processing.e2e_ppg.reconstruction.windowed_signal_reconstruction": {
       "references": [
         {
           "ref_id": "wang2022ppg",

@@ -1,0 +1,255 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.expansion.signal_event_rate.filter_signal_for_detection": {
+      "references": [
+        {
+          "ref_id": "feli2023pipeline",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Signal conditioning and heart-rate extraction helper for the reviewed signal event-rate expansion family."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Implementation relies on SciPy filtering and peak-processing primitives."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_event_rate.compute_event_rate": {
+      "references": [
+        {
+          "ref_id": "feli2023pipeline",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Heart-rate extraction helper aligned with the reviewed end-to-end PPG processing pipeline."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Uses SciPy/Numpy numerical routines for deterministic rate computation support."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_filter.analyze_pole_stability": {
+      "references": [
+        {
+          "ref_id": "oppenheim2009dtsp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Standard discrete-time filter stability criterion based on pole magnitude inside the unit circle."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy is the canonical software dependency for the surrounding filter-design workflow."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_filter.detect_transient_response": {
+      "references": [
+        {
+          "ref_id": "oppenheim2009dtsp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Covers transient behavior of discrete-time filters and startup effects."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy is the canonical software dependency for the surrounding filter-analysis workflow."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_transform.validate_parseval_energy": {
+      "references": [
+        {
+          "ref_id": "oppenheim2009dtsp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Authoritative reference for Parseval energy conservation in discrete-time Fourier analysis."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy provides the canonical FFT/numerical stack used around this diagnostic."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_transform.check_inverse_reconstruction": {
+      "references": [
+        {
+          "ref_id": "oppenheim2009dtsp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Authoritative reference for forward/inverse discrete transform reconstruction fidelity."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy provides the canonical FFT/numerical stack used around this diagnostic."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_detect_measure.estimate_snr": {
+      "references": [
+        {
+          "ref_id": "feli2023pipeline",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Reviewed signal-quality and rate-estimation pipeline context for this signal-quality diagnostic."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy/Numpy provide the canonical numerical stack for the diagnostic implementation."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_detect_measure.estimate_false_positive_rate": {
+      "references": [
+        {
+          "ref_id": "feli2023pipeline",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Reviewed signal-quality and rate-estimation pipeline context for this false-positive diagnostic."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy/Numpy provide the canonical numerical stack for the diagnostic implementation."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.graph_signal_processing.validate_graph_connectivity": {
+      "references": [
+        {
+          "ref_id": "shuman2013gsp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Canonical graph signal processing reference for graph connectivity and Laplacian-based reasoning."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy/Numpy provide the canonical linear algebra stack used by the implementation."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.graph_signal_processing.validate_filter_response": {
+      "references": [
+        {
+          "ref_id": "shuman2013gsp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Canonical graph signal processing reference for graph spectral filtering and filter response behavior."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy/Numpy provide the canonical numerical stack used by the implementation."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}
