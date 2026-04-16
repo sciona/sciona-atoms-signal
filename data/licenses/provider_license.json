@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "provider_repo": "sciona-atoms-signal",
+  "repo_default": {
+    "scope": "repo",
+    "scope_key": "sciona-atoms-signal",
+    "license_expression": "NOASSERTION",
+    "license_status": "unknown",
+    "license_family": "unknown",
+    "source_kind": "manual_override",
+    "source_path": null,
+    "upstream_license_expression": null,
+    "notes": "No top-level LICENSE/COPYING file or explicit SPDX declaration was present in this scratch checkout."
+  },
+  "family_overrides": [
+    {
+      "scope": "family",
+      "scope_key": "sciona.atoms.signal_processing.biosppy",
+      "license_expression": "BSD-3-Clause",
+      "license_status": "approved",
+      "license_family": "permissive",
+      "source_kind": "upstream_vendor_license",
+      "source_path": "package_metadata:biosppy",
+      "upstream_license_expression": "BSD-3-Clause",
+      "notes": "Applies to the BioSPPy-backed signal_processing/biosppy family tree, including ECG, detector, filter, and SQI wrappers."
+    },
+    {
+      "scope": "family",
+      "scope_key": "sciona.atoms.signal_processing.neurokit2",
+      "license_expression": "MIT",
+      "license_status": "approved",
+      "license_family": "permissive",
+      "source_kind": "upstream_vendor_license",
+      "source_path": "package_metadata:neurokit2",
+      "upstream_license_expression": "MIT",
+      "notes": "Applies to the NeuroKit2-backed signal_processing/neurokit2 family tree."
+    }
+  ]
+}
