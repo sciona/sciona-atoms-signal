@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "sciona.atoms.signal.review_bundle.e2e_ppg.core.v1",
+  "provider_repo": "sciona-atoms-signal",
+  "family_batch": "e2e_ppg",
+  "review_status": "reviewed",
+  "review_semantic_verdict": "pass",
+  "review_developer_semantic_verdict": "pass_with_limits",
+  "trust_readiness": "reviewed_with_limits",
+  "authoritative_sources": [
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/e2e_ppg/heart_cycle/atoms.py"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper/atoms.py"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/e2e_ppg/reconstruction/atoms.py"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/atoms.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_e2e_ppg_heart_cycle_import_smoke.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_e2e_ppg_kazemi_wrapper_import_smoke.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_e2e_ppg_kazemi_wrapper_d12_import_smoke.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_e2e_ppg_reconstruction_import_smoke.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_e2e_ppg_gan_reconstruction_import_smoke.py"
+    }
+  ],
+  "limitations": [
+    "This batch only covers the concrete e2e-PPG callables that already have direct evidence and smoke coverage."
+  ],
+  "blocking_findings": [],
+  "required_actions": [],
+  "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json",
+  "rows": [
+    {
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.detect_heart_cycles",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/e2e_ppg/heart_cycle/atoms.py",
+        "tests/test_e2e_ppg_heart_cycle_import_smoke.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.heart_cycle_detection",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/e2e_ppg/heart_cycle/atoms.py",
+        "tests/test_e2e_ppg_heart_cycle_import_smoke.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapperpredictionsignalcomputation",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper/atoms.py",
+        "tests/test_e2e_ppg_kazemi_wrapper_import_smoke.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.signalarraynormalization",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper/atoms.py",
+        "tests/test_e2e_ppg_kazemi_wrapper_import_smoke.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.reconstruction.gan_patch_reconstruction",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/e2e_ppg/reconstruction/atoms.py",
+        "tests/test_e2e_ppg_reconstruction_import_smoke.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.reconstruction.windowed_signal_reconstruction",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/e2e_ppg/reconstruction/atoms.py",
+        "tests/test_e2e_ppg_reconstruction_import_smoke.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.gan_reconstruction.generatereconstructedppg",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/atoms.py",
+        "tests/test_e2e_ppg_gan_reconstruction_import_smoke.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+    }
+  ]
+}

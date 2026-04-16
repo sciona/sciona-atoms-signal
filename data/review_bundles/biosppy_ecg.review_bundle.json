@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "sciona.atoms.signal.review_bundle.biosppy_ecg.core.v1",
+  "provider_repo": "sciona-atoms-signal",
+  "family_batch": "biosppy_ecg",
+  "review_status": "reviewed",
+  "review_semantic_verdict": "pass",
+  "review_developer_semantic_verdict": "pass_with_limits",
+  "trust_readiness": "reviewed_with_limits",
+  "authoritative_sources": [
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/biosppy/ecg.py"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/biosppy/ecg_detectors/atoms.py"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/biosppy/ecg_zz2018/atoms.py"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/biosppy/ecg_zz2018_d12/atoms.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_biosppy_ecg_atoms.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_biosppy_ecg_detectors.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_biosppy_ecg_zz2018.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_biosppy_ecg_zz2018_d12.py"
+    }
+  ],
+  "limitations": [
+    "This batch covers the core ECG and ECG-quality rows only; the rest of biosppy can be split into follow-up bundles."
+  ],
+  "blocking_findings": [],
+  "required_actions": [],
+  "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json",
+  "rows": [
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg.bandpass_filter",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/ecg.py",
+        "tests/test_biosppy_ecg_atoms.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg.r_peak_detection",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/ecg.py",
+        "tests/test_biosppy_ecg_atoms.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg.template_extraction",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/ecg.py",
+        "tests/test_biosppy_ecg_atoms.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg.heart_rate_computation",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/ecg.py",
+        "tests/test_biosppy_ecg_atoms.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_detectors.christovqrsdetect",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/ecg_detectors/atoms.py",
+        "tests/test_biosppy_ecg_detectors.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_detectors.hamilton_segmenter",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/ecg_detectors/atoms.py",
+        "tests/test_biosppy_ecg_detectors.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018.calculatecompositesqi_zz2018",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/ecg_zz2018/atoms.py",
+        "tests/test_biosppy_ecg_zz2018.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.computekurtosissqi",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/ecg_zz2018_d12/atoms.py",
+        "tests/test_biosppy_ecg_zz2018_d12.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
+    }
+  ]
+}
