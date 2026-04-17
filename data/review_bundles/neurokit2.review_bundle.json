@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "sciona.atoms.signal.review_bundle.neurokit2.ecg_quality.v1",
+  "provider_repo": "sciona-atoms-signal",
+  "family_batch": "neurokit2",
+  "review_status": "reviewed",
+  "review_semantic_verdict": "pass",
+  "review_developer_semantic_verdict": "pass_with_limits",
+  "trust_readiness": "reviewed_with_limits",
+  "authoritative_sources": [
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/neurokit2/atoms.py"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/neurokit2/witnesses.py"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/probes/signal_processing/neurokit2.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_neurokit2_import_smoke.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_neurokit2_atoms.py"
+    }
+  ],
+  "limitations": [
+    "This batch reviews only the thin provider wrappers around NeuroKit2 ECG quality helpers and does not re-validate the upstream algorithms beyond wrapper parity."
+  ],
+  "blocking_findings": [],
+  "required_actions": [],
+  "review_record_path": "data/review_bundles/neurokit2.review_bundle.json",
+  "rows": [
+    {
+      "atom_key": "sciona.atoms.signal_processing.neurokit2.averageqrstemplate",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/neurokit2/atoms.py",
+        "src/sciona/atoms/signal_processing/neurokit2/witnesses.py",
+        "src/sciona/probes/signal_processing/neurokit2.py",
+        "tests/test_neurokit2_import_smoke.py",
+        "tests/test_neurokit2_atoms.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/neurokit2.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.neurokit2.zhao2018hrvanalysis",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/neurokit2/atoms.py",
+        "src/sciona/atoms/signal_processing/neurokit2/witnesses.py",
+        "src/sciona/probes/signal_processing/neurokit2.py",
+        "tests/test_neurokit2_import_smoke.py",
+        "tests/test_neurokit2_atoms.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/neurokit2.review_bundle.json"
+    }
+  ]
+}

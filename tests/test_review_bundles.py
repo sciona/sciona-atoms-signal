@@ -56,3 +56,11 @@ def test_biosppy_online_filter_review_bundle_covers_expected_rows() -> None:
         "sciona.atoms.signal_processing.biosppy.online_filter_v2.filterstateinit",
         "sciona.atoms.signal_processing.biosppy.online_filter_v2.filterstep",
     }
+
+
+def test_neurokit2_review_bundle_covers_expected_rows() -> None:
+    bundle = _load_bundle(BUNDLE_DIR / "neurokit2.review_bundle.json")
+    assert {row["atom_key"] for row in bundle["rows"]} == {
+        "sciona.atoms.signal_processing.neurokit2.averageqrstemplate",
+        "sciona.atoms.signal_processing.neurokit2.zhao2018hrvanalysis",
+    }

@@ -10,7 +10,7 @@ def witness_zhao2018hrvanalysis(
     window: AbstractScalar,
     mode: AbstractScalar,
 ) -> AbstractScalar:
-    """Shape-and-type check for zhao2018 hrv analysis."""
+    """Shape-and-type check for the Zhao 2018 ECG quality label wrapper."""
     return AbstractScalar(dtype="str")
 
 
@@ -19,7 +19,7 @@ def witness_averageqrstemplate(
     rpeaks: AbstractArray | None,
     sampling_rate: AbstractScalar,
 ) -> AbstractSignal:
-    """Shape-and-type check for average qrs template."""
+    """Shape-and-type check for the average-QRS quality trace wrapper."""
     return AbstractSignal(
         shape=ecg_cleaned.shape,
         dtype="float64",
