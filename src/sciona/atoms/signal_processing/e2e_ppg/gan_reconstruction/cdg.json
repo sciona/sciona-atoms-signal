@@ -1,0 +1,139 @@
+{
+  "nodes": [
+    {
+      "node_id": "gan_reconstruction_root",
+      "parent_id": null,
+      "name": "GANReconstructionFamily",
+      "description": "Canonical CDG for the GAN-based E2E-PPG reconstruction wrappers.",
+      "concept_type": "custom",
+      "inputs": [],
+      "outputs": [],
+      "status": "decomposed",
+      "children": [
+        "generatereconstructedppg",
+        "gan_reconstruction"
+      ],
+      "depth": 0,
+      "type_signature": "",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "generatereconstructedppg",
+      "parent_id": "gan_reconstruction_root",
+      "name": "GenerateReconstructedPPG",
+      "description": "Generate a reconstructed PPG waveform with the upstream GAN model.",
+      "concept_type": "signal_transform",
+      "inputs": [
+        {
+          "name": "ppg_clean",
+          "type_desc": "ndarray",
+          "constraints": "clean input signal segment"
+        },
+        {
+          "name": "noise",
+          "type_desc": "ndarray",
+          "constraints": "latent noise tensor"
+        },
+        {
+          "name": "sampling_rate",
+          "type_desc": "float|int",
+          "constraints": "positive numeric sampling rate"
+        },
+        {
+          "name": "generator",
+          "type_desc": "module",
+          "constraints": "generator network"
+        },
+        {
+          "name": "device",
+          "type_desc": "str|device",
+          "constraints": "execution target"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "reconstructed_ppg",
+          "type_desc": "ndarray",
+          "constraints": "signal reconstructed by the GAN wrapper"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(ppg_clean: np.ndarray | torch.Tensor, noise: np.ndarray | torch.Tensor, sampling_rate: int | float, generator: torch.nn.Module, device: str | torch.device) -> np.ndarray | torch.Tensor",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "gan_reconstruction",
+      "parent_id": "gan_reconstruction_root",
+      "name": "GanReconstruction",
+      "description": "Generate a reconstructed PPG waveform through the GAN wrapper surface.",
+      "concept_type": "signal_transform",
+      "inputs": [
+        {
+          "name": "ppg_clean",
+          "type_desc": "ndarray",
+          "constraints": "clean input signal segment"
+        },
+        {
+          "name": "noise",
+          "type_desc": "ndarray|list[int]",
+          "constraints": "noise specification for the reconstruction"
+        },
+        {
+          "name": "sampling_rate",
+          "type_desc": "int",
+          "constraints": "positive numeric sampling rate"
+        },
+        {
+          "name": "generator",
+          "type_desc": "module",
+          "constraints": "generator network"
+        },
+        {
+          "name": "device",
+          "type_desc": "str|device",
+          "constraints": "execution target"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "reconstructed_ppg",
+          "type_desc": "ndarray",
+          "constraints": "signal reconstructed by the GAN wrapper"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(ppg_clean: np.ndarray, noise: list[int] | np.ndarray, sampling_rate: int, generator: torch.nn.Module, device: str | torch.device) -> np.ndarray | torch.Tensor",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    }
+  ],
+  "edges": [],
+  "metadata": {
+    "source": "manual_compaction",
+    "family": "e2e_ppg_gan_reconstruction"
+  }
+}

@@ -64,3 +64,20 @@ def test_neurokit2_review_bundle_covers_expected_rows() -> None:
         "sciona.atoms.signal_processing.neurokit2.averageqrstemplate",
         "sciona.atoms.signal_processing.neurokit2.zhao2018hrvanalysis",
     }
+
+
+def test_e2e_ppg_review_bundle_covers_expected_rows() -> None:
+    bundle = _load_bundle(BUNDLE_DIR / "e2e_ppg.review_bundle.json")
+    assert {row["atom_key"] for row in bundle["rows"]} == {
+        "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.detect_heart_cycles",
+        "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.heart_cycle_detection",
+        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapperpredictionsignalcomputation",
+        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.signalarraynormalization",
+        "sciona.atoms.signal_processing.e2e_ppg.reconstruction.gan_patch_reconstruction",
+        "sciona.atoms.signal_processing.e2e_ppg.reconstruction.windowed_signal_reconstruction",
+        "sciona.atoms.signal_processing.e2e_ppg.gan_reconstruction.generatereconstructedppg",
+        "sciona.atoms.signal_processing.e2e_ppg.gan_reconstruction.gan_reconstruction",
+        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.normalizesignal",
+        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.wrapperevaluate",
+        "sciona.atoms.signal_processing.e2e_ppg.template_matching.templatefeaturecomputation",
+    }

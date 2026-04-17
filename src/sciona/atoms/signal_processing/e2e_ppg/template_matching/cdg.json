@@ -1,0 +1,65 @@
+{
+  "nodes": [
+    {
+      "node_id": "template_matching_root",
+      "parent_id": null,
+      "name": "TemplateMatchingFamily",
+      "description": "Canonical CDG for the E2E-PPG template-matching feature computation wrapper.",
+      "concept_type": "custom",
+      "inputs": [],
+      "outputs": [],
+      "status": "decomposed",
+      "children": [
+        "templatefeaturecomputation"
+      ],
+      "depth": 0,
+      "type_signature": "",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "templatefeaturecomputation",
+      "parent_id": "template_matching_root",
+      "name": "TemplateFeatureComputation",
+      "description": "Compute average template-distance and correlation features for beats.",
+      "concept_type": "analysis",
+      "inputs": [
+        {
+          "name": "hc",
+          "type_desc": "Sequence[Sequence[float]] | np.ndarray",
+          "constraints": "beat collection"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "template_features",
+          "type_desc": "tuple[float, float]",
+          "constraints": "average Euclidean and correlation features"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(hc: Sequence[Sequence[float]] | np.ndarray) -> tuple[float, float]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    }
+  ],
+  "edges": [],
+  "metadata": {
+    "source": "manual_compaction",
+    "family": "e2e_ppg_template_matching"
+  }
+}

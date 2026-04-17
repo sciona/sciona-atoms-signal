@@ -25,6 +25,42 @@
       "path": "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/atoms.py"
     },
     {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/__init__.py"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/references.json"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/cdg.json"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/matches.json"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/e2e_ppg/template_matching/atoms.py"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/e2e_ppg/template_matching/__init__.py"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/e2e_ppg/template_matching/references.json"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/e2e_ppg/template_matching/cdg.json"
+    },
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/e2e_ppg/template_matching/matches.json"
+    },
+    {
       "kind": "local_test",
       "path": "tests/test_e2e_ppg_heart_cycle_import_smoke.py"
     },
@@ -43,10 +79,14 @@
     {
       "kind": "local_test",
       "path": "tests/test_e2e_ppg_gan_reconstruction_import_smoke.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_e2e_ppg_publication_ratchet.py"
     }
   ],
   "limitations": [
-    "This batch only covers the concrete e2e-PPG callables that already have direct evidence and smoke coverage."
+    "This draft closes the missing-row backlog for the publication-shaped e2e-PPG atoms and keeps the scope away from biosppy.svm_proc."
   ],
   "blocking_findings": [],
   "required_actions": [],
@@ -150,7 +190,87 @@
       "trust_readiness": "catalog_ready",
       "source_paths": [
         "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/atoms.py",
-        "tests/test_e2e_ppg_gan_reconstruction_import_smoke.py"
+        "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/__init__.py",
+        "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/references.json",
+        "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/cdg.json",
+        "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/matches.json",
+        "tests/test_e2e_ppg_publication_ratchet.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.gan_reconstruction.gan_reconstruction",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/atoms.py",
+        "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/__init__.py",
+        "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/references.json",
+        "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/cdg.json",
+        "src/sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/matches.json",
+        "tests/test_e2e_ppg_publication_ratchet.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.normalizesignal",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper_d12/atoms.py",
+        "src/sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper_d12/cdg.json",
+        "src/sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper_d12/matches.json",
+        "src/sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper_d12/references.json",
+        "tests/test_e2e_ppg_kazemi_wrapper_d12_import_smoke.py",
+        "tests/test_e2e_ppg_publication_ratchet.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.wrapperevaluate",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper_d12/atoms.py",
+        "src/sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper_d12/cdg.json",
+        "src/sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper_d12/matches.json",
+        "src/sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper_d12/references.json",
+        "tests/test_e2e_ppg_kazemi_wrapper_d12_import_smoke.py",
+        "tests/test_e2e_ppg_publication_ratchet.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.template_matching.templatefeaturecomputation",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/e2e_ppg/template_matching/atoms.py",
+        "src/sciona/atoms/signal_processing/e2e_ppg/template_matching/__init__.py",
+        "src/sciona/atoms/signal_processing/e2e_ppg/template_matching/references.json",
+        "src/sciona/atoms/signal_processing/e2e_ppg/template_matching/cdg.json",
+        "src/sciona/atoms/signal_processing/e2e_ppg/template_matching/matches.json",
+        "tests/test_e2e_ppg_publication_ratchet.py"
       ],
       "limitations": [],
       "blocking_findings": [],

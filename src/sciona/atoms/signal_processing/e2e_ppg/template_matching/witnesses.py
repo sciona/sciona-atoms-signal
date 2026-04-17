@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from sciona.ghost.abstract import AbstractArray
+from sciona.ghost.abstract import AbstractArray, AbstractScalar
 
 
-def witness_templatefeaturecomputation(hc: AbstractArray) -> AbstractArray:
+def witness_templatefeaturecomputation(hc: AbstractArray) -> tuple[AbstractScalar, AbstractScalar]:
     """Describe template-matching feature output for a beat collection."""
-    return AbstractArray(shape=hc.shape, dtype="float64")
+    return (AbstractScalar(dtype="float64"), AbstractScalar(dtype="float64"))

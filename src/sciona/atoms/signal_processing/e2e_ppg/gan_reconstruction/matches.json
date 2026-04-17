@@ -1,0 +1,134 @@
+[
+  {
+    "pdg_node": {
+      "predicate_id": "generate_reconstructed_ppg",
+      "statement": "(ppg_clean: np.ndarray | torch.Tensor, noise: np.ndarray | torch.Tensor, sampling_rate: int | float, generator: torch.nn.Module, device: str | torch.device) -> np.ndarray | torch.Tensor",
+      "informal_desc": "Route clean PPG context and latent noise through the upstream GAN reconstruction model.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "generate_reconstructed_ppg",
+          "type_signature": "(ppg_clean: np.ndarray | torch.Tensor, noise: np.ndarray | torch.Tensor, sampling_rate: int | float, generator: torch.nn.Module, device: str | torch.device) -> np.ndarray | torch.Tensor",
+          "docstring": "Route clean PPG context and latent noise through the upstream GAN reconstruction model.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "generate_reconstructed_ppg",
+          "type_signature": "(ppg_clean: np.ndarray | torch.Tensor, noise: np.ndarray | torch.Tensor, sampling_rate: int | float, generator: torch.nn.Module, device: str | torch.device) -> np.ndarray | torch.Tensor",
+          "docstring": "Route clean PPG context and latent noise through the upstream GAN reconstruction model.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "generate_reconstructed_ppg",
+            "type_signature": "(ppg_clean: np.ndarray | torch.Tensor, noise: np.ndarray | torch.Tensor, sampling_rate: int | float, generator: torch.nn.Module, device: str | torch.device) -> np.ndarray | torch.Tensor",
+            "docstring": "Route clean PPG context and latent noise through the upstream GAN reconstruction model.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "gan_reconstruction_wrapper",
+      "statement": "(ppg_clean: np.ndarray, noise: list[int] | np.ndarray, sampling_rate: int, generator: torch.nn.Module, device: str | torch.device) -> np.ndarray | torch.Tensor",
+      "informal_desc": "Expose the upstream GAN reconstruction wrapper surface for publication.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "gan_reconstruction_wrapper",
+          "type_signature": "(ppg_clean: np.ndarray, noise: list[int] | np.ndarray, sampling_rate: int, generator: torch.nn.Module, device: str | torch.device) -> np.ndarray | torch.Tensor",
+          "docstring": "Expose the upstream GAN reconstruction wrapper surface for publication.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "gan_reconstruction_wrapper",
+          "type_signature": "(ppg_clean: np.ndarray, noise: list[int] | np.ndarray, sampling_rate: int, generator: torch.nn.Module, device: str | torch.device) -> np.ndarray | torch.Tensor",
+          "docstring": "Expose the upstream GAN reconstruction wrapper surface for publication.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "gan_reconstruction_wrapper",
+            "type_signature": "(ppg_clean: np.ndarray, noise: list[int] | np.ndarray, sampling_rate: int, generator: torch.nn.Module, device: str | torch.device) -> np.ndarray | torch.Tensor",
+            "docstring": "Expose the upstream GAN reconstruction wrapper surface for publication.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  }
+]
