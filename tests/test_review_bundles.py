@@ -45,3 +45,14 @@ def test_review_bundles_have_provider_owned_sources_and_rows() -> None:
             for rel in row["source_paths"]:
                 assert (ROOT / rel).exists()
 
+
+def test_biosppy_online_filter_review_bundle_covers_expected_rows() -> None:
+    bundle = _load_bundle(BUNDLE_DIR / "biosppy_online_filter.review_bundle.json")
+    assert {row["atom_key"] for row in bundle["rows"]} == {
+        "sciona.atoms.signal_processing.biosppy.online_filter.filterstateinit",
+        "sciona.atoms.signal_processing.biosppy.online_filter.filterstep",
+        "sciona.atoms.signal_processing.biosppy.online_filter_codex.filterstateinit",
+        "sciona.atoms.signal_processing.biosppy.online_filter_codex.filterstep",
+        "sciona.atoms.signal_processing.biosppy.online_filter_v2.filterstateinit",
+        "sciona.atoms.signal_processing.biosppy.online_filter_v2.filterstep",
+    }
