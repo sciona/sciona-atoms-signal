@@ -81,3 +81,21 @@ def test_e2e_ppg_review_bundle_covers_expected_rows() -> None:
         "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.wrapperevaluate",
         "sciona.atoms.signal_processing.e2e_ppg.template_matching.templatefeaturecomputation",
     }
+
+
+def test_signal_expansion_review_bundle_covers_expected_rows() -> None:
+    bundle = _load_bundle(BUNDLE_DIR / "signal_expansion.review_bundle.json")
+    assert {row["atom_key"] for row in bundle["rows"]} == {
+        "sciona.atoms.expansion.signal_event_rate.filter_signal_for_detection",
+        "sciona.atoms.expansion.signal_event_rate.compute_event_rate",
+        "sciona.atoms.expansion.signal_filter.analyze_pole_stability",
+        "sciona.atoms.expansion.signal_filter.detect_transient_response",
+        "sciona.atoms.expansion.signal_transform.validate_parseval_energy",
+        "sciona.atoms.expansion.signal_transform.check_inverse_reconstruction",
+        "sciona.atoms.expansion.signal_detect_measure.estimate_snr",
+        "sciona.atoms.expansion.signal_detect_measure.estimate_false_positive_rate",
+        "sciona.atoms.expansion.graph_signal_processing.validate_graph_connectivity",
+        "sciona.atoms.expansion.graph_signal_processing.check_laplacian_symmetry",
+        "sciona.atoms.expansion.graph_signal_processing.analyze_spectral_gap",
+        "sciona.atoms.expansion.graph_signal_processing.validate_filter_response",
+    }

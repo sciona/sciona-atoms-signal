@@ -212,6 +212,36 @@
       "review_record_path": "data/review_bundles/signal_expansion.review_bundle.json"
     },
     {
+      "atom_key": "sciona.atoms.expansion.graph_signal_processing.check_laplacian_symmetry",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/expansion/graph_signal_processing.py",
+        "tests/test_expansion_graph_signal_processing.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/signal_expansion.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.expansion.graph_signal_processing.analyze_spectral_gap",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/expansion/graph_signal_processing.py",
+        "tests/test_expansion_graph_signal_processing.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/signal_expansion.review_bundle.json"
+    },
+    {
       "atom_key": "sciona.atoms.expansion.graph_signal_processing.validate_filter_response",
       "review_status": "reviewed",
       "review_semantic_verdict": "pass",

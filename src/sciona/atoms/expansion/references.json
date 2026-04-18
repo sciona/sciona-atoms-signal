@@ -226,6 +226,56 @@
       ],
       "auto_attribution_runs": []
     },
+    "sciona.atoms.expansion.graph_signal_processing.check_laplacian_symmetry": {
+      "references": [
+        {
+          "ref_id": "shuman2013gsp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Canonical graph signal processing reference for Laplacian symmetry and graph construction checks."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy/Numpy provide the canonical linear algebra stack used by the implementation."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.graph_signal_processing.analyze_spectral_gap": {
+      "references": [
+        {
+          "ref_id": "shuman2013gsp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Canonical graph signal processing reference for spectral gap and algebraic connectivity analysis."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy/Numpy provide the canonical numerical stack used by the implementation."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
     "sciona.atoms.expansion.graph_signal_processing.validate_filter_response": {
       "references": [
         {
