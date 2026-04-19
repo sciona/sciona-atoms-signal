@@ -23,6 +23,7 @@ SIGNAL_EVENT_RATE_PROBE_TARGETS: tuple[ProbeTarget, ...] = (
         _MODULE,
         "compute_event_rate_median_smoothed",
     ),
+    ProbeTarget(f"{_MODULE}.estimate_event_rate_from_signal", _MODULE, "estimate_event_rate_from_signal"),
     ProbeTarget(f"{_MODULE}.assess_signal_quality", _MODULE, "assess_signal_quality"),
     ProbeTarget(f"{_MODULE}.remove_signal_jumps", _MODULE, "remove_signal_jumps"),
     ProbeTarget(f"{_MODULE}.reject_outlier_intervals", _MODULE, "reject_outlier_intervals"),

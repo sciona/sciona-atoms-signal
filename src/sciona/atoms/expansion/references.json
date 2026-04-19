@@ -51,6 +51,131 @@
       ],
       "auto_attribution_runs": []
     },
+    "sciona.atoms.expansion.signal_event_rate.detect_peaks_in_signal": {
+      "references": [
+        {
+          "ref_id": "feli2023pipeline",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Conceptual event-detection stage in a waveform-to-rate pipeline; source behavior is a local robust peak detector."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Implementation delegates peak extraction to scipy.signal.find_peaks."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_event_rate.compute_event_rate_smoothed": {
+      "references": [
+        {
+          "ref_id": "feli2023pipeline",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Conceptual smoothing of interval-derived event-rate traces in a waveform-to-rate pipeline."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Implementation uses NumPy moving-average convolution over interval-derived rates."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_event_rate.compute_event_rate_median_smoothed": {
+      "references": [
+        {
+          "ref_id": "feli2023pipeline",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Conceptual robust smoothing of interval-derived event-rate traces in a waveform-to-rate pipeline."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Implementation uses scipy.ndimage.median_filter for deterministic median smoothing."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_event_rate.estimate_event_rate_from_signal": {
+      "references": [
+        {
+          "ref_id": "feli2023pipeline",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "End-to-end waveform-to-event-rate helper aligned with the reviewed signal-quality and HR extraction pipeline."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Implementation composes SciPy filtering, peak detection, and median smoothing primitives."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_event_rate.assess_signal_quality": {
+      "references": [
+        {
+          "ref_id": "feli2023pipeline",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Conceptual signal-quality assessment stage in the reviewed wearable PPG processing pipeline."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Implementation uses deterministic NumPy window statistics for the quality mask."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
     "sciona.atoms.expansion.signal_filter.analyze_pole_stability": {
       "references": [
         {

@@ -88,6 +88,11 @@ def test_signal_expansion_review_bundle_covers_expected_rows() -> None:
     assert {row["atom_key"] for row in bundle["rows"]} == {
         "sciona.atoms.expansion.signal_event_rate.filter_signal_for_detection",
         "sciona.atoms.expansion.signal_event_rate.compute_event_rate",
+        "sciona.atoms.expansion.signal_event_rate.assess_signal_quality",
+        "sciona.atoms.expansion.signal_event_rate.detect_peaks_in_signal",
+        "sciona.atoms.expansion.signal_event_rate.compute_event_rate_smoothed",
+        "sciona.atoms.expansion.signal_event_rate.compute_event_rate_median_smoothed",
+        "sciona.atoms.expansion.signal_event_rate.estimate_event_rate_from_signal",
         "sciona.atoms.expansion.signal_filter.analyze_pole_stability",
         "sciona.atoms.expansion.signal_filter.detect_transient_response",
         "sciona.atoms.expansion.signal_transform.validate_parseval_energy",
