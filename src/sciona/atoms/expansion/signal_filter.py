@@ -120,7 +120,9 @@ def measure_passband_ripple(
     if len(resp) == 0 or len(mask) == 0 or not np.any(mask):
         return 0.0, True
 
-    passband = resp[mask[:len(resp)]] if len(mask) >= len(resp) else resp[:len(mask)][mask[:len(resp)]]
+    n = min(len(resp), len(mask))
+    passband = resp[:n][mask[:n]]
+    passband = passband[np.isfinite(passband)]
     if len(passband) == 0:
         return 0.0, True
 

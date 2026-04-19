@@ -201,6 +201,56 @@
       ],
       "auto_attribution_runs": []
     },
+    "sciona.atoms.expansion.signal_filter.measure_passband_ripple": {
+      "references": [
+        {
+          "ref_id": "oppenheim2009dtsp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Standard discrete-time filter magnitude-response diagnostic for passband variation."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy/Numpy provide the canonical numerical stack for frequency-response analysis."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_filter.analyze_group_delay_variation": {
+      "references": [
+        {
+          "ref_id": "oppenheim2009dtsp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Authoritative reference for group delay and phase linearity in discrete-time filters."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy/Numpy provide the canonical numerical stack for group-delay diagnostics."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
     "sciona.atoms.expansion.signal_filter.detect_transient_response": {
       "references": [
         {
@@ -221,6 +271,56 @@
             "matched_nodes": [],
             "confidence": "high",
             "notes": "SciPy is the canonical software dependency for the surrounding filter-analysis workflow."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_transform.analyze_window_leakage": {
+      "references": [
+        {
+          "ref_id": "oppenheim2009dtsp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Authoritative reference for windowing effects and spectral leakage in Fourier analysis."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy/Numpy provide the canonical FFT/numerical stack used by the diagnostic."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_transform.detect_spectral_aliasing": {
+      "references": [
+        {
+          "ref_id": "oppenheim2009dtsp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Authoritative reference for Nyquist-frequency reasoning and aliasing diagnostics."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy/Numpy provide the canonical FFT/numerical stack used by the diagnostic."
           }
         }
       ],
@@ -296,6 +396,56 @@
             "matched_nodes": [],
             "confidence": "high",
             "notes": "SciPy/Numpy provide the canonical numerical stack for the diagnostic implementation."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_detect_measure.analyze_peak_threshold_sensitivity": {
+      "references": [
+        {
+          "ref_id": "kazemi2022ppg",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Reviewed signal peak-detection context for threshold-adjacent peak diagnostics."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy/Numpy provide the canonical numerical stack for threshold-sensitivity analysis."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_detect_measure.check_event_rate_stationarity": {
+      "references": [
+        {
+          "ref_id": "feli2023pipeline",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Reviewed waveform-to-rate pipeline context for event-rate stability diagnostics."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "SciPy/Numpy provide the canonical numerical stack for histogram-based stationarity checks."
           }
         }
       ],

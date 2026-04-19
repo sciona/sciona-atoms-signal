@@ -82,11 +82,12 @@ def analyze_peak_threshold_sensitivity(
 ) -> tuple[float, bool]:
     """Measure how many detected peaks sit near the decision threshold."""
     p = np.asarray(peaks, dtype=np.float64).ravel()
-    if len(p) == 0 or threshold == 0:
+    p = p[np.isfinite(p)]
+    if len(p) == 0 or not np.isfinite(threshold):
         return 0.0, True
 
-    margin = abs(threshold) * 0.1
-    near_threshold = np.sum(np.abs(p - threshold) < margin)
+    margin = max(abs(threshold) * 0.1, np.finfo(np.float64).eps)
+    near_threshold = np.sum(np.abs(p - threshold) <= margin)
     sensitivity = float(near_threshold) / len(p)
     return sensitivity, sensitivity < 0.2
 
@@ -98,6 +99,7 @@ def check_event_rate_stationarity(
 ) -> tuple[float, bool]:
     """Estimate whether event arrivals remain roughly stationary over time."""
     t = np.asarray(event_times, dtype=np.float64).ravel()
+    t = t[np.isfinite(t)]
     if len(t) < 2:
         return 0.0, True
 
@@ -105,6 +107,9 @@ def check_event_rate_stationarity(
     if t_max == t_min:
         return 0.0, True
 
+    if not np.isfinite(n_bins):
+        n_bins = 10
+    n_bins = max(1, int(n_bins))
     bins = np.linspace(t_min, t_max, n_bins + 1)
     counts, _ = np.histogram(t, bins=bins)
     counts = counts.astype(float)

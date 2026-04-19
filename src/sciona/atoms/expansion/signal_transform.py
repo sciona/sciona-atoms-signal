@@ -16,6 +16,26 @@ from sciona.ghost.abstract import AbstractArray, AbstractScalar
 from sciona.ghost.registry import register_atom
 
 
+def _spectral_leakage_fraction(samples: np.ndarray) -> float:
+    """Return fraction of spectral power outside the dominant main lobe."""
+    x = np.asarray(samples, dtype=np.float64).ravel()
+    x = x[np.isfinite(x)]
+    if len(x) < 2:
+        return 0.0
+
+    power = np.abs(np.fft.rfft(x)) ** 2
+    total_power = float(np.sum(power))
+    if total_power == 0.0:
+        return 0.0
+
+    peak = int(np.argmax(power))
+    half_width = 1
+    lo = max(0, peak - half_width)
+    hi = min(len(power), peak + half_width + 1)
+    main_lobe_power = float(np.sum(power[lo:hi]))
+    return max(0.0, min(1.0, 1.0 - main_lobe_power / total_power))
+
+
 def witness_analyze_window_leakage(
     windowed: AbstractArray,
     original: AbstractArray,
@@ -72,29 +92,42 @@ def analyze_window_leakage(
 ) -> tuple[float, bool]:
     """Analyze spectral leakage introduced by the window function.
 
-    Compares windowed and original signal energy to estimate how much
-    energy is redistributed by the window.  High leakage ratios indicate
-    the window attenuates too much of the signal.
+    Estimates how much spectral energy in the windowed signal lies
+    outside the dominant main lobe.  High leakage ratios indicate that
+    substantial energy is spread away from the primary frequency region.
 
     Args:
         windowed: windowed signal array.
         original: original signal before windowing.
 
     Returns:
-        (leakage_ratio, is_excessive) where leakage_ratio is
-        1 - (windowed_energy / original_energy) and is_excessive is
-        True if leakage_ratio > 0.5.
+        (leakage_ratio, is_excessive) where leakage_ratio is the
+        fraction of spectral power outside the dominant main lobe and
+        is_excessive is True if leakage_ratio > 0.5.
     """
     w = np.asarray(windowed, dtype=np.float64).ravel()
     o = np.asarray(original, dtype=np.float64).ravel()
+    n = min(len(w), len(o))
+    if n == 0:
+        return 0.0, False
+
+    w = w[:n]
+    o = o[:n]
+    finite = np.isfinite(w) & np.isfinite(o)
+    w = w[finite]
+    o = o[finite]
+    if len(w) == 0:
+        return 0.0, False
 
     orig_energy = float(np.sum(o ** 2))
     if orig_energy == 0:
         return 0.0, False
 
     win_energy = float(np.sum(w ** 2))
-    ratio = 1.0 - (win_energy / orig_energy)
-    ratio = max(0.0, min(1.0, ratio))
+    if win_energy == 0:
+        return 1.0, True
+
+    ratio = _spectral_leakage_fraction(w)
     return ratio, ratio > 0.5
 
 
@@ -130,9 +163,12 @@ def detect_spectral_aliasing(
 
     power = np.abs(s) ** 2
     total = float(np.sum(power))
-    if total == 0:
+    if total == 0 or not np.isfinite(total):
         return 0.0, False
 
+    if not np.isfinite(nyquist_fraction):
+        nyquist_fraction = 0.9
+    nyquist_fraction = min(1.0, max(0.0, float(nyquist_fraction)))
     cutoff = int(n * nyquist_fraction)
     alias_energy = float(np.sum(power[cutoff:]))
     fraction = alias_energy / total
