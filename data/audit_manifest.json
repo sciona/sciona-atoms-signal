@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "metadata": {
-    "generated_at": "2026-04-19T20:05:01.847197+00:00",
+    "generated_at": "2026-04-19T22:01:54.666024+00:00",
     "generator": "scripts/apply_audit_review_bundles.py",
     "phase": "phase_1_review_bundle_merge"
   },
@@ -1680,8 +1680,7 @@
       "trust_readiness": "reviewed_with_limits",
       "review_required_actions": [],
       "review_limitations": [
-        "End-to-end output is a heuristic event-rate estimate, not a clinically validated heart-rate measurement.",
-        "The composed path still uses the conservative internal reject_outlier_intervals helper; the helper itself remains unpublished pending contract repair."
+        "End-to-end output is a heuristic event-rate estimate, not a clinically validated heart-rate measurement."
       ],
       "trust_blockers": [],
       "structural_status": "pass",
@@ -1854,6 +1853,272 @@
       "required_actions": [],
       "blocking_findings": [],
       "review_record_path": "data/review_bundles/signal_expansion.review_bundle.json"
+    },
+    {
+      "atom_name": "sciona.atoms.expansion.signal_event_rate.reject_outlier_intervals",
+      "atom_key": "sciona.atoms.expansion.signal_event_rate.reject_outlier_intervals",
+      "atom_id": "sciona.atoms.expansion.signal_event_rate.reject_outlier_intervals",
+      "module_import_path": "sciona.atoms.expansion.signal_event_rate",
+      "module_path": "/Users/conrad/personal/sciona-atoms-signal/src/sciona/atoms/expansion/signal_event_rate.py",
+      "module_family": "expansion",
+      "domain_family": "expansion",
+      "wrapper_symbol": "reject_outlier_intervals",
+      "argument_names": [
+        "events",
+        "sampling_rate",
+        "mad_scale"
+      ],
+      "argument_details": [
+        {
+          "name": "events",
+          "annotation": "np.ndarray",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "sampling_rate",
+          "annotation": "float | int",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "mad_scale",
+          "annotation": "float",
+          "required": false,
+          "kind": "keyword_only"
+        }
+      ],
+      "uses_varargs": false,
+      "uses_kwargs": false,
+      "return_annotation": "np.ndarray",
+      "docstring_summary": "Drop event indices that participate in implausible local intervals.",
+      "has_docstring": true,
+      "authoritative_sources": [
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/expansion/signal_event_rate.py"
+        },
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/expansion/signal_filter.py"
+        },
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/expansion/signal_transform.py"
+        },
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/expansion/signal_detect_measure.py"
+        },
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/expansion/graph_signal_processing.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_expansion_signal_event_rate.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_signal_event_rate_expansion_import_smoke.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_expansion_signal_filter.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_signal_filter_expansion_import_smoke.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_expansion_signal_transform.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_signal_transform_expansion_import_smoke.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_expansion_signal_detect_measure.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_signal_detect_measure_expansion_import_smoke.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_expansion_graph_signal_processing.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_graph_signal_processing_expansion_import_smoke.py"
+        }
+      ],
+      "source_kind": "hand_written",
+      "review_status": "approved",
+      "review_priority": "review_now",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantics_verdict": "pass_with_limits",
+      "trust_readiness": "reviewed_with_limits",
+      "review_required_actions": [],
+      "review_limitations": [
+        "Interval cleanup removes isolated extra events; it does not synthesize missing events across long gaps."
+      ],
+      "trust_blockers": [],
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "runtime_status": "pass",
+      "developer_semantics_status": "pass",
+      "overall_verdict": "acceptable_with_limits",
+      "risk_tier": "low",
+      "risk_score": 0,
+      "risk_dimensions": {},
+      "risk_reasons": [],
+      "acceptability_score": 70,
+      "acceptability_band": "acceptable_with_limits_candidate",
+      "parity_coverage_level": "positive_and_negative",
+      "parity_test_status": "pass",
+      "parity_fixture_count": 2,
+      "parity_case_count": 3,
+      "required_actions": [],
+      "blocking_findings": [],
+      "review_record_path": "data/review_bundles/signal_expansion.review_bundle.json",
+      "has_references": true,
+      "references_status": "pass"
+    },
+    {
+      "atom_name": "sciona.atoms.expansion.signal_event_rate.remove_signal_jumps",
+      "atom_key": "sciona.atoms.expansion.signal_event_rate.remove_signal_jumps",
+      "atom_id": "sciona.atoms.expansion.signal_event_rate.remove_signal_jumps",
+      "module_import_path": "sciona.atoms.expansion.signal_event_rate",
+      "module_path": "/Users/conrad/personal/sciona-atoms-signal/src/sciona/atoms/expansion/signal_event_rate.py",
+      "module_family": "expansion",
+      "domain_family": "expansion",
+      "wrapper_symbol": "remove_signal_jumps",
+      "argument_names": [
+        "signal",
+        "sampling_rate",
+        "jump_threshold_scale"
+      ],
+      "argument_details": [
+        {
+          "name": "signal",
+          "annotation": "np.ndarray",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "sampling_rate",
+          "annotation": "float | int",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "jump_threshold_scale",
+          "annotation": "float",
+          "required": false,
+          "kind": "keyword_only"
+        }
+      ],
+      "uses_varargs": false,
+      "uses_kwargs": false,
+      "return_annotation": "np.ndarray",
+      "docstring_summary": "Remove large step discontinuities by flattening detected jumps.",
+      "has_docstring": true,
+      "authoritative_sources": [
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/expansion/signal_event_rate.py"
+        },
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/expansion/signal_filter.py"
+        },
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/expansion/signal_transform.py"
+        },
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/expansion/signal_detect_measure.py"
+        },
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/expansion/graph_signal_processing.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_expansion_signal_event_rate.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_signal_event_rate_expansion_import_smoke.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_expansion_signal_filter.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_signal_filter_expansion_import_smoke.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_expansion_signal_transform.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_signal_transform_expansion_import_smoke.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_expansion_signal_detect_measure.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_signal_detect_measure_expansion_import_smoke.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_expansion_graph_signal_processing.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_graph_signal_processing_expansion_import_smoke.py"
+        }
+      ],
+      "source_kind": "hand_written",
+      "review_status": "approved",
+      "review_priority": "review_now",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantics_verdict": "pass_with_limits",
+      "trust_readiness": "reviewed_with_limits",
+      "review_required_actions": [],
+      "review_limitations": [
+        "Jump correction removes step-like offsets in a one-dimensional waveform; it is not a general artifact-removal method."
+      ],
+      "trust_blockers": [],
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "runtime_status": "pass",
+      "developer_semantics_status": "pass",
+      "overall_verdict": "acceptable_with_limits",
+      "risk_tier": "low",
+      "risk_score": 0,
+      "risk_dimensions": {},
+      "risk_reasons": [],
+      "acceptability_score": 70,
+      "acceptability_band": "acceptable_with_limits_candidate",
+      "parity_coverage_level": "positive_and_negative",
+      "parity_test_status": "pass",
+      "parity_fixture_count": 2,
+      "parity_case_count": 2,
+      "required_actions": [],
+      "blocking_findings": [],
+      "review_record_path": "data/review_bundles/signal_expansion.review_bundle.json",
+      "has_references": true,
+      "references_status": "pass"
     },
     {
       "atom_name": "sciona.atoms.expansion.signal_filter.analyze_group_delay_variation",

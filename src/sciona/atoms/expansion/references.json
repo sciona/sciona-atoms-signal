@@ -176,6 +176,56 @@
       ],
       "auto_attribution_runs": []
     },
+    "sciona.atoms.expansion.signal_event_rate.remove_signal_jumps": {
+      "references": [
+        {
+          "ref_id": "feli2023pipeline",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Local waveform cleanup stage for robust event-rate estimation; removes step jumps before peak processing."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Uses NumPy robust difference statistics in the surrounding SciPy/Numpy signal pipeline."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.expansion.signal_event_rate.reject_outlier_intervals": {
+      "references": [
+        {
+          "ref_id": "feli2023pipeline",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Local event-interval cleanup stage for robust event-rate estimation; removes isolated extra events from ordered event indices."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Uses NumPy median absolute-deviation statistics in the surrounding SciPy/Numpy signal pipeline."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
     "sciona.atoms.expansion.signal_filter.analyze_pole_stability": {
       "references": [
         {

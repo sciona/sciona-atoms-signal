@@ -71,7 +71,7 @@
   ],
   "limitations": [
     "This bundle covers the current expansion witness rows only and leaves any future rewrite-specialized variants for follow-up.",
-    "For signal_event_rate pubrev-013, remove_signal_jumps and reject_outlier_intervals are intentionally held for remediation because their current public names overclaim the conservative source behavior."
+    "Signal-event-rate cleanup helpers are deterministic local robust-statistics stages rather than clinically validated morphology correction."
   ],
   "blocking_findings": [],
   "required_actions": [],
@@ -220,8 +220,57 @@
         "tests/test_pubrev013_signal_event_rate.py"
       ],
       "limitations": [
-        "End-to-end output is a heuristic event-rate estimate, not a clinically validated heart-rate measurement.",
-        "The composed path still uses the conservative internal reject_outlier_intervals helper; the helper itself remains unpublished pending contract repair."
+        "End-to-end output is a heuristic event-rate estimate, not a clinically validated heart-rate measurement."
+      ],
+      "blocking_findings": [],
+      "required_actions": [],
+      "has_references": true,
+      "references_status": "pass",
+      "parity_coverage_level": "positive_and_negative",
+      "parity_test_status": "pass",
+      "parity_fixture_count": 2,
+      "parity_case_count": 3,
+      "review_record_path": "data/review_bundles/signal_expansion.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.expansion.signal_event_rate.remove_signal_jumps",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/expansion/signal_event_rate.py",
+        "src/sciona/atoms/expansion/references.json",
+        "src/sciona/probes/expansion/signal_event_rate.py",
+        "tests/test_pubrev013_signal_event_rate.py"
+      ],
+      "limitations": [
+        "Jump correction removes step-like offsets in a one-dimensional waveform; it is not a general artifact-removal method."
+      ],
+      "blocking_findings": [],
+      "required_actions": [],
+      "has_references": true,
+      "references_status": "pass",
+      "parity_coverage_level": "positive_and_negative",
+      "parity_test_status": "pass",
+      "parity_fixture_count": 2,
+      "parity_case_count": 2,
+      "review_record_path": "data/review_bundles/signal_expansion.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.expansion.signal_event_rate.reject_outlier_intervals",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/expansion/signal_event_rate.py",
+        "src/sciona/atoms/expansion/references.json",
+        "src/sciona/probes/expansion/signal_event_rate.py",
+        "tests/test_pubrev013_signal_event_rate.py"
+      ],
+      "limitations": [
+        "Interval cleanup removes isolated extra events; it does not synthesize missing events across long gaps."
       ],
       "blocking_findings": [],
       "required_actions": [],

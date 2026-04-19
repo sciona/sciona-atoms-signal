@@ -29,20 +29,17 @@ SAFE_PUBREV_013_KEYS = {
     "sciona.atoms.expansion.signal_event_rate.compute_event_rate_smoothed",
     "sciona.atoms.expansion.signal_event_rate.compute_event_rate_median_smoothed",
     "sciona.atoms.expansion.signal_event_rate.estimate_event_rate_from_signal",
-}
-HELD_PUBREV_013_KEYS = {
     "sciona.atoms.expansion.signal_event_rate.remove_signal_jumps",
     "sciona.atoms.expansion.signal_event_rate.reject_outlier_intervals",
 }
 
 
-def test_pubrev013_safe_rows_are_provider_owned_and_held_rows_absent() -> None:
+def test_pubrev013_safe_rows_are_provider_owned_and_catalog_ready() -> None:
     bundle = json.loads(BUNDLE_PATH.read_text(encoding="utf-8"))
     rows = {row["atom_key"]: row for row in bundle["rows"]}
 
     assert bundle["provider_repo"] == "sciona-atoms-signal"
     assert SAFE_PUBREV_013_KEYS <= set(rows)
-    assert HELD_PUBREV_013_KEYS.isdisjoint(rows)
 
     for atom_key in SAFE_PUBREV_013_KEYS:
         row = rows[atom_key]
@@ -118,9 +115,22 @@ def test_pubrev013_detection_quality_and_estimator_behaviors() -> None:
     assert np.isfinite(event_rate).all()
 
 
-def test_pubrev013_held_atoms_capture_remediation_reasons() -> None:
+def test_pubrev013_remediated_helpers_handle_zero_mad_edge_cases() -> None:
     stepped = np.r_[np.zeros(5), np.ones(5) * 10.0]
-    np.testing.assert_allclose(remove_signal_jumps(stepped, 10.0), stepped)
+    np.testing.assert_allclose(remove_signal_jumps(stepped, 10.0), np.zeros_like(stepped))
+
+    noisy_step = np.array([0.0, 0.1, -0.1, 10.0, 10.1, 9.9])
+    corrected = remove_signal_jumps(noisy_step, 10.0, jump_threshold_scale=4.0)
+    assert np.max(corrected) - np.min(corrected) < 0.5
 
     single_extra_event = np.array([0, 100, 110, 200, 300], dtype=np.int64)
-    np.testing.assert_array_equal(reject_outlier_intervals(single_extra_event, 100.0), single_extra_event)
+    np.testing.assert_array_equal(
+        reject_outlier_intervals(single_extra_event, 100.0),
+        np.array([0, 100, 200, 300], dtype=np.int64),
+    )
+
+    zero_mad_extra_event = np.array([0, 100, 110, 200, 300, 400], dtype=np.int64)
+    np.testing.assert_array_equal(
+        reject_outlier_intervals(zero_mad_extra_event, 100.0),
+        np.array([0, 100, 200, 300, 400], dtype=np.int64),
+    )

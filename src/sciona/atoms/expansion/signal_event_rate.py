@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import math
 
+import icontract
 import numpy as np
 from scipy.ndimage import median_filter
 from scipy.signal import butter, find_peaks, sosfiltfilt
@@ -153,6 +154,14 @@ def _coerce_sampling_rate(sampling_rate: float | int) -> float:
     return rate
 
 
+def _valid_sampling_rate(sampling_rate: float | int) -> bool:
+    try:
+        rate = float(sampling_rate)
+    except (TypeError, ValueError):
+        return False
+    return math.isfinite(rate) and rate > 0
+
+
 def _robust_scale(values: np.ndarray) -> float:
     if values.size == 0:
         return 1.0
@@ -165,6 +174,11 @@ def _robust_scale(values: np.ndarray) -> float:
 
 
 @register_atom(witness_filter_signal_for_detection)
+@icontract.require(lambda sampling_rate: _valid_sampling_rate(sampling_rate), "sampling_rate must be positive")
+@icontract.require(lambda filter_order: filter_order >= 1, "filter_order must be positive")
+@icontract.require(lambda clipping_scale: clipping_scale > 0, "clipping_scale must be positive")
+@icontract.require(lambda low_cutoff_hz, high_cutoff_hz: low_cutoff_hz > 0 and high_cutoff_hz > 0, "cutoffs must be positive")
+@icontract.ensure(lambda result: result.ndim == 1 and np.isfinite(result).all(), "filtered signal must be finite and one-dimensional")
 def filter_signal_for_detection(
     signal: np.ndarray,
     sampling_rate: float | int,
@@ -213,6 +227,10 @@ def _pick_peak_orientation(
 
 
 @register_atom(witness_detect_peaks_in_signal)
+@icontract.require(lambda sampling_rate: _valid_sampling_rate(sampling_rate), "sampling_rate must be positive")
+@icontract.require(lambda prominence_scale: prominence_scale > 0, "prominence_scale must be positive")
+@icontract.require(lambda refractory_scale: refractory_scale > 0, "refractory_scale must be positive")
+@icontract.ensure(lambda result: result.dtype == np.int64 and np.all(np.diff(result) >= 0), "peaks must be sorted int64 indices")
 def detect_peaks_in_signal(
     conditioned_signal: np.ndarray,
     sampling_rate: float | int,
@@ -234,6 +252,10 @@ def detect_peaks_in_signal(
 
 
 @register_atom(witness_compute_event_rate)
+@icontract.require(lambda sampling_rate: _valid_sampling_rate(sampling_rate), "sampling_rate must be positive")
+@icontract.ensure(lambda result: len(result) == 2 and result[0].shape == result[1].shape, "midpoints and rates must align")
+@icontract.ensure(lambda result: result[0].dtype == np.int64 and result[1].dtype == np.float64, "outputs must use stable dtypes")
+@icontract.ensure(lambda result: np.isfinite(result[1]).all(), "event rates must be finite")
 def compute_event_rate(
     events: np.ndarray,
     sampling_rate: float | int,
@@ -261,6 +283,10 @@ def compute_event_rate(
 
 
 @register_atom(witness_compute_event_rate_smoothed)
+@icontract.require(lambda sampling_rate: _valid_sampling_rate(sampling_rate), "sampling_rate must be positive")
+@icontract.require(lambda smoothing_window: smoothing_window >= 1, "smoothing_window must be positive")
+@icontract.ensure(lambda result: len(result) == 2 and result[0].shape == result[1].shape, "midpoints and rates must align")
+@icontract.ensure(lambda result: np.isfinite(result[1]).all(), "smoothed rates must be finite")
 def compute_event_rate_smoothed(
     events: np.ndarray,
     sampling_rate: float | int,
@@ -279,6 +305,10 @@ def compute_event_rate_smoothed(
 
 
 @register_atom(witness_compute_event_rate_median_smoothed)
+@icontract.require(lambda sampling_rate: _valid_sampling_rate(sampling_rate), "sampling_rate must be positive")
+@icontract.require(lambda smoothing_window: smoothing_window >= 1, "smoothing_window must be positive")
+@icontract.ensure(lambda result: len(result) == 2 and result[0].shape == result[1].shape, "midpoints and rates must align")
+@icontract.ensure(lambda result: np.isfinite(result[1]).all(), "median-smoothed rates must be finite")
 def compute_event_rate_median_smoothed(
     events: np.ndarray,
     sampling_rate: float | int,
@@ -301,6 +331,11 @@ def compute_event_rate_median_smoothed(
 
 
 @register_atom(witness_estimate_event_rate_from_signal)
+@icontract.require(lambda sampling_rate: _valid_sampling_rate(sampling_rate), "sampling_rate must be positive")
+@icontract.require(lambda smoothing_window: smoothing_window >= 1, "smoothing_window must be positive")
+@icontract.ensure(lambda result: len(result) == 3, "result must contain events, midpoints, and rates")
+@icontract.ensure(lambda result: result[1].shape == result[2].shape, "midpoints and rates must align")
+@icontract.ensure(lambda result: np.isfinite(result[2]).all(), "estimated rates must be finite")
 def estimate_event_rate_from_signal(
     signal: np.ndarray,
     sampling_rate: float | int,
@@ -320,6 +355,10 @@ def estimate_event_rate_from_signal(
 
 
 @register_atom(witness_assess_signal_quality)
+@icontract.require(lambda sampling_rate: _valid_sampling_rate(sampling_rate), "sampling_rate must be positive")
+@icontract.require(lambda window_seconds: window_seconds > 0, "window_seconds must be positive")
+@icontract.ensure(lambda result: len(result) == 2 and result[0].shape == result[1].shape, "signal and quality mask must align")
+@icontract.ensure(lambda result: result[1].dtype == np.bool_, "quality mask must be boolean")
 def assess_signal_quality(
     signal: np.ndarray,
     sampling_rate: float | int,
@@ -353,6 +392,9 @@ def assess_signal_quality(
 
 
 @register_atom(witness_remove_signal_jumps)
+@icontract.require(lambda sampling_rate: _valid_sampling_rate(sampling_rate), "sampling_rate must be positive")
+@icontract.require(lambda jump_threshold_scale: jump_threshold_scale > 0, "jump_threshold_scale must be positive")
+@icontract.ensure(lambda result: result.ndim == 1 and np.isfinite(result).all(), "corrected signal must be finite and one-dimensional")
 def remove_signal_jumps(
     signal: np.ndarray,
     sampling_rate: float | int,
@@ -368,10 +410,7 @@ def remove_signal_jumps(
     diff = np.diff(values)
     median_diff = float(np.median(diff))
     mad_diff = float(np.median(np.abs(diff - median_diff)))
-    if mad_diff < 1e-10:
-        return values
-
-    threshold = jump_threshold_scale * mad_diff
+    threshold = 1e-10 if mad_diff < 1e-10 else jump_threshold_scale * mad_diff
     jumps = np.where(np.abs(diff - median_diff) > threshold)[0]
     if jumps.size == 0:
         return values
@@ -384,6 +423,10 @@ def remove_signal_jumps(
 
 
 @register_atom(witness_reject_outlier_intervals)
+@icontract.require(lambda sampling_rate: _valid_sampling_rate(sampling_rate), "sampling_rate must be positive")
+@icontract.require(lambda events: np.asarray(events).size == 0 or bool(np.all(np.asarray(events) >= 0)), "events must be non-negative")
+@icontract.require(lambda mad_scale: mad_scale > 0, "mad_scale must be positive")
+@icontract.ensure(lambda result: result.dtype == np.int64 and np.all(np.diff(result) >= 0), "events must be sorted int64 indices")
 def reject_outlier_intervals(
     events: np.ndarray,
     sampling_rate: float | int,
@@ -400,15 +443,25 @@ def reject_outlier_intervals(
     intervals = np.diff(idx).astype(np.float64)
     median_ivl = float(np.median(intervals))
     mad_ivl = float(np.median(np.abs(intervals - median_ivl)))
-    if mad_ivl < 1e-10:
+    tolerance = max(1.0, mad_scale * mad_ivl)
+    lo = max(1.0, median_ivl - tolerance)
+    hi = median_ivl + tolerance
+    good = (intervals >= lo) & (intervals <= hi)
+    if bool(good.all()):
         return idx
 
-    lo = max(1.0, median_ivl - mad_scale * mad_ivl)
-    hi = median_ivl + mad_scale * mad_ivl
-    good = (intervals >= lo) & (intervals <= hi)
     keep = np.ones(idx.size, dtype=bool)
+    candidates: list[tuple[float, int]] = []
     for i in range(1, idx.size - 1):
-        if not bool(good[i - 1]) and not bool(good[i]):
+        if bool(good[i - 1]) and bool(good[i]):
+            continue
+        merged_interval = float(idx[i + 1] - idx[i - 1])
+        merged_error = abs(merged_interval - median_ivl)
+        if merged_error <= tolerance:
+            candidates.append((merged_error, i))
+
+    for _, i in sorted(candidates):
+        if keep[i - 1] and keep[i + 1]:
             keep[i] = False
     return idx[keep]
 
