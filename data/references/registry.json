@@ -1,0 +1,280 @@
+{
+  "schema_version": "1.0",
+  "references": {
+    "feli2023pipeline": {
+      "ref_id": "feli2023pipeline",
+      "type": "paper",
+      "title": "End-to-End PPG Processing Pipeline for Wearables: From Quality Assessment and Motion Artifacts Removal to HR/HRV Feature Extraction",
+      "authors": [
+        "Mohammad Feli",
+        "Kianoosh Kazemi",
+        "Iman Azimi",
+        "Yuning Wang",
+        "Amir Rahmani",
+        "Pasi Liljeberg"
+      ],
+      "year": 2023,
+      "venue": "2023 IEEE International Conference on Bioinformatics and Biomedicine (BIBM)",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Primary pipeline paper cited by the upstream E2E-PPG repository."
+      },
+      "url": "https://ieeexplore.ieee.org/document/10423165"
+    },
+    "kazemi2022ppg": {
+      "ref_id": "kazemi2022ppg",
+      "type": "paper",
+      "title": "Robust PPG Peak Detection Using Dilated Convolutional Neural Networks",
+      "authors": [
+        "Kianoosh Kazemi",
+        "Juho Laitala",
+        "Iman Azimi",
+        "Pasi Liljeberg",
+        "Amir M. Rahmani"
+      ],
+      "year": 2022,
+      "venue": "Sensors",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "E2E-PPG peak detection paper cited by the upstream repository."
+      },
+      "doi": "10.3390/s22166054",
+      "url": "https://doi.org/10.3390/s22166054"
+    },
+    "neurokit2021": {
+      "ref_id": "neurokit2021",
+      "type": "paper",
+      "title": "NeuroKit2: A Python toolbox for neurophysiological signal processing",
+      "authors": [
+        "Dominique Makowski",
+        "Tam Pham",
+        "Zen J. Lau",
+        "Jan C. Brammer",
+        "Fran\u00e7ois Lespinasse",
+        "Hung Pham",
+        "Christopher Sch\u00f6lzel",
+        "S. H. Annabel Chen"
+      ],
+      "year": 2021,
+      "venue": "Behavior Research Methods",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Preferred NeuroKit2 citation from upstream CITATION.cff."
+      },
+      "doi": "10.3758/s13428-020-01516-y",
+      "url": "https://doi.org/10.3758/s13428-020-01516-y"
+    },
+    "oppenheim2009dtsp": {
+      "ref_id": "oppenheim2009dtsp",
+      "type": "book",
+      "title": "Discrete-Time Signal Processing",
+      "authors": [
+        "Alan V. Oppenheim",
+        "Ronald W. Schafer"
+      ],
+      "year": 2009,
+      "venue": "Pearson",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Authoritative reference for discrete-time filtering, Parseval energy conservation, and inverse reconstruction diagnostics."
+      },
+      "url": "https://www.pearson.com/us/higher-education/program/Oppenheim-Discrete-Time-Signal-Processing-3rd-Edition/PGM212808.html"
+    },
+    "repo_biosppy": {
+      "ref_id": "repo_biosppy",
+      "type": "repository",
+      "title": "BioSPPy",
+      "authors": [],
+      "year": null,
+      "venue": "GitHub",
+      "url": "https://github.com/PIA-Group/BioSPPy",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Repository citation for the upstream implementation used by this atom."
+      }
+    },
+    "repo_e2e_ppg": {
+      "ref_id": "repo_e2e_ppg",
+      "type": "repository",
+      "title": "E2E-PPG",
+      "authors": [],
+      "year": null,
+      "venue": "GitHub",
+      "url": "https://github.com/HealthSciTech/E2E-PPG",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Repository citation for the upstream implementation used by this atom."
+      }
+    },
+    "repo_neurokit2": {
+      "ref_id": "repo_neurokit2",
+      "type": "repository",
+      "title": "NeuroKit2",
+      "authors": [],
+      "year": null,
+      "venue": "GitHub",
+      "url": "https://github.com/neuropsychology/NeuroKit",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Repository citation for the upstream implementation used by this atom."
+      }
+    },
+    "scipy2020": {
+      "ref_id": "scipy2020",
+      "type": "paper",
+      "title": "SciPy 1.0: fundamental algorithms for scientific computing in Python",
+      "authors": [
+        "Pauli Virtanen",
+        "Ralf Gommers",
+        "Travis E. Oliphant",
+        "Matt Haberland",
+        "Tyler Reddy",
+        "David Cournapeau",
+        "Evgeni Burovski",
+        "Pearu Peterson",
+        "Warren Weckesser",
+        "Jonathan Bright",
+        "St\u00e9fan J. van der Walt",
+        "Matthew Brett",
+        "Joshua Wilson",
+        "K. Jarrod Millman",
+        "Nikolay Mayorov",
+        "Andrew R. J. Nelson",
+        "Eric Jones",
+        "Robert Kern",
+        "Eric Larson",
+        "C J Carey",
+        "\u0130lhan Polat",
+        "Yu Feng",
+        "Eric W. Moore",
+        "Jake VanderPlas",
+        "Denis Laxalde",
+        "Josef Perktold",
+        "Robert Cimrman",
+        "Ian Henriksen",
+        "E. A. Quintero",
+        "Charles R. Harris",
+        "Anne M. Archibald",
+        "Antony H. Ribeiro",
+        "Fabian Pedregosa",
+        "Paul van Mulbregt",
+        "SciPy 1.0 Contributors"
+      ],
+      "year": 2020,
+      "venue": "Nature Methods",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Canonical SciPy software paper."
+      },
+      "doi": "10.1038/s41592-019-0686-2",
+      "url": "https://doi.org/10.1038/s41592-019-0686-2"
+    },
+    "shuman2013gsp": {
+      "ref_id": "shuman2013gsp",
+      "type": "paper",
+      "title": "The Emerging Field of Signal Processing on Graphs: Extending High-Dimensional Data Analysis to Networks and Other Irregular Domains",
+      "authors": [
+        "David I. Shuman",
+        "Sunil K. Narang",
+        "Pascal Frossard",
+        "Antonio Ortega",
+        "Pierre Vandergheynst"
+      ],
+      "year": 2013,
+      "venue": "IEEE Signal Processing Magazine",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Canonical graph signal processing reference for graph connectivity, Laplacian spectra, and graph filter behavior."
+      },
+      "doi": "10.1109/MSP.2012.2235192",
+      "url": "https://doi.org/10.1109/MSP.2012.2235192"
+    },
+    "thuraisingham2006_rr_preprocessing": {
+      "ref_id": "thuraisingham2006_rr_preprocessing",
+      "type": "paper",
+      "title": "Preprocessing RR interval time series for heart rate variability analysis and estimates of standard deviation of RR intervals",
+      "authors": [
+        "Ranjit A. Thuraisingham"
+      ],
+      "year": 2006,
+      "venue": "Computer Methods and Programs in Biomedicine",
+      "url": "https://doi.org/10.1016/J.CMPB.2006.05.002",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Reference for RR-interval preprocessing and artifact filtering when reviewing local ECG interval-cleaning helpers."
+      }
+    },
+    "wang2022ppg": {
+      "ref_id": "wang2022ppg",
+      "type": "paper",
+      "title": "PPG Signal Reconstruction Using Deep Convolutional Generative Adversarial Network",
+      "authors": [
+        "Yuning Wang",
+        "Iman Azimi",
+        "Kianoosh Kazemi",
+        "Amir M. Rahmani",
+        "Pasi Liljeberg"
+      ],
+      "year": 2022,
+      "venue": "2022 44th Annual International Conference of the IEEE Engineering in Medicine & Biology Society (EMBC)",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "E2E-PPG reconstruction paper cited by the upstream repository."
+      },
+      "url": "https://ieeexplore.ieee.org/document/9870821"
+    },
+    "zhao2018ecgsqi": {
+      "ref_id": "zhao2018ecgsqi",
+      "type": "paper",
+      "title": "SQI quality evaluation mechanism of single-lead ECG signal based on simple heuristic fusion and fuzzy comprehensive evaluation",
+      "authors": [
+        "Zhao Zhao",
+        "Yuanting Zhang"
+      ],
+      "year": 2018,
+      "venue": "Frontiers in Physiology",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Exact SQI paper named in the upstream BioSPPy ZZ2018 implementation."
+      },
+      "doi": "10.3389/fphys.2018.00727",
+      "url": "https://doi.org/10.3389/fphys.2018.00727"
+    }
+  }
+}
