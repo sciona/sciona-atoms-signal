@@ -1,0 +1,134 @@
+[
+  {
+    "pdg_node": {
+      "predicate_id": "detect_heart_cycles",
+      "statement": "(ppg: np.ndarray, sampling_rate: float) -> np.ndarray",
+      "informal_desc": "Detect heart-cycle boundaries in a PPG waveform using the upstream E2E-PPG SQA routine.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "detect_heart_cycles",
+          "type_signature": "(ppg: np.ndarray, sampling_rate: float) -> np.ndarray",
+          "docstring": "Detect heart-cycle boundaries in a PPG waveform using the upstream E2E-PPG SQA routine.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "detect_heart_cycles",
+          "type_signature": "(ppg: np.ndarray, sampling_rate: float) -> np.ndarray",
+          "docstring": "Detect heart-cycle boundaries in a PPG waveform using the upstream E2E-PPG SQA routine.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "detect_heart_cycles",
+            "type_signature": "(ppg: np.ndarray, sampling_rate: float) -> np.ndarray",
+            "docstring": "Detect heart-cycle boundaries in a PPG waveform using the upstream E2E-PPG SQA routine.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  },
+  {
+    "pdg_node": {
+      "predicate_id": "heart_cycle_detection",
+      "statement": "(ppg: np.ndarray, sampling_rate: float) -> np.ndarray",
+      "informal_desc": "Alias the upstream E2E-PPG heart-cycle detector under the source routine name.",
+      "prover": "python",
+      "context": {}
+    },
+    "verified_match": {
+      "candidate": {
+        "declaration": {
+          "name": "heart_cycle_detection",
+          "type_signature": "(ppg: np.ndarray, sampling_rate: float) -> np.ndarray",
+          "docstring": "Alias the upstream E2E-PPG heart-cycle detector under the source routine name.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      },
+      "verified": true,
+      "compiler_output": "",
+      "proof_term": "",
+      "error_message": "",
+      "verification_level": "type_checked"
+    },
+    "all_candidates": [
+      {
+        "declaration": {
+          "name": "heart_cycle_detection",
+          "type_signature": "(ppg: np.ndarray, sampling_rate: float) -> np.ndarray",
+          "docstring": "Alias the upstream E2E-PPG heart-cycle detector under the source routine name.",
+          "conceptual_summary": "",
+          "source_lib": "ingester",
+          "prover": "python",
+          "raw_code": ""
+        },
+        "score": 1.0,
+        "retrieval_method": "ingester"
+      }
+    ],
+    "all_verifications": [
+      {
+        "candidate": {
+          "declaration": {
+            "name": "heart_cycle_detection",
+            "type_signature": "(ppg: np.ndarray, sampling_rate: float) -> np.ndarray",
+            "docstring": "Alias the upstream E2E-PPG heart-cycle detector under the source routine name.",
+            "conceptual_summary": "",
+            "source_lib": "ingester",
+            "prover": "python",
+            "raw_code": ""
+          },
+          "score": 1.0,
+          "retrieval_method": "ingester"
+        },
+        "verified": true,
+        "compiler_output": "",
+        "proof_term": "",
+        "error_message": "",
+        "verification_level": "type_checked"
+      }
+    ]
+  }
+]

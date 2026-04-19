@@ -1,0 +1,109 @@
+{
+  "nodes": [
+    {
+      "node_id": "heart_cycle_root",
+      "parent_id": null,
+      "name": "HeartCycleDetectionFamily",
+      "description": "Canonical CDG for the E2E-PPG heart-cycle detection wrappers.",
+      "concept_type": "custom",
+      "inputs": [],
+      "outputs": [],
+      "status": "decomposed",
+      "children": [
+        "detect_heart_cycles",
+        "heart_cycle_detection"
+      ],
+      "depth": 0,
+      "type_signature": "",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "detect_heart_cycles",
+      "parent_id": "heart_cycle_root",
+      "name": "DetectHeartCycles",
+      "description": "Detect heart-cycle boundaries in a PPG waveform using the upstream E2E-PPG SQA routine.",
+      "concept_type": "analysis",
+      "inputs": [
+        {
+          "name": "ppg",
+          "type_desc": "np.ndarray",
+          "constraints": "time-domain PPG waveform"
+        },
+        {
+          "name": "sampling_rate",
+          "type_desc": "float|int",
+          "constraints": "numeric sampling rate"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "heart_cycles",
+          "type_desc": "np.ndarray",
+          "constraints": "heart-cycle boundary or segment representation returned by upstream E2E-PPG"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(ppg: np.ndarray, sampling_rate: float) -> np.ndarray",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "heart_cycle_detection",
+      "parent_id": "heart_cycle_root",
+      "name": "HeartCycleDetection",
+      "description": "Alias the upstream E2E-PPG heart-cycle detector under the source routine name.",
+      "concept_type": "analysis",
+      "inputs": [
+        {
+          "name": "ppg",
+          "type_desc": "np.ndarray",
+          "constraints": "time-domain PPG waveform"
+        },
+        {
+          "name": "sampling_rate",
+          "type_desc": "float|int",
+          "constraints": "positive numeric sampling rate"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "heart_cycles",
+          "type_desc": "np.ndarray",
+          "constraints": "heart-cycle boundary or segment representation returned by upstream E2E-PPG"
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(ppg: np.ndarray, sampling_rate: float) -> np.ndarray",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    }
+  ],
+  "edges": [],
+  "metadata": {
+    "source": "manual_compaction",
+    "family": "e2e_ppg_heart_cycle"
+  }
+}

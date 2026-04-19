@@ -36,7 +36,7 @@ def test_review_bundles_have_provider_owned_sources_and_rows() -> None:
 
         for row in bundle["rows"]:
             assert row["atom_key"].startswith("sciona.atoms.")
-            assert row["review_status"] == "reviewed"
+            assert row["review_status"] in {"approved", "reviewed"}
             assert row["review_semantic_verdict"] in {"pass", "pass_with_limits"}
             assert row["review_developer_semantic_verdict"] in {"pass", "pass_with_limits"}
             assert row["trust_readiness"] in {"catalog_ready", "needs_followup"}

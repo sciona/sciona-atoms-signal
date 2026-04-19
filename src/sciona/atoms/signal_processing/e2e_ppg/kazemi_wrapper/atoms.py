@@ -6,8 +6,8 @@ import numpy as np
 import icontract
 from sciona.ghost.registry import register_atom
 
+from .._vendor import load_e2e_ppg_module
 from .witnesses import witness_wrapperpredictionsignalcomputation, witness_signalarraynormalization
-from kazemi_peak_detection import normalize
 
 
 @register_atom(witness_wrapperpredictionsignalcomputation)
@@ -40,4 +40,5 @@ def signalarraynormalization(arr: np.ndarray) -> np.ndarray:
     Returns:
         Normalized array with same shape as input.
     """
-    return normalize(arr)
+    module = load_e2e_ppg_module("kazemi_peak_detection")
+    return module.normalize(arr)

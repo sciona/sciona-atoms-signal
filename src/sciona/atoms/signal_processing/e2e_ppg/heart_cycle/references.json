@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "atoms": {
-    "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.signalarraynormalization@sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper/atoms.py:34": {
+    "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.detect_heart_cycles@sciona/atoms/signal_processing/e2e_ppg/heart_cycle/atoms.py:18": {
       "references": [
         {
           "ref_id": "kazemi2022ppg",
@@ -10,7 +10,7 @@
             "match_type": "manual",
             "matched_nodes": [],
             "confidence": "high",
-            "notes": "E2E-PPG normalization attribution for the Kazemi peak-detection wrapper."
+            "notes": "E2E-PPG heart-cycle detection attribution."
           }
         },
         {
@@ -36,7 +36,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapperpredictionsignalcomputation@sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper/atoms.py:17": {
+    "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.heart_cycle_detection@sciona/atoms/signal_processing/e2e_ppg/heart_cycle/atoms.py:32": {
       "references": [
         {
           "ref_id": "kazemi2022ppg",
@@ -45,7 +45,7 @@
             "match_type": "manual",
             "matched_nodes": [],
             "confidence": "high",
-            "notes": "Intended E2E-PPG peak-detection attribution; this atom is held pending semantic repair of the local implementation."
+            "notes": "E2E-PPG heart-cycle detection attribution."
           }
         },
         {
