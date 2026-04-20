@@ -1,0 +1,148 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "sciona.atoms.signal.review_bundle.biosppy_svm_proc.core.v1",
+  "provider_repo": "sciona-atoms-signal",
+  "family_batch": "biosppy_svm_proc",
+  "review_status": "reviewed",
+  "review_semantic_verdict": "pass",
+  "review_developer_semantic_verdict": "pass",
+  "trust_readiness": "catalog_ready",
+  "authoritative_sources": [
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_biosppy_svm_proc.py"
+    }
+  ],
+  "limitations": [
+    "Behavior was promoted only for the BioSPPy biometrics helper surface covered by direct upstream comparison tests."
+  ],
+  "blocking_findings": [],
+  "required_actions": [],
+  "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json",
+  "rows": [
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.get_auth_rates",
+      "review_status": "approved",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+        "tests/test_biosppy_svm_proc.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.get_id_rates",
+      "review_status": "approved",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+        "tests/test_biosppy_svm_proc.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.get_subject_results",
+      "review_status": "approved",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+        "tests/test_biosppy_svm_proc.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.assess_classification",
+      "review_status": "approved",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+        "tests/test_biosppy_svm_proc.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.assess_runs",
+      "review_status": "approved",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+        "tests/test_biosppy_svm_proc.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.combination",
+      "review_status": "approved",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+        "tests/test_biosppy_svm_proc.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.majority_rule",
+      "review_status": "approved",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+        "tests/test_biosppy_svm_proc.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.cross_validation",
+      "review_status": "approved",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+        "tests/test_biosppy_svm_proc.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
+    }
+  ]
+}

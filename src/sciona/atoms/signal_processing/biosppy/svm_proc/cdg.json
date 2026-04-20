@@ -35,42 +35,42 @@
     {
       "node_id": "get_auth_rates",
       "parent_id": "SVM_root",
-      "name": "Get Auth Rates",
+      "name": "get_auth_rates",
       "description": "Compute authentication rates from the confusion matrix.\n\nParameters\n----------\nTP : array\n    True Positive counts for each classifier threshold.\nFP : array\n    False Positive counts for each classifier threshold.\nTN : array\n    True Negative counts for each classifier threshold.\nFN : array\n    False Negative counts for each classifier threshold.\nthresholds : array\n    Classifier thresholds.\n\nReturns\n-------\nAcc : array\n    Accuracy at each classifier threshold.\nTAR : array\n    True Accept Rate at each classifier threshold.\nFAR : array\n    False Accept Rate at each classifier threshold.\nFRR : array\n    False Reject Rate at each classifier threshold.\nTRR : array\n    True Reject Rate at each classifier threshold.\nEER : array\n    Equal Error Rate points, with format (threshold, rate).\nErr : array\n    Error rate at each classifier threshold.\nPPV : array\n    Positive Predictive Value at each classifier threshold.\nFDR : array\n    False Discovery Rate at each classifier threshold.\nNPV : array\n    Negative Predictive Value at each classifier threshold.\nFOR : array\n    False Omission Rate at each classifier threshold.\nMCC : array\n    Matthrews Correlation Coefficient at each classifier threshold.",
       "concept_type": "custom",
       "inputs": [
         {
           "name": "TP",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "valid NDArray[np.float64]",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "FP",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "valid NDArray[np.float64]",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "TN",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "valid NDArray[np.float64]",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "FN",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "valid NDArray[np.float64]",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "thresholds",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "valid NDArray[np.float64]",
           "required": true,
           "default_value_repr": ""
         }
@@ -78,8 +78,8 @@
       "outputs": [
         {
           "name": "result",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "dict[str, object]",
+          "constraints": "valid dict[str, object]",
           "required": true,
           "default_value_repr": ""
         }
@@ -87,7 +87,7 @@
       "status": "atomic",
       "children": [],
       "depth": 1,
-      "type_signature": "(TP: Any, FP: Any, TN: Any, FN: Any, thresholds: Any) -> Any",
+      "type_signature": "(TP: NDArray[np.float64], FP: NDArray[np.float64], TN: NDArray[np.float64], FN: NDArray[np.float64], thresholds: NDArray[np.float64]) -> dict[str, object]",
       "matched_primitive": null,
       "primitive_binding_confidence": 0.0,
       "primitive_binding_source": "",
@@ -102,42 +102,42 @@
     {
       "node_id": "get_id_rates",
       "parent_id": "SVM_root",
-      "name": "Get Id Rates",
+      "name": "get_id_rates",
       "description": "Compute identification rates from the confusion matrix.\n\nParameters\n----------\nH : array\n    Hit counts for each classifier threshold.\nM : array\n    Miss counts for each classifier threshold.\nR : array\n    Reject counts for each classifier threshold.\nN : int\n    Number of test samples.\nthresholds : array\n    Classifier thresholds.\n\nReturns\n-------\nAcc : array\n    Accuracy at each classifier threshold.\nErr : array\n    Error rate at each classifier threshold.\nMR : array\n    Miss Rate at each classifier threshold.\nRR : array\n    Reject Rate at each classifier threshold.\nEID : array\n    Error of Identification points, with format (threshold, rate).\nEER : array\n    Equal Error Rate points, with format (threshold, rate).",
       "concept_type": "custom",
       "inputs": [
         {
           "name": "H",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "valid NDArray[np.float64]",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "M",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "valid NDArray[np.float64]",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "R",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "valid NDArray[np.float64]",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "N",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "int",
+          "constraints": "valid int",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "thresholds",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "valid NDArray[np.float64]",
           "required": true,
           "default_value_repr": ""
         }
@@ -145,8 +145,8 @@
       "outputs": [
         {
           "name": "result",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "dict[str, object]",
+          "constraints": "valid dict[str, object]",
           "required": true,
           "default_value_repr": ""
         }
@@ -154,7 +154,7 @@
       "status": "atomic",
       "children": [],
       "depth": 1,
-      "type_signature": "(H: Any, M: Any, R: Any, N: Any, thresholds: Any) -> Any",
+      "type_signature": "(H: NDArray[np.float64], M: NDArray[np.float64], R: NDArray[np.float64], N: int, thresholds: NDArray[np.float64]) -> dict[str, object]",
       "matched_primitive": null,
       "primitive_binding_confidence": 0.0,
       "primitive_binding_source": "",
@@ -169,49 +169,49 @@
     {
       "node_id": "get_subject_results",
       "parent_id": "SVM_root",
-      "name": "Get Subject Results",
+      "name": "get_subject_results",
       "description": "Compute authentication and identification performance metrics for a\ngiven subject.\n\nParameters\n----------\nresults : dict\n    Classification results.\nsubject : hashable\n    True subject label.\nthresholds : array\n    Classifier thresholds.\nsubjects : list\n    Target subject classes.\nsubject_dict : bidict\n    Subject-label conversion dictionary.\nsubject_idx : list\n    Subject index.\n\nReturns\n-------\nassessment : dict\n    Authentication and identification results.",
       "concept_type": "custom",
       "inputs": [
         {
           "name": "results",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "dict[str, object]",
+          "constraints": "valid dict[str, object]",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "subject",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "Hashable",
+          "constraints": "valid Hashable",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "thresholds",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "valid NDArray[np.float64]",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "subjects",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "Sequence[Hashable]",
+          "constraints": "valid Sequence[Hashable]",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "subject_dict",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "bidict[Hashable, int]",
+          "constraints": "valid bidict[Hashable, int]",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "subject_idx",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "Sequence[int]",
+          "constraints": "valid Sequence[int]",
           "required": true,
           "default_value_repr": ""
         }
@@ -219,8 +219,8 @@
       "outputs": [
         {
           "name": "result",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "dict[str, object]",
+          "constraints": "valid dict[str, object]",
           "required": true,
           "default_value_repr": ""
         }
@@ -228,7 +228,7 @@
       "status": "atomic",
       "children": [],
       "depth": 1,
-      "type_signature": "(results: Any, subject: Any, thresholds: Any, subjects: Any, subject_dict: Any, subject_idx: Any) -> Any",
+      "type_signature": "(results: dict[str, object], subject: Hashable, thresholds: NDArray[np.float64], subjects: Sequence[Hashable], subject_dict: bidict[Hashable, int], subject_idx: Sequence[int]) -> dict[str, object]",
       "matched_primitive": null,
       "primitive_binding_confidence": 0.0,
       "primitive_binding_source": "",
@@ -243,21 +243,21 @@
     {
       "node_id": "assess_classification",
       "parent_id": "SVM_root",
-      "name": "Assess Classification",
+      "name": "assess_classification",
       "description": "Assess the performance of a biometric classification test.\n\nParameters\n----------\nresults : dict\n    Classification results.\nthresholds : array\n    Classifier thresholds.\n\nReturns\n-------\nassessment : dict\n    Classification assessment.",
       "concept_type": "custom",
       "inputs": [
         {
           "name": "results",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "dict[str, object]",
+          "constraints": "valid dict[str, object]",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "thresholds",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "valid NDArray[np.float64]",
           "required": true,
           "default_value_repr": ""
         }
@@ -265,8 +265,8 @@
       "outputs": [
         {
           "name": "result",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "dict[str, object]",
+          "constraints": "valid dict[str, object]",
           "required": true,
           "default_value_repr": ""
         }
@@ -274,7 +274,7 @@
       "status": "atomic",
       "children": [],
       "depth": 1,
-      "type_signature": "(results: Any, thresholds: Any) -> Any",
+      "type_signature": "(results: dict[str, object], thresholds: NDArray[np.float64]) -> dict[str, object]",
       "matched_primitive": null,
       "primitive_binding_confidence": 0.0,
       "primitive_binding_source": "",
@@ -289,21 +289,21 @@
     {
       "node_id": "assess_runs",
       "parent_id": "SVM_root",
-      "name": "Assess Runs",
+      "name": "assess_runs",
       "description": "Assess the performance of multiple biometric classification runs.\n\nParameters\n----------\nresults : list\n    Classification assessment for each run.\nsubjects : list\n    Common target subject classes.\n\nReturns\n-------\nassessment : dict\n    Global classification assessment.",
       "concept_type": "custom",
       "inputs": [
         {
           "name": "results",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "Sequence[dict[str, object]]",
+          "constraints": "valid Sequence[dict[str, object]]",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "subjects",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "Sequence[Hashable]",
+          "constraints": "valid Sequence[Hashable]",
           "required": true,
           "default_value_repr": ""
         }
@@ -311,8 +311,8 @@
       "outputs": [
         {
           "name": "result",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "dict[str, object]",
+          "constraints": "valid dict[str, object]",
           "required": true,
           "default_value_repr": ""
         }
@@ -320,7 +320,7 @@
       "status": "atomic",
       "children": [],
       "depth": 1,
-      "type_signature": "(results: Any, subjects: Any) -> Any",
+      "type_signature": "(results: Sequence[dict[str, object]], subjects: Sequence[Hashable]) -> dict[str, object]",
       "matched_primitive": null,
       "primitive_binding_confidence": 0.0,
       "primitive_binding_source": "",
@@ -335,30 +335,30 @@
     {
       "node_id": "combination",
       "parent_id": "SVM_root",
-      "name": "Combination",
+      "name": "combination",
       "description": "Combine results from multiple classifiers.\n\nParameters\n----------\nresults : dict\n    Results for each classifier.\nweights : dict, optional\n    Weight for each classifier.\n\nReturns\n-------\ndecision : object\n    Consensus decision.\nconfidence : float\n    Confidence estimate of the decision.\ncounts : array\n    Weight for each possible decision outcome.\nclasses : array\n    List of possible decision outcomes.",
       "concept_type": "custom",
       "inputs": [
         {
           "name": "results",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "Mapping[Hashable, Sequence[object] | NDArray]",
+          "constraints": "valid Mapping[Hashable, Sequence[object] | NDArray]",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "weights",
-          "type_desc": "Any",
-          "constraints": "valid Any",
-          "required": true,
-          "default_value_repr": ""
+          "type_desc": "Mapping[Hashable, float] | None",
+          "constraints": "valid Mapping[Hashable, float] | None",
+          "required": false,
+          "default_value_repr": "None"
         }
       ],
       "outputs": [
         {
           "name": "result",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "tuple[object, object, object, object]",
+          "constraints": "valid tuple[object, object, object, object]",
           "required": true,
           "default_value_repr": ""
         }
@@ -366,7 +366,7 @@
       "status": "atomic",
       "children": [],
       "depth": 1,
-      "type_signature": "(results: Any, weights: Any) -> Any",
+      "type_signature": "(results: Mapping[Hashable, Sequence[object] | NDArray], weights: Mapping[Hashable, float] | None = None) -> tuple[object, object, object, object]",
       "matched_primitive": null,
       "primitive_binding_confidence": 0.0,
       "primitive_binding_source": "",
@@ -381,21 +381,21 @@
     {
       "node_id": "majority_rule",
       "parent_id": "SVM_root",
-      "name": "Majority Rule",
+      "name": "majority_rule",
       "description": "Determine the most frequent class label.\n\nParameters\n----------\nlabels : array, list\n    List of clas labels.\nrandom : bool, optional\n    If True, will choose randomly in case of tied classes, otherwise the\n    first element is chosen.\n\nReturns\n-------\n    decision : object\n        Consensus decision.\n    count : int\n        Number of elements of the consensus decision.",
       "concept_type": "custom",
       "inputs": [
         {
           "name": "labels",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "NDArray | Sequence[object]",
+          "constraints": "valid NDArray | Sequence[object]",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "random",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "bool",
+          "constraints": "valid bool",
           "required": true,
           "default_value_repr": ""
         }
@@ -403,8 +403,8 @@
       "outputs": [
         {
           "name": "result",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "tuple[object, object]",
+          "constraints": "valid tuple[object, object]",
           "required": true,
           "default_value_repr": ""
         }
@@ -412,7 +412,7 @@
       "status": "atomic",
       "children": [],
       "depth": 1,
-      "type_signature": "(labels: Any, random: Any) -> Any",
+      "type_signature": "(labels: NDArray | Sequence[object], random: bool) -> tuple[object, object]",
       "matched_primitive": null,
       "primitive_binding_confidence": 0.0,
       "primitive_binding_source": "",
@@ -427,51 +427,51 @@
     {
       "node_id": "cross_validation",
       "parent_id": "SVM_root",
-      "name": "Cross Validation",
+      "name": "cross_validation",
       "description": "Return a Cross Validation (CV) iterator.\n\nWraps the StratifiedShuffleSplit iterator from sklearn.model_selection.\nThis iterator returns stratified randomized folds, which preserve the\npercentage of samples for each class.\n\nParameters\n----------\nlabels : list, array\n    List of class labels for each data sample.\nn_iter : int, optional\n    Number of splitting iterations.\ntest_size : float, int, optional\n    If float, represents the proportion of the dataset to include in the\n    test split; if int, represents the absolute number of test samples.\ntrain_size : float, int, optional\n    If float, represents the proportion of the dataset to include in the\n    train split; if int, represents the absolute number of train samples.\nrandom_state : int, RandomState, optional\n    The seed of the pseudo random number generator to use when shuffling\n    the data.\n\nReturns\n-------\ncv : CV iterator\n    Cross Validation iterator.",
       "concept_type": "custom",
       "inputs": [
         {
           "name": "labels",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "list | NDArray",
+          "constraints": "valid list | NDArray",
           "required": true,
           "default_value_repr": ""
         },
         {
           "name": "n_iter",
-          "type_desc": "Any",
-          "constraints": "valid Any",
-          "required": true,
-          "default_value_repr": ""
+          "type_desc": "int",
+          "constraints": "valid int",
+          "required": false,
+          "default_value_repr": "10"
         },
         {
           "name": "test_size",
-          "type_desc": "Any",
-          "constraints": "valid Any",
-          "required": true,
-          "default_value_repr": ""
+          "type_desc": "float | int",
+          "constraints": "valid float | int",
+          "required": false,
+          "default_value_repr": "0.1"
         },
         {
           "name": "train_size",
-          "type_desc": "Any",
-          "constraints": "valid Any",
-          "required": true,
-          "default_value_repr": ""
+          "type_desc": "float | int | None",
+          "constraints": "valid float | int | None",
+          "required": false,
+          "default_value_repr": "None"
         },
         {
           "name": "random_state",
-          "type_desc": "Any",
-          "constraints": "valid state object",
-          "required": true,
-          "default_value_repr": ""
+          "type_desc": "int | None",
+          "constraints": "valid int | None",
+          "required": false,
+          "default_value_repr": "None"
         }
       ],
       "outputs": [
         {
           "name": "result",
-          "type_desc": "Any",
-          "constraints": "valid Any",
+          "type_desc": "Iterator[tuple[NDArray[np.int64], NDArray[np.int64]]]",
+          "constraints": "valid Iterator[tuple[NDArray[np.int64], NDArray[np.int64]]]",
           "required": true,
           "default_value_repr": ""
         }
@@ -479,7 +479,7 @@
       "status": "atomic",
       "children": [],
       "depth": 1,
-      "type_signature": "(labels: Any, n_iter: Any, test_size: Any, train_size: Any, random_state: Any) -> Any",
+      "type_signature": "(labels: list | NDArray, n_iter: int = 10, test_size: float | int = 0.1, train_size: float | int | None = None, random_state: int | None = None) -> Iterator[tuple[NDArray[np.int64], NDArray[np.int64]]]",
       "matched_primitive": null,
       "primitive_binding_confidence": 0.0,
       "primitive_binding_source": "",

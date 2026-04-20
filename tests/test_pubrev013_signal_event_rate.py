@@ -134,3 +134,15 @@ def test_pubrev013_remediated_helpers_handle_zero_mad_edge_cases() -> None:
         reject_outlier_intervals(zero_mad_extra_event, 100.0),
         np.array([0, 100, 200, 300, 400], dtype=np.int64),
     )
+
+    midpoint_extra_event = np.array([0, 100, 150, 200, 300], dtype=np.int64)
+    np.testing.assert_array_equal(
+        reject_outlier_intervals(midpoint_extra_event, 100.0),
+        np.array([0, 100, 200, 300], dtype=np.int64),
+    )
+
+    missed_event_gap = np.array([0, 100, 300, 400], dtype=np.int64)
+    np.testing.assert_array_equal(
+        reject_outlier_intervals(missed_event_gap, 100.0),
+        missed_event_gap,
+    )

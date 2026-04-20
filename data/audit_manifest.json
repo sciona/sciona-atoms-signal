@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "metadata": {
-    "generated_at": "2026-04-19T23:58:56.236557+00:00",
+    "generated_at": "2026-04-20T13:01:06.638944+00:00",
     "generator": "scripts/apply_audit_review_bundles.py",
     "phase": "phase_1_review_bundle_merge"
   },
@@ -1980,7 +1980,7 @@
       "parity_coverage_level": "positive_and_negative",
       "parity_test_status": "pass",
       "parity_fixture_count": 2,
-      "parity_case_count": 3,
+      "parity_case_count": 5,
       "required_actions": [],
       "blocking_findings": [],
       "review_record_path": "data/review_bundles/signal_expansion.review_bundle.json",
@@ -6367,6 +6367,657 @@
       "required_actions": [],
       "blocking_findings": [],
       "review_record_path": "data/review_bundles/biosppy_online_filter.review_bundle.json"
+    },
+    {
+      "atom_name": "sciona.atoms.signal_processing.biosppy.svm_proc.assess_classification",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.assess_classification",
+      "atom_id": "sciona.atoms.signal_processing.biosppy.svm_proc.assess_classification",
+      "module_import_path": "sciona.atoms.signal_processing.biosppy.svm_proc",
+      "module_path": "/Users/conrad/personal/sciona-atoms-signal/src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+      "module_family": "biosppy",
+      "domain_family": "signal_processing.biosppy",
+      "wrapper_symbol": "assess_classification",
+      "argument_names": [
+        "results",
+        "thresholds"
+      ],
+      "argument_details": [
+        {
+          "name": "results",
+          "annotation": "dict[str, object]",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "thresholds",
+          "annotation": "np.ndarray",
+          "required": true,
+          "kind": "positional_or_keyword"
+        }
+      ],
+      "uses_varargs": false,
+      "uses_kwargs": false,
+      "return_annotation": "dict[str, object]",
+      "docstring_summary": "Assess the performance of a biometric classification test.",
+      "has_docstring": true,
+      "authoritative_sources": [
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_biosppy_svm_proc.py"
+        }
+      ],
+      "source_kind": "hand_written",
+      "review_status": "approved",
+      "review_priority": "review_now",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantics_verdict": "pass",
+      "trust_readiness": "reviewed_with_limits",
+      "review_required_actions": [],
+      "review_limitations": [],
+      "trust_blockers": [],
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "runtime_status": "pass",
+      "developer_semantics_status": "pass",
+      "overall_verdict": "acceptable_with_limits",
+      "risk_tier": "low",
+      "risk_score": 0,
+      "risk_dimensions": {},
+      "risk_reasons": [],
+      "acceptability_score": 70,
+      "acceptability_band": "acceptable_with_limits_candidate",
+      "parity_coverage_level": "unknown",
+      "parity_test_status": "unknown",
+      "parity_fixture_count": 0,
+      "parity_case_count": 0,
+      "required_actions": [],
+      "blocking_findings": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
+    },
+    {
+      "atom_name": "sciona.atoms.signal_processing.biosppy.svm_proc.assess_runs",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.assess_runs",
+      "atom_id": "sciona.atoms.signal_processing.biosppy.svm_proc.assess_runs",
+      "module_import_path": "sciona.atoms.signal_processing.biosppy.svm_proc",
+      "module_path": "/Users/conrad/personal/sciona-atoms-signal/src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+      "module_family": "biosppy",
+      "domain_family": "signal_processing.biosppy",
+      "wrapper_symbol": "assess_runs",
+      "argument_names": [
+        "results",
+        "subjects"
+      ],
+      "argument_details": [
+        {
+          "name": "results",
+          "annotation": "Sequence[dict[str, object]]",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "subjects",
+          "annotation": "Sequence[Hashable]",
+          "required": true,
+          "kind": "positional_or_keyword"
+        }
+      ],
+      "uses_varargs": false,
+      "uses_kwargs": false,
+      "return_annotation": "dict[str, object]",
+      "docstring_summary": "Assess the performance of multiple biometric classification runs.",
+      "has_docstring": true,
+      "authoritative_sources": [
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_biosppy_svm_proc.py"
+        }
+      ],
+      "source_kind": "hand_written",
+      "review_status": "approved",
+      "review_priority": "review_now",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantics_verdict": "pass",
+      "trust_readiness": "reviewed_with_limits",
+      "review_required_actions": [],
+      "review_limitations": [],
+      "trust_blockers": [],
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "runtime_status": "pass",
+      "developer_semantics_status": "pass",
+      "overall_verdict": "acceptable_with_limits",
+      "risk_tier": "low",
+      "risk_score": 0,
+      "risk_dimensions": {},
+      "risk_reasons": [],
+      "acceptability_score": 70,
+      "acceptability_band": "acceptable_with_limits_candidate",
+      "parity_coverage_level": "unknown",
+      "parity_test_status": "unknown",
+      "parity_fixture_count": 0,
+      "parity_case_count": 0,
+      "required_actions": [],
+      "blocking_findings": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
+    },
+    {
+      "atom_name": "sciona.atoms.signal_processing.biosppy.svm_proc.combination",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.combination",
+      "atom_id": "sciona.atoms.signal_processing.biosppy.svm_proc.combination",
+      "module_import_path": "sciona.atoms.signal_processing.biosppy.svm_proc",
+      "module_path": "/Users/conrad/personal/sciona-atoms-signal/src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+      "module_family": "biosppy",
+      "domain_family": "signal_processing.biosppy",
+      "wrapper_symbol": "combination",
+      "argument_names": [
+        "results",
+        "weights"
+      ],
+      "argument_details": [
+        {
+          "name": "results",
+          "annotation": "Mapping[Hashable, Sequence[object] | np.ndarray]",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "weights",
+          "annotation": "Mapping[Hashable, float] | None",
+          "required": false,
+          "kind": "positional_or_keyword"
+        }
+      ],
+      "uses_varargs": false,
+      "uses_kwargs": false,
+      "return_annotation": "tuple[object, object, object, object]",
+      "docstring_summary": "Combine results from multiple classifiers.",
+      "has_docstring": true,
+      "authoritative_sources": [
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_biosppy_svm_proc.py"
+        }
+      ],
+      "source_kind": "hand_written",
+      "review_status": "approved",
+      "review_priority": "review_now",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantics_verdict": "pass",
+      "trust_readiness": "reviewed_with_limits",
+      "review_required_actions": [],
+      "review_limitations": [],
+      "trust_blockers": [],
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "runtime_status": "pass",
+      "developer_semantics_status": "pass",
+      "overall_verdict": "acceptable_with_limits",
+      "risk_tier": "low",
+      "risk_score": 0,
+      "risk_dimensions": {},
+      "risk_reasons": [],
+      "acceptability_score": 70,
+      "acceptability_band": "acceptable_with_limits_candidate",
+      "parity_coverage_level": "unknown",
+      "parity_test_status": "unknown",
+      "parity_fixture_count": 0,
+      "parity_case_count": 0,
+      "required_actions": [],
+      "blocking_findings": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
+    },
+    {
+      "atom_name": "sciona.atoms.signal_processing.biosppy.svm_proc.cross_validation",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.cross_validation",
+      "atom_id": "sciona.atoms.signal_processing.biosppy.svm_proc.cross_validation",
+      "module_import_path": "sciona.atoms.signal_processing.biosppy.svm_proc",
+      "module_path": "/Users/conrad/personal/sciona-atoms-signal/src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+      "module_family": "biosppy",
+      "domain_family": "signal_processing.biosppy",
+      "wrapper_symbol": "cross_validation",
+      "argument_names": [
+        "labels",
+        "n_iter",
+        "test_size",
+        "train_size",
+        "random_state"
+      ],
+      "argument_details": [
+        {
+          "name": "labels",
+          "annotation": "Union[list, np.ndarray]",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "n_iter",
+          "annotation": "int",
+          "required": false,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "test_size",
+          "annotation": "Union[float, int]",
+          "required": false,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "train_size",
+          "annotation": "Union[float, int, None]",
+          "required": false,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "random_state",
+          "annotation": "Union[int, None]",
+          "required": false,
+          "kind": "positional_or_keyword"
+        }
+      ],
+      "uses_varargs": false,
+      "uses_kwargs": false,
+      "return_annotation": "Iterator[tuple[np.ndarray, np.ndarray]]",
+      "docstring_summary": "Return a Cross Validation (CV) iterator.",
+      "has_docstring": true,
+      "authoritative_sources": [
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_biosppy_svm_proc.py"
+        }
+      ],
+      "source_kind": "hand_written",
+      "review_status": "approved",
+      "review_priority": "review_now",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantics_verdict": "pass",
+      "trust_readiness": "reviewed_with_limits",
+      "review_required_actions": [],
+      "review_limitations": [],
+      "trust_blockers": [],
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "runtime_status": "pass",
+      "developer_semantics_status": "pass",
+      "overall_verdict": "acceptable_with_limits",
+      "risk_tier": "low",
+      "risk_score": 0,
+      "risk_dimensions": {},
+      "risk_reasons": [],
+      "acceptability_score": 70,
+      "acceptability_band": "acceptable_with_limits_candidate",
+      "parity_coverage_level": "unknown",
+      "parity_test_status": "unknown",
+      "parity_fixture_count": 0,
+      "parity_case_count": 0,
+      "required_actions": [],
+      "blocking_findings": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
+    },
+    {
+      "atom_name": "sciona.atoms.signal_processing.biosppy.svm_proc.get_auth_rates",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.get_auth_rates",
+      "atom_id": "sciona.atoms.signal_processing.biosppy.svm_proc.get_auth_rates",
+      "module_import_path": "sciona.atoms.signal_processing.biosppy.svm_proc",
+      "module_path": "/Users/conrad/personal/sciona-atoms-signal/src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+      "module_family": "biosppy",
+      "domain_family": "signal_processing.biosppy",
+      "wrapper_symbol": "get_auth_rates",
+      "argument_names": [
+        "TP",
+        "FP",
+        "TN",
+        "FN",
+        "thresholds"
+      ],
+      "argument_details": [
+        {
+          "name": "TP",
+          "annotation": "np.ndarray",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "FP",
+          "annotation": "np.ndarray",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "TN",
+          "annotation": "np.ndarray",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "FN",
+          "annotation": "np.ndarray",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "thresholds",
+          "annotation": "np.ndarray",
+          "required": true,
+          "kind": "positional_or_keyword"
+        }
+      ],
+      "uses_varargs": false,
+      "uses_kwargs": false,
+      "return_annotation": "dict[str, object]",
+      "docstring_summary": "Compute authentication rates from correct and incorrect prediction counts at each threshold.",
+      "has_docstring": true,
+      "authoritative_sources": [
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_biosppy_svm_proc.py"
+        }
+      ],
+      "source_kind": "hand_written",
+      "review_status": "approved",
+      "review_priority": "review_now",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantics_verdict": "pass",
+      "trust_readiness": "reviewed_with_limits",
+      "review_required_actions": [],
+      "review_limitations": [],
+      "trust_blockers": [],
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "runtime_status": "pass",
+      "developer_semantics_status": "pass",
+      "overall_verdict": "acceptable_with_limits",
+      "risk_tier": "low",
+      "risk_score": 0,
+      "risk_dimensions": {},
+      "risk_reasons": [],
+      "acceptability_score": 70,
+      "acceptability_band": "acceptable_with_limits_candidate",
+      "parity_coverage_level": "unknown",
+      "parity_test_status": "unknown",
+      "parity_fixture_count": 0,
+      "parity_case_count": 0,
+      "required_actions": [],
+      "blocking_findings": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
+    },
+    {
+      "atom_name": "sciona.atoms.signal_processing.biosppy.svm_proc.get_id_rates",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.get_id_rates",
+      "atom_id": "sciona.atoms.signal_processing.biosppy.svm_proc.get_id_rates",
+      "module_import_path": "sciona.atoms.signal_processing.biosppy.svm_proc",
+      "module_path": "/Users/conrad/personal/sciona-atoms-signal/src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+      "module_family": "biosppy",
+      "domain_family": "signal_processing.biosppy",
+      "wrapper_symbol": "get_id_rates",
+      "argument_names": [
+        "H",
+        "M",
+        "R",
+        "N",
+        "thresholds"
+      ],
+      "argument_details": [
+        {
+          "name": "H",
+          "annotation": "np.ndarray",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "M",
+          "annotation": "np.ndarray",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "R",
+          "annotation": "np.ndarray",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "N",
+          "annotation": "int",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "thresholds",
+          "annotation": "np.ndarray",
+          "required": true,
+          "kind": "positional_or_keyword"
+        }
+      ],
+      "uses_varargs": false,
+      "uses_kwargs": false,
+      "return_annotation": "dict[str, object]",
+      "docstring_summary": "Compute identification rates for a Support Vector Machine (SVM) biometric classifier. Derives accuracy, miss rate, reject rate, and Equal Error Rate (EER) from hits, misses, and rejections at each decision threshold.",
+      "has_docstring": true,
+      "authoritative_sources": [
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_biosppy_svm_proc.py"
+        }
+      ],
+      "source_kind": "hand_written",
+      "review_status": "approved",
+      "review_priority": "review_now",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantics_verdict": "pass",
+      "trust_readiness": "reviewed_with_limits",
+      "review_required_actions": [],
+      "review_limitations": [],
+      "trust_blockers": [],
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "runtime_status": "pass",
+      "developer_semantics_status": "pass",
+      "overall_verdict": "acceptable_with_limits",
+      "risk_tier": "low",
+      "risk_score": 0,
+      "risk_dimensions": {},
+      "risk_reasons": [],
+      "acceptability_score": 70,
+      "acceptability_band": "acceptable_with_limits_candidate",
+      "parity_coverage_level": "unknown",
+      "parity_test_status": "unknown",
+      "parity_fixture_count": 0,
+      "parity_case_count": 0,
+      "required_actions": [],
+      "blocking_findings": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
+    },
+    {
+      "atom_name": "sciona.atoms.signal_processing.biosppy.svm_proc.get_subject_results",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.get_subject_results",
+      "atom_id": "sciona.atoms.signal_processing.biosppy.svm_proc.get_subject_results",
+      "module_import_path": "sciona.atoms.signal_processing.biosppy.svm_proc",
+      "module_path": "/Users/conrad/personal/sciona-atoms-signal/src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+      "module_family": "biosppy",
+      "domain_family": "signal_processing.biosppy",
+      "wrapper_symbol": "get_subject_results",
+      "argument_names": [
+        "results",
+        "subject",
+        "thresholds",
+        "subjects",
+        "subject_dict",
+        "subject_idx"
+      ],
+      "argument_details": [
+        {
+          "name": "results",
+          "annotation": "dict[str, object]",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "subject",
+          "annotation": "Hashable",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "thresholds",
+          "annotation": "np.ndarray",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "subjects",
+          "annotation": "Sequence[Hashable]",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "subject_dict",
+          "annotation": "_SubjectDictionary",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "subject_idx",
+          "annotation": "Sequence[int]",
+          "required": true,
+          "kind": "positional_or_keyword"
+        }
+      ],
+      "uses_varargs": false,
+      "uses_kwargs": false,
+      "return_annotation": "dict[str, object]",
+      "docstring_summary": "Compute authentication and identification performance metrics for a",
+      "has_docstring": true,
+      "authoritative_sources": [
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_biosppy_svm_proc.py"
+        }
+      ],
+      "source_kind": "hand_written",
+      "review_status": "approved",
+      "review_priority": "review_now",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantics_verdict": "pass",
+      "trust_readiness": "reviewed_with_limits",
+      "review_required_actions": [],
+      "review_limitations": [],
+      "trust_blockers": [],
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "runtime_status": "pass",
+      "developer_semantics_status": "pass",
+      "overall_verdict": "acceptable_with_limits",
+      "risk_tier": "low",
+      "risk_score": 0,
+      "risk_dimensions": {},
+      "risk_reasons": [],
+      "acceptability_score": 70,
+      "acceptability_band": "acceptable_with_limits_candidate",
+      "parity_coverage_level": "unknown",
+      "parity_test_status": "unknown",
+      "parity_fixture_count": 0,
+      "parity_case_count": 0,
+      "required_actions": [],
+      "blocking_findings": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
+    },
+    {
+      "atom_name": "sciona.atoms.signal_processing.biosppy.svm_proc.majority_rule",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.svm_proc.majority_rule",
+      "atom_id": "sciona.atoms.signal_processing.biosppy.svm_proc.majority_rule",
+      "module_import_path": "sciona.atoms.signal_processing.biosppy.svm_proc",
+      "module_path": "/Users/conrad/personal/sciona-atoms-signal/src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py",
+      "module_family": "biosppy",
+      "domain_family": "signal_processing.biosppy",
+      "wrapper_symbol": "majority_rule",
+      "argument_names": [
+        "labels",
+        "random"
+      ],
+      "argument_details": [
+        {
+          "name": "labels",
+          "annotation": "Union[np.ndarray, Sequence[object]]",
+          "required": true,
+          "kind": "positional_or_keyword"
+        },
+        {
+          "name": "random",
+          "annotation": "bool",
+          "required": true,
+          "kind": "positional_or_keyword"
+        }
+      ],
+      "uses_varargs": false,
+      "uses_kwargs": false,
+      "return_annotation": "tuple[object, object]",
+      "docstring_summary": "Determine the most frequent class label.",
+      "has_docstring": true,
+      "authoritative_sources": [
+        {
+          "kind": "local_source",
+          "path": "src/sciona/atoms/signal_processing/biosppy/svm_proc/atoms.py"
+        },
+        {
+          "kind": "local_test",
+          "path": "tests/test_biosppy_svm_proc.py"
+        }
+      ],
+      "source_kind": "hand_written",
+      "review_status": "approved",
+      "review_priority": "review_now",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantics_verdict": "pass",
+      "trust_readiness": "reviewed_with_limits",
+      "review_required_actions": [],
+      "review_limitations": [],
+      "trust_blockers": [],
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "runtime_status": "pass",
+      "developer_semantics_status": "pass",
+      "overall_verdict": "acceptable_with_limits",
+      "risk_tier": "low",
+      "risk_score": 0,
+      "risk_dimensions": {},
+      "risk_reasons": [],
+      "acceptability_score": 70,
+      "acceptability_band": "acceptable_with_limits_candidate",
+      "parity_coverage_level": "unknown",
+      "parity_test_status": "unknown",
+      "parity_fixture_count": 0,
+      "parity_case_count": 0,
+      "required_actions": [],
+      "blocking_findings": [],
+      "review_record_path": "data/review_bundles/biosppy_svm_proc.review_bundle.json"
     },
     {
       "atom_name": "sciona.atoms.signal_processing.e2e_ppg.gan_reconstruction.gan_reconstruction",

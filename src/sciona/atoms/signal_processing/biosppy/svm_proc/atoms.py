@@ -3,7 +3,7 @@ from __future__ import annotations
 
 
 from collections.abc import Hashable, Iterator, Mapping, Sequence
-from typing import Union
+from typing import Protocol, Union
 import numpy as np
 
 import icontract
@@ -13,6 +13,25 @@ from .witnesses import witness_assess_classification, witness_assess_runs, witne
 
 # Witness functions should be imported from the generated witnesses module
 
+
+class _ReturnTupleLike(Protocol):
+    def as_dict(self) -> dict[str, object]:
+        """Return a named mapping for BioSPPy ReturnTuple values."""
+
+
+class _SubjectDictionary(Protocol):
+    @property
+    def inv(self) -> Mapping[object, Hashable]:
+        """Return the inverse label-to-subject mapping."""
+
+    def __getitem__(self, key: Hashable) -> int:
+        """Return the numeric classifier label for a subject."""
+
+
+def _as_dict(value: _ReturnTupleLike) -> dict[str, object]:
+    return dict(value.as_dict())
+
+
 @register_atom(witness_get_auth_rates)
 @icontract.require(lambda TP: TP is not None, "TP cannot be None")
 @icontract.require(lambda FP: FP is not None, "FP cannot be None")
@@ -20,7 +39,13 @@ from .witnesses import witness_assess_classification, witness_assess_runs, witne
 @icontract.require(lambda FN: FN is not None, "FN cannot be None")
 @icontract.require(lambda thresholds: thresholds is not None, "thresholds cannot be None")
 @icontract.ensure(lambda result: result is not None, "Get Auth Rates output must not be None")
-def get_auth_rates(TP: np.ndarray, FP: np.ndarray, TN: np.ndarray, FN: np.ndarray, thresholds: np.ndarray) -> dict:
+def get_auth_rates(
+    TP: np.ndarray,
+    FP: np.ndarray,
+    TN: np.ndarray,
+    FN: np.ndarray,
+    thresholds: np.ndarray,
+) -> dict[str, object]:
     """Compute authentication rates from correct and incorrect prediction counts at each threshold.
 
     Args:
@@ -33,11 +58,15 @@ def get_auth_rates(TP: np.ndarray, FP: np.ndarray, TN: np.ndarray, FN: np.ndarra
     Returns:
         rate metrics at each threshold
     """
-    total = TP + FP + TN + FN
-    FAR = np.where(total > 0, FP / (FP + TN + 1e-15), 0.0)  # false accept rate
-    FRR = np.where(total > 0, FN / (FN + TP + 1e-15), 0.0)  # false reject rate
-    accuracy = np.where(total > 0, (TP + TN) / total, 0.0)
-    return {"FAR": FAR, "FRR": FRR, "accuracy": accuracy, "thresholds": thresholds}
+    return _as_dict(
+        biometrics.get_auth_rates(
+            TP=TP,
+            FP=FP,
+            TN=TN,
+            FN=FN,
+            thresholds=thresholds,
+        )
+    )
 
 @register_atom(witness_get_id_rates)
 @icontract.require(lambda H: H is not None, "H cannot be None")
@@ -46,7 +75,13 @@ def get_auth_rates(TP: np.ndarray, FP: np.ndarray, TN: np.ndarray, FN: np.ndarra
 @icontract.require(lambda N: N is not None, "N cannot be None")
 @icontract.require(lambda thresholds: thresholds is not None, "thresholds cannot be None")
 @icontract.ensure(lambda result: result is not None, "Get Id Rates output must not be None")
-def get_id_rates(H: np.ndarray, M: np.ndarray, R: np.ndarray, N: int, thresholds: np.ndarray) -> dict:
+def get_id_rates(
+    H: np.ndarray,
+    M: np.ndarray,
+    R: np.ndarray,
+    N: int,
+    thresholds: np.ndarray,
+) -> dict[str, object]:
     """Compute identification rates for a Support Vector Machine (SVM) biometric classifier. Derives accuracy, miss rate, reject rate, and Equal Error Rate (EER) from hits, misses, and rejections at each decision threshold.
 
     Args:
@@ -59,11 +94,15 @@ def get_id_rates(H: np.ndarray, M: np.ndarray, R: np.ndarray, N: int, thresholds
     Returns:
         Identification performance metrics at each threshold.
     """
-    total = H + M + R
-    accuracy = np.where(total > 0, H / total, 0.0)
-    miss_rate = np.where(total > 0, M / total, 0.0)
-    reject_rate = np.where(total > 0, R / total, 0.0)
-    return {"accuracy": accuracy, "miss_rate": miss_rate, "reject_rate": reject_rate, "N": N, "thresholds": thresholds}
+    return _as_dict(
+        biometrics.get_id_rates(
+            H=H,
+            M=M,
+            R=R,
+            N=N,
+            thresholds=thresholds,
+        )
+    )
 
 @register_atom(witness_get_subject_results)
 @icontract.require(lambda results: results is not None, "results cannot be None")
@@ -78,7 +117,7 @@ def get_subject_results(
     subject: Hashable,
     thresholds: np.ndarray,
     subjects: Sequence[Hashable],
-    subject_dict: Mapping[Hashable, int],
+    subject_dict: _SubjectDictionary,
     subject_idx: Sequence[int],
 ) -> dict[str, object]:
     """Compute authentication and identification performance metrics for a
@@ -115,16 +154,23 @@ assessment : dict
     Returns:
         Result data.
     """
-    # Per-subject performance aggregation
-    auth = results.get("authentication", {})
-    ident = results.get("identification", {})
-    return {"authentication": auth, "identification": ident, "subject": subject, "thresholds": thresholds}
+    assessment = biometrics.get_subject_results(
+        results=results,
+        subject=subject,
+        thresholds=thresholds,
+        subjects=subjects,
+        subject_dict=subject_dict,
+        subject_idx=subject_idx,
+    )[0]
+    if not isinstance(assessment, dict):
+        raise TypeError("BioSPPy get_subject_results returned a non-dict assessment.")
+    return assessment
 
 @register_atom(witness_assess_classification)
 @icontract.require(lambda results: results is not None, "results cannot be None")
 @icontract.require(lambda thresholds: thresholds is not None, "thresholds cannot be None")
 @icontract.ensure(lambda result: result is not None, "Assess Classification output must not be None")
-def assess_classification(results: dict, thresholds: np.ndarray) -> dict:
+def assess_classification(results: dict[str, object], thresholds: np.ndarray) -> dict[str, object]:
     """Assess the performance of a biometric classification test.
 
 Parameters
@@ -146,14 +192,16 @@ assessment : dict
     Returns:
         Result data.
     """
-    # Classification assessment across subjects and thresholds
-    return {"results": results, "thresholds": thresholds}
+    assessment = biometrics.assess_classification(results=results, thresholds=thresholds)[0]
+    if not isinstance(assessment, dict):
+        raise TypeError("BioSPPy assess_classification returned a non-dict assessment.")
+    return assessment
 
 @register_atom(witness_assess_runs)
 @icontract.require(lambda results: results is not None, "results cannot be None")
 @icontract.require(lambda subjects: subjects is not None, "subjects cannot be None")
 @icontract.ensure(lambda result: result is not None, "Assess Runs output must not be None")
-def assess_runs(results: list, subjects: list) -> dict:
+def assess_runs(results: Sequence[dict[str, object]], subjects: Sequence[Hashable]) -> dict[str, object]:
     """Assess the performance of multiple biometric classification runs.
 
 Parameters
@@ -175,14 +223,18 @@ assessment : dict
     Returns:
         Result data.
     """
-    # Average metrics across runs
-    return {"results": results, "subjects": subjects}
+    assessment = biometrics.assess_runs(results=results, subjects=subjects)[0]
+    if not isinstance(assessment, dict):
+        raise TypeError("BioSPPy assess_runs returned a non-dict assessment.")
+    return assessment
 
 @register_atom(witness_combination)
 @icontract.require(lambda results: results is not None, "results cannot be None")
-@icontract.require(lambda weights: weights is not None, "weights cannot be None")
 @icontract.ensure(lambda result: result is not None, "Combination output must not be None")
-def combination(results: dict, weights: dict) -> tuple:
+def combination(
+    results: Mapping[Hashable, Sequence[object] | np.ndarray],
+    weights: Mapping[Hashable, float] | None = None,
+) -> tuple[object, object, object, object]:
     """Combine results from multiple classifiers.
 
 Parameters
@@ -210,24 +262,13 @@ classes : array
     Returns:
         Result data.
     """
-    # Weighted ensemble combination
-    all_decisions = []
-    all_weights = []
-    for clf, res in results.items():
-        w = weights.get(clf, 1.0) if weights else 1.0
-        all_decisions.append(res)
-        all_weights.append(w)
-    # Return weighted majority
-    classes = sorted(set(all_decisions))
-    counts = np.array([sum(w for d, w in zip(all_decisions, all_weights) if d == c) for c in classes])
-    best = classes[np.argmax(counts)]
-    return (best, float(np.max(counts) / np.sum(counts)), counts, np.array(classes))
+    return tuple(biometrics.combination(results=results, weights=weights))
 
 @register_atom(witness_majority_rule)
 @icontract.require(lambda labels: labels is not None, "labels cannot be None")
 @icontract.require(lambda random: random is not None, "random cannot be None")
 @icontract.ensure(lambda result: result is not None, "Majority Rule output must not be None")
-def majority_rule(labels: Union[np.ndarray, list], random: bool) -> tuple:
+def majority_rule(labels: Union[np.ndarray, Sequence[object]], random: bool) -> tuple[object, object]:
     """Determine the most frequent class label.
 
 Parameters
@@ -252,14 +293,7 @@ Returns
     Returns:
         Result data.
     """
-    labels_arr = np.asarray(labels)
-    unique, counts = np.unique(labels_arr, return_counts=True)
-    best = unique[np.argmax(counts)]
-    count = int(np.max(counts))
-    if random and np.sum(counts == count) > 1:
-        tied = unique[counts == count]
-        best = np.random.choice(tied)
-    return (best, count)
+    return tuple(biometrics.majority_rule(labels=labels, random=random))
 
 @register_atom(witness_cross_validation)
 @icontract.require(lambda labels: labels is not None, "labels cannot be None")

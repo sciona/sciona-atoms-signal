@@ -58,6 +58,20 @@ def test_biosppy_online_filter_review_bundle_covers_expected_rows() -> None:
     }
 
 
+def test_biosppy_svm_proc_review_bundle_covers_expected_rows() -> None:
+    bundle = _load_bundle(BUNDLE_DIR / "biosppy_svm_proc.review_bundle.json")
+    assert {row["atom_key"] for row in bundle["rows"]} == {
+        "sciona.atoms.signal_processing.biosppy.svm_proc.assess_classification",
+        "sciona.atoms.signal_processing.biosppy.svm_proc.assess_runs",
+        "sciona.atoms.signal_processing.biosppy.svm_proc.combination",
+        "sciona.atoms.signal_processing.biosppy.svm_proc.cross_validation",
+        "sciona.atoms.signal_processing.biosppy.svm_proc.get_auth_rates",
+        "sciona.atoms.signal_processing.biosppy.svm_proc.get_id_rates",
+        "sciona.atoms.signal_processing.biosppy.svm_proc.get_subject_results",
+        "sciona.atoms.signal_processing.biosppy.svm_proc.majority_rule",
+    }
+
+
 def test_neurokit2_review_bundle_covers_expected_rows() -> None:
     bundle = _load_bundle(BUNDLE_DIR / "neurokit2.review_bundle.json")
     assert {row["atom_key"] for row in bundle["rows"]} == {
@@ -93,6 +107,8 @@ def test_signal_expansion_review_bundle_covers_expected_rows() -> None:
         "sciona.atoms.expansion.signal_event_rate.compute_event_rate_smoothed",
         "sciona.atoms.expansion.signal_event_rate.compute_event_rate_median_smoothed",
         "sciona.atoms.expansion.signal_event_rate.estimate_event_rate_from_signal",
+        "sciona.atoms.expansion.signal_event_rate.remove_signal_jumps",
+        "sciona.atoms.expansion.signal_event_rate.reject_outlier_intervals",
         "sciona.atoms.expansion.signal_filter.analyze_pole_stability",
         "sciona.atoms.expansion.signal_filter.detect_transient_response",
         "sciona.atoms.expansion.signal_transform.validate_parseval_energy",

@@ -279,7 +279,7 @@
       "parity_coverage_level": "positive_and_negative",
       "parity_test_status": "pass",
       "parity_fixture_count": 2,
-      "parity_case_count": 3,
+      "parity_case_count": 5,
       "review_record_path": "data/review_bundles/signal_expansion.review_bundle.json"
     },
     {

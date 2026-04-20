@@ -447,20 +447,32 @@ def reject_outlier_intervals(
     lo = max(1.0, median_ivl - tolerance)
     hi = median_ivl + tolerance
     good = (intervals >= lo) & (intervals <= hi)
-    if bool(good.all()):
-        return idx
 
     keep = np.ones(idx.size, dtype=bool)
-    candidates: list[tuple[float, int]] = []
+    candidate_scores: dict[int, float] = {}
     for i in range(1, idx.size - 1):
-        if bool(good[i - 1]) and bool(good[i]):
-            continue
         merged_interval = float(idx[i + 1] - idx[i - 1])
-        merged_error = abs(merged_interval - median_ivl)
-        if merged_error <= tolerance:
-            candidates.append((merged_error, i))
+        if not (bool(good[i - 1]) and bool(good[i])):
+            merged_error = abs(merged_interval - median_ivl)
+            if merged_error <= tolerance:
+                candidate_scores[i] = min(candidate_scores.get(i, math.inf), merged_error)
 
-    for _, i in sorted(candidates):
+        context = np.concatenate((intervals[: i - 1], intervals[i + 1 :]))
+        if context.size == 0:
+            continue
+        reference_interval = float(np.median(context))
+        if reference_interval <= 0.0:
+            continue
+        context_mad = float(np.median(np.abs(context - reference_interval)))
+        local_tolerance = max(1.0, mad_scale * context_mad, 0.15 * reference_interval)
+        left_interval = float(intervals[i - 1])
+        right_interval = float(intervals[i])
+        split_interval_is_short = min(left_interval, right_interval) < 0.75 * reference_interval
+        if split_interval_is_short and abs(merged_interval - reference_interval) <= local_tolerance:
+            local_error = abs(merged_interval - reference_interval)
+            candidate_scores[i] = min(candidate_scores.get(i, math.inf), local_error)
+
+    for _, i in sorted((score, i) for i, score in candidate_scores.items()):
         if keep[i - 1] and keep[i + 1]:
             keep[i] = False
     return idx[keep]
