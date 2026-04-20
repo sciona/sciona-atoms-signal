@@ -102,6 +102,10 @@
     },
     {
       "kind": "local_test",
+      "path": "tests/test_e2e_ppg_kazemi_wrapper_reingest.py"
+    },
+    {
+      "kind": "local_test",
       "path": "tests/test_e2e_ppg_kazemi_wrapper_d12_import_smoke.py"
     },
     {
@@ -122,7 +126,7 @@
     }
   ],
   "limitations": [
-    "This draft closes the missing-row backlog for the publication-shaped e2e-PPG atoms and keeps the scope away from biosppy.svm_proc."
+    "This review covers deterministic E2E-PPG helper atoms; neural model loading and training are outside this bundle."
   ],
   "blocking_findings": [],
   "required_actions": [],
@@ -176,10 +180,10 @@
     },
     {
       "atom_key": "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapperpredictionsignalcomputation",
-      "review_status": "reviewed",
+      "review_status": "approved",
       "review_semantic_verdict": "pass_with_limits",
       "review_developer_semantic_verdict": "pass_with_limits",
-      "trust_readiness": "needs_followup",
+      "trust_readiness": "catalog_ready",
       "has_references": true,
       "references_status": "pass",
       "source_paths": [
@@ -189,17 +193,36 @@
         "src/sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper/cdg.json",
         "src/sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper/matches.json",
         "tests/test_e2e_ppg_kazemi_wrapper_import_smoke.py",
+        "tests/test_e2e_ppg_kazemi_wrapper_reingest.py",
         "tests/test_e2e_ppg_pubrev_009.py"
       ],
       "limitations": [
-        "The current implementation only multiplies prediction by raw_signal, while the existing metadata describes the upstream Kazemi peak-detection post-processing routine."
+        "The atom covers the deterministic Kazemi Wrapper_function post-processing loop for one aligned prediction/raw-signal segment; model inference, segment offsets, and resampling are handled by other upstream routines."
       ],
-      "blocking_findings": [
-        "semantic_drift"
+      "blocking_findings": [],
+      "required_actions": [],
+      "overall_verdict": "pass",
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "runtime_status": "pass",
+      "developer_semantics_status": "pass_with_limits",
+      "risk_tier": "low",
+      "risk_score": 12,
+      "risk_dimensions": {
+        "provenance": "low",
+        "semantic_drift": "low",
+        "runtime": "low",
+        "scope": "medium"
+      },
+      "risk_reasons": [
+        "The implementation is a local, audited replay of the upstream post-processing loop rather than a TensorFlow model call."
       ],
-      "required_actions": [
-        "Replace wrapperpredictionsignalcomputation with behavior equivalent to the upstream Kazemi wrapper or narrow its public contract and metadata before publication."
-      ],
+      "acceptability_score": 86,
+      "acceptability_band": "acceptable_with_limits_candidate",
+      "parity_coverage_level": "positive_and_negative",
+      "parity_test_status": "pass",
+      "parity_fixture_count": 4,
+      "parity_case_count": 4,
       "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
     },
     {

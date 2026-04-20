@@ -1,17 +1,17 @@
 from __future__ import annotations
-from sciona.ghost.abstract import AbstractArray, AbstractScalar, AbstractDistribution, AbstractSignal
+from sciona.ghost.abstract import AbstractArray
 
 
 def witness_wrapperpredictionsignalcomputation(prediction: AbstractArray, raw_signal: AbstractArray) -> AbstractArray:
-    """Shape-and-type check for wrapper prediction signal computation. Returns output metadata without running the real computation."""
+    """Describe the integer peak-index vector returned by Kazemi wrapper post-processing."""
     result = AbstractArray(
-        shape=prediction.shape,
-        dtype="float64",
+        shape=(0,),
+        dtype="int64",
     )
     return result
 
 def witness_signalarraynormalization(arr: AbstractArray) -> AbstractArray:
-    """Shape-and-type check for signal array normalization. Returns output metadata without running the real computation."""
+    """Describe the normalized array returned by the Kazemi normalization helper."""
     result = AbstractArray(
         shape=arr.shape,
         dtype="float64",

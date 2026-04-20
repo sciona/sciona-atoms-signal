@@ -1,10 +1,10 @@
 {
   "nodes": [
     {
-      "node_id": "Wrapper_function_root",
+      "node_id": "kazemi_wrapper_root",
       "parent_id": null,
-      "name": "Wrapper_function",
-      "description": "Ingested pipeline from Wrapper_function",
+      "name": "kazemi_wrapper",
+      "description": "Kazemi E2E-PPG peak wrapper helpers.",
       "concept_type": "custom",
       "inputs": [],
       "outputs": [],
@@ -22,263 +22,87 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "The public package exposes one source-aligned peak post-processing atom and one upstream normalization helper."
     },
     {
       "node_id": "wrapperpredictionsignalcomputation",
-      "parent_id": "Wrapper_function_root",
-      "name": "WrapperPredictionSignalComputation",
-      "description": "Entry-point pure wrapper that consumes prediction and raw signal and returns a deterministic result with no persistent state.",
-      "concept_type": "custom",
-      "inputs": [
-        {
-          "name": "prediction",
-          "type_desc": "object",
-          "constraints": "isinstance(x, dict)"
-        },
-        {
-          "name": "raw_signal",
-          "type_desc": "np.ndarray",
-          "constraints": "x is not None"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "wrapper_output",
-          "type_desc": "object",
-          "constraints": "Deterministic for identical inputs"
-        }
-      ],
-      "status": "decomposed",
-      "children": [
-        "normalizepredictionforpeakscoring",
-        "detectcandidatepeakswithadaptivewindows",
-        "suppresspeakscloserthanminimumdistance",
-        "filternonpositivepeaksandfinalize"
-      ],
-      "depth": 1,
-      "type_signature": "(prediction: model prediction input, raw_signal: raw signal input) -> computed wrapper result",
-      "matched_primitive": null,
-      "is_optional": false,
-      "is_opaque": false,
-      "is_external": false,
-      "parallelizable": false,
-      "conceptual_summary": "Deterministic Dual-Input Functional Combiner. Maps an ordered pair of inputs through a fixed, side-effect-free rule to produce a single derived output. The operation performs a stateless fusion of a precomputed estimate and a raw observation representation, with no internal memory or parameter updates. For identical input values, the mapping is referentially transparent and always returns the same result.. Applications: Robotics: combine a dynamics-model estimate with live sensor arrays to produce a control-ready state signal, Computational biology: merge a learned structural prior with experimental measurement matrices to generate a refined candidate representation, Remote sensing: fuse model-generated environmental fields with raw instrument grids for a corrected analysis layer, Industrial process control: combine predictor outputs and streaming telemetry into a deterministic actuator input metric",
-      "critic_notes": "",
-      "decomposition_rationale": ""
-    },
-    {
-      "node_id": "normalizepredictionforpeakscoring",
-      "parent_id": "wrapperpredictionsignalcomputation",
-      "name": "NormalizePredictionForPeakScoring",
-      "description": "Scale the prediction signal into a normalized score space used by downstream peak detection.",
-      "concept_type": "signal_filter",
-      "inputs": [
-        {
-          "name": "prediction",
-          "type_desc": "np.ndarray",
-          "constraints": "1D numeric sequence"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "normalized_prediction",
-          "type_desc": "np.ndarray",
-          "constraints": "same length as prediction"
-        }
-      ],
-      "status": "atomic",
-      "children": [],
-      "depth": 2,
-      "type_signature": "(prediction: numpy.ndarray) -> numpy.ndarray",
-      "matched_primitive": null,
-      "is_optional": false,
-      "is_opaque": false,
-      "is_external": false,
-      "parallelizable": false,
-      "conceptual_summary": "",
-      "critic_notes": "",
-      "decomposition_rationale": ""
-    },
-    {
-      "node_id": "detectcandidatepeakswithadaptivewindows",
-      "parent_id": "wrapperpredictionsignalcomputation",
-      "name": "DetectCandidatePeaksWithAdaptiveWindows",
-      "description": "Scan normalized scores left-to-right, trigger on threshold crossings, and select one candidate index per window using raw-signal tie-breaking when multiple maxima occur.",
+      "parent_id": "kazemi_wrapper_root",
+      "name": "wrapperpredictionsignalcomputation",
+      "description": "Post-process a model prediction trace against the aligned raw PPG trace to extract retained peak indices.",
       "concept_type": "searching",
       "inputs": [
         {
-          "name": "normalized_prediction",
-          "type_desc": "np.ndarray",
-          "constraints": "1D normalized scores"
+          "name": "prediction",
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "non-empty numeric prediction trace",
+          "required": true
         },
         {
           "name": "raw_signal",
-          "type_desc": "np.ndarray",
-          "constraints": "same length as normalized_prediction"
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "non-empty numeric PPG trace aligned to prediction",
+          "required": true
         }
       ],
       "outputs": [
         {
-          "name": "candidate_indices",
-          "type_desc": "list[int]",
-          "constraints": "indices from thresholded windows; uses long window=15, tail window=7, threshold=0.70"
+          "name": "result",
+          "type_desc": "NDArray[np.intp]",
+          "constraints": "integer peak indices with positive raw-signal amplitude"
         }
       ],
       "status": "atomic",
       "children": [],
-      "depth": 2,
-      "type_signature": "(normalized_prediction: numpy.ndarray, raw_signal: numpy.ndarray) -> list[int]",
+      "depth": 1,
+      "type_signature": "(prediction: np.ndarray, raw_signal: np.ndarray) -> np.ndarray",
       "matched_primitive": null,
       "is_optional": false,
       "is_opaque": false,
       "is_external": false,
       "parallelizable": false,
       "conceptual_summary": "",
-      "critic_notes": "",
-      "decomposition_rationale": ""
-    },
-    {
-      "node_id": "suppresspeakscloserthanminimumdistance",
-      "parent_id": "wrapperpredictionsignalcomputation",
-      "name": "SuppressPeaksCloserThanMinimumDistance",
-      "description": "Resolve neighboring candidate peaks that are too close by greedily keeping the one with higher raw-signal amplitude.",
-      "concept_type": "greedy",
-      "inputs": [
-        {
-          "name": "candidate_indices",
-          "type_desc": "list[int]",
-          "constraints": "ascending scan order"
-        },
-        {
-          "name": "raw_signal",
-          "type_desc": "np.ndarray",
-          "constraints": "indexable at candidate positions"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "distance_filtered_indices",
-          "type_desc": "list[int]",
-          "constraints": "adjacent indices differ by at least 35 after suppression"
-        }
-      ],
-      "status": "atomic",
-      "children": [],
-      "depth": 2,
-      "type_signature": "(candidate_indices: list[int], raw_signal: numpy.ndarray) -> list[int]",
-      "matched_primitive": null,
-      "is_optional": false,
-      "is_opaque": false,
-      "is_external": false,
-      "parallelizable": false,
-      "conceptual_summary": "",
-      "critic_notes": "",
-      "decomposition_rationale": ""
-    },
-    {
-      "node_id": "filternonpositivepeaksandfinalize",
-      "parent_id": "wrapperpredictionsignalcomputation",
-      "name": "FilterNonPositivePeaksAndFinalize",
-      "description": "Remove peaks whose raw-signal amplitude is non-positive and return the remaining indices as a numpy array.",
-      "concept_type": "set_theory",
-      "inputs": [
-        {
-          "name": "distance_filtered_indices",
-          "type_desc": "list[int]",
-          "constraints": "post-distance-suppression indices"
-        },
-        {
-          "name": "raw_signal",
-          "type_desc": "np.ndarray",
-          "constraints": "indexable at all provided indices"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "wrapper_output",
-          "type_desc": "np.ndarray",
-          "constraints": "final positive-amplitude peak indices"
-        }
-      ],
-      "status": "atomic",
-      "children": [],
-      "depth": 2,
-      "type_signature": "(distance_filtered_indices: list[int], raw_signal: numpy.ndarray) -> numpy.ndarray",
-      "matched_primitive": null,
-      "is_optional": false,
-      "is_opaque": false,
-      "is_external": false,
-      "parallelizable": false,
-      "conceptual_summary": "",
-      "critic_notes": "",
+      "critic_notes": "Source-aligned to the vendored E2E-PPG Kazemi Wrapper_function post-processing loop; model loading and segmenting remain outside this atom.",
       "decomposition_rationale": ""
     },
     {
       "node_id": "signalarraynormalization",
-      "parent_id": "Wrapper_function_root",
-      "name": "SignalArrayNormalization",
-      "description": "Pure stateless normalization of an input numeric array.",
+      "parent_id": "kazemi_wrapper_root",
+      "name": "signalarraynormalization",
+      "description": "Normalize an input numeric array using the vendored Kazemi normalization helper.",
       "concept_type": "arithmetic",
       "inputs": [
         {
           "name": "arr",
-          "type_desc": "np.ndarray",
-          "constraints": "Finite numeric values"
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "numeric input array",
+          "required": true
         }
       ],
       "outputs": [
         {
-          "name": "normalized_arr",
-          "type_desc": "np.ndarray",
-          "constraints": "Same shape as input"
+          "name": "result",
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "same shape as input"
         }
       ],
       "status": "atomic",
       "children": [],
       "depth": 1,
-      "type_signature": "(arr: array-like numeric values) -> array-like numeric values",
+      "type_signature": "(arr: np.ndarray) -> np.ndarray",
       "matched_primitive": null,
       "is_optional": false,
       "is_opaque": false,
       "is_external": false,
       "parallelizable": false,
-      "conceptual_summary": "DeterministicNumericArrayRescaling. Transforms a finite numeric array by applying a deterministic scaling rule parameterized by summary statistics of that same array (for example, magnitude, extrema, or dispersion). The mapping preserves the original shape while converting values to a standardized scale so comparisons are less sensitive to absolute magnitude. This is a one-pass, stateless canonicalization step used to make downstream computations scale-consistent.. Applications: Preconditioning multichannel instrument readings in autonomous systems before sensor fusion, Standardizing voxel/intensity arrays in volumetric imaging pipelines prior to segmentation or registration, Normalizing high-throughput molecular measurement vectors before clustering or manifold learning, Rescaling node or edge feature vectors in graph-based infrastructure simulations before optimization",
+      "conceptual_summary": "",
       "critic_notes": "",
       "decomposition_rationale": ""
     }
   ],
-  "edges": [
-    {
-      "source_id": "normalizepredictionforpeakscoring",
-      "target_id": "detectcandidatepeakswithadaptivewindows",
-      "output_name": "normalized_prediction",
-      "input_name": "normalized_prediction",
-      "source_type": "numpy.ndarray",
-      "target_type": "numpy.ndarray",
-      "requires_glue": false
-    },
-    {
-      "source_id": "detectcandidatepeakswithadaptivewindows",
-      "target_id": "suppresspeakscloserthanminimumdistance",
-      "output_name": "candidate_indices",
-      "input_name": "candidate_indices",
-      "source_type": "list[int]",
-      "target_type": "list[int]",
-      "requires_glue": false
-    },
-    {
-      "source_id": "suppresspeakscloserthanminimumdistance",
-      "target_id": "filternonpositivepeaksandfinalize",
-      "output_name": "distance_filtered_indices",
-      "input_name": "distance_filtered_indices",
-      "source_type": "list[int]",
-      "target_type": "list[int]",
-      "requires_glue": false
-    }
-  ],
+  "edges": [],
   "metadata": {
-    "source": "ingester",
-    "class_name": "Wrapper_function"
+    "source": "manual_reingest",
+    "family": "e2e_ppg_kazemi_wrapper",
+    "upstream_source": "/Users/conrad/personal/ageo-atoms/third_party/E2E-PPG/kazemi_peak_detection.py:69"
   }
 }

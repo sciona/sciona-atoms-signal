@@ -13,12 +13,11 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBLISHABLE_ATOMS = {
     "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.detect_heart_cycles",
     "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.heart_cycle_detection",
+    "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapperpredictionsignalcomputation",
     "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.signalarraynormalization",
 }
 
-HELD_ATOMS = {
-    "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapperpredictionsignalcomputation",
-}
+HELD_ATOMS: set[str] = set()
 
 
 def _load_json(relpath: str) -> dict:
@@ -29,7 +28,7 @@ def _load_bundle() -> dict:
     return _load_json("data/review_bundles/e2e_ppg.review_bundle.json")
 
 
-def test_pubrev_009_bundle_marks_safe_atoms_reference_ready_and_holds_drifted_wrapper() -> None:
+def test_pubrev_009_bundle_marks_safe_atoms_reference_ready() -> None:
     rows = {row["atom_key"]: row for row in _load_bundle()["rows"]}
 
     for atom_key in PUBLISHABLE_ATOMS:
