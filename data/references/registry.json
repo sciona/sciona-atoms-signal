@@ -143,7 +143,7 @@
     "scipy2020": {
       "ref_id": "scipy2020",
       "type": "paper",
-      "title": "SciPy 1.0: fundamental algorithms for scientific computing in Python",
+      "title": "SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python",
       "authors": [
         "Pauli Virtanen",
         "Ralf Gommers",
@@ -164,8 +164,8 @@
         "Eric Jones",
         "Robert Kern",
         "Eric Larson",
-        "C J Carey",
-        "\u0130lhan Polat",
+        "C. J. Carey",
+        "Ilhan Polat",
         "Yu Feng",
         "Eric W. Moore",
         "Jake VanderPlas",
@@ -176,10 +176,9 @@
         "E. A. Quintero",
         "Charles R. Harris",
         "Anne M. Archibald",
-        "Antony H. Ribeiro",
+        "Ant\u00f4nio H. Ribeiro",
         "Fabian Pedregosa",
-        "Paul van Mulbregt",
-        "SciPy 1.0 Contributors"
+        "Paul van Mulbregt"
       ],
       "year": 2020,
       "venue": "Nature Methods",
@@ -188,7 +187,7 @@
         "match_type": "manual",
         "matched_nodes": [],
         "confidence": "high",
-        "notes": "Canonical SciPy software paper."
+        "notes": "Primary software paper for SciPy."
       },
       "doi": "10.1038/s41592-019-0686-2",
       "url": "https://doi.org/10.1038/s41592-019-0686-2"
