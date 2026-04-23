@@ -398,7 +398,7 @@
       "parent_id": "gan_patch_reconstruction",
       "name": "update_iteration_state_from_stitched_signal",
       "description": "Extract next reconstructed chunk, update remaining target, append accumulation, and slide clean context window.",
-      "concept_type": "custom",
+      "concept_type": "data_assembly",
       "inputs": [
         {
           "name": "stitched_signal_native",
@@ -531,7 +531,7 @@
       "parent_id": "windowed_signal_reconstruction",
       "name": "load_reconstruction_model_runtime",
       "description": "Prepare GAN runtime artifacts by resolving the trained generator weights and execution device.",
-      "concept_type": "custom",
+      "concept_type": "analysis",
       "inputs": [
         {
           "name": "model_path",
@@ -902,7 +902,7 @@
       "parent_id": "windowed_signal_reconstruction",
       "name": "merge_segments_with_peak_alignment",
       "description": "Construct stitched full-signal candidates by peak-aligned concatenation, skipping contexts that cannot be robustly aligned.",
-      "concept_type": "custom",
+      "concept_type": "data_assembly",
       "inputs": [
         {
           "name": "alignment_contexts",
@@ -945,7 +945,7 @@
       "parent_id": "windowed_signal_reconstruction",
       "name": "backproject_descale_and_reassess_quality",
       "description": "Project stitched candidates back to working length, descale to physiological range, and recompute clean/noisy partitions via SQA.",
-      "concept_type": "custom",
+      "concept_type": "clustering",
       "inputs": [
         {
           "name": "stitched_signals",

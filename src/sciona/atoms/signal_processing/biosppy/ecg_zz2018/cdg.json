@@ -101,7 +101,7 @@
       "parent_id": "calculatecompositesqi_zz2018",
       "name": "ValidateDetectorInputs",
       "description": "Checks if the R-peak detector inputs are empty. If either is empty, the signal quality is immediately deemed unacceptable.",
-      "concept_type": "custom",
+      "concept_type": "analysis",
       "inputs": [
         {
           "name": "detector_1",
@@ -139,7 +139,7 @@
       "parent_id": "calculatecompositesqi_zz2018",
       "name": "CalculateBaseSQIs",
       "description": "Computes four fundamental Signal Quality Indices (qSQI, pSQI, kSQI, basSQI) using external specialized functions.",
-      "concept_type": "custom",
+      "concept_type": "analysis",
       "inputs": [
         {
           "name": "signal",
@@ -212,7 +212,7 @@
       "parent_id": "calculatecompositesqi_zz2018",
       "name": "ClassifySQIsHeuristically",
       "description": "Classifies each of the four base SQIs into discrete categories (0=unqualified, 1=suspicious, 2=optimal) based on a set of heuristic rules, some of which are adaptive to heart rate.",
-      "concept_type": "custom",
+      "concept_type": "analysis",
       "inputs": [
         {
           "name": "qsqi",
@@ -270,7 +270,7 @@
       "parent_id": "calculatecompositesqi_zz2018",
       "name": "AggregateHeuristicClasses",
       "description": "Aggregates the discrete classifications of the SQIs by counting classes to determine the final signal quality label ('Unacceptable', 'Excellent', 'Barely acceptable').",
-      "concept_type": "custom",
+      "concept_type": "data_assembly",
       "inputs": [
         {
           "name": "class_matrix",
