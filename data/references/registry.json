@@ -255,6 +255,54 @@
       },
       "url": "https://ieeexplore.ieee.org/document/9870821"
     },
+    "barachant2012bci": {
+      "ref_id": "barachant2012bci",
+      "type": "paper",
+      "title": "Multiclass Brain-Computer Interface Classification by Riemannian Geometry",
+      "authors": ["Alexandre Barachant", "Stéphane Bonnet", "Marco Congedo", "Christian Jutten"],
+      "year": 2012,
+      "venue": "IEEE Transactions on Biomedical Engineering",
+      "doi": "10.1109/TBME.2011.2172210",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Foundational paper for Riemannian BCI methods: MDM classifier, tangent space projection, Karcher mean."
+      }
+    },
+    "repo_pyriemann": {
+      "ref_id": "repo_pyriemann",
+      "type": "repository",
+      "title": "pyRiemann",
+      "authors": [],
+      "year": null,
+      "venue": "GitHub",
+      "url": "https://github.com/pyRiemann/pyRiemann",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "BSD-licensed library used as algorithmic reference for Riemannian geometry reimplementations."
+      }
+    },
+    "repo_barachant_seizure": {
+      "ref_id": "repo_barachant_seizure",
+      "type": "repository",
+      "title": "Barachant Seizure Detection (1st place)",
+      "authors": ["Alexandre Barachant"],
+      "year": 2014,
+      "venue": "GitHub/Kaggle",
+      "url": "https://github.com/alexandrebarachant/kaggle-seizure-prediction",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "BSD 3-Clause source for seizure prediction competition solution."
+      }
+    },
     "zhao2018ecgsqi": {
       "ref_id": "zhao2018ecgsqi",
       "type": "paper",

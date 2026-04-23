@@ -1,0 +1,117 @@
+{
+  "nodes": [
+    {
+      "node_id": "riemannian_bci_signal_processing_root",
+      "parent_id": null,
+      "name": "RiemannianBCISignalProcessing",
+      "description": "Signal processing utilities for Riemannian BCI pipelines.",
+      "concept_type": "custom",
+      "inputs": [],
+      "outputs": [],
+      "status": "decomposed",
+      "children": [
+        "segment_max_aggregation",
+        "ranked_prediction_blend",
+        "xgb_per_branch_classifier"
+      ],
+      "depth": 0,
+      "type_signature": "",
+      "matched_primitive": null,
+      "primitive_binding_confidence": 0.0,
+      "primitive_binding_source": "",
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "segment_max_aggregation",
+      "parent_id": "riemannian_bci_signal_processing_root",
+      "name": "SegmentMaxAggregation",
+      "description": "Aggregate windowed predictions by taking element-wise max over overlapping segments.",
+      "concept_type": "aggregation",
+      "inputs": [
+        {"name": "predictions", "type_desc": "NDArray[float64]", "constraints": "shape (n_windows, n_classes)", "required": true, "default_value_repr": ""},
+        {"name": "window_size", "type_desc": "int", "constraints": ">= 1", "required": true, "default_value_repr": ""},
+        {"name": "stride", "type_desc": "int", "constraints": ">= 1", "required": true, "default_value_repr": ""},
+        {"name": "n_samples", "type_desc": "int", "constraints": ">= 1", "required": true, "default_value_repr": ""}
+      ],
+      "outputs": [
+        {"name": "aggregated", "type_desc": "NDArray[float64]", "constraints": "shape (n_samples, n_classes)", "required": true, "default_value_repr": ""}
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(predictions: NDArray[float64], window_size: int, stride: int, n_samples: int) -> NDArray[float64]",
+      "matched_primitive": null,
+      "primitive_binding_confidence": 0.0,
+      "primitive_binding_source": "",
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "Assigns each window prediction to its sample range and takes element-wise max of overlapping assignments.",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "ranked_prediction_blend",
+      "parent_id": "riemannian_bci_signal_processing_root",
+      "name": "RankedPredictionBlend",
+      "description": "Blend predictions from multiple models by weighted rank-averaging.",
+      "concept_type": "ensemble",
+      "inputs": [
+        {"name": "predictions", "type_desc": "NDArray[float64]", "constraints": "shape (n_models, n_samples)", "required": true, "default_value_repr": ""},
+        {"name": "weights", "type_desc": "NDArray[float64]", "constraints": "shape (n_models,)", "required": true, "default_value_repr": ""}
+      ],
+      "outputs": [
+        {"name": "blended", "type_desc": "NDArray[float64]", "constraints": "shape (n_samples,)", "required": true, "default_value_repr": ""}
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(predictions: NDArray[float64], weights: NDArray[float64]) -> NDArray[float64]",
+      "matched_primitive": null,
+      "primitive_binding_confidence": 0.0,
+      "primitive_binding_source": "",
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "Rank-transforms each model's predictions, computes weighted average of ranks, then re-ranks.",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "xgb_per_branch_classifier",
+      "parent_id": "riemannian_bci_signal_processing_root",
+      "name": "XGBPerBranchClassifier",
+      "description": "External XGBoost per-branch classifier node. Wraps XGBoost for per-branch classification in Riemannian BCI pipelines.",
+      "concept_type": "external_tool",
+      "inputs": [],
+      "outputs": [],
+      "status": "conceptual",
+      "children": [],
+      "depth": 1,
+      "type_signature": "",
+      "matched_primitive": null,
+      "primitive_binding_confidence": 0.0,
+      "primitive_binding_source": "",
+      "is_optional": false,
+      "is_opaque": true,
+      "is_external": true,
+      "parallelizable": false,
+      "conceptual_summary": "Conceptual node representing an XGBoost classifier operating on per-branch features in a Riemannian BCI pipeline.",
+      "critic_notes": "External tool node — no implementation provided. Wraps XGBoost.",
+      "decomposition_rationale": ""
+    }
+  ],
+  "edges": [],
+  "metadata": {
+    "source": "manual",
+    "family": "riemannian_bci_signal_processing"
+  }
+}

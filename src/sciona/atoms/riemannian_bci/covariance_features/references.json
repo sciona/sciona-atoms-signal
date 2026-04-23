@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.riemannian_bci.covariance_features.atoms.autocorrelation_covariance_matrix@sciona/atoms/riemannian_bci/covariance_features/atoms.py:38": {
+      "references": [
+        {
+          "ref_id": "barachant2012bci",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Foundational Riemannian BCI paper describing covariance-based feature extraction."
+          }
+        },
+        {
+          "ref_id": "repo_barachant_seizure",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "BSD 3-Clause source for seizure competition Hankel covariance construction."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.riemannian_bci.covariance_features.atoms.cross_frequency_coherence_matrix@sciona/atoms/riemannian_bci/covariance_features/atoms.py:82": {
+      "references": [
+        {
+          "ref_id": "barachant2012bci",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Cross-frequency coherence used as BCI feature in Riemannian framework."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Uses scipy.signal.coherence for pairwise magnitude-squared coherence."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.riemannian_bci.covariance_features.atoms.tangent_space_projection@sciona/atoms/riemannian_bci/covariance_features/atoms.py:134": {
+      "references": [
+        {
+          "ref_id": "barachant2012bci",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Tangent space projection is a core method in Barachant 2012."
+          }
+        },
+        {
+          "ref_id": "repo_pyriemann",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Algorithmic reference for tangent space projection implementation."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.riemannian_bci.covariance_features.atoms.riemannian_mean_spd@sciona/atoms/riemannian_bci/covariance_features/atoms.py:192": {
+      "references": [
+        {
+          "ref_id": "barachant2012bci",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Karcher mean is central to the Riemannian BCI framework."
+          }
+        },
+        {
+          "ref_id": "repo_pyriemann",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Algorithmic reference for iterative Riemannian mean computation."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}
