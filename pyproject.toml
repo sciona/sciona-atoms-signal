@@ -13,6 +13,7 @@ dependencies = [
   "icontract",
   "numpy",
   "sciona",
+  "stumpy",
 ]
 
 [tool.setuptools]

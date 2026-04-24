@@ -34,6 +34,28 @@
       "source_path": "package_metadata:neurokit2",
       "upstream_license_expression": "MIT",
       "notes": "Applies to the NeuroKit2-backed signal_processing/neurokit2 family tree."
+    },
+    {
+      "scope": "family",
+      "scope_key": "sciona.atoms.financial_signals",
+      "license_expression": "MIT",
+      "license_status": "approved",
+      "license_family": "permissive",
+      "source_kind": "manual_override",
+      "source_path": "external_vendor_tree:kaggle-solutions/LICENSE.md",
+      "upstream_license_expression": "MIT",
+      "notes": "Applies to the financial_signals family ingested from the third_party_wave2 Optiver checkout vendored inside the MIT-licensed kaggle-solutions repository. The inspected upstream GitHub repository page did not expose a detectable LICENSE file."
+    },
+    {
+      "scope": "family",
+      "scope_key": "sciona.atoms.anomaly_detection",
+      "license_expression": "MIT",
+      "license_status": "approved",
+      "license_family": "permissive",
+      "source_kind": "manual_override",
+      "source_path": "external_vendor_tree:kaggle-solutions/LICENSE.md",
+      "upstream_license_expression": "MIT",
+      "notes": "Applies to the anomaly_detection family ingested from the third_party_wave2 KDD anomaly checkout vendored inside the MIT-licensed kaggle-solutions repository. The inspected upstream GitHub repository page did not expose a detectable LICENSE file."
     }
   ]
 }

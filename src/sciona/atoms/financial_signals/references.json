@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.financial_signals.atoms.realized_volatility@sciona/atoms/financial_signals/atoms.py:45": {
+      "references": [
+        {
+          "ref_id": "repo_optiver_orvp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Direct mapping of the realized_volatility helper in the Optiver feature processor."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.financial_signals.atoms.realized_quadpower_quarticity@sciona/atoms/financial_signals/atoms.py:55": {
+      "references": [
+        {
+          "ref_id": "repo_optiver_orvp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Adapted from the Optiver price-domain quarticity convolution into the requested log-return interface."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.financial_signals.atoms.weighted_average_price@sciona/atoms/financial_signals/atoms.py:79": {
+      "references": [
+        {
+          "ref_id": "repo_optiver_orvp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Direct mapping of the WAP order-book formula used in calc_wap1/calc_wap2."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.financial_signals.atoms.linear_trend_feature@sciona/atoms/financial_signals/atoms.py:101": {
+      "references": [
+        {
+          "ref_id": "repo_optiver_orvp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Direct mapping of the get_dir_stats least-squares slope extraction."
+          }
+        },
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Uses scipy.linalg.lstsq for the linear trend fit."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.financial_signals.atoms.book_imbalance_features@sciona/atoms/financial_signals/atoms.py:115": {
+      "references": [
+        {
+          "ref_id": "repo_optiver_orvp",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Order-book imbalance derived from the same best-level bid/ask size features used by the upstream pipeline."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

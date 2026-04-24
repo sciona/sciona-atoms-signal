@@ -15,7 +15,7 @@ def _load_manifest() -> dict:
     return data
 
 
-def test_signal_provider_license_manifest_has_conservative_default_and_two_overrides() -> None:
+def test_signal_provider_license_manifest_has_conservative_default_and_family_overrides() -> None:
     manifest = _load_manifest()
 
     default = manifest["repo_default"]
@@ -31,15 +31,16 @@ def test_signal_provider_license_manifest_has_conservative_default_and_two_overr
     assert {entry["scope_key"] for entry in overrides} == {
         "sciona.atoms.signal_processing.biosppy",
         "sciona.atoms.signal_processing.neurokit2",
+        "sciona.atoms.financial_signals",
+        "sciona.atoms.anomaly_detection",
     }
 
     for entry in overrides:
         assert entry["scope"] == "family"
         assert entry["license_status"] == "approved"
         assert entry["license_family"] == "permissive"
-        assert entry["source_kind"] == "upstream_vendor_license"
+        assert entry["source_kind"] in {"upstream_vendor_license", "manual_override"}
         assert entry["license_expression"] in {"BSD-3-Clause", "MIT"}
         assert entry["upstream_license_expression"] == entry["license_expression"]
-        assert entry["source_path"].startswith("package_metadata:")
+        assert entry["source_path"].startswith(("package_metadata:", "external_vendor_tree:"))
         assert entry["notes"]
-

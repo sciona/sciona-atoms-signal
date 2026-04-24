@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "sciona.atoms.signal.review_bundle.anomaly_detection.core.v1",
+  "provider_repo": "sciona-atoms-signal",
+  "family_batch": "anomaly_detection",
+  "review_status": "reviewed",
+  "review_semantic_verdict": "pass_with_limits",
+  "review_developer_semantic_verdict": "pass_with_limits",
+  "trust_readiness": "reviewed_with_limits",
+  "authoritative_sources": [
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/anomaly_detection/atoms.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_anomaly_detection_behavior.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_anomaly_detection_review_bundle.py"
+    }
+  ],
+  "limitations": [
+    "Anomaly atoms adapt a competition solution into a reusable API; the implementation preserves the self-join normalization and low-variation masking pattern but does not ship regression fixtures from the original KDD dataset."
+  ],
+  "blocking_findings": [],
+  "required_actions": [],
+  "review_record_path": "data/review_bundles/anomaly_detection.review_bundle.json",
+  "rows": [
+    {
+      "atom_key": "sciona.atoms.anomaly_detection.matrix_profile_anomaly_score",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/anomaly_detection/atoms.py",
+        "tests/test_anomaly_detection_behavior.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/anomaly_detection.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.anomaly_detection.multiscale_anomaly_aggregation",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/anomaly_detection/atoms.py",
+        "tests/test_anomaly_detection_behavior.py"
+      ],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/anomaly_detection.review_bundle.json"
+    }
+  ]
+}

@@ -97,6 +97,25 @@ def test_e2e_ppg_review_bundle_covers_expected_rows() -> None:
     }
 
 
+def test_financial_signals_review_bundle_covers_expected_rows() -> None:
+    bundle = _load_bundle(BUNDLE_DIR / "financial_signals.review_bundle.json")
+    assert {row["atom_key"] for row in bundle["rows"]} == {
+        "sciona.atoms.financial_signals.realized_volatility",
+        "sciona.atoms.financial_signals.realized_quadpower_quarticity",
+        "sciona.atoms.financial_signals.weighted_average_price",
+        "sciona.atoms.financial_signals.linear_trend_feature",
+        "sciona.atoms.financial_signals.book_imbalance_features",
+    }
+
+
+def test_anomaly_detection_review_bundle_covers_expected_rows() -> None:
+    bundle = _load_bundle(BUNDLE_DIR / "anomaly_detection.review_bundle.json")
+    assert {row["atom_key"] for row in bundle["rows"]} == {
+        "sciona.atoms.anomaly_detection.matrix_profile_anomaly_score",
+        "sciona.atoms.anomaly_detection.multiscale_anomaly_aggregation",
+    }
+
+
 def test_signal_expansion_review_bundle_covers_expected_rows() -> None:
     bundle = _load_bundle(BUNDLE_DIR / "signal_expansion.review_bundle.json")
     assert {row["atom_key"] for row in bundle["rows"]} == {

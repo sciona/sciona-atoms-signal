@@ -303,6 +303,54 @@
         "notes": "BSD 3-Clause source for seizure prediction competition solution."
       }
     },
+    "repo_optiver_orvp": {
+      "ref_id": "repo_optiver_orvp",
+      "type": "repository",
+      "title": "Optiver Realized Volatility Prediction 7th Place Solution",
+      "authors": [],
+      "year": null,
+      "venue": "GitHub/Kaggle",
+      "url": "https://github.com/michaelpoluektov/orvp",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Repository citation for the Optiver feature-engineering code used to derive the financial_signals atoms."
+      }
+    },
+    "repo_kddcup2021_anomaly": {
+      "ref_id": "repo_kddcup2021_anomaly",
+      "type": "repository",
+      "title": "KDD Cup 2021 Multi-dataset Time Series Anomaly Detection 5th Place Solution",
+      "authors": [],
+      "year": 2021,
+      "venue": "GitHub/KDD Cup",
+      "url": "https://github.com/intellygenta/KDDCup2021",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Repository citation for the KDD Cup anomaly scoring code used to derive the matrix-profile atoms."
+      }
+    },
+    "repo_stumpy": {
+      "ref_id": "repo_stumpy",
+      "type": "repository",
+      "title": "STUMPY",
+      "authors": [],
+      "year": null,
+      "venue": "GitHub",
+      "url": "https://github.com/TDAmeritrade/stumpy",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "BSD-3-Clause matrix-profile library used for the STOMP profile computation in anomaly_detection atoms."
+      }
+    },
     "zhao2018ecgsqi": {
       "ref_id": "zhao2018ecgsqi",
       "type": "paper",

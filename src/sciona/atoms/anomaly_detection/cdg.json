@@ -1,0 +1,91 @@
+{
+  "nodes": [
+    {
+      "node_id": "anomaly_detection_root",
+      "parent_id": null,
+      "name": "AnomalyDetection",
+      "description": "Matrix-profile anomaly scoring and multi-scale aggregation atoms.",
+      "concept_type": "custom",
+      "inputs": [],
+      "outputs": [],
+      "status": "decomposed",
+      "children": [
+        "matrix_profile_anomaly_score",
+        "multiscale_anomaly_aggregation"
+      ],
+      "depth": 0,
+      "type_signature": "",
+      "matched_primitive": null,
+      "primitive_binding_confidence": 0.0,
+      "primitive_binding_source": "",
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "matrix_profile_anomaly_score",
+      "parent_id": "anomaly_detection_root",
+      "name": "MatrixProfileAnomalyScore",
+      "description": "Compute a normalized self-join matrix-profile anomaly score per subsequence.",
+      "concept_type": "signal_measure",
+      "inputs": [
+        {"name": "series", "type_desc": "NDArray[float64]", "constraints": "shape (n,), finite", "required": true, "default_value_repr": ""},
+        {"name": "window_size", "type_desc": "int", "constraints": ">= 3 and < n", "required": true, "default_value_repr": ""}
+      ],
+      "outputs": [
+        {"name": "scores", "type_desc": "NDArray[float64]", "constraints": "shape (n - window_size + 1,), normalized to [0, 1]", "required": true, "default_value_repr": ""}
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(series: NDArray[float64], window_size: int) -> NDArray[float64]",
+      "matched_primitive": null,
+      "primitive_binding_confidence": 0.0,
+      "primitive_binding_source": "",
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "Runs STOMP via stumpy.stump, penalizes low-variation windows, normalizes by matched-neighbor profile distance, and smooths the result.",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    },
+    {
+      "node_id": "multiscale_anomaly_aggregation",
+      "parent_id": "anomaly_detection_root",
+      "name": "MultiscaleAnomalyAggregation",
+      "description": "Aggregate normalized matrix-profile anomaly scores across multiple window sizes.",
+      "concept_type": "signal_measure",
+      "inputs": [
+        {"name": "series", "type_desc": "NDArray[float64]", "constraints": "shape (n,), finite", "required": true, "default_value_repr": ""},
+        {"name": "window_sizes", "type_desc": "list[int]", "constraints": "non-empty list of integers, each >= 3 and < n", "required": true, "default_value_repr": ""}
+      ],
+      "outputs": [
+        {"name": "aggregated_scores", "type_desc": "NDArray[float64]", "constraints": "shape (n,), normalized to [0, 1]", "required": true, "default_value_repr": ""}
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 1,
+      "type_signature": "(series: NDArray[float64], window_sizes: list[int]) -> NDArray[float64]",
+      "matched_primitive": null,
+      "primitive_binding_confidence": 0.0,
+      "primitive_binding_source": "",
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": false,
+      "conceptual_summary": "Computes per-scale normalized matrix-profile scores, lifts them onto the time axis, and max-pools across scales.",
+      "critic_notes": "",
+      "decomposition_rationale": ""
+    }
+  ],
+  "edges": [],
+  "metadata": {
+    "source": "manual",
+    "family": "anomaly_detection"
+  }
+}

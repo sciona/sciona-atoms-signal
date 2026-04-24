@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.anomaly_detection.atoms.matrix_profile_anomaly_score@sciona/atoms/anomaly_detection/atoms.py:145": {
+      "references": [
+        {
+          "ref_id": "repo_kddcup2021_anomaly",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Adapted from the compute_score self-join scoring and masking logic in the KDD Cup 2021 anomaly solution."
+          }
+        },
+        {
+          "ref_id": "repo_stumpy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Uses stumpy.stump to compute the STOMP matrix profile."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.anomaly_detection.atoms.multiscale_anomaly_aggregation@sciona/atoms/anomaly_detection/atoms.py:161": {
+      "references": [
+        {
+          "ref_id": "repo_kddcup2021_anomaly",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Uses the KDD solution's window-wise multi-scale search pattern as the basis for max-pooled aggregation."
+          }
+        },
+        {
+          "ref_id": "repo_stumpy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Each scale delegates its STOMP profile computation to stumpy.stump."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}
