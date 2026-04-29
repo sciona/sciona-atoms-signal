@@ -1,0 +1,270 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.audio_speech.atoms.resample_audio@sciona/atoms/audio_speech/atoms.py:104": {
+      "references": [
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Uses scipy.signal.resample_poly for polyphase audio resampling."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.audio_windows@sciona/atoms/audio_speech/atoms.py:124": {
+      "references": [
+        {
+          "ref_id": "numpy_docs",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Uses NumPy sliding-window views and read-only flags for window extraction."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.stft_magnitude@sciona/atoms/audio_speech/atoms.py:145": {
+      "references": [
+        {
+          "ref_id": "numpy_docs",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Uses NumPy real FFT behavior to compute one-sided STFT magnitudes."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.mel_filterbank@sciona/atoms/audio_speech/atoms.py:166": {
+      "references": [
+        {
+          "ref_id": "librosa_mel_docs",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Implements Slaney-style triangular mel filters with area normalization."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.apply_mel_filterbank@sciona/atoms/audio_speech/atoms.py:201": {
+      "references": [
+        {
+          "ref_id": "librosa_mel_docs",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Uses the standard mel projection step from a linear power spectrogram to mel bands."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.log_mel_spectrogram@sciona/atoms/audio_speech/atoms.py:219": {
+      "references": [
+        {
+          "ref_id": "librosa_mel_docs",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Follows the stable power-to-decibel scaling pattern used for log-mel features."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.mfcc@sciona/atoms/audio_speech/atoms.py:237": {
+      "references": [
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Uses scipy.fft.dct for DCT-II MFCC coefficient extraction."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.spec_augment_time_mask@sciona/atoms/audio_speech/atoms.py:253": {
+      "references": [
+        {
+          "ref_id": "park2019specaugment",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Implements deterministic time masking from the SpecAugment policy family."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.spec_augment_freq_mask@sciona/atoms/audio_speech/atoms.py:279": {
+      "references": [
+        {
+          "ref_id": "park2019specaugment",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Implements deterministic frequency masking from the SpecAugment policy family."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.median_filter_1d@sciona/atoms/audio_speech/atoms.py:304": {
+      "references": [
+        {
+          "ref_id": "scipy2020",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Implements a median smoothing primitive equivalent to scipy.signal median filtering for 1-D predictions."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.ebu_r128_normalize@sciona/atoms/audio_speech/atoms.py:323": {
+      "references": [
+        {
+          "ref_id": "repo_pyloudnorm",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Implements the K-weighted, gated loudness normalization path using the 48 kHz coefficients described in the research bundle."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.wiener_soft_mask@sciona/atoms/audio_speech/atoms.py:363": {
+      "references": [
+        {
+          "ref_id": "repo_norbert",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Implements a single-pass stabilized source soft mask related to Wiener source-separation masking."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.rule_based_g2p@sciona/atoms/audio_speech/atoms.py:381": {
+      "references": [
+        {
+          "ref_id": "repo_g2p",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Uses explicit caller-supplied context rules for rule-based grapheme-to-phoneme conversion."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.dtw_alignment@sciona/atoms/audio_speech/atoms.py:423": {
+      "references": [
+        {
+          "ref_id": "audiolabs_dtw",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Uses the DTW dynamic-programming recurrence with a monotonic stay-or-advance path constraint."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.monotonic_alignment_search@sciona/atoms/audio_speech/atoms.py:464": {
+      "references": [
+        {
+          "ref_id": "kim2020glowtts",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Implements a NumPy monotonic maximum-score path primitive for MAS-style alignment."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.ctc_greedy_decode@sciona/atoms/audio_speech/atoms.py:501": {
+      "references": [
+        {
+          "ref_id": "distill2017ctc",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Uses the standard CTC best-path collapse operation described in the CTC reference."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.audio_speech.atoms.ctc_beam_decode@sciona/atoms/audio_speech/atoms.py:524": {
+      "references": [
+        {
+          "ref_id": "distill2017ctc",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Uses CTC prefix probability tracking with separate blank and non-blank states."
+          }
+        },
+        {
+          "ref_id": "awni_ctc_gist",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Matches the compact prefix beam-search structure while keeping the implementation local and typed."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

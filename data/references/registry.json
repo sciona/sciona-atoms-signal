@@ -351,6 +351,183 @@
         "notes": "BSD-3-Clause matrix-profile library used for the STOMP profile computation in anomaly_detection atoms."
       }
     },
+    "numpy_docs": {
+      "ref_id": "numpy_docs",
+      "type": "documentation",
+      "title": "NumPy Documentation",
+      "authors": [],
+      "year": null,
+      "venue": "NumPy",
+      "url": "https://numpy.org/doc/stable/",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Reference for NumPy FFT, array, and sliding-window behavior used by the audio_speech atoms."
+      }
+    },
+    "librosa_mel_docs": {
+      "ref_id": "librosa_mel_docs",
+      "type": "documentation",
+      "title": "librosa Mel and power-to-decibel documentation",
+      "authors": [],
+      "year": null,
+      "venue": "librosa",
+      "url": "https://librosa.org/doc/main/generated/librosa.filters.mel.html",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "medium",
+        "notes": "Reference for Slaney mel filterbank semantics and log-mel power scaling."
+      }
+    },
+    "park2019specaugment": {
+      "ref_id": "park2019specaugment",
+      "type": "paper",
+      "title": "SpecAugment: A Simple Data Augmentation Method for Automatic Speech Recognition",
+      "authors": [
+        "Daniel S. Park",
+        "William Chan",
+        "Yu Zhang",
+        "Chung-Cheng Chiu",
+        "Barret Zoph",
+        "Ekin D. Cubuk",
+        "Quoc V. Le"
+      ],
+      "year": 2019,
+      "venue": "Interspeech",
+      "url": "https://arxiv.org/abs/1904.08779",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Primary paper for time and frequency masking of spectrograms."
+      }
+    },
+    "repo_pyloudnorm": {
+      "ref_id": "repo_pyloudnorm",
+      "type": "repository",
+      "title": "pyloudnorm",
+      "authors": [],
+      "year": null,
+      "venue": "GitHub",
+      "url": "https://github.com/csteinmetz1/pyloudnorm",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "medium",
+        "notes": "Reference implementation for ITU-R BS.1770 loudness measurement concepts."
+      }
+    },
+    "repo_norbert": {
+      "ref_id": "repo_norbert",
+      "type": "repository",
+      "title": "norbert",
+      "authors": [],
+      "year": null,
+      "venue": "GitHub",
+      "url": "https://github.com/sigsep/norbert",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "medium",
+        "notes": "Reference for Wiener-style source separation masks; the atom implements a single-pass stabilized soft mask."
+      }
+    },
+    "repo_g2p": {
+      "ref_id": "repo_g2p",
+      "type": "repository",
+      "title": "g2p",
+      "authors": [],
+      "year": null,
+      "venue": "GitHub",
+      "url": "https://github.com/roedoejet/g2p",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "medium",
+        "notes": "Reference for rule-based grapheme-to-phoneme conversion with explicit caller-supplied rules."
+      }
+    },
+    "audiolabs_dtw": {
+      "ref_id": "audiolabs_dtw",
+      "type": "documentation",
+      "title": "Dynamic Time Warping",
+      "authors": [],
+      "year": null,
+      "venue": "AudioLabs Erlangen",
+      "url": "https://www.audiolabs-erlangen.de/resources/MIR/FMP/C3/C3S2_DTWbasic.html",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "medium",
+        "notes": "Reference for the dynamic-programming DTW recurrence used in the custom alignment atom."
+      }
+    },
+    "kim2020glowtts": {
+      "ref_id": "kim2020glowtts",
+      "type": "paper",
+      "title": "Glow-TTS: A Generative Flow for Text-to-Speech via Monotonic Alignment Search",
+      "authors": [
+        "Jaehyeon Kim",
+        "Sungwon Kim",
+        "Jungil Kong",
+        "Sungroh Yoon"
+      ],
+      "year": 2020,
+      "venue": "NeurIPS",
+      "url": "https://proceedings.neurips.cc/paper/2020/file/5c3b99e8f92532e5ad1556e53ceea00c-Paper.pdf",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Primary paper for monotonic alignment search in flow-based text-to-speech."
+      }
+    },
+    "distill2017ctc": {
+      "ref_id": "distill2017ctc",
+      "type": "article",
+      "title": "Sequence Modeling With CTC",
+      "authors": [
+        "Awni Hannun"
+      ],
+      "year": 2017,
+      "venue": "Distill",
+      "url": "https://distill.pub/2017/ctc/",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Reference for CTC collapse behavior and prefix beam-search state tracking."
+      }
+    },
+    "awni_ctc_gist": {
+      "ref_id": "awni_ctc_gist",
+      "type": "repository",
+      "title": "Example CTC Decoder in Python",
+      "authors": [
+        "Awni Hannun"
+      ],
+      "year": null,
+      "venue": "GitHub Gist",
+      "url": "https://gist.github.com/awni/56369a90d03953e370f3964c826ed4b0",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "medium",
+        "notes": "Reference for a compact CTC prefix beam-search implementation pattern."
+      }
+    },
     "zhao2018ecgsqi": {
       "ref_id": "zhao2018ecgsqi",
       "type": "paper",
