@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "atoms": {
-    "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.detect_heart_cycles@sciona/atoms/signal_processing/e2e_ppg/heart_cycle/atoms.py:18": {
+    "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.atoms.detect_heart_cycles@sciona/atoms/signal_processing/e2e_ppg/heart_cycle/atoms.py:18": {
       "references": [
         {
           "ref_id": "kazemi2022ppg",
@@ -36,7 +36,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.heart_cycle_detection@sciona/atoms/signal_processing/e2e_ppg/heart_cycle/atoms.py:32": {
+    "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.atoms.heart_cycle_detection@sciona/atoms/signal_processing/e2e_ppg/heart_cycle/atoms.py:32": {
       "references": [
         {
           "ref_id": "kazemi2022ppg",

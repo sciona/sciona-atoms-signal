@@ -12,6 +12,7 @@ quality diagnostics:
 from __future__ import annotations
 
 import numpy as np
+import icontract
 from sciona.ghost.abstract import AbstractArray, AbstractScalar
 from sciona.ghost.registry import register_atom
 
@@ -86,6 +87,9 @@ def witness_check_inverse_reconstruction(
 
 
 @register_atom(witness_analyze_window_leakage)
+@icontract.require(lambda windowed: np.asarray(windowed).size > 0, "windowed signal must be non-empty")
+@icontract.require(lambda original: np.asarray(original).size > 0, "original signal must be non-empty")
+@icontract.ensure(lambda result: 0.0 <= result[0] <= 1.0, "leakage ratio must be a fraction")
 def analyze_window_leakage(
     windowed: np.ndarray,
     original: np.ndarray,
@@ -137,6 +141,9 @@ def analyze_window_leakage(
 
 
 @register_atom(witness_detect_spectral_aliasing)
+@icontract.require(lambda spectrum: np.asarray(spectrum).size >= 2, "spectrum must contain at least two bins")
+@icontract.require(lambda nyquist_fraction: isinstance(nyquist_fraction, (float, int, np.number)), "nyquist_fraction must be numeric")
+@icontract.ensure(lambda result: 0.0 <= result[0] <= 1.0, "alias energy fraction must be a fraction")
 def detect_spectral_aliasing(
     spectrum: np.ndarray,
     nyquist_fraction: float = 0.9,
@@ -181,6 +188,9 @@ def detect_spectral_aliasing(
 
 
 @register_atom(witness_validate_parseval_energy)
+@icontract.require(lambda time_domain: np.asarray(time_domain).size > 0, "time_domain must be non-empty")
+@icontract.require(lambda freq_domain: np.asarray(freq_domain).size > 0, "freq_domain must be non-empty")
+@icontract.ensure(lambda result: result[0] >= 0.0, "relative error must be non-negative")
 def validate_parseval_energy(
     time_domain: np.ndarray,
     freq_domain: np.ndarray,
@@ -220,6 +230,9 @@ def validate_parseval_energy(
 
 
 @register_atom(witness_check_inverse_reconstruction)
+@icontract.require(lambda original: np.asarray(original).size > 0, "original signal must be non-empty")
+@icontract.require(lambda original, reconstructed: np.asarray(original).shape == np.asarray(reconstructed).shape, "signals must have matching shape")
+@icontract.ensure(lambda result: result[0] >= 0.0, "relative error must be non-negative")
 def check_inverse_reconstruction(
     original: np.ndarray,
     reconstructed: np.ndarray,

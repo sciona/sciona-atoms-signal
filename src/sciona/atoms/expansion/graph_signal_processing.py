@@ -12,6 +12,7 @@ quality diagnostics:
 from __future__ import annotations
 
 import numpy as np
+import icontract
 from sciona.ghost.abstract import AbstractArray, AbstractScalar
 from sciona.ghost.registry import register_atom
 
@@ -64,6 +65,9 @@ def witness_validate_filter_response(
 
 
 @register_atom(witness_validate_graph_connectivity)
+@icontract.require(lambda adjacency: np.asarray(adjacency).ndim == 2, "adjacency must be 2-D")
+@icontract.require(lambda adjacency: np.asarray(adjacency).shape[0] == np.asarray(adjacency).shape[1], "adjacency must be square")
+@icontract.ensure(lambda result: result[0] >= 0, "component count must be non-negative")
 def validate_graph_connectivity(
     adjacency: np.ndarray,
 ) -> tuple[int, bool]:
@@ -115,6 +119,10 @@ def validate_graph_connectivity(
 
 
 @register_atom(witness_check_laplacian_symmetry)
+@icontract.require(lambda laplacian: np.asarray(laplacian).ndim == 2, "laplacian must be 2-D")
+@icontract.require(lambda laplacian: np.asarray(laplacian).shape[0] == np.asarray(laplacian).shape[1], "laplacian must be square")
+@icontract.require(lambda tolerance: tolerance >= 0.0, "tolerance must be non-negative")
+@icontract.ensure(lambda result: result[0] >= 0.0, "asymmetry must be non-negative")
 def check_laplacian_symmetry(
     laplacian: np.ndarray,
     tolerance: float = 1e-10,
@@ -150,6 +158,9 @@ def check_laplacian_symmetry(
 
 
 @register_atom(witness_analyze_spectral_gap)
+@icontract.require(lambda eigenvalues: np.asarray(eigenvalues).size >= 2, "at least two eigenvalues are required")
+@icontract.require(lambda eigenvalues: bool(np.all(np.isfinite(np.asarray(eigenvalues, dtype=np.float64)))), "eigenvalues must be finite")
+@icontract.ensure(lambda result: result[0] >= 0.0, "spectral gap must be non-negative")
 def analyze_spectral_gap(
     eigenvalues: np.ndarray,
 ) -> tuple[float, bool]:
@@ -181,6 +192,9 @@ def analyze_spectral_gap(
 
 
 @register_atom(witness_validate_filter_response)
+@icontract.require(lambda filter_response: np.asarray(filter_response).size > 0, "filter_response must be non-empty")
+@icontract.require(lambda filter_response, eigenvalues: np.asarray(filter_response).size == np.asarray(eigenvalues).size, "response and eigenvalue counts must match")
+@icontract.ensure(lambda result: result[0] >= 0.0, "max gain must be non-negative")
 def validate_filter_response(
     filter_response: np.ndarray,
     eigenvalues: np.ndarray,

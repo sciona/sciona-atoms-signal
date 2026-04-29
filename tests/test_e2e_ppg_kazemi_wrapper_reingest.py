@@ -10,6 +10,7 @@ from sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper import wrapperpredict
 
 ROOT = Path(__file__).resolve().parents[1]
 ATOM = "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapperpredictionsignalcomputation"
+REFERENCE_ATOM = "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.atoms.wrapperpredictionsignalcomputation"
 
 
 def test_wrapper_prediction_signal_computation_extracts_source_aligned_peak_indices() -> None:
@@ -75,7 +76,7 @@ def test_kazemi_wrapper_reingest_metadata_marks_atom_publishable() -> None:
             / "src/sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper/references.json"
         ).read_text()
     )
-    reference_key = next(key for key in refs["atoms"] if key.startswith(f"{ATOM}@"))
+    reference_key = next(key for key in refs["atoms"] if key.startswith(f"{REFERENCE_ATOM}@"))
     ref_ids = {ref["ref_id"] for ref in refs["atoms"][reference_key]["references"]}
     assert {"kazemi2022ppg", "feli2023pipeline", "repo_e2e_ppg"} <= ref_ids
 

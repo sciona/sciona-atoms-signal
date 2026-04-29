@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "atoms": {
-    "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.signalarraynormalization@sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper/atoms.py:97": {
+    "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.atoms.signalarraynormalization@sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper/atoms.py:97": {
       "references": [
         {
           "ref_id": "kazemi2022ppg",
@@ -36,7 +36,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapperpredictionsignalcomputation@sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper/atoms.py:43": {
+    "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.atoms.wrapperpredictionsignalcomputation@sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper/atoms.py:43": {
       "references": [
         {
           "ref_id": "kazemi2022ppg",

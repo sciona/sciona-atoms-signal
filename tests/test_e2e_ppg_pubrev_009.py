@@ -28,6 +28,12 @@ def _load_bundle() -> dict:
     return _load_json("data/review_bundles/e2e_ppg.review_bundle.json")
 
 
+def _package_atom_fqdn(reference_key: str) -> str:
+    fqdn = reference_key.split("@", 1)[0]
+    prefix, _, suffix = fqdn.rpartition(".atoms.")
+    return f"{prefix}.{suffix}" if prefix else fqdn
+
+
 def test_pubrev_009_bundle_marks_safe_atoms_reference_ready() -> None:
     rows = {row["atom_key"]: row for row in _load_bundle()["rows"]}
 
@@ -52,10 +58,7 @@ def test_pubrev_009_references_cover_safe_atoms() -> None:
     heart_cycle_refs = _load_json("src/sciona/atoms/signal_processing/e2e_ppg/heart_cycle/references.json")
     kazemi_refs = _load_json("src/sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper/references.json")
 
-    reference_keys = {
-        key.split("@", 1)[0]
-        for key in set(heart_cycle_refs["atoms"]) | set(kazemi_refs["atoms"])
-    }
+    reference_keys = {_package_atom_fqdn(key) for key in set(heart_cycle_refs["atoms"]) | set(kazemi_refs["atoms"])}
     for atom_key in PUBLISHABLE_ATOMS:
         assert atom_key in reference_keys
 

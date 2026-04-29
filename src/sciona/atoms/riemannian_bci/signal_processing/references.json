@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "atoms": {
-    "sciona.atoms.riemannian_bci.signal_processing.atoms.segment_max_aggregation@sciona/atoms/riemannian_bci/signal_processing/atoms.py:22": {
+    "sciona.atoms.riemannian_bci.signal_processing.atoms.segment_max_aggregation@sciona/atoms/riemannian_bci/signal_processing/atoms.py:31": {
       "references": [
         {
           "ref_id": "repo_barachant_seizure",
@@ -16,7 +16,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.riemannian_bci.signal_processing.atoms.ranked_prediction_blend@sciona/atoms/riemannian_bci/signal_processing/atoms.py:70": {
+    "sciona.atoms.riemannian_bci.signal_processing.atoms.ranked_prediction_blend@sciona/atoms/riemannian_bci/signal_processing/atoms.py:87": {
       "references": [
         {
           "ref_id": "repo_barachant_seizure",

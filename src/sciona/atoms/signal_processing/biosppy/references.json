@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "atoms": {
-    "sciona.atoms.signal_processing.biosppy.ecg.heart_rate_computation_median_smoothed": {
+    "sciona.atoms.signal_processing.biosppy.atoms.heart_rate_computation_median_smoothed@sciona/atoms/signal_processing/biosppy/ecg.py:321": {
       "references": [
         {
           "ref_id": "repo_biosppy",
@@ -16,7 +16,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal_processing.biosppy.ecg.reject_outlier_intervals": {
+    "sciona.atoms.signal_processing.biosppy.atoms.reject_outlier_intervals@sciona/atoms/signal_processing/biosppy/ecg.py:241": {
       "references": [
         {
           "ref_id": "repo_biosppy",

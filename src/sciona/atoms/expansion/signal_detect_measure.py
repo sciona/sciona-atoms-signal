@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import numpy as np
+import icontract
 from sciona.ghost.abstract import AbstractArray, AbstractScalar
 from sciona.ghost.registry import register_atom
 
@@ -51,6 +52,9 @@ def witness_estimate_false_positive_rate(
 
 
 @register_atom(witness_estimate_snr)
+@icontract.require(lambda signal: np.asarray(signal).size >= 2, "signal must contain at least two samples")
+@icontract.require(lambda signal: bool(np.all(np.isfinite(np.asarray(signal, dtype=np.float64)))), "signal must be finite")
+@icontract.ensure(lambda result: np.isfinite(result[0]) or result[0] == float("inf"), "SNR must be finite or positive infinity")
 def estimate_snr(
     signal: np.ndarray,
     noise_floor: float = 0.0,
@@ -76,6 +80,9 @@ def estimate_snr(
 
 
 @register_atom(witness_analyze_peak_threshold_sensitivity)
+@icontract.require(lambda peaks: np.asarray(peaks).size > 0, "peaks must be non-empty")
+@icontract.require(lambda threshold: np.isfinite(threshold), "threshold must be finite")
+@icontract.ensure(lambda result: 0.0 <= result[0] <= 1.0, "sensitivity must be a fraction")
 def analyze_peak_threshold_sensitivity(
     peaks: np.ndarray,
     threshold: float,
@@ -93,6 +100,9 @@ def analyze_peak_threshold_sensitivity(
 
 
 @register_atom(witness_check_event_rate_stationarity)
+@icontract.require(lambda event_times: np.asarray(event_times).size >= 2, "at least two event times are required")
+@icontract.require(lambda n_bins: isinstance(n_bins, (int, np.integer)), "n_bins must be integer-like")
+@icontract.ensure(lambda result: result[0] >= 0.0, "coefficient of variation must be non-negative")
 def check_event_rate_stationarity(
     event_times: np.ndarray,
     n_bins: int = 10,
@@ -122,6 +132,9 @@ def check_event_rate_stationarity(
 
 
 @register_atom(witness_estimate_false_positive_rate)
+@icontract.require(lambda detected_amplitudes: np.asarray(detected_amplitudes).size > 0, "detected_amplitudes must be non-empty")
+@icontract.require(lambda noise_std: noise_std > 0.0, "noise_std must be positive")
+@icontract.ensure(lambda result: 0.0 <= result[0] <= 1.0, "false positive rate must be a fraction")
 def estimate_false_positive_rate(
     detected_amplitudes: np.ndarray,
     noise_std: float,

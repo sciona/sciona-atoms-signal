@@ -47,8 +47,8 @@ def test_neurokit2_references_map_to_live_atom_fqdns() -> None:
         (ROOT / "src/sciona/atoms/signal_processing/neurokit2/references.json").read_text()
     )
     assert set(references["atoms"]) == {
-        "sciona.atoms.signal_processing.neurokit2.averageqrstemplate@sciona/atoms/signal_processing/neurokit2/atoms.py:43",
-        "sciona.atoms.signal_processing.neurokit2.zhao2018hrvanalysis@sciona/atoms/signal_processing/neurokit2/atoms.py:21",
+        "sciona.atoms.signal_processing.neurokit2.atoms.averageqrstemplate@sciona/atoms/signal_processing/neurokit2/atoms.py:43",
+        "sciona.atoms.signal_processing.neurokit2.atoms.zhao2018hrvanalysis@sciona/atoms/signal_processing/neurokit2/atoms.py:21",
     }
 
 

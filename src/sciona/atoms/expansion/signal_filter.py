@@ -12,6 +12,7 @@ application diagnostics:
 from __future__ import annotations
 
 import numpy as np
+import icontract
 from sciona.ghost.abstract import AbstractArray, AbstractScalar
 from sciona.ghost.registry import register_atom
 
@@ -65,6 +66,9 @@ def witness_detect_transient_response(
 
 
 @register_atom(witness_analyze_pole_stability)
+@icontract.require(lambda poles: np.asarray(poles).size > 0, "poles must be non-empty")
+@icontract.require(lambda margin: margin >= 0.0, "margin must be non-negative")
+@icontract.ensure(lambda result: result[0] >= 0.0, "max pole magnitude must be non-negative")
 def analyze_pole_stability(
     poles: np.ndarray,
     margin: float = 0.01,
@@ -98,6 +102,10 @@ def analyze_pole_stability(
 
 
 @register_atom(witness_measure_passband_ripple)
+@icontract.require(lambda freq_response_db: np.asarray(freq_response_db).size > 0, "freq_response_db must be non-empty")
+@icontract.require(lambda passband_mask: np.asarray(passband_mask).size > 0, "passband_mask must be non-empty")
+@icontract.require(lambda passband_mask: bool(np.any(np.asarray(passband_mask, dtype=bool))), "passband_mask must select samples")
+@icontract.ensure(lambda result: result[0] >= 0.0, "ripple must be non-negative")
 def measure_passband_ripple(
     freq_response_db: np.ndarray,
     passband_mask: np.ndarray,
@@ -136,6 +144,9 @@ def measure_passband_ripple(
 
 
 @register_atom(witness_analyze_group_delay_variation)
+@icontract.require(lambda group_delay: np.asarray(group_delay).size >= 2, "group_delay must contain at least two samples")
+@icontract.require(lambda group_delay: int(np.sum(np.isfinite(np.asarray(group_delay, dtype=np.float64)))) >= 2, "group_delay must contain at least two finite samples")
+@icontract.ensure(lambda result: result[0] >= 0.0, "delay variation must be non-negative")
 def analyze_group_delay_variation(
     group_delay: np.ndarray,
 ) -> tuple[float, bool]:
@@ -169,6 +180,10 @@ def analyze_group_delay_variation(
 
 
 @register_atom(witness_detect_transient_response)
+@icontract.require(lambda output: np.asarray(output).size >= 4, "output must contain at least four samples")
+@icontract.require(lambda output: bool(np.all(np.isfinite(np.asarray(output, dtype=np.float64)))), "output must be finite")
+@icontract.require(lambda n_transient_samples: n_transient_samples >= 0, "n_transient_samples must be non-negative")
+@icontract.ensure(lambda result: result[0] >= 0 and 0.0 <= result[1] <= 1.0, "transient length and energy fraction must be bounded")
 def detect_transient_response(
     output: np.ndarray,
     n_transient_samples: int = 0,

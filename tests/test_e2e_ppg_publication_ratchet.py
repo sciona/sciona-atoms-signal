@@ -33,15 +33,15 @@ def test_e2e_ppg_publication_bundle_rows() -> None:
     _load_json("src/sciona/atoms/signal_processing/e2e_ppg/template_matching/matches.json")
 
     assert set(gan_refs["atoms"]) == {
-        "sciona.atoms.signal_processing.e2e_ppg.gan_reconstruction.generatereconstructedppg@sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/atoms.py:22",
-        "sciona.atoms.signal_processing.e2e_ppg.gan_reconstruction.gan_reconstruction@sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/atoms.py:47",
+        "sciona.atoms.signal_processing.e2e_ppg.gan_reconstruction.atoms.generatereconstructedppg@sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/atoms.py:22",
+        "sciona.atoms.signal_processing.e2e_ppg.gan_reconstruction.atoms.gan_reconstruction@sciona/atoms/signal_processing/e2e_ppg/gan_reconstruction/atoms.py:47",
     }
     assert set(template_refs["atoms"]) == {
-        "sciona.atoms.signal_processing.e2e_ppg.template_matching.templatefeaturecomputation@sciona/atoms/signal_processing/e2e_ppg/template_matching/atoms.py:16",
+        "sciona.atoms.signal_processing.e2e_ppg.template_matching.atoms.templatefeaturecomputation@sciona/atoms/signal_processing/e2e_ppg/template_matching/atoms.py:16",
     }
     assert set(d12_refs["atoms"]) == {
-        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.normalizesignal@sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper_d12/atoms.py:25",
-        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.wrapperevaluate@sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper_d12/atoms.py:34",
+        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.atoms.normalizesignal@sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper_d12/atoms.py:25",
+        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.atoms.wrapperevaluate@sciona/atoms/signal_processing/e2e_ppg/kazemi_wrapper_d12/atoms.py:34",
     }
     assert {row["atom_key"] for row in bundle["rows"]} == {
         "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.detect_heart_cycles",

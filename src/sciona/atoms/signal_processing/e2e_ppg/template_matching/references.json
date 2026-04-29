@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "atoms": {
-    "sciona.atoms.signal_processing.e2e_ppg.template_matching.templatefeaturecomputation@sciona/atoms/signal_processing/e2e_ppg/template_matching/atoms.py:16": {
+    "sciona.atoms.signal_processing.e2e_ppg.template_matching.atoms.templatefeaturecomputation@sciona/atoms/signal_processing/e2e_ppg/template_matching/atoms.py:16": {
       "references": [
         {
           "ref_id": "kazemi2022ppg",
