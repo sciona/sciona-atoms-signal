@@ -1,0 +1,245 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.time_series_features.rolling_window_features@sciona/atoms/time_series_features/atoms.py:81": {
+      "references": [
+        {
+          "ref_id": "sciona2026timeseriesfeatures",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Local report specifies same-length rolling statistics with leading NaN alignment."
+          }
+        },
+        {
+          "ref_id": "rigtorp2011rolling",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Source context for NumPy sliding-window views over time-series arrays."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.time_series_features.create_lag_features@sciona/atoms/time_series_features/atoms.py:114": {
+      "references": [
+        {
+          "ref_id": "sciona2026timeseriesfeatures",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Local report specifies causal lag columns with boundary NaN fill."
+          }
+        },
+        {
+          "ref_id": "maguire2020numpyfeature",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "NumPy feature-engineering reference for lag construction."
+          }
+        },
+        {
+          "ref_id": "numpy_roll_docs",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Documents the circular behavior intentionally avoided to prevent leakage."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.time_series_features.technical_indicators_macd@sciona/atoms/time_series_features/atoms.py:133": {
+      "references": [
+        {
+          "ref_id": "sciona2026timeseriesfeatures",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Local report identifies MACD as the technical-indicator atom built from cascading exponential moving averages."
+          }
+        },
+        {
+          "ref_id": "numpy_docs",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Implementation uses deterministic NumPy array arithmetic."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.time_series_features.seasonal_decompose_additive@sciona/atoms/time_series_features/atoms.py:152": {
+      "references": [
+        {
+          "ref_id": "sciona2026timeseriesfeatures",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Local report specifies additive decomposition via centered moving averages and repeated seasonal offsets."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.time_series_features.grouped_temporal_diff@sciona/atoms/time_series_features/atoms.py:184": {
+      "references": [
+        {
+          "ref_id": "sciona2026timeseriesfeatures",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Local report specifies temporal differences masked at entity boundaries."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.time_series_features.entity_time_aggregate@sciona/atoms/time_series_features/atoms.py:210": {
+      "references": [
+        {
+          "ref_id": "sciona2026timeseriesfeatures",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Local report specifies entity-level statistical summaries from aligned temporal arrays."
+          }
+        },
+        {
+          "ref_id": "stackoverflow2018numpygroupby",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Reference context for NumPy grouping and aggregation patterns."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.time_series_features.forward_fill@sciona/atoms/time_series_features/atoms.py:244": {
+      "references": [
+        {
+          "ref_id": "sciona2026timeseriesfeatures",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Local report specifies forward-fill with index accumulation maps."
+          }
+        },
+        {
+          "ref_id": "stackoverflow2016ffill",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "medium",
+            "notes": "Reference for a pure NumPy forward-fill indexing pattern."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.time_series_features.log1p_transform@sciona/atoms/time_series_features/atoms.py:265": {
+      "references": [
+        {
+          "ref_id": "sciona2026timeseriesfeatures",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Local report specifies log1p for skewed time-series features."
+          }
+        },
+        {
+          "ref_id": "numpy_docs",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "NumPy documentation covers log1p precision and array semantics."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.time_series_features.expm1_inverse@sciona/atoms/time_series_features/atoms.py:274": {
+      "references": [
+        {
+          "ref_id": "sciona2026timeseriesfeatures",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Prompted as the inverse transform paired with log1p time-series preprocessing."
+          }
+        },
+        {
+          "ref_id": "numpy_docs",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "NumPy documentation covers expm1 precision and array semantics."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.time_series_features.exogenous_feature_concat@sciona/atoms/time_series_features/atoms.py:284": {
+      "references": [
+        {
+          "ref_id": "sciona2026timeseriesfeatures",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Local report specifies broadcasting static exogenous regressors across the time axis."
+          }
+        },
+        {
+          "ref_id": "numpy_docs",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Implementation uses NumPy repeat and concatenate operations."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "nodes": [
+    {
+      "node_id": "time_series_features_root",
+      "name": "Time Series Features",
+      "description": "Pure feature engineering, preprocessing, and aggregation atoms for aligned time series.",
+      "concept_type": "signal_transform",
+      "status": "decomposed",
+      "children": [
+        "rolling_window_features",
+        "create_lag_features",
+        "technical_indicators_macd",
+        "seasonal_decompose_additive",
+        "grouped_temporal_diff",
+        "entity_time_aggregate",
+        "forward_fill",
+        "log1p_transform",
+        "expm1_inverse",
+        "exogenous_feature_concat"
+      ],
+      "depth": 0
+    },
+    {
+      "node_id": "rolling_window_features",
+      "name": "rolling_window_features",
+      "description": "Compute same-length rolling mean, standard deviation, minimum, and maximum features.",
+      "concept_type": "signal_transform",
+      "status": "atomic",
+      "type_signature": "(series: NDArray[np.float64], window_size: int, statistics: list[str]) -> NDArray[np.float64]",
+      "depth": 1,
+      "inputs": [
+        {"name": "series", "type_desc": "NDArray[np.float64]", "required": true},
+        {"name": "window_size", "type_desc": "int", "required": true},
+        {"name": "statistics", "type_desc": "list[str]", "required": true}
+      ],
+      "outputs": [
+        {"name": "result", "type_desc": "NDArray[np.float64]"}
+      ]
+    },
+    {
+      "node_id": "create_lag_features",
+      "name": "create_lag_features",
+      "description": "Create strictly causal lag columns without circular wraparound.",
+      "concept_type": "signal_transform",
+      "status": "atomic",
+      "type_signature": "(values: NDArray[np.float64], lags: list[int]) -> NDArray[np.float64]",
+      "depth": 1,
+      "inputs": [
+        {"name": "values", "type_desc": "NDArray[np.float64]", "required": true},
+        {"name": "lags", "type_desc": "list[int]", "required": true}
+      ],
+      "outputs": [
+        {"name": "result", "type_desc": "NDArray[np.float64]"}
+      ]
+    },
+    {
+      "node_id": "technical_indicators_macd",
+      "name": "technical_indicators_macd",
+      "description": "Compute MACD, signal line, and histogram from exponential moving averages.",
+      "concept_type": "signal_transform",
+      "status": "atomic",
+      "type_signature": "(prices: NDArray[np.float64], fast: int, slow: int, signal: int) -> tuple[NDArray[np.float64], NDArray[np.float64], NDArray[np.float64]]",
+      "depth": 1,
+      "inputs": [
+        {"name": "prices", "type_desc": "NDArray[np.float64]", "required": true},
+        {"name": "fast", "type_desc": "int", "required": true},
+        {"name": "slow", "type_desc": "int", "required": true},
+        {"name": "signal", "type_desc": "int", "required": true}
+      ],
+      "outputs": [
+        {"name": "result", "type_desc": "tuple[NDArray[np.float64], NDArray[np.float64], NDArray[np.float64]]"}
+      ]
+    },
+    {
+      "node_id": "seasonal_decompose_additive",
+      "name": "seasonal_decompose_additive",
+      "description": "Split a series into additive trend, seasonal, and residual components.",
+      "concept_type": "analysis",
+      "status": "atomic",
+      "type_signature": "(series: NDArray[np.float64], period: int) -> tuple[NDArray[np.float64], NDArray[np.float64], NDArray[np.float64]]",
+      "depth": 1,
+      "inputs": [
+        {"name": "series", "type_desc": "NDArray[np.float64]", "required": true},
+        {"name": "period", "type_desc": "int", "required": true}
+      ],
+      "outputs": [
+        {"name": "result", "type_desc": "tuple[NDArray[np.float64], NDArray[np.float64], NDArray[np.float64]]"}
+      ]
+    },
+    {
+      "node_id": "grouped_temporal_diff",
+      "name": "grouped_temporal_diff",
+      "description": "Compute temporal differences without crossing entity boundaries.",
+      "concept_type": "signal_transform",
+      "status": "atomic",
+      "type_signature": "(values: NDArray[np.float64], entity_ids: NDArray[np.int64], periods: int) -> NDArray[np.float64]",
+      "depth": 1,
+      "inputs": [
+        {"name": "values", "type_desc": "NDArray[np.float64]", "required": true},
+        {"name": "entity_ids", "type_desc": "NDArray[np.int64]", "required": true},
+        {"name": "periods", "type_desc": "int", "required": true}
+      ],
+      "outputs": [
+        {"name": "result", "type_desc": "NDArray[np.float64]"}
+      ]
+    },
+    {
+      "node_id": "entity_time_aggregate",
+      "name": "entity_time_aggregate",
+      "description": "Aggregate aligned time-series values into sorted entity-level summaries.",
+      "concept_type": "data_assembly",
+      "status": "atomic",
+      "type_signature": "(values: NDArray[np.float64], entity_ids: NDArray[np.int64], agg_fns: list[str]) -> NDArray[np.float64]",
+      "depth": 1,
+      "inputs": [
+        {"name": "values", "type_desc": "NDArray[np.float64]", "required": true},
+        {"name": "entity_ids", "type_desc": "NDArray[np.int64]", "required": true},
+        {"name": "agg_fns", "type_desc": "list[str]", "required": true}
+      ],
+      "outputs": [
+        {"name": "result", "type_desc": "NDArray[np.float64]"}
+      ]
+    },
+    {
+      "node_id": "forward_fill",
+      "name": "forward_fill",
+      "description": "Propagate the last observed finite value forward along a time axis.",
+      "concept_type": "signal_transform",
+      "status": "atomic",
+      "type_signature": "(series: NDArray[np.float64], axis: int = 0) -> NDArray[np.float64]",
+      "depth": 1,
+      "inputs": [
+        {"name": "series", "type_desc": "NDArray[np.float64]", "required": true},
+        {"name": "axis", "type_desc": "int", "required": false}
+      ],
+      "outputs": [
+        {"name": "result", "type_desc": "NDArray[np.float64]"}
+      ]
+    },
+    {
+      "node_id": "log1p_transform",
+      "name": "log1p_transform",
+      "description": "Apply a high-precision natural logarithm of one plus each value.",
+      "concept_type": "signal_transform",
+      "status": "atomic",
+      "type_signature": "(values: NDArray[np.float64]) -> NDArray[np.float64]",
+      "depth": 1,
+      "inputs": [
+        {"name": "values", "type_desc": "NDArray[np.float64]", "required": true}
+      ],
+      "outputs": [
+        {"name": "result", "type_desc": "NDArray[np.float64]"}
+      ]
+    },
+    {
+      "node_id": "expm1_inverse",
+      "name": "expm1_inverse",
+      "description": "Invert a log1p transform with exponential minus one.",
+      "concept_type": "signal_transform",
+      "status": "atomic",
+      "type_signature": "(values: NDArray[np.float64]) -> NDArray[np.float64]",
+      "depth": 1,
+      "inputs": [
+        {"name": "values", "type_desc": "NDArray[np.float64]", "required": true}
+      ],
+      "outputs": [
+        {"name": "result", "type_desc": "NDArray[np.float64]"}
+      ]
+    },
+    {
+      "node_id": "exogenous_feature_concat",
+      "name": "exogenous_feature_concat",
+      "description": "Broadcast static exogenous features across time and append them to a sequence matrix.",
+      "concept_type": "data_assembly",
+      "status": "atomic",
+      "type_signature": "(sequence: NDArray[np.float64], exogenous_features: NDArray[np.float64]) -> NDArray[np.float64]",
+      "depth": 1,
+      "inputs": [
+        {"name": "sequence", "type_desc": "NDArray[np.float64]", "required": true},
+        {"name": "exogenous_features", "type_desc": "NDArray[np.float64]", "required": true}
+      ],
+      "outputs": [
+        {"name": "result", "type_desc": "NDArray[np.float64]"}
+      ]
+    }
+  ],
+  "edges": [],
+  "metadata": {
+    "source": "manual",
+    "family": "time_series_features"
+  }
+}

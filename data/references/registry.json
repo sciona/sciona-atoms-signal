@@ -528,6 +528,102 @@
         "notes": "Reference for a compact CTC prefix beam-search implementation pattern."
       }
     },
+    "sciona2026timeseriesfeatures": {
+      "ref_id": "sciona2026timeseriesfeatures",
+      "type": "internal_research_report",
+      "title": "Time Series Feature Engineering Atoms Research",
+      "authors": ["Sciona research process"],
+      "year": 2026,
+      "venue": "sciona-atoms research/14_research.pdf",
+      "url": "file:///Users/conrad/personal/sciona-atoms/research/14_research.pdf",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Local research report defining pure NumPy time-series feature atoms for sciona-atoms-signal."
+      }
+    },
+    "rigtorp2011rolling": {
+      "ref_id": "rigtorp2011rolling",
+      "type": "article",
+      "title": "Efficient Rolling Statistics With NumPy",
+      "authors": ["Erik Rigtorp"],
+      "year": 2011,
+      "venue": "rigtorp.se",
+      "url": "https://rigtorp.se/2011/01/01/rolling-statistics-numpy.html",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "medium",
+        "notes": "Reference for strided rolling-window views used to compute rolling statistics."
+      }
+    },
+    "maguire2020numpyfeature": {
+      "ref_id": "maguire2020numpyfeature",
+      "type": "article",
+      "title": "Numpy Feature Engineering - 2x Speed Up Over Pandas!",
+      "authors": ["Andrew Maguire"],
+      "year": 2020,
+      "venue": "andrewm4894.com",
+      "url": "https://andrewm4894.com/2020/10/15/numpy-feature-engineering-2x-speed-up-over-pandas/",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "medium",
+        "notes": "Reference for NumPy lag-feature construction without DataFrame state."
+      }
+    },
+    "numpy_roll_docs": {
+      "ref_id": "numpy_roll_docs",
+      "type": "documentation",
+      "title": "numpy.roll",
+      "authors": ["NumPy Developers"],
+      "year": 2026,
+      "venue": "NumPy documentation",
+      "url": "https://numpy.org/doc/stable/reference/generated/numpy.roll.html",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "medium",
+        "notes": "Documents circular shift behavior avoided by the causal lag atom."
+      }
+    },
+    "stackoverflow2016ffill": {
+      "ref_id": "stackoverflow2016ffill",
+      "type": "discussion",
+      "title": "Most efficient way to forward-fill NaN values in numpy array",
+      "authors": ["Stack Overflow contributors"],
+      "year": 2016,
+      "venue": "Stack Overflow",
+      "url": "https://stackoverflow.com/questions/41190852/most-efficient-way-to-forward-fill-nan-values-in-numpy-array",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "medium",
+        "notes": "Reference for index accumulation maps used to forward-fill missing values."
+      }
+    },
+    "stackoverflow2018numpygroupby": {
+      "ref_id": "stackoverflow2018numpygroupby",
+      "type": "discussion",
+      "title": "Vectorized groupby with NumPy",
+      "authors": ["Stack Overflow contributors"],
+      "year": 2018,
+      "venue": "Stack Overflow",
+      "url": "https://stackoverflow.com/questions/49141969/vectorized-groupby-with-numpy",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "medium",
+        "notes": "Reference for grouping arrays by entity identifiers before aggregation."
+      }
+    },
     "zhao2018ecgsqi": {
       "ref_id": "zhao2018ecgsqi",
       "type": "paper",
