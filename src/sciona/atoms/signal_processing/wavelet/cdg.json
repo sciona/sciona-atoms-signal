@@ -1,0 +1,68 @@
+{
+  "nodes": [
+    {
+      "node_id": "wavelet_denoise",
+      "parent_id": null,
+      "name": "WaveletDenoise",
+      "description": "Denoise a 1D signal using discrete wavelet transform with universal thresholding.",
+      "concept_type": "signal_filter",
+      "aliases": ["wavelet_denoising", "dwt_denoise", "signal_denoising"],
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "1-D numeric signal",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "wavelet",
+          "type_desc": "str",
+          "constraints": "valid pywt wavelet name",
+          "required": false,
+          "default_value_repr": "\"db4\""
+        },
+        {
+          "name": "level",
+          "type_desc": "int",
+          "constraints": ">= 1",
+          "required": false,
+          "default_value_repr": "4"
+        },
+        {
+          "name": "threshold_mode",
+          "type_desc": "str",
+          "constraints": "\"soft\" or \"hard\"",
+          "required": false,
+          "default_value_repr": "\"soft\""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "denoised_signal",
+          "type_desc": "NDArray[np.float64]",
+          "constraints": "same shape as input signal",
+          "required": true,
+          "default_value_repr": ""
+        }
+      ],
+      "status": "atomic",
+      "children": [],
+      "depth": 0,
+      "type_signature": "(signal: NDArray[np.float64], wavelet: str, level: int, threshold_mode: str) -> NDArray[np.float64]",
+      "matched_primitive": null,
+      "is_optional": false,
+      "is_opaque": false,
+      "is_external": false,
+      "parallelizable": true,
+      "conceptual_summary": "DWT-based denoising with universal thresholding on detail coefficients.",
+      "critic_notes": "",
+      "decomposition_rationale": "Leaf atom — single pure function."
+    }
+  ],
+  "edges": [],
+  "metadata": {
+    "source": "hand_authored",
+    "class_name": "WaveletDenoise"
+  }
+}
