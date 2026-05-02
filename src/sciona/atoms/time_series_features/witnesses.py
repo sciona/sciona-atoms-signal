@@ -115,3 +115,16 @@ def witness_exogenous_feature_concat(
         shape=(sequence.shape[0], sequence.shape[1] + exogenous_features.shape[0]),
         dtype="float64",
     )
+
+
+def witness_interpolate_to_timestamps(
+    source_times: AbstractArray,
+    source_values: AbstractArray,
+    target_times: AbstractArray,
+) -> AbstractArray:
+    """Describe linearly interpolated values at target timestamps."""
+    if source_times.shape != source_values.shape:
+        raise ValueError("source_times and source_values must have equal shape")
+    if source_times.shape[0] < 2:
+        raise ValueError("source_times must contain at least two samples")
+    return AbstractArray(shape=target_times.shape, dtype="float64")

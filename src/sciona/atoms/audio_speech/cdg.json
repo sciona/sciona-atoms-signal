@@ -204,7 +204,11 @@
       "parallelizable": true,
       "conceptual_summary": "Floors power values, converts to decibels, and clips the dynamic range.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "aliases": [
+        "audio_feature_extraction",
+        "mel_spectrogram_extraction"
+      ]
     },
     {
       "node_id": "mfcc",

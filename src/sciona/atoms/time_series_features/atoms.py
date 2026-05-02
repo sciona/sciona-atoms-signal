@@ -17,6 +17,7 @@ from .witnesses import (
     witness_expm1_inverse,
     witness_forward_fill,
     witness_grouped_temporal_diff,
+    witness_interpolate_to_timestamps,
     witness_log1p_transform,
     witness_rolling_window_features,
     witness_seasonal_decompose_additive,
@@ -290,3 +291,16 @@ def exogenous_feature_concat(
     static = np.asarray(exogenous_features, dtype=np.float64).reshape(1, -1)
     repeated = np.repeat(static, base.shape[0], axis=0)
     return np.concatenate([base, repeated], axis=1).astype(np.float64)
+
+
+@register_atom(witness_interpolate_to_timestamps)
+@icontract.require(lambda source_times, source_values: len(source_times) == len(source_values), "source_times and source_values must have equal length")
+@icontract.require(lambda source_times: len(source_times) >= 2, "source_times must contain at least two samples")
+@icontract.ensure(lambda result, target_times: len(result) == len(target_times), "result must match target_times length")
+def interpolate_to_timestamps(
+    source_times: NDArray[np.float64],
+    source_values: NDArray[np.float64],
+    target_times: NDArray[np.float64],
+) -> NDArray[np.float64]:
+    """Linearly interpolate signal values to target timestamps."""
+    return np.interp(target_times, source_times, source_values)
