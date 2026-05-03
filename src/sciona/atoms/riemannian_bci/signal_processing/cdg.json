@@ -34,13 +34,43 @@
       "description": "Aggregate windowed predictions by taking element-wise max over overlapping segments.",
       "concept_type": "aggregation",
       "inputs": [
-        {"name": "predictions", "type_desc": "NDArray[float64]", "constraints": "shape (n_windows, n_classes)", "required": true, "default_value_repr": ""},
-        {"name": "window_size", "type_desc": "int", "constraints": ">= 1", "required": true, "default_value_repr": ""},
-        {"name": "stride", "type_desc": "int", "constraints": ">= 1", "required": true, "default_value_repr": ""},
-        {"name": "n_samples", "type_desc": "int", "constraints": ">= 1", "required": true, "default_value_repr": ""}
+        {
+          "name": "predictions",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n_windows, n_classes)",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "window_size",
+          "type_desc": "int",
+          "constraints": ">= 1",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "stride",
+          "type_desc": "int",
+          "constraints": ">= 1",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "n_samples",
+          "type_desc": "int",
+          "constraints": ">= 1",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "outputs": [
-        {"name": "aggregated", "type_desc": "NDArray[float64]", "constraints": "shape (n_samples, n_classes)", "required": true, "default_value_repr": ""}
+        {
+          "name": "aggregated",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n_samples, n_classes)",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "status": "atomic",
       "children": [],
@@ -64,11 +94,29 @@
       "description": "Blend predictions from multiple models by weighted rank-averaging.",
       "concept_type": "ensemble",
       "inputs": [
-        {"name": "predictions", "type_desc": "NDArray[float64]", "constraints": "shape (n_models, n_samples)", "required": true, "default_value_repr": ""},
-        {"name": "weights", "type_desc": "NDArray[float64]", "constraints": "shape (n_models,)", "required": true, "default_value_repr": ""}
+        {
+          "name": "predictions",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n_models, n_samples)",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "weights",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n_models,)",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "outputs": [
-        {"name": "blended", "type_desc": "NDArray[float64]", "constraints": "shape (n_samples,)", "required": true, "default_value_repr": ""}
+        {
+          "name": "blended",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n_samples,)",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "status": "atomic",
       "children": [],
@@ -83,7 +131,21 @@
       "parallelizable": false,
       "conceptual_summary": "Rank-transforms each model's predictions, computes weighted average of ranks, then re-ranks.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "common_patterns": [
+        {
+          "pattern_id": "prediction_averaging",
+          "description": "Average predictions from multiple models",
+          "atoms": [
+            "voting_classifier_soft_probabilities",
+            "voting_regressor_average",
+            "ranked_prediction_blend",
+            "fold_ensemble_average"
+          ],
+          "ordering": "alternatives",
+          "when": "Stage describes ensembling, blending, or averaging model predictions"
+        }
+      ]
     },
     {
       "node_id": "xgb_per_branch_classifier",
@@ -105,7 +167,7 @@
       "is_external": true,
       "parallelizable": false,
       "conceptual_summary": "Conceptual node representing an XGBoost classifier operating on per-branch features in a Riemannian BCI pipeline.",
-      "critic_notes": "External tool node — no implementation provided. Wraps XGBoost.",
+      "critic_notes": "External tool node \u2014 no implementation provided. Wraps XGBoost.",
       "decomposition_rationale": ""
     }
   ],

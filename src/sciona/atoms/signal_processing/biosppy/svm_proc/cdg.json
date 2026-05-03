@@ -489,7 +489,19 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "common_patterns": [
+        {
+          "pattern_id": "cross_validation_with_ensemble",
+          "description": "Split data into CV folds then average out-of-fold predictions",
+          "atoms": [
+            "cross_validation",
+            "fold_ensemble_average"
+          ],
+          "ordering": "sequential",
+          "when": "Stage describes cross-validated training with fold averaging"
+        }
+      ]
     }
   ],
   "edges": [],

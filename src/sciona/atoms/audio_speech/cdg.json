@@ -48,11 +48,28 @@
       "description": "Resample audio along the sample axis using polyphase anti-alias filtering.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "signal", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "orig_sr", "type_desc": "int", "required": true},
-        {"name": "target_sr", "type_desc": "int", "required": true}
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "orig_sr",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "target_sr",
+          "type_desc": "int",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "NDArray[np.float64]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -75,11 +92,28 @@
       "description": "Expose overlapping audio windows as a read-only strided view.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "signal", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "window_size", "type_desc": "int", "required": true},
-        {"name": "hop_size", "type_desc": "int", "required": true}
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "window_size",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "hop_size",
+          "type_desc": "int",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "NDArray[np.float64]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -102,12 +136,33 @@
       "description": "Compute one-sided STFT magnitudes from framed audio.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "signal", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "n_fft", "type_desc": "int", "required": true},
-        {"name": "hop_length", "type_desc": "int", "required": true},
-        {"name": "window", "type_desc": "str", "required": true}
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "n_fft",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "hop_length",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "window",
+          "type_desc": "str",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "NDArray[np.float64]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -130,13 +185,38 @@
       "description": "Build a Slaney-normalized triangular mel filterbank.",
       "concept_type": "signal_filter",
       "inputs": [
-        {"name": "n_mels", "type_desc": "int", "required": true},
-        {"name": "n_fft", "type_desc": "int", "required": true},
-        {"name": "sr", "type_desc": "int", "required": true},
-        {"name": "fmin", "type_desc": "float", "required": true},
-        {"name": "fmax", "type_desc": "float", "required": true}
+        {
+          "name": "n_mels",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "n_fft",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "sr",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "fmin",
+          "type_desc": "float",
+          "required": true
+        },
+        {
+          "name": "fmax",
+          "type_desc": "float",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "NDArray[np.float64]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -150,7 +230,20 @@
       "parallelizable": true,
       "conceptual_summary": "Computes triangular mel weights with Slaney area normalization.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "common_patterns": [
+        {
+          "pattern_id": "mel_spectrogram_pipeline",
+          "description": "Build mel filterbank, project power spectrum, apply log scaling",
+          "atoms": [
+            "mel_filterbank",
+            "apply_mel_filterbank",
+            "log_mel_spectrogram"
+          ],
+          "ordering": "sequential",
+          "when": "Stage describes computing mel spectrogram from audio"
+        }
+      ]
     },
     {
       "node_id": "apply_mel_filterbank",
@@ -159,10 +252,23 @@
       "description": "Project a power spectrogram onto mel bands.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "power_spectrum", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "mel_fb", "type_desc": "NDArray[np.float64]", "required": true}
+        {
+          "name": "power_spectrum",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "mel_fb",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "NDArray[np.float64]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -176,7 +282,20 @@
       "parallelizable": true,
       "conceptual_summary": "Matrix-multiplies mel filters by linear power frames.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "common_patterns": [
+        {
+          "pattern_id": "mel_spectrogram_pipeline",
+          "description": "Build mel filterbank, project power spectrum, apply log scaling",
+          "atoms": [
+            "mel_filterbank",
+            "apply_mel_filterbank",
+            "log_mel_spectrogram"
+          ],
+          "ordering": "sequential",
+          "when": "Stage describes computing mel spectrogram from audio"
+        }
+      ]
     },
     {
       "node_id": "log_mel_spectrogram",
@@ -185,12 +304,33 @@
       "description": "Convert mel power values to a clipped decibel scale.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "mel_spectrum", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "ref", "type_desc": "float", "required": true},
-        {"name": "amin", "type_desc": "float", "required": true},
-        {"name": "top_db", "type_desc": "float", "required": true}
+        {
+          "name": "mel_spectrum",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "ref",
+          "type_desc": "float",
+          "required": true
+        },
+        {
+          "name": "amin",
+          "type_desc": "float",
+          "required": true
+        },
+        {
+          "name": "top_db",
+          "type_desc": "float",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "NDArray[np.float64]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -208,6 +348,19 @@
       "aliases": [
         "audio_feature_extraction",
         "mel_spectrogram_extraction"
+      ],
+      "common_patterns": [
+        {
+          "pattern_id": "mel_spectrogram_pipeline",
+          "description": "Build mel filterbank, project power spectrum, apply log scaling",
+          "atoms": [
+            "mel_filterbank",
+            "apply_mel_filterbank",
+            "log_mel_spectrogram"
+          ],
+          "ordering": "sequential",
+          "when": "Stage describes computing mel spectrogram from audio"
+        }
       ]
     },
     {
@@ -217,10 +370,23 @@
       "description": "Compute DCT-II cepstral coefficients from log-mel features.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "log_mel_spectrum", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "n_mfcc", "type_desc": "int", "required": true}
+        {
+          "name": "log_mel_spectrum",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "n_mfcc",
+          "type_desc": "int",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "NDArray[np.float64]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -243,13 +409,38 @@
       "description": "Apply deterministic contiguous masks along the time axis.",
       "concept_type": "signal_filter",
       "inputs": [
-        {"name": "spectrogram", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "num_masks", "type_desc": "int", "required": true},
-        {"name": "max_width", "type_desc": "int", "required": true},
-        {"name": "mask_value", "type_desc": "float", "required": true},
-        {"name": "rng_seed", "type_desc": "int", "required": true}
+        {
+          "name": "spectrogram",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "num_masks",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "max_width",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "mask_value",
+          "type_desc": "float",
+          "required": true
+        },
+        {
+          "name": "rng_seed",
+          "type_desc": "int",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "NDArray[np.float64]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -272,13 +463,38 @@
       "description": "Apply deterministic contiguous masks along the frequency axis.",
       "concept_type": "signal_filter",
       "inputs": [
-        {"name": "spectrogram", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "num_masks", "type_desc": "int", "required": true},
-        {"name": "max_width", "type_desc": "int", "required": true},
-        {"name": "mask_value", "type_desc": "float", "required": true},
-        {"name": "rng_seed", "type_desc": "int", "required": true}
+        {
+          "name": "spectrogram",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "num_masks",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "max_width",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "mask_value",
+          "type_desc": "float",
+          "required": true
+        },
+        {
+          "name": "rng_seed",
+          "type_desc": "int",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "NDArray[np.float64]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -301,10 +517,23 @@
       "description": "Smooth frame predictions with a centered median filter.",
       "concept_type": "signal_filter",
       "inputs": [
-        {"name": "predictions", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "kernel_size", "type_desc": "int", "required": true}
+        {
+          "name": "predictions",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "kernel_size",
+          "type_desc": "int",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "NDArray[np.float64]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -327,11 +556,28 @@
       "description": "Normalize 48 kHz audio using K-weighted gated loudness.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "signal", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "sr", "type_desc": "int", "required": true},
-        {"name": "target_lufs", "type_desc": "float", "required": true}
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "sr",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "target_lufs",
+          "type_desc": "float",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "NDArray[np.float64]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -354,12 +600,33 @@
       "description": "Apply a stabilized power-ratio soft mask to a complex mixture spectrum.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "target_mag", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "noise_mag", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "mix_complex", "type_desc": "NDArray[np.complex128]", "required": true},
-        {"name": "eps", "type_desc": "float", "required": true}
+        {
+          "name": "target_mag",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "noise_mag",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "mix_complex",
+          "type_desc": "NDArray[np.complex128]",
+          "required": true
+        },
+        {
+          "name": "eps",
+          "type_desc": "float",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "NDArray[np.complex128]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.complex128]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -382,10 +649,23 @@
       "description": "Convert text to phoneme IDs using explicit regex context rules.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "text", "type_desc": "str", "required": true},
-        {"name": "ruleset", "type_desc": "dict[str, tuple[int, str, str]]", "required": true}
+        {
+          "name": "text",
+          "type_desc": "str",
+          "required": true
+        },
+        {
+          "name": "ruleset",
+          "type_desc": "dict[str, tuple[int, str, str]]",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "list[tuple[int, int, int]]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "list[tuple[int, int, int]]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -408,10 +688,23 @@
       "description": "Find a monotonic frame-to-token DTW path from frame probabilities.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "frame_probs", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "phoneme_sequence", "type_desc": "list[int]", "required": true}
+        {
+          "name": "frame_probs",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "phoneme_sequence",
+          "type_desc": "list[int]",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "list[tuple[int, int]]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "list[tuple[int, int]]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -434,11 +727,28 @@
       "description": "Compute a hard monotonic maximum-score path for each batch item.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "value", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "mask", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "max_neg_val", "type_desc": "float", "required": true}
+        {
+          "name": "value",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "mask",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "max_neg_val",
+          "type_desc": "float",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "NDArray[np.float64]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -461,10 +771,23 @@
       "description": "Collapse the highest-probability CTC path into token IDs.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "log_probs", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "blank_id", "type_desc": "int", "required": true}
+        {
+          "name": "log_probs",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "blank_id",
+          "type_desc": "int",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "list[int]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "list[int]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -487,13 +810,38 @@
       "description": "Decode CTC log probabilities with prefix beam search.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "log_probs", "type_desc": "NDArray[np.float64]", "required": true},
-        {"name": "beam_width", "type_desc": "int", "required": true},
-        {"name": "blank_id", "type_desc": "int", "required": true},
-        {"name": "alpha", "type_desc": "float", "required": true},
-        {"name": "beta", "type_desc": "float", "required": true}
+        {
+          "name": "log_probs",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "beam_width",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "blank_id",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "alpha",
+          "type_desc": "float",
+          "required": true
+        },
+        {
+          "name": "beta",
+          "type_desc": "float",
+          "required": true
+        }
       ],
-      "outputs": [{"name": "result", "type_desc": "list[tuple[list[int], float]]"}],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "list[tuple[list[int], float]]"
+        }
+      ],
       "status": "atomic",
       "children": [],
       "depth": 1,
@@ -511,10 +859,26 @@
     }
   ],
   "edges": [
-    {"source": "stft_magnitude", "target": "apply_mel_filterbank", "type": "data"},
-    {"source": "mel_filterbank", "target": "apply_mel_filterbank", "type": "data"},
-    {"source": "apply_mel_filterbank", "target": "log_mel_spectrogram", "type": "data"},
-    {"source": "log_mel_spectrogram", "target": "mfcc", "type": "data"}
+    {
+      "source": "stft_magnitude",
+      "target": "apply_mel_filterbank",
+      "type": "data"
+    },
+    {
+      "source": "mel_filterbank",
+      "target": "apply_mel_filterbank",
+      "type": "data"
+    },
+    {
+      "source": "apply_mel_filterbank",
+      "target": "log_mel_spectrogram",
+      "type": "data"
+    },
+    {
+      "source": "log_mel_spectrogram",
+      "target": "mfcc",
+      "type": "data"
+    }
   ],
   "metadata": {
     "source": "manual",
