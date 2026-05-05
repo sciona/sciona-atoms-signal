@@ -37,8 +37,8 @@
     {
       "rule_name": "insert_passband_ripple_measurement_after_validate",
       "name": "Measure Passband Ripple",
-      "intent": "Quantify passband distortion after stability validation.",
-      "dejargonized_summary": "Add a passband ripple measurement after validating stability.",
+            "intent": "Quantify passband distortion after stability validation for bandpass, Butterworth, whitening, or related filters.",
+            "dejargonized_summary": "Add a passband ripple measurement after validating stability, including Bandpass filtering (1-40 Hz), Butterworth Bandpass Filtering, and Whitening plus Bandpass filtering.",
       "trigger": {
         "metric_name": "passband_ripple_db",
         "comparison": "gt",
