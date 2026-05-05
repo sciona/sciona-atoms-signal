@@ -15,14 +15,24 @@
         "metric_name": "n_graph_components",
         "comparison": "gt",
         "threshold": 1.0,
-        "required_intermediate_keys": ["n_graph_components"]
+        "required_intermediate_keys": [
+          "n_graph_components"
+        ]
       },
-      "action_classes": ["gate_or_validate", "precondition"],
+      "action_classes": [
+        "gate_or_validate",
+        "precondition"
+      ],
       "rewrite": {
         "before_summary": "Graph construction feeds the next graph signal stage directly.",
         "after_summary": "A connectivity validation stage is inserted after graph construction.",
         "information_flow_effect": "Adds graph topology evidence before downstream Laplacian or spectral analysis."
-      }
+      },
+      "operation_id": "sciona.expansions.graph_signal_processing.insert_connectivity_validation_after_build_graph",
+      "operation_type": "validation",
+      "applies_to": "graph_signal_processing.build_graph",
+      "runtime_rule_builder": "insert_connectivity_validation_after_build_graph",
+      "runtime_diagnostic": "n_graph_components"
     },
     {
       "rule_name": "insert_laplacian_symmetry_check_after_compute_laplacian",
@@ -33,14 +43,23 @@
         "metric_name": "laplacian_max_asymmetry",
         "comparison": "gt",
         "threshold": 1e-10,
-        "required_intermediate_keys": ["laplacian_max_asymmetry"]
+        "required_intermediate_keys": [
+          "laplacian_max_asymmetry"
+        ]
       },
-      "action_classes": ["gate_or_validate"],
+      "action_classes": [
+        "gate_or_validate"
+      ],
       "rewrite": {
         "before_summary": "The computed Laplacian feeds the next graph signal stage directly.",
         "after_summary": "A symmetry check is inserted after Laplacian computation.",
         "information_flow_effect": "Adds a structural validity check for the matrix representation."
-      }
+      },
+      "operation_id": "sciona.expansions.graph_signal_processing.insert_laplacian_symmetry_check_after_compute_laplacian",
+      "operation_type": "validation",
+      "applies_to": "graph_signal_processing.compute_laplacian",
+      "runtime_rule_builder": "insert_laplacian_symmetry_check_after_compute_laplacian",
+      "runtime_diagnostic": "laplacian_max_asymmetry"
     },
     {
       "rule_name": "insert_spectral_gap_analysis_after_gft",
@@ -51,14 +70,24 @@
         "metric_name": "spectral_gap",
         "comparison": "lt",
         "threshold": 0.01,
-        "required_intermediate_keys": ["spectral_gap"]
+        "required_intermediate_keys": [
+          "spectral_gap"
+        ]
       },
-      "action_classes": ["gate_or_validate", "branch_and_compare"],
+      "action_classes": [
+        "gate_or_validate",
+        "branch_and_compare"
+      ],
       "rewrite": {
         "before_summary": "The graph Fourier transform feeds graph filtering directly.",
         "after_summary": "A spectral gap analysis stage is inserted after the graph Fourier transform.",
         "information_flow_effect": "Adds connectivity evidence in the graph spectral domain."
-      }
+      },
+      "operation_id": "sciona.expansions.graph_signal_processing.insert_spectral_gap_analysis_after_gft",
+      "operation_type": "diagnostic",
+      "applies_to": "graph_signal_processing.graph_fourier_transform",
+      "runtime_rule_builder": "insert_spectral_gap_analysis_after_gft",
+      "runtime_diagnostic": "spectral_gap"
     },
     {
       "rule_name": "insert_filter_response_validation_after_graph_filter",
@@ -69,14 +98,23 @@
         "metric_name": "max_filter_gain",
         "comparison": "gt",
         "threshold": 100.0,
-        "required_intermediate_keys": ["max_filter_gain"]
+        "required_intermediate_keys": [
+          "max_filter_gain"
+        ]
       },
-      "action_classes": ["gate_or_validate"],
+      "action_classes": [
+        "gate_or_validate"
+      ],
       "rewrite": {
         "before_summary": "Graph filtering feeds the downstream result directly.",
         "after_summary": "A filter-response validation stage is inserted after graph filtering.",
         "information_flow_effect": "Adds stability evidence for the filtered graph signal."
-      }
+      },
+      "operation_id": "sciona.expansions.graph_signal_processing.insert_filter_response_validation_after_graph_filter",
+      "operation_type": "validation",
+      "applies_to": "graph_signal_processing.graph_filter",
+      "runtime_rule_builder": "insert_filter_response_validation_after_graph_filter",
+      "runtime_diagnostic": "max_filter_gain"
     }
   ],
   "audit": {
@@ -91,6 +129,8 @@
         "note": "Rule names and trigger metrics mirror sciona/principal/expansion_rules/graph_signal_processing.py."
       }
     ],
-    "maintainers": ["ageo-matcher"]
+    "maintainers": [
+      "ageo-matcher"
+    ]
   }
 }

@@ -15,14 +15,23 @@
         "metric_name": "window_leakage_ratio",
         "comparison": "gt",
         "threshold": 0.5,
-        "required_intermediate_keys": ["window_leakage_ratio"]
+        "required_intermediate_keys": [
+          "window_leakage_ratio"
+        ]
       },
-      "action_classes": ["gate_or_validate"],
+      "action_classes": [
+        "gate_or_validate"
+      ],
       "rewrite": {
         "before_summary": "Windowing feeds the forward transform path directly.",
         "after_summary": "A window-leakage analysis stage is inserted after windowing.",
         "information_flow_effect": "Adds leakage evidence before spectral interpretation."
-      }
+      },
+      "operation_id": "sciona.expansions.signal_transform.insert_window_leakage_analysis_after_window",
+      "operation_type": "diagnostic",
+      "applies_to": "signal_transform.window",
+      "runtime_rule_builder": "insert_window_leakage_analysis_after_window",
+      "runtime_diagnostic": "window_leakage_ratio"
     },
     {
       "rule_name": "insert_aliasing_detection_after_forward_transform",
@@ -33,14 +42,24 @@
         "metric_name": "alias_energy_fraction",
         "comparison": "gt",
         "threshold": 0.1,
-        "required_intermediate_keys": ["alias_energy_fraction"]
+        "required_intermediate_keys": [
+          "alias_energy_fraction"
+        ]
       },
-      "action_classes": ["gate_or_validate", "precondition"],
+      "action_classes": [
+        "gate_or_validate",
+        "precondition"
+      ],
       "rewrite": {
         "before_summary": "The forward transform feeds spectral processing directly.",
         "after_summary": "A spectral-aliasing detection stage is inserted after the forward transform.",
         "information_flow_effect": "Adds sampling-limit evidence before spectral processing."
-      }
+      },
+      "operation_id": "sciona.expansions.signal_transform.insert_aliasing_detection_after_forward_transform",
+      "operation_type": "validation",
+      "applies_to": "signal_transform.forward_transform",
+      "runtime_rule_builder": "insert_aliasing_detection_after_forward_transform",
+      "runtime_diagnostic": "alias_energy_fraction"
     },
     {
       "rule_name": "insert_parseval_validation_after_spectral_processing",
@@ -50,15 +69,24 @@
       "trigger": {
         "metric_name": "parseval_relative_error",
         "comparison": "gt",
-        "threshold": 1e-6,
-        "required_intermediate_keys": ["parseval_relative_error"]
+        "threshold": 1e-06,
+        "required_intermediate_keys": [
+          "parseval_relative_error"
+        ]
       },
-      "action_classes": ["gate_or_validate"],
+      "action_classes": [
+        "gate_or_validate"
+      ],
       "rewrite": {
         "before_summary": "Spectral processing feeds the inverse or downstream path directly.",
         "after_summary": "A Parseval energy validation stage is inserted after spectral processing.",
         "information_flow_effect": "Adds energy-conservation evidence across domains."
-      }
+      },
+      "operation_id": "sciona.expansions.signal_transform.insert_parseval_validation_after_spectral_processing",
+      "operation_type": "validation",
+      "applies_to": "signal_transform.spectral_processing",
+      "runtime_rule_builder": "insert_parseval_validation_after_spectral_processing",
+      "runtime_diagnostic": "parseval_relative_error"
     },
     {
       "rule_name": "insert_reconstruction_check_after_inverse",
@@ -69,14 +97,23 @@
         "metric_name": "reconstruction_error",
         "comparison": "gt",
         "threshold": 1e-10,
-        "required_intermediate_keys": ["reconstruction_error"]
+        "required_intermediate_keys": [
+          "reconstruction_error"
+        ]
       },
-      "action_classes": ["gate_or_validate"],
+      "action_classes": [
+        "gate_or_validate"
+      ],
       "rewrite": {
         "before_summary": "The inverse transform feeds the downstream result directly.",
         "after_summary": "A reconstruction-quality check is inserted after the inverse transform.",
         "information_flow_effect": "Adds round-trip fidelity evidence for the transformed signal."
-      }
+      },
+      "operation_id": "sciona.expansions.signal_transform.insert_reconstruction_check_after_inverse",
+      "operation_type": "validation",
+      "applies_to": "signal_transform.inverse_transform",
+      "runtime_rule_builder": "insert_reconstruction_check_after_inverse",
+      "runtime_diagnostic": "reconstruction_error"
     }
   ],
   "audit": {
@@ -91,6 +128,8 @@
         "note": "Rule names and trigger metrics mirror sciona/principal/expansion_rules/signal_transform.py."
       }
     ],
-    "maintainers": ["ageo-matcher"]
+    "maintainers": [
+      "ageo-matcher"
+    ]
   }
 }

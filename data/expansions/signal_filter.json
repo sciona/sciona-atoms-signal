@@ -15,14 +15,24 @@
         "metric_name": "max_pole_magnitude",
         "comparison": "gte",
         "threshold": 1.0,
-        "required_intermediate_keys": ["max_pole_magnitude"]
+        "required_intermediate_keys": [
+          "max_pole_magnitude"
+        ]
       },
-      "action_classes": ["gate_or_validate", "precondition"],
+      "action_classes": [
+        "gate_or_validate",
+        "precondition"
+      ],
       "rewrite": {
         "before_summary": "Filter design feeds the next filter stage directly.",
         "after_summary": "A pole-stability analysis stage is inserted after filter design.",
         "information_flow_effect": "Adds explicit stability evidence before the filter is trusted."
-      }
+      },
+      "operation_id": "sciona.expansions.signal_filter.insert_pole_stability_analysis_after_design",
+      "operation_type": "validation",
+      "applies_to": "signal_filter.design_filter",
+      "runtime_rule_builder": "insert_pole_stability_analysis_after_design",
+      "runtime_diagnostic": "max_pole_magnitude"
     },
     {
       "rule_name": "insert_passband_ripple_measurement_after_validate",
@@ -33,14 +43,23 @@
         "metric_name": "passband_ripple_db",
         "comparison": "gt",
         "threshold": 1.0,
-        "required_intermediate_keys": ["passband_ripple_db"]
+        "required_intermediate_keys": [
+          "passband_ripple_db"
+        ]
       },
-      "action_classes": ["gate_or_validate"],
+      "action_classes": [
+        "gate_or_validate"
+      ],
       "rewrite": {
         "before_summary": "Stability validation feeds downstream filter stages directly.",
         "after_summary": "A passband-ripple measurement stage is inserted after validation.",
         "information_flow_effect": "Adds amplitude-distortion evidence for the passband."
-      }
+      },
+      "operation_id": "sciona.expansions.signal_filter.insert_passband_ripple_measurement_after_validate",
+      "operation_type": "diagnostic",
+      "applies_to": "signal_filter.validate_stability",
+      "runtime_rule_builder": "insert_passband_ripple_measurement_after_validate",
+      "runtime_diagnostic": "passband_ripple_db"
     },
     {
       "rule_name": "insert_group_delay_analysis_after_frequency_response",
@@ -51,14 +70,23 @@
         "metric_name": "group_delay_variation",
         "comparison": "gt",
         "threshold": 1.0,
-        "required_intermediate_keys": ["group_delay_variation"]
+        "required_intermediate_keys": [
+          "group_delay_variation"
+        ]
       },
-      "action_classes": ["gate_or_validate"],
+      "action_classes": [
+        "gate_or_validate"
+      ],
       "rewrite": {
         "before_summary": "Frequency-response analysis feeds the downstream result directly.",
         "after_summary": "A group-delay analysis stage is inserted after frequency-response analysis.",
         "information_flow_effect": "Adds phase-distortion evidence for the filter."
-      }
+      },
+      "operation_id": "sciona.expansions.signal_filter.insert_group_delay_analysis_after_frequency_response",
+      "operation_type": "diagnostic",
+      "applies_to": "signal_filter.frequency_response",
+      "runtime_rule_builder": "insert_group_delay_analysis_after_frequency_response",
+      "runtime_diagnostic": "group_delay_variation"
     },
     {
       "rule_name": "insert_transient_detection_after_apply_filter",
@@ -69,14 +97,24 @@
         "metric_name": "transient_energy_fraction",
         "comparison": "gt",
         "threshold": 0.1,
-        "required_intermediate_keys": ["transient_energy_fraction"]
+        "required_intermediate_keys": [
+          "transient_energy_fraction"
+        ]
       },
-      "action_classes": ["insert_correction", "gate_or_validate"],
+      "action_classes": [
+        "insert_correction",
+        "gate_or_validate"
+      ],
       "rewrite": {
         "before_summary": "The applied filter output feeds downstream stages directly.",
         "after_summary": "A transient-response detection stage is inserted after filter application.",
         "information_flow_effect": "Adds startup-artifact evidence for the filtered signal."
-      }
+      },
+      "operation_id": "sciona.expansions.signal_filter.insert_transient_detection_after_apply_filter",
+      "operation_type": "diagnostic",
+      "applies_to": "signal_filter.apply_filter",
+      "runtime_rule_builder": "insert_transient_detection_after_apply_filter",
+      "runtime_diagnostic": "transient_energy_fraction"
     }
   ],
   "audit": {
@@ -91,6 +129,8 @@
         "note": "Rule names and trigger metrics mirror sciona/principal/expansion_rules/signal_filter.py."
       }
     ],
-    "maintainers": ["ageo-matcher"]
+    "maintainers": [
+      "ageo-matcher"
+    ]
   }
 }

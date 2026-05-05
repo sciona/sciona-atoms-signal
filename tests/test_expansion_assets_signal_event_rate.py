@@ -161,8 +161,7 @@ class TestExpansionAssetsSignalEventRate:
         asset = resolve_local_expansion_asset("signal_detect_measure")
 
         assert asset is not None
-        assert asset.family == "signal_event_rate"
-        assert "signal_detect_measure" in asset.family_aliases
+        assert asset.family == "signal_detect_measure"
 
     def test_asset_backed_rule_set_attaches_provenance(self):
         class _StubRuleSet:

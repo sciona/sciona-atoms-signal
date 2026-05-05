@@ -2,7 +2,9 @@
   "asset_id": "family.signal_event_rate.expansions.v1",
   "asset_version": "phase3.v1",
   "family": "signal_event_rate",
-  "family_aliases": ["signal_detect_measure"],
+  "family_aliases": [
+    "signal_detect_measure"
+  ],
   "domain": "signal_processing",
   "name": "Signal Event Rate Expansion Inventory",
   "description": "Declarative refinement inventory for signal to event to rate pipelines, covering pre-filter cleanup, signal-quality gating, and post-detection interval rejection.",
@@ -48,7 +50,10 @@
       },
       "uncertainty_notes": [
         "This expansion is only safe when the pre-filter stage still has access to the waveform."
-      ]
+      ],
+      "operation_id": "sciona.expansions.signal_event_rate.insert_jump_removal_before_filter",
+      "operation_type": "insert",
+      "applies_to": "signal_event_rate.signal->filter"
     },
     {
       "rule_name": "insert_sqi_before_filter",
@@ -89,7 +94,10 @@
       },
       "uncertainty_notes": [
         "This expansion assumes the family still exposes a waveform path before filtering."
-      ]
+      ],
+      "operation_id": "sciona.expansions.signal_event_rate.insert_sqi_before_filter",
+      "operation_type": "insert",
+      "applies_to": "signal_event_rate.signal->filter"
     },
     {
       "rule_name": "insert_peak_correction_after_detection",
@@ -133,7 +141,10 @@
       },
       "uncertainty_notes": [
         "This refinement is most appropriate when the detector is mostly right but the event timing is still locally unstable."
-      ]
+      ],
+      "operation_id": "sciona.expansions.signal_event_rate.insert_peak_correction_after_detection",
+      "operation_type": "insert",
+      "applies_to": "signal_event_rate.detect_events->measure_rate"
     },
     {
       "rule_name": "insert_outlier_rejection_after_detection",
@@ -164,7 +175,10 @@
       },
       "uncertainty_notes": [
         "This refinement is lossy and should only fire after event extraction."
-      ]
+      ],
+      "operation_id": "sciona.expansions.signal_event_rate.insert_outlier_rejection_after_detection",
+      "operation_type": "insert",
+      "applies_to": "signal_event_rate.detect_events->measure_rate"
     },
     {
       "rule_name": "insert_outlier_rejection_after_detection_median_smoothed",
@@ -195,7 +209,10 @@
       },
       "uncertainty_notes": [
         "This refinement changes the final measure stage, so it should only fire when event-spacing instability is materially present."
-      ]
+      ],
+      "operation_id": "sciona.expansions.signal_event_rate.insert_outlier_rejection_after_detection_median_smoothed",
+      "operation_type": "rewrite",
+      "applies_to": "signal_event_rate.detect_events->measure_rate"
     },
     {
       "rule_name": "insert_outlier_rejection_after_detection_smoothed",
@@ -226,7 +243,10 @@
       },
       "uncertainty_notes": [
         "This refinement is lossy and should only fire after event extraction."
-      ]
+      ],
+      "operation_id": "sciona.expansions.signal_event_rate.insert_outlier_rejection_after_detection_smoothed",
+      "operation_type": "insert",
+      "applies_to": "signal_event_rate.detect_events->smoothed_rate"
     }
   ],
   "audit": {

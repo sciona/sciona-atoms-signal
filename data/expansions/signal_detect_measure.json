@@ -15,14 +15,24 @@
         "metric_name": "snr_db",
         "comparison": "lt",
         "threshold": 10.0,
-        "required_intermediate_keys": ["snr_db"]
+        "required_intermediate_keys": [
+          "snr_db"
+        ]
       },
-      "action_classes": ["precondition", "gate_or_validate"],
+      "action_classes": [
+        "precondition",
+        "gate_or_validate"
+      ],
       "rewrite": {
         "before_summary": "The source signal feeds the detection filter directly.",
         "after_summary": "An SNR estimation stage is inserted before detection filtering.",
         "information_flow_effect": "Adds noise evidence before downstream event detection."
-      }
+      },
+      "operation_id": "sciona.expansions.signal_detect_measure.insert_snr_estimation_before_filter",
+      "operation_type": "precondition",
+      "applies_to": "signal_detect_measure.signal->filter",
+      "runtime_rule_builder": "insert_snr_estimation_before_filter",
+      "runtime_diagnostic": "snr_db"
     },
     {
       "rule_name": "insert_threshold_sensitivity_after_filter",
@@ -33,14 +43,24 @@
         "metric_name": "threshold_sensitivity",
         "comparison": "gt",
         "threshold": 0.2,
-        "required_intermediate_keys": ["threshold_sensitivity"]
+        "required_intermediate_keys": [
+          "threshold_sensitivity"
+        ]
       },
-      "action_classes": ["gate_or_validate", "branch_and_compare"],
+      "action_classes": [
+        "gate_or_validate",
+        "branch_and_compare"
+      ],
       "rewrite": {
         "before_summary": "The filtered signal feeds downstream detection directly.",
         "after_summary": "A threshold-sensitivity analysis stage is inserted after filtering.",
         "information_flow_effect": "Adds robustness evidence for the detection threshold."
-      }
+      },
+      "operation_id": "sciona.expansions.signal_detect_measure.insert_threshold_sensitivity_after_filter",
+      "operation_type": "diagnostic",
+      "applies_to": "signal_detect_measure.filter",
+      "runtime_rule_builder": "insert_threshold_sensitivity_after_filter",
+      "runtime_diagnostic": "threshold_sensitivity"
     },
     {
       "rule_name": "insert_rate_stationarity_after_detect",
@@ -51,14 +71,24 @@
         "metric_name": "event_rate_cv",
         "comparison": "gt",
         "threshold": 0.5,
-        "required_intermediate_keys": ["event_rate_cv"]
+        "required_intermediate_keys": [
+          "event_rate_cv"
+        ]
       },
-      "action_classes": ["gate_or_validate", "smooth_or_aggregate"],
+      "action_classes": [
+        "gate_or_validate",
+        "smooth_or_aggregate"
+      ],
       "rewrite": {
         "before_summary": "Detected peaks feed the measurement path directly.",
         "after_summary": "A rate-stationarity check is inserted after peak detection.",
         "information_flow_effect": "Adds timing-stability evidence before final measurement."
-      }
+      },
+      "operation_id": "sciona.expansions.signal_detect_measure.insert_rate_stationarity_after_detect",
+      "operation_type": "diagnostic",
+      "applies_to": "signal_detect_measure.detect_events",
+      "runtime_rule_builder": "insert_rate_stationarity_after_detect",
+      "runtime_diagnostic": "event_rate_cv"
     },
     {
       "rule_name": "insert_false_positive_estimation_after_rate",
@@ -69,14 +99,23 @@
         "metric_name": "false_positive_rate",
         "comparison": "gt",
         "threshold": 0.05,
-        "required_intermediate_keys": ["false_positive_rate"]
+        "required_intermediate_keys": [
+          "false_positive_rate"
+        ]
       },
-      "action_classes": ["gate_or_validate"],
+      "action_classes": [
+        "gate_or_validate"
+      ],
       "rewrite": {
         "before_summary": "The computed rate feeds the downstream result directly.",
         "after_summary": "A false-positive-rate estimation stage is inserted after rate computation.",
         "information_flow_effect": "Adds reliability evidence for the event measurement."
-      }
+      },
+      "operation_id": "sciona.expansions.signal_detect_measure.insert_false_positive_estimation_after_rate",
+      "operation_type": "validation",
+      "applies_to": "signal_detect_measure.measure_rate",
+      "runtime_rule_builder": "insert_false_positive_estimation_after_rate",
+      "runtime_diagnostic": "false_positive_rate"
     }
   ],
   "audit": {
@@ -91,6 +130,8 @@
         "note": "Rule names and trigger metrics mirror sciona/principal/expansion_rules/signal_detect_measure.py."
       }
     ],
-    "maintainers": ["ageo-matcher"]
+    "maintainers": [
+      "ageo-matcher"
+    ]
   }
 }
