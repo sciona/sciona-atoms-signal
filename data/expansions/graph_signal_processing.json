@@ -1,0 +1,96 @@
+{
+  "asset_id": "family.graph_signal_processing.expansions.v1",
+  "asset_version": "phase2.v1",
+  "family": "graph_signal_processing",
+  "domain": "graph_signal_processing",
+  "name": "Graph Signal Processing Expansion Inventory",
+  "summary": "Declarative refinements for graph signal pipelines that build a graph, compute a Laplacian, transform to the graph spectrum, and filter or diffuse signals.",
+  "operations": [
+    {
+      "rule_name": "insert_connectivity_validation_after_build_graph",
+      "name": "Validate Connectivity After Build Graph",
+      "intent": "Check that the constructed graph is connected before later spectral operations assume a coherent graph domain.",
+      "dejargonized_summary": "Add a check that the graph is connected after it is built.",
+      "trigger": {
+        "metric_name": "n_graph_components",
+        "comparison": "gt",
+        "threshold": 1.0,
+        "required_intermediate_keys": ["n_graph_components"]
+      },
+      "action_classes": ["gate_or_validate", "precondition"],
+      "rewrite": {
+        "before_summary": "Graph construction feeds the next graph signal stage directly.",
+        "after_summary": "A connectivity validation stage is inserted after graph construction.",
+        "information_flow_effect": "Adds graph topology evidence before downstream Laplacian or spectral analysis."
+      }
+    },
+    {
+      "rule_name": "insert_laplacian_symmetry_check_after_compute_laplacian",
+      "name": "Check Laplacian Symmetry",
+      "intent": "Verify that the Laplacian has the expected symmetry before graph Fourier or filtering logic uses it.",
+      "dejargonized_summary": "Add a check that the Laplacian matrix is symmetric.",
+      "trigger": {
+        "metric_name": "laplacian_max_asymmetry",
+        "comparison": "gt",
+        "threshold": 1e-10,
+        "required_intermediate_keys": ["laplacian_max_asymmetry"]
+      },
+      "action_classes": ["gate_or_validate"],
+      "rewrite": {
+        "before_summary": "The computed Laplacian feeds the next graph signal stage directly.",
+        "after_summary": "A symmetry check is inserted after Laplacian computation.",
+        "information_flow_effect": "Adds a structural validity check for the matrix representation."
+      }
+    },
+    {
+      "rule_name": "insert_spectral_gap_analysis_after_gft",
+      "name": "Analyze Spectral Gap After GFT",
+      "intent": "Expose weak graph connectivity in the spectral representation before graph filtering decisions are trusted.",
+      "dejargonized_summary": "Add a spectral gap check after the graph Fourier transform.",
+      "trigger": {
+        "metric_name": "spectral_gap",
+        "comparison": "lt",
+        "threshold": 0.01,
+        "required_intermediate_keys": ["spectral_gap"]
+      },
+      "action_classes": ["gate_or_validate", "branch_and_compare"],
+      "rewrite": {
+        "before_summary": "The graph Fourier transform feeds graph filtering directly.",
+        "after_summary": "A spectral gap analysis stage is inserted after the graph Fourier transform.",
+        "information_flow_effect": "Adds connectivity evidence in the graph spectral domain."
+      }
+    },
+    {
+      "rule_name": "insert_filter_response_validation_after_graph_filter",
+      "name": "Validate Graph Filter Response",
+      "intent": "Check for unstable graph filter gain after filtering or diffusion.",
+      "dejargonized_summary": "Add a check that the graph filter response is not too large.",
+      "trigger": {
+        "metric_name": "max_filter_gain",
+        "comparison": "gt",
+        "threshold": 100.0,
+        "required_intermediate_keys": ["max_filter_gain"]
+      },
+      "action_classes": ["gate_or_validate"],
+      "rewrite": {
+        "before_summary": "Graph filtering feeds the downstream result directly.",
+        "after_summary": "A filter-response validation stage is inserted after graph filtering.",
+        "information_flow_effect": "Adds stability evidence for the filtered graph signal."
+      }
+    }
+  ],
+  "audit": {
+    "provenance": "provider_migrated_asset",
+    "source_kind": "shared_asset",
+    "review_status": "transitional",
+    "rationale": "Externalizes implemented graph signal processing expansion operations into provider-owned declarative assets.",
+    "dejargonized_summary": "These are checks that make graph signal pipelines more explicit when the graph, Laplacian, spectrum, or filter response may be unreliable.",
+    "references": [
+      {
+        "title": "Matcher graph_signal_processing expansion rules",
+        "note": "Rule names and trigger metrics mirror sciona/principal/expansion_rules/graph_signal_processing.py."
+      }
+    ],
+    "maintainers": ["ageo-matcher"]
+  }
+}

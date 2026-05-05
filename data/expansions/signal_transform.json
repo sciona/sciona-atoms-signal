@@ -1,0 +1,96 @@
+{
+  "asset_id": "family.signal_transform.expansions.v1",
+  "asset_version": "phase2.v1",
+  "family": "signal_transform",
+  "domain": "signal_processing",
+  "name": "Signal Transform Expansion Inventory",
+  "summary": "Declarative refinements for windowing, forward transforms, spectral processing, and inverse transforms.",
+  "operations": [
+    {
+      "rule_name": "insert_window_leakage_analysis_after_window",
+      "name": "Analyze Window Leakage",
+      "intent": "Measure spectral leakage introduced by windowing before downstream spectral processing.",
+      "dejargonized_summary": "Add a check for excessive leakage after applying a window.",
+      "trigger": {
+        "metric_name": "window_leakage_ratio",
+        "comparison": "gt",
+        "threshold": 0.5,
+        "required_intermediate_keys": ["window_leakage_ratio"]
+      },
+      "action_classes": ["gate_or_validate"],
+      "rewrite": {
+        "before_summary": "Windowing feeds the forward transform path directly.",
+        "after_summary": "A window-leakage analysis stage is inserted after windowing.",
+        "information_flow_effect": "Adds leakage evidence before spectral interpretation."
+      }
+    },
+    {
+      "rule_name": "insert_aliasing_detection_after_forward_transform",
+      "name": "Detect Spectral Aliasing",
+      "intent": "Check for high energy near Nyquist after the forward transform.",
+      "dejargonized_summary": "Add an aliasing check after the forward transform.",
+      "trigger": {
+        "metric_name": "alias_energy_fraction",
+        "comparison": "gt",
+        "threshold": 0.1,
+        "required_intermediate_keys": ["alias_energy_fraction"]
+      },
+      "action_classes": ["gate_or_validate", "precondition"],
+      "rewrite": {
+        "before_summary": "The forward transform feeds spectral processing directly.",
+        "after_summary": "A spectral-aliasing detection stage is inserted after the forward transform.",
+        "information_flow_effect": "Adds sampling-limit evidence before spectral processing."
+      }
+    },
+    {
+      "rule_name": "insert_parseval_validation_after_spectral_processing",
+      "name": "Validate Parseval Energy",
+      "intent": "Check energy consistency after spectral processing.",
+      "dejargonized_summary": "Add an energy-conservation check after spectral processing.",
+      "trigger": {
+        "metric_name": "parseval_relative_error",
+        "comparison": "gt",
+        "threshold": 1e-6,
+        "required_intermediate_keys": ["parseval_relative_error"]
+      },
+      "action_classes": ["gate_or_validate"],
+      "rewrite": {
+        "before_summary": "Spectral processing feeds the inverse or downstream path directly.",
+        "after_summary": "A Parseval energy validation stage is inserted after spectral processing.",
+        "information_flow_effect": "Adds energy-conservation evidence across domains."
+      }
+    },
+    {
+      "rule_name": "insert_reconstruction_check_after_inverse",
+      "name": "Check Inverse Reconstruction",
+      "intent": "Verify round-trip fidelity after inverse transformation.",
+      "dejargonized_summary": "Add a reconstruction check after the inverse transform.",
+      "trigger": {
+        "metric_name": "reconstruction_error",
+        "comparison": "gt",
+        "threshold": 1e-10,
+        "required_intermediate_keys": ["reconstruction_error"]
+      },
+      "action_classes": ["gate_or_validate"],
+      "rewrite": {
+        "before_summary": "The inverse transform feeds the downstream result directly.",
+        "after_summary": "A reconstruction-quality check is inserted after the inverse transform.",
+        "information_flow_effect": "Adds round-trip fidelity evidence for the transformed signal."
+      }
+    }
+  ],
+  "audit": {
+    "provenance": "provider_migrated_asset",
+    "source_kind": "shared_asset",
+    "review_status": "transitional",
+    "rationale": "Externalizes implemented signal transform expansion operations into provider-owned declarative assets.",
+    "dejargonized_summary": "These are checks that make transform pipelines more explicit when leakage, aliasing, energy mismatch, or reconstruction error may affect the result.",
+    "references": [
+      {
+        "title": "Matcher signal_transform expansion rules",
+        "note": "Rule names and trigger metrics mirror sciona/principal/expansion_rules/signal_transform.py."
+      }
+    ],
+    "maintainers": ["ageo-matcher"]
+  }
+}

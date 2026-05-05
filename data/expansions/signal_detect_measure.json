@@ -1,0 +1,96 @@
+{
+  "asset_id": "family.signal_detect_measure.expansions.v1",
+  "asset_version": "phase2.v1",
+  "family": "signal_detect_measure",
+  "domain": "signal_processing",
+  "name": "Signal Detect Measure Expansion Inventory",
+  "summary": "Declarative refinements for pipelines that filter a signal, detect events, and compute event-level measurements.",
+  "operations": [
+    {
+      "rule_name": "insert_snr_estimation_before_filter",
+      "name": "Estimate SNR Before Filter",
+      "intent": "Assess signal-to-noise ratio before detection-oriented filtering commits to a conditioning path.",
+      "dejargonized_summary": "Add an SNR check before filtering when the signal may be too noisy.",
+      "trigger": {
+        "metric_name": "snr_db",
+        "comparison": "lt",
+        "threshold": 10.0,
+        "required_intermediate_keys": ["snr_db"]
+      },
+      "action_classes": ["precondition", "gate_or_validate"],
+      "rewrite": {
+        "before_summary": "The source signal feeds the detection filter directly.",
+        "after_summary": "An SNR estimation stage is inserted before detection filtering.",
+        "information_flow_effect": "Adds noise evidence before downstream event detection."
+      }
+    },
+    {
+      "rule_name": "insert_threshold_sensitivity_after_filter",
+      "name": "Analyze Threshold Sensitivity",
+      "intent": "Expose whether detected event counts are brittle with respect to the peak threshold.",
+      "dejargonized_summary": "Add a check for whether small threshold changes cause large detection changes.",
+      "trigger": {
+        "metric_name": "threshold_sensitivity",
+        "comparison": "gt",
+        "threshold": 0.2,
+        "required_intermediate_keys": ["threshold_sensitivity"]
+      },
+      "action_classes": ["gate_or_validate", "branch_and_compare"],
+      "rewrite": {
+        "before_summary": "The filtered signal feeds downstream detection directly.",
+        "after_summary": "A threshold-sensitivity analysis stage is inserted after filtering.",
+        "information_flow_effect": "Adds robustness evidence for the detection threshold."
+      }
+    },
+    {
+      "rule_name": "insert_rate_stationarity_after_detect",
+      "name": "Check Event Rate Stationarity",
+      "intent": "Identify non-stationary event timing before the rate measure is interpreted as stable.",
+      "dejargonized_summary": "Add a check for whether the event rate changes too much over time.",
+      "trigger": {
+        "metric_name": "event_rate_cv",
+        "comparison": "gt",
+        "threshold": 0.5,
+        "required_intermediate_keys": ["event_rate_cv"]
+      },
+      "action_classes": ["gate_or_validate", "smooth_or_aggregate"],
+      "rewrite": {
+        "before_summary": "Detected peaks feed the measurement path directly.",
+        "after_summary": "A rate-stationarity check is inserted after peak detection.",
+        "information_flow_effect": "Adds timing-stability evidence before final measurement."
+      }
+    },
+    {
+      "rule_name": "insert_false_positive_estimation_after_rate",
+      "name": "Estimate False Positive Rate",
+      "intent": "Quantify unreliable detections after rate computation when detection noise may bias the measure.",
+      "dejargonized_summary": "Add a false-positive estimate after computing the event rate.",
+      "trigger": {
+        "metric_name": "false_positive_rate",
+        "comparison": "gt",
+        "threshold": 0.05,
+        "required_intermediate_keys": ["false_positive_rate"]
+      },
+      "action_classes": ["gate_or_validate"],
+      "rewrite": {
+        "before_summary": "The computed rate feeds the downstream result directly.",
+        "after_summary": "A false-positive-rate estimation stage is inserted after rate computation.",
+        "information_flow_effect": "Adds reliability evidence for the event measurement."
+      }
+    }
+  ],
+  "audit": {
+    "provenance": "provider_migrated_asset",
+    "source_kind": "shared_asset",
+    "review_status": "transitional",
+    "rationale": "Externalizes implemented signal detect/measure expansion operations into provider-owned declarative assets.",
+    "dejargonized_summary": "These are checks that make event detection and measurement pipelines more explicit when noise, threshold brittleness, non-stationarity, or false positives are present.",
+    "references": [
+      {
+        "title": "Matcher signal_detect_measure expansion rules",
+        "note": "Rule names and trigger metrics mirror sciona/principal/expansion_rules/signal_detect_measure.py."
+      }
+    ],
+    "maintainers": ["ageo-matcher"]
+  }
+}

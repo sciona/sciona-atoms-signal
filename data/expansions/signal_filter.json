@@ -1,0 +1,96 @@
+{
+  "asset_id": "family.signal_filter.expansions.v1",
+  "asset_version": "phase2.v1",
+  "family": "signal_filter",
+  "domain": "signal_processing",
+  "name": "Signal Filter Expansion Inventory",
+  "summary": "Declarative refinements for filter design, validation, application, and frequency-response analysis pipelines.",
+  "operations": [
+    {
+      "rule_name": "insert_pole_stability_analysis_after_design",
+      "name": "Analyze Pole Stability",
+      "intent": "Check filter stability from pole locations immediately after filter design.",
+      "dejargonized_summary": "Add a stability check after designing the filter.",
+      "trigger": {
+        "metric_name": "max_pole_magnitude",
+        "comparison": "gte",
+        "threshold": 1.0,
+        "required_intermediate_keys": ["max_pole_magnitude"]
+      },
+      "action_classes": ["gate_or_validate", "precondition"],
+      "rewrite": {
+        "before_summary": "Filter design feeds the next filter stage directly.",
+        "after_summary": "A pole-stability analysis stage is inserted after filter design.",
+        "information_flow_effect": "Adds explicit stability evidence before the filter is trusted."
+      }
+    },
+    {
+      "rule_name": "insert_passband_ripple_measurement_after_validate",
+      "name": "Measure Passband Ripple",
+      "intent": "Quantify passband distortion after stability validation.",
+      "dejargonized_summary": "Add a passband ripple measurement after validating stability.",
+      "trigger": {
+        "metric_name": "passband_ripple_db",
+        "comparison": "gt",
+        "threshold": 1.0,
+        "required_intermediate_keys": ["passband_ripple_db"]
+      },
+      "action_classes": ["gate_or_validate"],
+      "rewrite": {
+        "before_summary": "Stability validation feeds downstream filter stages directly.",
+        "after_summary": "A passband-ripple measurement stage is inserted after validation.",
+        "information_flow_effect": "Adds amplitude-distortion evidence for the passband."
+      }
+    },
+    {
+      "rule_name": "insert_group_delay_analysis_after_frequency_response",
+      "name": "Analyze Group Delay",
+      "intent": "Expose phase distortion from group-delay variation after frequency-response analysis.",
+      "dejargonized_summary": "Add a group-delay check after computing the frequency response.",
+      "trigger": {
+        "metric_name": "group_delay_variation",
+        "comparison": "gt",
+        "threshold": 1.0,
+        "required_intermediate_keys": ["group_delay_variation"]
+      },
+      "action_classes": ["gate_or_validate"],
+      "rewrite": {
+        "before_summary": "Frequency-response analysis feeds the downstream result directly.",
+        "after_summary": "A group-delay analysis stage is inserted after frequency-response analysis.",
+        "information_flow_effect": "Adds phase-distortion evidence for the filter."
+      }
+    },
+    {
+      "rule_name": "insert_transient_detection_after_apply_filter",
+      "name": "Detect Transient Response",
+      "intent": "Identify startup artifacts after applying a filter to a signal.",
+      "dejargonized_summary": "Add a transient-artifact check after applying the filter.",
+      "trigger": {
+        "metric_name": "transient_energy_fraction",
+        "comparison": "gt",
+        "threshold": 0.1,
+        "required_intermediate_keys": ["transient_energy_fraction"]
+      },
+      "action_classes": ["insert_correction", "gate_or_validate"],
+      "rewrite": {
+        "before_summary": "The applied filter output feeds downstream stages directly.",
+        "after_summary": "A transient-response detection stage is inserted after filter application.",
+        "information_flow_effect": "Adds startup-artifact evidence for the filtered signal."
+      }
+    }
+  ],
+  "audit": {
+    "provenance": "provider_migrated_asset",
+    "source_kind": "shared_asset",
+    "review_status": "transitional",
+    "rationale": "Externalizes implemented signal filter expansion operations into provider-owned declarative assets.",
+    "dejargonized_summary": "These are checks that make filter pipelines more explicit when stability, passband ripple, phase delay, or startup artifacts may be a problem.",
+    "references": [
+      {
+        "title": "Matcher signal_filter expansion rules",
+        "note": "Rule names and trigger metrics mirror sciona/principal/expansion_rules/signal_filter.py."
+      }
+    ],
+    "maintainers": ["ageo-matcher"]
+  }
+}
