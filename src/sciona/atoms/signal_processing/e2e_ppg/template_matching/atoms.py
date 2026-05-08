@@ -13,7 +13,7 @@ from .witnesses import witness_templatefeaturecomputation
 @register_atom(witness_templatefeaturecomputation)  # type: ignore[untyped-decorator]
 @icontract.require(lambda hc: hc is not None, "hc cannot be None")
 @icontract.ensure(lambda result: result is not None, "TemplateFeatureComputation output must not be None")
-def templatefeaturecomputation(
+def template_feature_computation(
     hc: Sequence[Sequence[float]] | np.ndarray,
 ) -> tuple[float, float]:
     """Compute average template-distance and correlation features for beats."""

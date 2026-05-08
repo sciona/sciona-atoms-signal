@@ -10,8 +10,8 @@
       "outputs": [],
       "status": "decomposed",
       "children": [
-        "wrapperpredictionsignalcomputation",
-        "signalarraynormalization"
+        "wrapper_prediction_signal_computation",
+        "signal_array_normalization"
       ],
       "depth": 0,
       "type_signature": "",
@@ -25,9 +25,9 @@
       "decomposition_rationale": "The public package exposes one source-aligned peak post-processing atom and one upstream normalization helper."
     },
     {
-      "node_id": "wrapperpredictionsignalcomputation",
+      "node_id": "wrapper_prediction_signal_computation",
       "parent_id": "kazemi_wrapper_root",
-      "name": "wrapperpredictionsignalcomputation",
+      "name": "wrapper_prediction_signal_computation",
       "description": "Post-process a model prediction trace against the aligned raw PPG trace to extract retained peak indices.",
       "concept_type": "searching",
       "inputs": [
@@ -65,9 +65,9 @@
       "decomposition_rationale": ""
     },
     {
-      "node_id": "signalarraynormalization",
+      "node_id": "signal_array_normalization",
       "parent_id": "kazemi_wrapper_root",
-      "name": "signalarraynormalization",
+      "name": "signal_array_normalization",
       "description": "Normalize an input numeric array using the vendored Kazemi normalization helper.",
       "concept_type": "arithmetic",
       "inputs": [

@@ -19,7 +19,7 @@
       "depth": 0,
       "type_signature": "",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,
@@ -32,21 +32,33 @@
     {
       "node_id": "realized_volatility",
       "parent_id": "financial_signals_root",
-      "name": "RealizedVolatility",
+      "name": "realized_volatility",
       "description": "Compute realized volatility as the square root of the summed squared log returns.",
       "concept_type": "signal_measure",
       "inputs": [
-        {"name": "log_returns", "type_desc": "NDArray[float64]", "constraints": "shape (n,), finite", "required": true, "default_value_repr": ""}
+        {
+          "name": "log_returns",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n,), finite",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "outputs": [
-        {"name": "realized_volatility", "type_desc": "float", "constraints": "finite, >= 0", "required": true, "default_value_repr": ""}
+        {
+          "name": "realized_volatility",
+          "type_desc": "float",
+          "constraints": "finite, >= 0",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "status": "atomic",
       "children": [],
       "depth": 1,
       "type_signature": "(log_returns: NDArray[float64]) -> float",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,
@@ -59,21 +71,33 @@
     {
       "node_id": "realized_quadpower_quarticity",
       "parent_id": "financial_signals_root",
-      "name": "RealizedQuadpowerQuarticity",
+      "name": "realized_quadpower_quarticity",
       "description": "Compute a sparse-kernel quarticity proxy from absolute log returns.",
       "concept_type": "signal_measure",
       "inputs": [
-        {"name": "log_returns", "type_desc": "NDArray[float64]", "constraints": "shape (n,), finite", "required": true, "default_value_repr": ""}
+        {
+          "name": "log_returns",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n,), finite",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "outputs": [
-        {"name": "quarticity", "type_desc": "float", "constraints": "finite, >= 0", "required": true, "default_value_repr": ""}
+        {
+          "name": "quarticity",
+          "type_desc": "float",
+          "constraints": "finite, >= 0",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "status": "atomic",
       "children": [],
       "depth": 1,
       "type_signature": "(log_returns: NDArray[float64]) -> float",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,
@@ -86,24 +110,54 @@
     {
       "node_id": "weighted_average_price",
       "parent_id": "financial_signals_root",
-      "name": "WeightedAveragePrice",
+      "name": "weighted_average_price",
       "description": "Compute top-of-book weighted average price from bid/ask prices and sizes.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "bid_price", "type_desc": "NDArray[float64]", "constraints": "same shape as other inputs", "required": true, "default_value_repr": ""},
-        {"name": "ask_price", "type_desc": "NDArray[float64]", "constraints": "same shape as other inputs", "required": true, "default_value_repr": ""},
-        {"name": "bid_size", "type_desc": "NDArray[float64]", "constraints": "same shape as other inputs", "required": true, "default_value_repr": ""},
-        {"name": "ask_size", "type_desc": "NDArray[float64]", "constraints": "same shape as other inputs", "required": true, "default_value_repr": ""}
+        {
+          "name": "bid_price",
+          "type_desc": "NDArray[float64]",
+          "constraints": "same shape as other inputs",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "ask_price",
+          "type_desc": "NDArray[float64]",
+          "constraints": "same shape as other inputs",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "bid_size",
+          "type_desc": "NDArray[float64]",
+          "constraints": "same shape as other inputs",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "ask_size",
+          "type_desc": "NDArray[float64]",
+          "constraints": "same shape as other inputs",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "outputs": [
-        {"name": "wap", "type_desc": "NDArray[float64]", "constraints": "same shape as inputs", "required": true, "default_value_repr": ""}
+        {
+          "name": "wap",
+          "type_desc": "NDArray[float64]",
+          "constraints": "same shape as inputs",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "status": "atomic",
       "children": [],
       "depth": 1,
       "type_signature": "(bid_price: NDArray[float64], ask_price: NDArray[float64], bid_size: NDArray[float64], ask_size: NDArray[float64]) -> NDArray[float64]",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,
@@ -116,21 +170,33 @@
     {
       "node_id": "linear_trend_feature",
       "parent_id": "financial_signals_root",
-      "name": "LinearTrendFeature",
+      "name": "linear_trend_feature",
       "description": "Fit a least-squares line over the sample index and return its slope.",
       "concept_type": "signal_measure",
       "inputs": [
-        {"name": "series", "type_desc": "NDArray[float64]", "constraints": "shape (n,), n >= 2, finite", "required": true, "default_value_repr": ""}
+        {
+          "name": "series",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n,), n >= 2, finite",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "outputs": [
-        {"name": "slope", "type_desc": "float", "constraints": "finite", "required": true, "default_value_repr": ""}
+        {
+          "name": "slope",
+          "type_desc": "float",
+          "constraints": "finite",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "status": "atomic",
       "children": [],
       "depth": 1,
       "type_signature": "(series: NDArray[float64]) -> float",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,
@@ -143,22 +209,40 @@
     {
       "node_id": "book_imbalance_features",
       "parent_id": "financial_signals_root",
-      "name": "BookImbalanceFeatures",
+      "name": "book_imbalance_features",
       "description": "Compute signed bid-ask size imbalance.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "bid_size", "type_desc": "NDArray[float64]", "constraints": "same shape as ask_size", "required": true, "default_value_repr": ""},
-        {"name": "ask_size", "type_desc": "NDArray[float64]", "constraints": "same shape as bid_size", "required": true, "default_value_repr": ""}
+        {
+          "name": "bid_size",
+          "type_desc": "NDArray[float64]",
+          "constraints": "same shape as ask_size",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "ask_size",
+          "type_desc": "NDArray[float64]",
+          "constraints": "same shape as bid_size",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "outputs": [
-        {"name": "imbalance", "type_desc": "NDArray[float64]", "constraints": "same shape as inputs", "required": true, "default_value_repr": ""}
+        {
+          "name": "imbalance",
+          "type_desc": "NDArray[float64]",
+          "constraints": "same shape as inputs",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "status": "atomic",
       "children": [],
       "depth": 1,
       "type_signature": "(bid_size: NDArray[float64], ask_size: NDArray[float64]) -> NDArray[float64]",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,

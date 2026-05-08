@@ -10,7 +10,7 @@
       "outputs": [],
       "status": "decomposed",
       "children": [
-        "generatereconstructedppg",
+        "generate_reconstructed_ppg",
         "gan_reconstruction"
       ],
       "depth": 0,
@@ -25,9 +25,9 @@
       "decomposition_rationale": ""
     },
     {
-      "node_id": "generatereconstructedppg",
+      "node_id": "generate_reconstructed_ppg",
       "parent_id": "gan_reconstruction_root",
-      "name": "GenerateReconstructedPPG",
+      "name": "generate_reconstructed_ppg",
       "description": "Generate a reconstructed PPG waveform with the upstream GAN model.",
       "concept_type": "signal_transform",
       "inputs": [
@@ -80,7 +80,7 @@
     {
       "node_id": "gan_reconstruction",
       "parent_id": "gan_reconstruction_root",
-      "name": "GanReconstruction",
+      "name": "gan_reconstruction",
       "description": "Generate a reconstructed PPG waveform through the GAN wrapper surface.",
       "concept_type": "signal_transform",
       "inputs": [

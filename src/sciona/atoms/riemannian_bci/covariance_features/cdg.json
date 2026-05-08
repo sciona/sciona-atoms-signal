@@ -18,7 +18,7 @@
       "depth": 0,
       "type_signature": "",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,
@@ -31,22 +31,40 @@
     {
       "node_id": "autocorrelation_covariance_matrix",
       "parent_id": "covariance_features_root",
-      "name": "AutocorrelationCovarianceMatrix",
+      "name": "autocorrelation_covariance_matrix",
       "description": "Build a Hankel autocorrelation covariance matrix from multichannel EEG data.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "data", "type_desc": "NDArray[float64]", "constraints": "shape (n_channels, n_samples)", "required": true, "default_value_repr": ""},
-        {"name": "n_lags", "type_desc": "int", "constraints": ">= 1, < n_samples", "required": true, "default_value_repr": ""}
+        {
+          "name": "data",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n_channels, n_samples)",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "n_lags",
+          "type_desc": "int",
+          "constraints": ">= 1, < n_samples",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "outputs": [
-        {"name": "covariance", "type_desc": "NDArray[float64]", "constraints": "shape (n_channels * n_lags, n_channels * n_lags), symmetric SPD", "required": true, "default_value_repr": ""}
+        {
+          "name": "covariance",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n_channels * n_lags, n_channels * n_lags), symmetric SPD",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "status": "atomic",
       "children": [],
       "depth": 1,
       "type_signature": "(data: NDArray[float64], n_lags: int) -> NDArray[float64]",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,
@@ -59,24 +77,54 @@
     {
       "node_id": "cross_frequency_coherence_matrix",
       "parent_id": "covariance_features_root",
-      "name": "CrossFrequencyCoherenceMatrix",
+      "name": "cross_frequency_coherence_matrix",
       "description": "Compute magnitude-squared coherence between all channel pairs at specified frequency bands.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "data", "type_desc": "NDArray[float64]", "constraints": "shape (n_channels, n_samples), n_channels >= 2", "required": true, "default_value_repr": ""},
-        {"name": "fs", "type_desc": "float", "constraints": "> 0", "required": true, "default_value_repr": ""},
-        {"name": "freq_bands", "type_desc": "NDArray[float64]", "constraints": "shape (n_bands, 2)", "required": true, "default_value_repr": ""},
-        {"name": "nperseg", "type_desc": "int", "constraints": ">= 2", "required": true, "default_value_repr": ""}
+        {
+          "name": "data",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n_channels, n_samples), n_channels >= 2",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "fs",
+          "type_desc": "float",
+          "constraints": "> 0",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "freq_bands",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n_bands, 2)",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "nperseg",
+          "type_desc": "int",
+          "constraints": ">= 2",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "outputs": [
-        {"name": "coherence", "type_desc": "NDArray[float64]", "constraints": "shape (n_bands, n_channels, n_channels)", "required": true, "default_value_repr": ""}
+        {
+          "name": "coherence",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n_bands, n_channels, n_channels)",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "status": "atomic",
       "children": [],
       "depth": 1,
       "type_signature": "(data: NDArray[float64], fs: float, freq_bands: NDArray[float64], nperseg: int) -> NDArray[float64]",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,
@@ -89,22 +137,40 @@
     {
       "node_id": "tangent_space_projection",
       "parent_id": "covariance_features_root",
-      "name": "TangentSpaceProjection",
+      "name": "tangent_space_projection",
       "description": "Project SPD matrices to the tangent space at a reference point.",
       "concept_type": "geometry",
       "inputs": [
-        {"name": "matrices", "type_desc": "NDArray[float64]", "constraints": "shape (n_matrices, p, p), symmetric SPD", "required": true, "default_value_repr": ""},
-        {"name": "reference", "type_desc": "NDArray[float64]", "constraints": "shape (p, p), symmetric SPD", "required": true, "default_value_repr": ""}
+        {
+          "name": "matrices",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n_matrices, p, p), symmetric SPD",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "reference",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (p, p), symmetric SPD",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "outputs": [
-        {"name": "tangent_vectors", "type_desc": "NDArray[float64]", "constraints": "shape (n_matrices, p*(p+1)//2)", "required": true, "default_value_repr": ""}
+        {
+          "name": "tangent_vectors",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n_matrices, p*(p+1)//2)",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "status": "atomic",
       "children": [],
       "depth": 1,
       "type_signature": "(matrices: NDArray[float64], reference: NDArray[float64]) -> NDArray[float64]",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,
@@ -117,23 +183,47 @@
     {
       "node_id": "riemannian_mean_spd",
       "parent_id": "covariance_features_root",
-      "name": "RiemannianMeanSPD",
+      "name": "riemannian_mean_spd",
       "description": "Iterative Karcher/Frechet mean on the SPD manifold.",
       "concept_type": "geometry",
       "inputs": [
-        {"name": "matrices", "type_desc": "NDArray[float64]", "constraints": "shape (n_matrices, p, p), symmetric SPD, n_matrices >= 1", "required": true, "default_value_repr": ""},
-        {"name": "max_iter", "type_desc": "int", "constraints": ">= 1", "required": false, "default_value_repr": "50"},
-        {"name": "tol", "type_desc": "float", "constraints": "> 0", "required": false, "default_value_repr": "1e-12"}
+        {
+          "name": "matrices",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n_matrices, p, p), symmetric SPD, n_matrices >= 1",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "max_iter",
+          "type_desc": "int",
+          "constraints": ">= 1",
+          "required": false,
+          "default_value_repr": "50"
+        },
+        {
+          "name": "tol",
+          "type_desc": "float",
+          "constraints": "> 0",
+          "required": false,
+          "default_value_repr": "1e-12"
+        }
       ],
       "outputs": [
-        {"name": "mean", "type_desc": "NDArray[float64]", "constraints": "shape (p, p), symmetric SPD", "required": true, "default_value_repr": ""}
+        {
+          "name": "mean",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (p, p), symmetric SPD",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "status": "atomic",
       "children": [],
       "depth": 1,
       "type_signature": "(matrices: NDArray[float64], max_iter: int = 50, tol: float = 1e-12) -> NDArray[float64]",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,

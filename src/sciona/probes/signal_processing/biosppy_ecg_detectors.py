@@ -16,9 +16,9 @@ class ProbeTarget:
 _MODULE = "sciona.atoms.signal_processing.biosppy.ecg_detectors"
 
 ECG_DETECTORS_PROBE_TARGETS: tuple[ProbeTarget, ...] = (
-    ProbeTarget(f"{_MODULE}.thresholdbasedsignalsegmentation", _MODULE, "thresholdbasedsignalsegmentation"),
+    ProbeTarget(f"{_MODULE}.threshold_based_signal_segmentation", _MODULE, "threshold_based_signal_segmentation"),
     ProbeTarget(f"{_MODULE}.asi_signal_segmenter", _MODULE, "asi_signal_segmenter"),
-    ProbeTarget(f"{_MODULE}.christovqrsdetect", _MODULE, "christovqrsdetect"),
+    ProbeTarget(f"{_MODULE}.christov_qrs_detect", _MODULE, "christov_qrs_detect"),
     ProbeTarget(f"{_MODULE}.christov_qrs_segmenter", _MODULE, "christov_qrs_segmenter"),
     ProbeTarget(f"{_MODULE}.engzee_signal_segmentation", _MODULE, "engzee_signal_segmentation"),
     ProbeTarget(f"{_MODULE}.engzee_qrs_segmentation", _MODULE, "engzee_qrs_segmentation"),

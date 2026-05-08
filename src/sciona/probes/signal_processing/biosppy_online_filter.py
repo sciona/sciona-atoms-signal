@@ -17,14 +17,14 @@ _MODULE = "sciona.atoms.signal_processing.biosppy.online_filter.atoms"
 
 ONLINE_FILTER_PROBE_TARGETS: tuple[ProbeTarget, ...] = (
     ProbeTarget(
-        "sciona.atoms.signal_processing.biosppy.online_filter.filterstateinit",
+        "sciona.atoms.signal_processing.biosppy.online_filter.filter_state_init",
         _MODULE,
-        "filterstateinit",
+        "filter_state_init",
     ),
     ProbeTarget(
-        "sciona.atoms.signal_processing.biosppy.online_filter.filterstep",
+        "sciona.atoms.signal_processing.biosppy.online_filter.filter_step",
         _MODULE,
-        "filterstep",
+        "filter_step",
     ),
 )
 

@@ -10,13 +10,13 @@
       "outputs": [],
       "status": "decomposed",
       "children": [
-        "zhao2018hrvanalysis",
-        "averageqrstemplate"
+        "zhao_2018_hrv_analysis",
+        "average_qrs_template"
       ],
       "depth": 0,
       "type_signature": "",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,
@@ -27,27 +27,63 @@
       "decomposition_rationale": ""
     },
     {
-      "node_id": "zhao2018hrvanalysis",
+      "node_id": "zhao_2018_hrv_analysis",
       "parent_id": "neurokit2_root",
-      "name": "Zhao2018HRVAnalysis",
+      "name": "zhao_2018_hrv_analysis",
       "description": "Compute the Zhao 2018 ECG quality verdict over a cleaned ECG trace.",
       "concept_type": "analysis",
       "inputs": [
-        {"name": "ecg_cleaned", "type_desc": "ndarray", "constraints": "cleaned ECG signal", "required": true, "default_value_repr": ""},
-        {"name": "rpeaks", "type_desc": "ndarray | None", "constraints": "R-peak indices", "required": false, "default_value_repr": "None"},
-        {"name": "sampling_rate", "type_desc": "int | float", "constraints": "> 0", "required": false, "default_value_repr": "1000"},
-        {"name": "window", "type_desc": "int | float | tuple", "constraints": "window specification", "required": false, "default_value_repr": "1024"},
-        {"name": "mode", "type_desc": "str", "constraints": "quality mode", "required": false, "default_value_repr": "'simple'"}
+        {
+          "name": "ecg_cleaned",
+          "type_desc": "ndarray",
+          "constraints": "cleaned ECG signal",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "rpeaks",
+          "type_desc": "ndarray | None",
+          "constraints": "R-peak indices",
+          "required": false,
+          "default_value_repr": "None"
+        },
+        {
+          "name": "sampling_rate",
+          "type_desc": "int | float",
+          "constraints": "> 0",
+          "required": false,
+          "default_value_repr": "1000"
+        },
+        {
+          "name": "window",
+          "type_desc": "int | float | tuple",
+          "constraints": "window specification",
+          "required": false,
+          "default_value_repr": "1024"
+        },
+        {
+          "name": "mode",
+          "type_desc": "str",
+          "constraints": "quality mode",
+          "required": false,
+          "default_value_repr": "'simple'"
+        }
       ],
       "outputs": [
-        {"name": "quality_label", "type_desc": "str", "constraints": "quality verdict string", "required": true, "default_value_repr": ""}
+        {
+          "name": "quality_label",
+          "type_desc": "str",
+          "constraints": "quality verdict string",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "status": "atomic",
       "children": [],
       "depth": 1,
       "type_signature": "(ecg_cleaned: ndarray, rpeaks: ndarray | None = None, sampling_rate: int | float = 1000, window: int | float | tuple = 1024, mode: str = 'simple') -> str",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,
@@ -58,25 +94,49 @@
       "decomposition_rationale": ""
     },
     {
-      "node_id": "averageqrstemplate",
+      "node_id": "average_qrs_template",
       "parent_id": "neurokit2_root",
-      "name": "AverageQRSTemplate",
+      "name": "average_qrs_template",
       "description": "Build an average QRS template aligned to the detected R-peaks.",
       "concept_type": "signal_transform",
       "inputs": [
-        {"name": "ecg_cleaned", "type_desc": "ndarray", "constraints": "cleaned ECG signal", "required": true, "default_value_repr": ""},
-        {"name": "rpeaks", "type_desc": "ndarray | None", "constraints": "R-peak indices", "required": false, "default_value_repr": "None"},
-        {"name": "sampling_rate", "type_desc": "int | float", "constraints": "> 0", "required": false, "default_value_repr": "1000"}
+        {
+          "name": "ecg_cleaned",
+          "type_desc": "ndarray",
+          "constraints": "cleaned ECG signal",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "rpeaks",
+          "type_desc": "ndarray | None",
+          "constraints": "R-peak indices",
+          "required": false,
+          "default_value_repr": "None"
+        },
+        {
+          "name": "sampling_rate",
+          "type_desc": "int | float",
+          "constraints": "> 0",
+          "required": false,
+          "default_value_repr": "1000"
+        }
       ],
       "outputs": [
-        {"name": "qrs_template", "type_desc": "ndarray", "constraints": "same length as the cleaned ECG signal", "required": true, "default_value_repr": ""}
+        {
+          "name": "qrs_template",
+          "type_desc": "ndarray",
+          "constraints": "same length as the cleaned ECG signal",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "status": "atomic",
       "children": [],
       "depth": 1,
       "type_signature": "(ecg_cleaned: ndarray, rpeaks: ndarray | None = None, sampling_rate: int | float = 1000) -> ndarray",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,

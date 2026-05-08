@@ -10,8 +10,8 @@
       "outputs": [],
       "status": "decomposed",
       "children": [
-        "filterstateinit",
-        "filterstep"
+        "filter_state_init",
+        "filter_step"
       ],
       "depth": 0,
       "type_signature": "",
@@ -25,9 +25,9 @@
       "decomposition_rationale": ""
     },
     {
-      "node_id": "filterstateinit",
+      "node_id": "filter_state_init",
       "parent_id": "online_filter_root",
-      "name": "FilterStateInit",
+      "name": "filter_state_init",
       "description": "Initialize filter coefficients and an empty streaming delay-line state.",
       "concept_type": "state_init",
       "inputs": [
@@ -83,9 +83,9 @@
       "decomposition_rationale": ""
     },
     {
-      "node_id": "filterstep",
+      "node_id": "filter_step",
       "parent_id": "online_filter_root",
-      "name": "FilterStep",
+      "name": "filter_step",
       "description": "Filter one signal chunk and advance the delay-line state.",
       "concept_type": "signal_filter",
       "inputs": [
@@ -136,8 +136,8 @@
   ],
   "edges": [
     {
-      "source_id": "filterstateinit",
-      "target_id": "filterstep",
+      "source_id": "filter_state_init",
+      "target_id": "filter_step",
       "output_name": "state",
       "input_name": "state",
       "source_type": "FilterState",

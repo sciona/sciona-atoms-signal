@@ -3,10 +3,14 @@
     {
       "node_id": "wavelet_denoise",
       "parent_id": null,
-      "name": "WaveletDenoise",
+      "name": "wavelet_denoise",
       "description": "Denoise a 1D signal using discrete wavelet transform with universal thresholding.",
       "concept_type": "signal_filter",
-      "aliases": ["wavelet_denoising", "dwt_denoise", "signal_denoising"],
+      "aliases": [
+        "wavelet_denoising",
+        "dwt_denoise",
+        "signal_denoising"
+      ],
       "inputs": [
         {
           "name": "signal",

@@ -18,7 +18,7 @@ from .witnesses import witness_averageqrstemplate, witness_zhao2018hrvanalysis
 @icontract.require(lambda window: isinstance(window, (int, float, tuple)), "window must be numeric or tuple")
 @icontract.require(lambda mode: isinstance(mode, str), "mode must be a string")
 @icontract.ensure(lambda result: result is not None, "Zhao2018HRVAnalysis output must not be None")
-def zhao2018hrvanalysis(
+def zhao_2018_hrv_analysis(
     ecg_cleaned: np.ndarray,
     rpeaks: np.ndarray | None = None,
     sampling_rate: int | float = 1000,
@@ -40,7 +40,7 @@ def zhao2018hrvanalysis(
 @icontract.require(lambda rpeaks: rpeaks is None or isinstance(rpeaks, np.ndarray), "rpeaks must be an ndarray when provided")
 @icontract.require(lambda sampling_rate: isinstance(sampling_rate, (int, float, np.number)), "sampling_rate must be numeric")
 @icontract.ensure(lambda result: result is not None, "AverageQRSTemplate output must not be None")
-def averageqrstemplate(
+def average_qrs_template(
     ecg_cleaned: np.ndarray,
     rpeaks: np.ndarray | None = None,
     sampling_rate: int | float = 1000,

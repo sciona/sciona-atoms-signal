@@ -40,7 +40,7 @@ def _normalize_prediction(prediction: np.ndarray) -> np.ndarray:
 )
 @icontract.ensure(lambda result: isinstance(result, np.ndarray), "result must be np.ndarray")
 @icontract.ensure(lambda result: np.issubdtype(result.dtype, np.integer), "result must contain integer indices")
-def wrapperpredictionsignalcomputation(prediction: np.ndarray, raw_signal: np.ndarray) -> np.ndarray:
+def wrapper_prediction_signal_computation(prediction: np.ndarray, raw_signal: np.ndarray) -> np.ndarray:
     """Extract Kazemi wrapper peak indices from model predictions and a raw PPG segment.
 
     Args:
@@ -94,7 +94,7 @@ def wrapperpredictionsignalcomputation(prediction: np.ndarray, raw_signal: np.nd
 @register_atom(witness_signalarraynormalization)
 @icontract.require(lambda arr: isinstance(arr, np.ndarray), "arr must be np.ndarray")
 @icontract.ensure(lambda result: isinstance(result, np.ndarray), "result must be np.ndarray")
-def signalarraynormalization(arr: np.ndarray) -> np.ndarray:
+def signal_array_normalization(arr: np.ndarray) -> np.ndarray:
     """Normalize an input numeric array to a standard scale.
 
     Args:

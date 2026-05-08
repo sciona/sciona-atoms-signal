@@ -19,7 +19,7 @@ if TYPE_CHECKING:
     "sampling_rate must be numeric",
 )
 @icontract.ensure(lambda result: result is not None, "GenerateReconstructedPPG output must not be None")
-def generatereconstructedppg(
+def generate_reconstructed_ppg(
     ppg_clean: np.ndarray | "torch.Tensor",
     noise: np.ndarray | "torch.Tensor",
     sampling_rate: int | float,

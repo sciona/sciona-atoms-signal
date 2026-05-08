@@ -28,7 +28,7 @@ from .witnesses import (
 @icontract.require(lambda sampling_rate: isinstance(sampling_rate, (float, int, np.number)), "sampling_rate must be numeric")
 @icontract.require(lambda Pth: isinstance(Pth, (float, int, np.number)), "Pth must be numeric")
 @icontract.ensure(lambda result: result is not None, "ThresholdBasedSignalSegmentation output must not be None")
-def thresholdbasedsignalsegmentation(
+def threshold_based_signal_segmentation(
     signal: np.ndarray,
     sampling_rate: float = 1000.0,
     Pth: float = 5.0,
@@ -54,7 +54,7 @@ def asi_signal_segmenter(signal: np.ndarray, sampling_rate: float, Pth: float) -
 @icontract.require(lambda sampling_rate: sampling_rate > 0, "sampling_rate must be positive")
 @icontract.ensure(lambda result: isinstance(result, np.ndarray), "result must be ndarray")
 @icontract.ensure(lambda result: result.ndim == 1, "result must be 1-D")
-def christovqrsdetect(signal: np.ndarray, sampling_rate: float) -> np.ndarray:
+def christov_qrs_detect(signal: np.ndarray, sampling_rate: float) -> np.ndarray:
     """Run the Christov QRS detector and return detected R-peaks."""
     return _christov_segmenter(signal=signal, sampling_rate=sampling_rate)["rpeaks"]
 

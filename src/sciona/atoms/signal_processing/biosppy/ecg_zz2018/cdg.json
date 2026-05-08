@@ -11,9 +11,9 @@
       "status": "decomposed",
       "children": [
         "calculatecompositesqi_zz2018",
-        "calculatebeatagreementsqi",
-        "calculatefrequencypowersqi",
-        "calculatekurtosissqi"
+        "calculate_beat_agreement_sqi",
+        "calculate_frequency_power_sqi",
+        "calculate_kurtosis_sqi"
       ],
       "depth": 0,
       "type_signature": "",
@@ -380,7 +380,7 @@
       "decomposition_rationale": ""
     },
     {
-      "node_id": "calculatebeatagreementsqi",
+      "node_id": "calculate_beat_agreement_sqi",
       "parent_id": "ZZ2018_root",
       "name": "CalculateBeatAgreementSQI",
       "description": "Calculates a beat-based Signal Quality Index (bSQI) based on the agreement between two beat detectors.",
@@ -438,7 +438,7 @@
     },
     {
       "node_id": "convertwindowtosamples",
-      "parent_id": "calculatebeatagreementsqi",
+      "parent_id": "calculate_beat_agreement_sqi",
       "name": "ConvertWindowToSamples",
       "description": "Converts the search window from milliseconds to an integer number of samples based on the sampling frequency.",
       "concept_type": "arithmetic",
@@ -476,7 +476,7 @@
     },
     {
       "node_id": "countmutualdetections",
-      "parent_id": "calculatebeatagreementsqi",
+      "parent_id": "calculate_beat_agreement_sqi",
       "name": "CountMutualDetections",
       "description": "Counts the number of beats in the first detector's output that have a corresponding beat in the second detector's output within the search window.",
       "concept_type": "searching",
@@ -519,7 +519,7 @@
     },
     {
       "node_id": "calculateagreementscore",
-      "parent_id": "calculatebeatagreementsqi",
+      "parent_id": "calculate_beat_agreement_sqi",
       "name": "CalculateAgreementScore",
       "description": "Calculates the final bSQI score based on the number of mutual detections and the total number of detections from each source, according to the specified mode.",
       "concept_type": "arithmetic",
@@ -566,7 +566,7 @@
       "decomposition_rationale": ""
     },
     {
-      "node_id": "calculatefrequencypowersqi",
+      "node_id": "calculate_frequency_power_sqi",
       "parent_id": "ZZ2018_root",
       "name": "CalculateFrequencyPowerSQI",
       "description": "Calculates a frequency-based Signal Quality Index (fSQI) using the power spectrum of the ECG signal.",
@@ -629,7 +629,7 @@
     },
     {
       "node_id": "compute_power_spectral_density",
-      "parent_id": "calculatefrequencypowersqi",
+      "parent_id": "calculate_frequency_power_sqi",
       "name": "compute_power_spectral_density",
       "description": "Computes the power spectral density of the input ECG signal using Welch's method, which provides the signal's power distribution over a range of frequencies.",
       "concept_type": "signal_transform",
@@ -677,7 +677,7 @@
     },
     {
       "node_id": "integrate_power_in_band",
-      "parent_id": "calculatefrequencypowersqi",
+      "parent_id": "calculate_frequency_power_sqi",
       "name": "integrate_power_in_band",
       "description": "Calculates the total power within a specified frequency band by performing a trapezoidal integration over the power spectral density.",
       "concept_type": "analysis",
@@ -720,7 +720,7 @@
     },
     {
       "node_id": "calculate_power_ratio",
-      "parent_id": "calculatefrequencypowersqi",
+      "parent_id": "calculate_frequency_power_sqi",
       "name": "calculate_power_ratio",
       "description": "Calculates the final SQI score from the numerator and denominator power values, applying the specified adjustment mode.",
       "concept_type": "arithmetic",
@@ -762,9 +762,9 @@
       "decomposition_rationale": ""
     },
     {
-      "node_id": "calculatekurtosissqi",
+      "node_id": "calculate_kurtosis_sqi",
       "parent_id": "ZZ2018_root",
-      "name": "CalculateKurtosisSQI",
+      "name": "calculate_kurtosis_sqi",
       "description": "Calculates a Signal Quality Index (kSQI) based on the statistical kurtosis of the signal.",
       "concept_type": "signal_transform",
       "inputs": [

@@ -793,7 +793,7 @@
   },
   {
     "pdg_node": {
-      "predicate_id": "calculatekurtosissqi",
+      "predicate_id": "calculate_kurtosis_sqi",
       "statement": "(signal: NDArray, fisher: bool) -> float",
       "informal_desc": "Calculates a Signal Quality Index (kSQI) based on the statistical kurtosis of the signal.",
       "prover": "python",
@@ -802,7 +802,7 @@
     "verified_match": {
       "candidate": {
         "declaration": {
-          "name": "calculatekurtosissqi",
+          "name": "calculate_kurtosis_sqi",
           "type_signature": "(signal: NDArray, fisher: bool) -> float",
           "docstring": "Calculates a Signal Quality Index (kSQI) based on the statistical kurtosis of the signal.",
           "conceptual_summary": "MeasureDistributionTailedness. Computes the fourth standardized moment of a 1D numerical array. This scalar value quantifies the 'tailedness' of the distribution, measuring the propensity for values to be concentrated far from the mean (outliers) relative to a Gaussian distribution. A boolean flag selects between the raw moment and the excess moment (adjusted by a constant).. Applications: Quantitative Finance: Assessing the tail risk of an asset's return distribution. High kurtosis indicates a greater probability of extreme market movements than predicted by simpler models., Industrial Process Control: Monitoring sensor data for anomalies. A change in the kurtosis of pressure or temperature readings can signal a deviation from stable operation and predict system failures., Geophysics: Characterizing the impulsiveness of seismic signals. The kurtosis of ground acceleration time-series helps differentiate between background noise and sharp, high-impact tremor events., Neuroscience: Analyzing neuronal firing patterns. The kurtosis of inter-spike interval distributions can distinguish between regular, rhythmic firing and bursty, irregular activity.",
@@ -822,7 +822,7 @@
     "all_candidates": [
       {
         "declaration": {
-          "name": "calculatekurtosissqi",
+          "name": "calculate_kurtosis_sqi",
           "type_signature": "(signal: NDArray, fisher: bool) -> float",
           "docstring": "Calculates a Signal Quality Index (kSQI) based on the statistical kurtosis of the signal.",
           "conceptual_summary": "MeasureDistributionTailedness. Computes the fourth standardized moment of a 1D numerical array. This scalar value quantifies the 'tailedness' of the distribution, measuring the propensity for values to be concentrated far from the mean (outliers) relative to a Gaussian distribution. A boolean flag selects between the raw moment and the excess moment (adjusted by a constant).. Applications: Quantitative Finance: Assessing the tail risk of an asset's return distribution. High kurtosis indicates a greater probability of extreme market movements than predicted by simpler models., Industrial Process Control: Monitoring sensor data for anomalies. A change in the kurtosis of pressure or temperature readings can signal a deviation from stable operation and predict system failures., Geophysics: Characterizing the impulsiveness of seismic signals. The kurtosis of ground acceleration time-series helps differentiate between background noise and sharp, high-impact tremor events., Neuroscience: Analyzing neuronal firing patterns. The kurtosis of inter-spike interval distributions can distinguish between regular, rhythmic firing and bursty, irregular activity.",
@@ -838,7 +838,7 @@
       {
         "candidate": {
           "declaration": {
-            "name": "calculatekurtosissqi",
+            "name": "calculate_kurtosis_sqi",
             "type_signature": "(signal: NDArray, fisher: bool) -> float",
             "docstring": "Calculates a Signal Quality Index (kSQI) based on the statistical kurtosis of the signal.",
             "conceptual_summary": "MeasureDistributionTailedness. Computes the fourth standardized moment of a 1D numerical array. This scalar value quantifies the 'tailedness' of the distribution, measuring the propensity for values to be concentrated far from the mean (outliers) relative to a Gaussian distribution. A boolean flag selects between the raw moment and the excess moment (adjusted by a constant).. Applications: Quantitative Finance: Assessing the tail risk of an asset's return distribution. High kurtosis indicates a greater probability of extreme market movements than predicted by simpler models., Industrial Process Control: Monitoring sensor data for anomalies. A change in the kurtosis of pressure or temperature readings can signal a deviation from stable operation and predict system failures., Geophysics: Characterizing the impulsiveness of seismic signals. The kurtosis of ground acceleration time-series helps differentiate between background noise and sharp, high-impact tremor events., Neuroscience: Analyzing neuronal firing patterns. The kurtosis of inter-spike interval distributions can distinguish between regular, rhythmic firing and bursty, irregular activity.",

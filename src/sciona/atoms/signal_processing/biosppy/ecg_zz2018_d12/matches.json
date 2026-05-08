@@ -661,7 +661,7 @@
   },
   {
     "pdg_node": {
-      "predicate_id": "computekurtosissqi",
+      "predicate_id": "compute_kurtosis_sqi",
       "statement": "(signal: array-like, fisher: bool) -> float",
       "informal_desc": "Computes kurtosis-based ECG quality score from the input signal.",
       "prover": "python",
@@ -670,7 +670,7 @@
     "verified_match": {
       "candidate": {
         "declaration": {
-          "name": "computekurtosissqi",
+          "name": "compute_kurtosis_sqi",
           "type_signature": "(signal: array-like, fisher: bool) -> float",
           "docstring": "Computes kurtosis-based ECG quality score from the input signal.",
           "conceptual_summary": "Standardized Fourth-Moment Signal Concentration Score. Maps a 1-D sampled scalar sequence to a single distribution-shape statistic by computing its standardized fourth central moment. The transform quantifies tail heaviness and peak concentration relative to variance, producing either excess kurtosis (Fisher convention) or raw kurtosis (Pearson convention) based on a binary mode selector. This is a many-to-one statistical reduction from sample-level structure to a scalar quality/regularity indicator.. Applications: Mechanical condition monitoring: score impulsiveness of accelerometer streams to detect bearing or gear faults., Communications engineering: characterize burstiness/non-Gaussianity of channel noise or interference samples., Geophysical sensing: detect transient event contamination in seismic trace windows via tail-heaviness scoring., Neurosignal processing: assess artifact contamination in electrophysiology segments using fourth-moment concentration.",
@@ -690,7 +690,7 @@
     "all_candidates": [
       {
         "declaration": {
-          "name": "computekurtosissqi",
+          "name": "compute_kurtosis_sqi",
           "type_signature": "(signal: array-like, fisher: bool) -> float",
           "docstring": "Computes kurtosis-based ECG quality score from the input signal.",
           "conceptual_summary": "Standardized Fourth-Moment Signal Concentration Score. Maps a 1-D sampled scalar sequence to a single distribution-shape statistic by computing its standardized fourth central moment. The transform quantifies tail heaviness and peak concentration relative to variance, producing either excess kurtosis (Fisher convention) or raw kurtosis (Pearson convention) based on a binary mode selector. This is a many-to-one statistical reduction from sample-level structure to a scalar quality/regularity indicator.. Applications: Mechanical condition monitoring: score impulsiveness of accelerometer streams to detect bearing or gear faults., Communications engineering: characterize burstiness/non-Gaussianity of channel noise or interference samples., Geophysical sensing: detect transient event contamination in seismic trace windows via tail-heaviness scoring., Neurosignal processing: assess artifact contamination in electrophysiology segments using fourth-moment concentration.",
@@ -706,7 +706,7 @@
       {
         "candidate": {
           "declaration": {
-            "name": "computekurtosissqi",
+            "name": "compute_kurtosis_sqi",
             "type_signature": "(signal: array-like, fisher: bool) -> float",
             "docstring": "Computes kurtosis-based ECG quality score from the input signal.",
             "conceptual_summary": "Standardized Fourth-Moment Signal Concentration Score. Maps a 1-D sampled scalar sequence to a single distribution-shape statistic by computing its standardized fourth central moment. The transform quantifies tail heaviness and peak concentration relative to variance, producing either excess kurtosis (Fisher convention) or raw kurtosis (Pearson convention) based on a binary mode selector. This is a many-to-one statistical reduction from sample-level structure to a scalar quality/regularity indicator.. Applications: Mechanical condition monitoring: score impulsiveness of accelerometer streams to detect bearing or gear faults., Communications engineering: characterize burstiness/non-Gaussianity of channel noise or interference samples., Geophysical sensing: detect transient event contamination in seismic trace windows via tail-heaviness scoring., Neurosignal processing: assess artifact contamination in electrophysiology segments using fourth-moment concentration.",
@@ -727,7 +727,7 @@
   },
   {
     "pdg_node": {
-      "predicate_id": "assemblezz2018sqi",
+      "predicate_id": "assemble_zz2018_sqi",
       "statement": "(signal: array-like, detector_1: array-like beat locations, detector_2: array-like beat locations, fs: float, search_window: float, nseg: int, mode: string, b_sqi: float, f_sqi: float, k_sqi: float) -> float or label",
       "informal_desc": "Builds the final ZZ2018 signal-quality result by combining beat, frequency, and kurtosis evidence.",
       "prover": "python",
@@ -736,7 +736,7 @@
     "verified_match": {
       "candidate": {
         "declaration": {
-          "name": "assemblezz2018sqi",
+          "name": "assemble_zz2018_sqi",
           "type_signature": "(signal: array-like, detector_1: array-like beat locations, detector_2: array-like beat locations, fs: float, search_window: float, nseg: int, mode: string, b_sqi: float, f_sqi: float, k_sqi: float) -> float or label",
           "docstring": "Builds the final ZZ2018 signal-quality result by combining beat, frequency, and kurtosis evidence.",
           "conceptual_summary": "Band-Limited Spectral Energy Ratio Scorer. Transforms a 1-D sampled scalar sequence into the frequency domain using segment-based spectral estimation, then aggregates power within two user-defined frequency intervals. It maps these aggregated energies to a single scalar via a selectable ratio/normalization rule, quantifying how strongly energy is concentrated in one band relative to another. The operation is a lossy projection from a high-dimensional spectrum to a compact quality index.. Applications: Condition monitoring: quantify fault-signature harmonic concentration versus broadband background in rotating machinery vibration signals., Geophysics: score microseismic event quality by contrasting event-band energy against noise-band energy in single-station traces., Wireless systems: estimate channel occupancy quality by comparing target sub-band power to adjacent/interference bands in RF captures., Acoustics: evaluate tonal prominence versus ambient noise in environmental or industrial sound measurements.",
@@ -756,7 +756,7 @@
     "all_candidates": [
       {
         "declaration": {
-          "name": "assemblezz2018sqi",
+          "name": "assemble_zz2018_sqi",
           "type_signature": "(signal: array-like, detector_1: array-like beat locations, detector_2: array-like beat locations, fs: float, search_window: float, nseg: int, mode: string, b_sqi: float, f_sqi: float, k_sqi: float) -> float or label",
           "docstring": "Builds the final ZZ2018 signal-quality result by combining beat, frequency, and kurtosis evidence.",
           "conceptual_summary": "Band-Limited Spectral Energy Ratio Scorer. Transforms a 1-D sampled scalar sequence into the frequency domain using segment-based spectral estimation, then aggregates power within two user-defined frequency intervals. It maps these aggregated energies to a single scalar via a selectable ratio/normalization rule, quantifying how strongly energy is concentrated in one band relative to another. The operation is a lossy projection from a high-dimensional spectrum to a compact quality index.. Applications: Condition monitoring: quantify fault-signature harmonic concentration versus broadband background in rotating machinery vibration signals., Geophysics: score microseismic event quality by contrasting event-band energy against noise-band energy in single-station traces., Wireless systems: estimate channel occupancy quality by comparing target sub-band power to adjacent/interference bands in RF captures., Acoustics: evaluate tonal prominence versus ambient noise in environmental or industrial sound measurements.",
@@ -772,7 +772,7 @@
       {
         "candidate": {
           "declaration": {
-            "name": "assemblezz2018sqi",
+            "name": "assemble_zz2018_sqi",
             "type_signature": "(signal: array-like, detector_1: array-like beat locations, detector_2: array-like beat locations, fs: float, search_window: float, nseg: int, mode: string, b_sqi: float, f_sqi: float, k_sqi: float) -> float or label",
             "docstring": "Builds the final ZZ2018 signal-quality result by combining beat, frequency, and kurtosis evidence.",
             "conceptual_summary": "Band-Limited Spectral Energy Ratio Scorer. Transforms a 1-D sampled scalar sequence into the frequency domain using segment-based spectral estimation, then aggregates power within two user-defined frequency intervals. It maps these aggregated energies to a single scalar via a selectable ratio/normalization rule, quantifying how strongly energy is concentrated in one band relative to another. The operation is a lossy projection from a high-dimensional spectrum to a compact quality index.. Applications: Condition monitoring: quantify fault-signature harmonic concentration versus broadband background in rotating machinery vibration signals., Geophysics: score microseismic event quality by contrasting event-band energy against noise-band energy in single-station traces., Wireless systems: estimate channel occupancy quality by comparing target sub-band power to adjacent/interference bands in RF captures., Acoustics: evaluate tonal prominence versus ambient noise in environmental or industrial sound measurements.",

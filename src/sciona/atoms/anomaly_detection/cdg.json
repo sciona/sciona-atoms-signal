@@ -16,7 +16,7 @@
       "depth": 0,
       "type_signature": "",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,
@@ -29,22 +29,40 @@
     {
       "node_id": "matrix_profile_anomaly_score",
       "parent_id": "anomaly_detection_root",
-      "name": "MatrixProfileAnomalyScore",
+      "name": "matrix_profile_anomaly_score",
       "description": "Compute a normalized self-join matrix-profile anomaly score per subsequence.",
       "concept_type": "signal_measure",
       "inputs": [
-        {"name": "series", "type_desc": "NDArray[float64]", "constraints": "shape (n,), finite", "required": true, "default_value_repr": ""},
-        {"name": "window_size", "type_desc": "int", "constraints": ">= 3 and < n", "required": true, "default_value_repr": ""}
+        {
+          "name": "series",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n,), finite",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "window_size",
+          "type_desc": "int",
+          "constraints": ">= 3 and < n",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "outputs": [
-        {"name": "scores", "type_desc": "NDArray[float64]", "constraints": "shape (n - window_size + 1,), normalized to [0, 1]", "required": true, "default_value_repr": ""}
+        {
+          "name": "scores",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n - window_size + 1,), normalized to [0, 1]",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "status": "atomic",
       "children": [],
       "depth": 1,
       "type_signature": "(series: NDArray[float64], window_size: int) -> NDArray[float64]",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,
@@ -57,22 +75,40 @@
     {
       "node_id": "multiscale_anomaly_aggregation",
       "parent_id": "anomaly_detection_root",
-      "name": "MultiscaleAnomalyAggregation",
+      "name": "multiscale_anomaly_aggregation",
       "description": "Aggregate normalized matrix-profile anomaly scores across multiple window sizes.",
       "concept_type": "signal_measure",
       "inputs": [
-        {"name": "series", "type_desc": "NDArray[float64]", "constraints": "shape (n,), finite", "required": true, "default_value_repr": ""},
-        {"name": "window_sizes", "type_desc": "list[int]", "constraints": "non-empty list of integers, each >= 3 and < n", "required": true, "default_value_repr": ""}
+        {
+          "name": "series",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n,), finite",
+          "required": true,
+          "default_value_repr": ""
+        },
+        {
+          "name": "window_sizes",
+          "type_desc": "list[int]",
+          "constraints": "non-empty list of integers, each >= 3 and < n",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "outputs": [
-        {"name": "aggregated_scores", "type_desc": "NDArray[float64]", "constraints": "shape (n,), normalized to [0, 1]", "required": true, "default_value_repr": ""}
+        {
+          "name": "aggregated_scores",
+          "type_desc": "NDArray[float64]",
+          "constraints": "shape (n,), normalized to [0, 1]",
+          "required": true,
+          "default_value_repr": ""
+        }
       ],
       "status": "atomic",
       "children": [],
       "depth": 1,
       "type_signature": "(series: NDArray[float64], window_sizes: list[int]) -> NDArray[float64]",
       "matched_primitive": null,
-      "primitive_binding_confidence": 0.0,
+      "primitive_binding_confidence": 0,
       "primitive_binding_source": "",
       "is_optional": false,
       "is_opaque": false,

@@ -28,7 +28,7 @@ def _as_numeric_vector(array: np.ndarray, name: str) -> np.ndarray:
 @icontract.require(lambda a: a is None or _is_vector(a), "a must be None or a non-empty 1D numpy array")
 @icontract.require(lambda a: a is None or float(a[0]) != 0.0, "a[0] must be non-zero")
 @icontract.ensure(lambda result: result[0][2] is None, "initial zi must be None")
-def filterstateinit(
+def filter_state_init(
     b: np.ndarray | None = None,
     a: np.ndarray | None = None,
 ) -> tuple[tuple[np.ndarray, np.ndarray, np.ndarray | None], FilterState]:
@@ -58,7 +58,7 @@ def filterstateinit(
 @icontract.require(lambda state: state is not None, "state cannot be None")
 @icontract.require(lambda state: state.b is not None and state.a is not None, "state must carry filter coefficients")
 @icontract.ensure(lambda result, signal: result[0][0].shape == signal.shape, "filtered output shape must match input")
-def filterstep(
+def filter_step(
     signal: np.ndarray | None = None,
     state: FilterState | None = None,
 ) -> tuple[tuple[np.ndarray, np.ndarray], FilterState]:
@@ -66,8 +66,8 @@ def filterstep(
 
     Args:
         signal: Optional one-dimensional numeric signal chunk.
-        state: Prior filter state produced by :func:`filterstateinit` or a
-            previous :func:`filterstep` call.
+        state: Prior filter state produced by :func:`filter_state_init` or a
+            previous :func:`filter_step` call.
 
     Returns:
         A tuple ``((filtered_signal, zi_out), next_state)`` with the filtered

@@ -17,9 +17,9 @@ _MODULE = "sciona.atoms.signal_processing.biosppy.ecg_zz2018"
 
 ECG_ZZ2018_PROBE_TARGETS: tuple[ProbeTarget, ...] = (
     ProbeTarget(f"{_MODULE}.calculatecompositesqi_zz2018", _MODULE, "calculatecompositesqi_zz2018"),
-    ProbeTarget(f"{_MODULE}.calculatebeatagreementsqi", _MODULE, "calculatebeatagreementsqi"),
-    ProbeTarget(f"{_MODULE}.calculatefrequencypowersqi", _MODULE, "calculatefrequencypowersqi"),
-    ProbeTarget(f"{_MODULE}.calculatekurtosissqi", _MODULE, "calculatekurtosissqi"),
+    ProbeTarget(f"{_MODULE}.calculate_beat_agreement_sqi", _MODULE, "calculate_beat_agreement_sqi"),
+    ProbeTarget(f"{_MODULE}.calculate_frequency_power_sqi", _MODULE, "calculate_frequency_power_sqi"),
+    ProbeTarget(f"{_MODULE}.calculate_kurtosis_sqi", _MODULE, "calculate_kurtosis_sqi"),
 )
 
 

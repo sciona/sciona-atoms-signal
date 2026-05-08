@@ -27,7 +27,7 @@
     {
       "node_id": "detect_heart_cycles",
       "parent_id": "heart_cycle_root",
-      "name": "DetectHeartCycles",
+      "name": "detect_heart_cycles",
       "description": "Detect heart-cycle boundaries in a PPG waveform using the upstream E2E-PPG SQA routine.",
       "concept_type": "analysis",
       "inputs": [
@@ -65,7 +65,7 @@
     {
       "node_id": "heart_cycle_detection",
       "parent_id": "heart_cycle_root",
-      "name": "HeartCycleDetection",
+      "name": "heart_cycle_detection",
       "description": "Alias the upstream E2E-PPG heart-cycle detector under the source routine name.",
       "concept_type": "analysis",
       "inputs": [

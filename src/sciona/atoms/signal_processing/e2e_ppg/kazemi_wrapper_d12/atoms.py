@@ -21,8 +21,8 @@ def _normalize(arr: np.ndarray) -> np.ndarray:
 @register_atom(witness_normalizesignal)
 @icontract.require(lambda arr: isinstance(arr, np.ndarray), "arr must be a numpy array")
 @icontract.require(lambda arr: arr.size > 0, "arr must be non-empty")
-@icontract.ensure(lambda result: isinstance(result, np.ndarray), "normalizesignal must return a numpy array")
-def normalizesignal(arr: np.ndarray) -> np.ndarray:
+@icontract.ensure(lambda result: isinstance(result, np.ndarray), "normalize_signal must return a numpy array")
+def normalize_signal(arr: np.ndarray) -> np.ndarray:
     """Normalize an array into the unit interval used by the vendored Kazemi peak wrapper."""
     return _normalize(arr.astype(float, copy=False))
 
@@ -30,8 +30,8 @@ def normalizesignal(arr: np.ndarray) -> np.ndarray:
 @register_atom(witness_wrapperevaluate)
 @icontract.require(lambda prediction: isinstance(prediction, np.ndarray), "prediction must be a numpy array")
 @icontract.require(lambda raw_signal: isinstance(raw_signal, np.ndarray), "raw_signal must be a numpy array")
-@icontract.ensure(lambda result: isinstance(result, np.ndarray), "wrapperevaluate must return a numpy array")
-def wrapperevaluate(prediction: np.ndarray, raw_signal: np.ndarray) -> np.ndarray:
+@icontract.ensure(lambda result: isinstance(result, np.ndarray), "wrapper_evaluate must return a numpy array")
+def wrapper_evaluate(prediction: np.ndarray, raw_signal: np.ndarray) -> np.ndarray:
     """Post-process normalized predictions against the raw signal to extract final peak indices."""
     test = _normalize(prediction.astype(float, copy=False))
     raw = raw_signal.astype(float, copy=False)

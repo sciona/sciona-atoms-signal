@@ -29,7 +29,7 @@ def _ensure_scipy_trapz() -> None:
 @icontract.require(lambda fs: isinstance(fs, (float, int, np.number)), "fs must be numeric")
 @icontract.require(lambda search_window: isinstance(search_window, (float, int, np.number)), "search_window must be numeric")
 @icontract.ensure(lambda result: result is not None, "ComputeBeatAgreementSQI output must not be None")
-def computebeatagreementsqi(
+def compute_beat_agreement_sqi(
     detector_1: ArrayLike,
     detector_2: ArrayLike,
     fs: float = 1000.0,
@@ -43,7 +43,7 @@ def computebeatagreementsqi(
 @register_atom(witness_computefrequencysqi)
 @icontract.require(lambda fs: isinstance(fs, (float, int, np.number)), "fs must be numeric")
 @icontract.ensure(lambda result: result is not None, "ComputeFrequencySQI output must not be None")
-def computefrequencysqi(
+def compute_frequency_sqi(
     ecg_signal: ArrayLike,
     fs: float = 1000.0,
     nseg: int = 1024,
@@ -67,7 +67,7 @@ def computefrequencysqi(
 @icontract.require(lambda signal: signal is not None, "signal cannot be None")
 @icontract.require(lambda fisher: fisher is not None, "fisher cannot be None")
 @icontract.ensure(lambda result: result is not None, "ComputeKurtosisSQI output must not be None")
-def computekurtosissqi(signal: ArrayLike, fisher: bool = True) -> float:
+def compute_kurtosis_sqi(signal: ArrayLike, fisher: bool = True) -> float:
     """Compute the kurtosis-based SQI for an ECG waveform."""
     return kSQI(signal=signal, fisher=fisher)
 
@@ -80,7 +80,7 @@ def computekurtosissqi(signal: ArrayLike, fisher: bool = True) -> float:
 @icontract.require(lambda search_window: isinstance(search_window, (float, int, np.number)), "search_window must be numeric")
 @icontract.require(lambda nseg: isinstance(nseg, (float, int, np.number)), "nseg must be numeric")
 @icontract.ensure(lambda result: result is not None, "AssembleZZ2018SQI output must not be None")
-def assemblezz2018sqi(
+def assemble_zz2018_sqi(
     signal: ArrayLike,
     detector_1: ArrayLike,
     detector_2: ArrayLike,

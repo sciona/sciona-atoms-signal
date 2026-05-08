@@ -1,7 +1,7 @@
 [
   {
     "pdg_node": {
-      "predicate_id": "wrapperpredictionsignalcomputation",
+      "predicate_id": "wrapper_prediction_signal_computation",
       "statement": "(prediction: numpy.ndarray, raw_signal: numpy.ndarray) -> numpy.ndarray",
       "informal_desc": "Post-process Kazemi model scores and the aligned raw PPG segment into retained peak indices.",
       "prover": "python",
@@ -12,7 +12,7 @@
     "verified_match": {
       "candidate": {
         "declaration": {
-          "name": "wrapperpredictionsignalcomputation",
+          "name": "wrapper_prediction_signal_computation",
           "type_signature": "(prediction: numpy.ndarray, raw_signal: numpy.ndarray) -> numpy.ndarray",
           "docstring": "Extract Kazemi wrapper peak indices from model predictions and a raw PPG segment.",
           "conceptual_summary": "Deterministic peak post-processing for an aligned PPG prediction trace.",
@@ -34,7 +34,7 @@
   },
   {
     "pdg_node": {
-      "predicate_id": "signalarraynormalization",
+      "predicate_id": "signal_array_normalization",
       "statement": "(arr: numpy.ndarray) -> numpy.ndarray",
       "informal_desc": "Normalize an array using the vendored Kazemi helper.",
       "prover": "python",
@@ -45,7 +45,7 @@
     "verified_match": {
       "candidate": {
         "declaration": {
-          "name": "signalarraynormalization",
+          "name": "signal_array_normalization",
           "type_signature": "(arr: numpy.ndarray) -> numpy.ndarray",
           "docstring": "Normalize an input numeric array to a standard scale.",
           "conceptual_summary": "Deterministic numeric array normalization.",

@@ -16,8 +16,8 @@ class ProbeTarget:
 _MODULE = "sciona.atoms.signal_processing.neurokit2"
 
 NEUROKIT2_PROBE_TARGETS: tuple[ProbeTarget, ...] = (
-    ProbeTarget(f"{_MODULE}.zhao2018hrvanalysis", _MODULE, "zhao2018hrvanalysis"),
-    ProbeTarget(f"{_MODULE}.averageqrstemplate", _MODULE, "averageqrstemplate"),
+    ProbeTarget(f"{_MODULE}.zhao_2018_hrv_analysis", _MODULE, "zhao_2018_hrv_analysis"),
+    ProbeTarget(f"{_MODULE}.average_qrs_template", _MODULE, "average_qrs_template"),
 )
 
 

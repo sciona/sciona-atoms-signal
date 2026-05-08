@@ -10,7 +10,7 @@
       "outputs": [],
       "status": "decomposed",
       "children": [
-        "templatefeaturecomputation"
+        "template_feature_computation"
       ],
       "depth": 0,
       "type_signature": "",
@@ -24,9 +24,9 @@
       "decomposition_rationale": ""
     },
     {
-      "node_id": "templatefeaturecomputation",
+      "node_id": "template_feature_computation",
       "parent_id": "template_matching_root",
-      "name": "TemplateFeatureComputation",
+      "name": "template_feature_computation",
       "description": "Compute average template-distance and correlation features for beats.",
       "concept_type": "analysis",
       "inputs": [

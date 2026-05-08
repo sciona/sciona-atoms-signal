@@ -56,7 +56,7 @@ def calculatecompositesqi_zz2018(
 @register_atom(witness_calculatebeatagreementsqi)
 @icontract.require(lambda fs: isinstance(fs, (float, int, np.number)), "fs must be numeric")
 @icontract.ensure(lambda result: result is not None, "CalculateBeatAgreementSQI output must not be None")
-def calculatebeatagreementsqi(
+def calculate_beat_agreement_sqi(
     detector_1: ArrayLike,
     detector_2: ArrayLike,
     fs: float,
@@ -79,7 +79,7 @@ Returns:
 @register_atom(witness_calculatefrequencypowersqi)
 @icontract.require(lambda fs: isinstance(fs, (float, int, np.number)), "fs must be numeric")
 @icontract.ensure(lambda result: result is not None, "CalculateFrequencyPowerSQI output must not be None")
-def calculatefrequencypowersqi(
+def calculate_frequency_power_sqi(
     ecg_signal: ArrayLike,
     fs: float,
     nseg: int,
@@ -106,7 +106,7 @@ Returns:
 @icontract.require(lambda signal: signal is not None, "signal cannot be None")
 @icontract.require(lambda fisher: fisher is not None, "fisher cannot be None")
 @icontract.ensure(lambda result: result is not None, "CalculateKurtosisSQI output must not be None")
-def calculatekurtosissqi(signal: ArrayLike, fisher: bool) -> float:
+def calculate_kurtosis_sqi(signal: ArrayLike, fisher: bool) -> float:
     """Calculates a Signal Quality Index (kSQI) based on the statistical kurtosis of the signal.
 
 Args:
