@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "atoms": {
-    "sciona.atoms.time_series_features.rolling_window_features@sciona/atoms/time_series_features/atoms.py:81": {
+    "sciona.atoms.time_series_features.rolling_window_features@sciona/atoms/time_series_features/atoms.py:82": {
       "references": [
         {
           "ref_id": "sciona2026timeseriesfeatures",
@@ -26,7 +26,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.time_series_features.create_lag_features@sciona/atoms/time_series_features/atoms.py:114": {
+    "sciona.atoms.time_series_features.create_lag_features@sciona/atoms/time_series_features/atoms.py:115": {
       "references": [
         {
           "ref_id": "sciona2026timeseriesfeatures",
@@ -61,7 +61,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.time_series_features.technical_indicators_macd@sciona/atoms/time_series_features/atoms.py:133": {
+    "sciona.atoms.time_series_features.technical_indicators_macd@sciona/atoms/time_series_features/atoms.py:134": {
       "references": [
         {
           "ref_id": "sciona2026timeseriesfeatures",
@@ -86,7 +86,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.time_series_features.seasonal_decompose_additive@sciona/atoms/time_series_features/atoms.py:152": {
+    "sciona.atoms.time_series_features.seasonal_decompose_additive@sciona/atoms/time_series_features/atoms.py:153": {
       "references": [
         {
           "ref_id": "sciona2026timeseriesfeatures",
@@ -101,7 +101,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.time_series_features.grouped_temporal_diff@sciona/atoms/time_series_features/atoms.py:184": {
+    "sciona.atoms.time_series_features.grouped_temporal_diff@sciona/atoms/time_series_features/atoms.py:185": {
       "references": [
         {
           "ref_id": "sciona2026timeseriesfeatures",
@@ -116,7 +116,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.time_series_features.entity_time_aggregate@sciona/atoms/time_series_features/atoms.py:210": {
+    "sciona.atoms.time_series_features.entity_time_aggregate@sciona/atoms/time_series_features/atoms.py:211": {
       "references": [
         {
           "ref_id": "sciona2026timeseriesfeatures",
@@ -141,7 +141,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.time_series_features.forward_fill@sciona/atoms/time_series_features/atoms.py:244": {
+    "sciona.atoms.time_series_features.forward_fill@sciona/atoms/time_series_features/atoms.py:245": {
       "references": [
         {
           "ref_id": "sciona2026timeseriesfeatures",
@@ -166,7 +166,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.time_series_features.log1p_transform@sciona/atoms/time_series_features/atoms.py:265": {
+    "sciona.atoms.time_series_features.log1p_transform@sciona/atoms/time_series_features/atoms.py:266": {
       "references": [
         {
           "ref_id": "sciona2026timeseriesfeatures",
@@ -191,7 +191,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.time_series_features.expm1_inverse@sciona/atoms/time_series_features/atoms.py:274": {
+    "sciona.atoms.time_series_features.expm1_inverse@sciona/atoms/time_series_features/atoms.py:275": {
       "references": [
         {
           "ref_id": "sciona2026timeseriesfeatures",
@@ -216,7 +216,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.time_series_features.exogenous_feature_concat@sciona/atoms/time_series_features/atoms.py:284": {
+    "sciona.atoms.time_series_features.exogenous_feature_concat@sciona/atoms/time_series_features/atoms.py:285": {
       "references": [
         {
           "ref_id": "sciona2026timeseriesfeatures",
