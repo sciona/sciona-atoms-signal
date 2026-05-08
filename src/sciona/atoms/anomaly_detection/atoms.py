@@ -7,7 +7,6 @@ from collections.abc import Sequence
 import icontract
 import numpy as np
 from numpy.typing import NDArray
-import stumpy
 
 from sciona.ghost.registry import register_atom
 
@@ -16,7 +15,6 @@ from .witnesses import (
     witness_multiscale_anomaly_aggregation,
 )
 
-
 _DENOM_THRESHOLD = 0.1
 _UPPER_THRESHOLD = 0.75
 _LOWER_THRESHOLD = 0.25
@@ -24,11 +22,9 @@ _CONST_THRESHOLD = 0.05
 _MIN_COEF = 0.5
 _PADDING_LENGTH = 3
 
-
 def _is_finite_array(values: NDArray[np.float64]) -> bool:
     """Return whether an ndarray contains only finite values."""
     return bool(np.isfinite(values).all())
-
 
 def _is_valid_window_sizes(series: NDArray[np.float64], window_sizes: Sequence[int]) -> bool:
     """Return whether every window size is a usable integer subsequence length."""
@@ -38,7 +34,6 @@ def _is_valid_window_sizes(series: NDArray[np.float64], window_sizes: Sequence[i
         and all(3 <= window < series.shape[0] for window in window_sizes)
     )
 
-
 def _moving_average(values: NDArray[np.float64], width: int) -> NDArray[np.float64]:
     """Compute a simple same-length moving average."""
     if values.size == 0:
@@ -47,12 +42,10 @@ def _moving_average(values: NDArray[np.float64], width: int) -> NDArray[np.float
     kernel = np.ones(width, dtype=np.float64) / float(width)
     return np.convolve(values, kernel, mode="same")
 
-
 def _peak_to_peak_windows(series: NDArray[np.float64], window_size: int) -> NDArray[np.float64]:
     """Compute peak-to-peak range for every subsequence window."""
     windows = np.lib.stride_tricks.sliding_window_view(series, window_size)
     return windows.max(axis=1) - windows.min(axis=1)
-
 
 def _variation_coef(orig_p2p: NDArray[np.float64], window_size: int) -> NDArray[np.float64]:
     """Compute the low-variation penalty term adapted from the KDD solution."""
@@ -88,7 +81,6 @@ def _variation_coef(orig_p2p: NDArray[np.float64], window_size: int) -> NDArray[
 
     return coef
 
-
 def _normalize_unit_interval(values: NDArray[np.float64]) -> NDArray[np.float64]:
     """Normalize a non-negative score vector to [0, 1]."""
     if values.size == 0:
@@ -98,11 +90,11 @@ def _normalize_unit_interval(values: NDArray[np.float64]) -> NDArray[np.float64]
         return np.zeros_like(values, dtype=np.float64)
     return values / max_val
 
-
 def _matrix_profile_score_core(
     series: NDArray[np.float64],
     window_size: int,
 ) -> NDArray[np.float64]:
+    import stumpy
     """Compute the normalized self-join anomaly score per subsequence."""
     matrix_profile = stumpy.stump(series, window_size)
     mp_values = matrix_profile[:, 0].astype(np.float64)
@@ -133,7 +125,6 @@ def _matrix_profile_score_core(
 
     return _normalize_unit_interval(smoothed * mask)
 
-
 @register_atom(witness_matrix_profile_anomaly_score)
 @icontract.require(lambda series: series.ndim == 1, "series must be 1-D")
 @icontract.require(lambda series: _is_finite_array(series), "series must be finite")
@@ -148,7 +139,6 @@ def matrix_profile_anomaly_score(
 ) -> NDArray[np.float64]:
     """Compute a normalized self-join matrix-profile anomaly score."""
     return _matrix_profile_score_core(series, window_size)
-
 
 @register_atom(witness_multiscale_anomaly_aggregation)
 @icontract.require(lambda series: series.ndim == 1, "series must be 1-D")

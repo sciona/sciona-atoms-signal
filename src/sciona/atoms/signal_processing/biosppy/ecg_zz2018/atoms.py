@@ -1,7 +1,6 @@
 from __future__ import annotations
 """Auto-generated atom wrappers following the sciona pattern."""
 
-
 import numpy as np
 import scipy.integrate as scipy_integrate
 from numpy.typing import ArrayLike
@@ -9,13 +8,8 @@ from numpy.typing import ArrayLike
 import icontract
 from sciona.ghost.registry import register_atom
 from .witnesses import witness_calculatebeatagreementsqi, witness_calculatecompositesqi_zz2018, witness_calculatefrequencypowersqi, witness_calculatekurtosissqi
-from biosppy.signals.ecg import ZZ2018
-from biosppy.signals.ecg import bSQI
-from biosppy.signals.ecg import fSQI
-from biosppy.signals.ecg import kSQI
 
 # Witness functions should be imported from the generated witnesses module
-
 
 def _ensure_scipy_trapz() -> None:
     """Compat shim for BioSPPy on SciPy versions without integrate.trapz."""
@@ -36,6 +30,7 @@ def calculatecompositesqi_zz2018(
     nseg: int,
     mode: str,
 ) -> float:
+    from biosppy.signals.ecg import ZZ2018
     """Calculates a composite Signal Quality Index (SQI) for a signal, using multiple detectors and parameters. This likely serves as an orchestrator or a specific implementation from a paper.
 
     Args:
@@ -63,6 +58,7 @@ def calculate_beat_agreement_sqi(
     mode: str,
     search_window: int,
 ) -> float:
+    from biosppy.signals.ecg import bSQI
     """Calculates a beat-based Signal Quality Index (bSQI) based on the agreement between two beat detectors.
 
 Args:
@@ -87,6 +83,7 @@ def calculate_frequency_power_sqi(
     dem_spectrum: ArrayLike,
     mode: str,
 ) -> float:
+    from biosppy.signals.ecg import fSQI
     """Calculates a frequency-based Signal Quality Index (fSQI) using the power spectrum of the electrocardiogram (ECG) signal.
 
 Args:
@@ -107,6 +104,7 @@ Returns:
 @icontract.require(lambda fisher: fisher is not None, "fisher cannot be None")
 @icontract.ensure(lambda result: result is not None, "CalculateKurtosisSQI output must not be None")
 def calculate_kurtosis_sqi(signal: ArrayLike, fisher: bool) -> float:
+    from biosppy.signals.ecg import kSQI
     """Calculates a Signal Quality Index (kSQI) based on the statistical kurtosis of the signal.
 
 Args:

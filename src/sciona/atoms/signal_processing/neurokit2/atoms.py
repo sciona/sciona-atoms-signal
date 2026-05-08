@@ -6,10 +6,8 @@ import numpy as np
 import icontract
 
 from sciona.ghost.registry import register_atom
-from neurokit2.ecg.ecg_quality import _ecg_quality_averageQRS, _ecg_quality_zhao2018
 
 from .witnesses import witness_averageqrstemplate, witness_zhao2018hrvanalysis
-
 
 @register_atom(witness_zhao2018hrvanalysis)
 @icontract.require(lambda ecg_cleaned: ecg_cleaned is not None, "ecg_cleaned cannot be None")
@@ -25,6 +23,7 @@ def zhao_2018_hrv_analysis(
     window: int | float | tuple[object, ...] = 1024,
     mode: str = "simple",
 ) -> str:
+    from neurokit2.ecg.ecg_quality import _ecg_quality_averageQRS, _ecg_quality_zhao2018
     """Return NeuroKit2's Zhao 2018 ECG quality label for a cleaned ECG trace."""
     return _ecg_quality_zhao2018(
         ecg_cleaned=ecg_cleaned,
@@ -33,7 +32,6 @@ def zhao_2018_hrv_analysis(
         window=window,
         mode=mode,
     )
-
 
 @register_atom(witness_averageqrstemplate)
 @icontract.require(lambda ecg_cleaned: ecg_cleaned is not None, "ecg_cleaned cannot be None")
@@ -45,6 +43,7 @@ def average_qrs_template(
     rpeaks: np.ndarray | None = None,
     sampling_rate: int | float = 1000,
 ) -> np.ndarray:
+    from neurokit2.ecg.ecg_quality import _ecg_quality_averageQRS, _ecg_quality_zhao2018
     """Return the per-sample average-QRS ECG quality trace from NeuroKit2."""
     return _ecg_quality_averageQRS(
         ecg_cleaned=ecg_cleaned,

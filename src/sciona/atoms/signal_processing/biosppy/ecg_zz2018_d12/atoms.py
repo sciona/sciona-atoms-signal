@@ -7,7 +7,6 @@ from numpy.typing import ArrayLike
 
 import icontract
 from sciona.ghost.registry import register_atom
-from biosppy.signals.ecg import ZZ2018, bSQI, fSQI, kSQI
 
 from .witnesses import (
     witness_assemblezz2018sqi,
@@ -16,14 +15,12 @@ from .witnesses import (
     witness_computekurtosissqi,
 )
 
-
 def _ensure_scipy_trapz() -> None:
     """Compat shim for BioSPPy on SciPy versions without integrate.trapz."""
     if not hasattr(np, "trapz") and hasattr(np, "trapezoid"):
         np.trapz = np.trapezoid  # type: ignore[attr-defined]
     if not hasattr(scipy_integrate, "trapz"):
         scipy_integrate.trapz = np.trapz  # type: ignore[attr-defined]
-
 
 @register_atom(witness_computebeatagreementsqi)
 @icontract.require(lambda fs: isinstance(fs, (float, int, np.number)), "fs must be numeric")
@@ -36,9 +33,9 @@ def compute_beat_agreement_sqi(
     mode: str = "simple",
     search_window: int = 150,
 ) -> float:
+    from biosppy.signals.ecg import ZZ2018, bSQI, fSQI, kSQI
     """Compute the detector-agreement SQI from two beat-location streams."""
     return bSQI(detector_1=detector_1, detector_2=detector_2, fs=fs, mode=mode, search_window=search_window)
-
 
 @register_atom(witness_computefrequencysqi)
 @icontract.require(lambda fs: isinstance(fs, (float, int, np.number)), "fs must be numeric")
@@ -51,6 +48,7 @@ def compute_frequency_sqi(
     dem_spectrum: tuple[float, float] | ArrayLike | None = None,
     mode: str = "simple",
 ) -> float:
+    from biosppy.signals.ecg import ZZ2018, bSQI, fSQI, kSQI
     """Compute the frequency-domain SQI for an ECG waveform."""
     _ensure_scipy_trapz()
     return fSQI(
@@ -62,15 +60,14 @@ def compute_frequency_sqi(
         mode=mode,
     )
 
-
 @register_atom(witness_computekurtosissqi)
 @icontract.require(lambda signal: signal is not None, "signal cannot be None")
 @icontract.require(lambda fisher: fisher is not None, "fisher cannot be None")
 @icontract.ensure(lambda result: result is not None, "ComputeKurtosisSQI output must not be None")
 def compute_kurtosis_sqi(signal: ArrayLike, fisher: bool = True) -> float:
+    from biosppy.signals.ecg import ZZ2018, bSQI, fSQI, kSQI
     """Compute the kurtosis-based SQI for an ECG waveform."""
     return kSQI(signal=signal, fisher=fisher)
-
 
 @register_atom(witness_assemblezz2018sqi)
 @icontract.require(lambda signal: signal is not None, "signal cannot be None")
@@ -89,6 +86,7 @@ def assemble_zz2018_sqi(
     nseg: int = 1024,
     mode: str = "simple",
 ) -> str:
+    from biosppy.signals.ecg import ZZ2018, bSQI, fSQI, kSQI
     """Run the composite ZZ2018 ECG quality classifier.
 
     Args:

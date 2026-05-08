@@ -1,23 +1,19 @@
 from __future__ import annotations
 """Auto-generated atom wrappers following the sciona pattern."""
 
-
 from collections.abc import Hashable, Iterator, Mapping, Sequence
 from typing import Protocol, Union
 import numpy as np
 
 import icontract
-import biosppy.biometrics as biometrics
 from sciona.ghost.registry import register_atom
 from .witnesses import witness_assess_classification, witness_assess_runs, witness_combination, witness_cross_validation, witness_get_auth_rates, witness_get_id_rates, witness_get_subject_results, witness_majority_rule
 
 # Witness functions should be imported from the generated witnesses module
 
-
 class _ReturnTupleLike(Protocol):
     def as_dict(self) -> dict[str, object]:
         """Return a named mapping for BioSPPy ReturnTuple values."""
-
 
 class _SubjectDictionary(Protocol):
     @property
@@ -27,10 +23,8 @@ class _SubjectDictionary(Protocol):
     def __getitem__(self, key: Hashable) -> int:
         """Return the numeric classifier label for a subject."""
 
-
 def _as_dict(value: _ReturnTupleLike) -> dict[str, object]:
     return dict(value.as_dict())
-
 
 @register_atom(witness_get_auth_rates)
 @icontract.require(lambda TP: TP is not None, "TP cannot be None")
@@ -46,6 +40,7 @@ def get_auth_rates(
     FN: np.ndarray,
     thresholds: np.ndarray,
 ) -> dict[str, object]:
+    import biosppy.biometrics as biometrics
     """Compute authentication rates from correct and incorrect prediction counts at each threshold.
 
     Args:
@@ -82,6 +77,7 @@ def get_id_rates(
     N: int,
     thresholds: np.ndarray,
 ) -> dict[str, object]:
+    import biosppy.biometrics as biometrics
     """Compute identification rates for a Support Vector Machine (SVM) biometric classifier. Derives accuracy, miss rate, reject rate, and Equal Error Rate (EER) from hits, misses, and rejections at each decision threshold.
 
     Args:
@@ -120,6 +116,7 @@ def get_subject_results(
     subject_dict: _SubjectDictionary,
     subject_idx: Sequence[int],
 ) -> dict[str, object]:
+    import biosppy.biometrics as biometrics
     """Compute authentication and identification performance metrics for a
 given subject.
 
@@ -171,6 +168,7 @@ assessment : dict
 @icontract.require(lambda thresholds: thresholds is not None, "thresholds cannot be None")
 @icontract.ensure(lambda result: result is not None, "Assess Classification output must not be None")
 def assess_classification(results: dict[str, object], thresholds: np.ndarray) -> dict[str, object]:
+    import biosppy.biometrics as biometrics
     """Assess the performance of a biometric classification test.
 
 Parameters
@@ -202,6 +200,7 @@ assessment : dict
 @icontract.require(lambda subjects: subjects is not None, "subjects cannot be None")
 @icontract.ensure(lambda result: result is not None, "Assess Runs output must not be None")
 def assess_runs(results: Sequence[dict[str, object]], subjects: Sequence[Hashable]) -> dict[str, object]:
+    import biosppy.biometrics as biometrics
     """Assess the performance of multiple biometric classification runs.
 
 Parameters
@@ -235,6 +234,7 @@ def combination(
     results: Mapping[Hashable, Sequence[object] | np.ndarray],
     weights: Mapping[Hashable, float] | None = None,
 ) -> tuple[object, object, object, object]:
+    import biosppy.biometrics as biometrics
     """Combine results from multiple classifiers.
 
 Parameters
@@ -269,6 +269,7 @@ classes : array
 @icontract.require(lambda random: random is not None, "random cannot be None")
 @icontract.ensure(lambda result: result is not None, "Majority Rule output must not be None")
 def majority_rule(labels: Union[np.ndarray, Sequence[object]], random: bool) -> tuple[object, object]:
+    import biosppy.biometrics as biometrics
     """Determine the most frequent class label.
 
 Parameters
@@ -307,6 +308,7 @@ def cross_validation(
     train_size: Union[float, int, None] = None,
     random_state: Union[int, None] = None,
 ) -> Iterator[tuple[np.ndarray, np.ndarray]]:
+    import biosppy.biometrics as biometrics
     """Return a Cross Validation (CV) iterator.
 
 Wraps the StratifiedShuffleSplit iterator from sklearn.model_selection.

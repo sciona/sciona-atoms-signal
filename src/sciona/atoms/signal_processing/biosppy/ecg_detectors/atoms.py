@@ -4,11 +4,6 @@ import numpy as np
 
 import icontract
 from sciona.ghost.registry import register_atom
-from biosppy.signals.ecg import ASI_segmenter
-from biosppy.signals.ecg import christov_segmenter as _christov_segmenter
-from biosppy.signals.ecg import engzee_segmenter as _engzee_segmenter
-from biosppy.signals.ecg import gamboa_segmenter as _gamboa_segmenter
-from biosppy.signals.ecg import hamilton_segmenter as _hamilton_segmenter
 
 from .witnesses import (
     witness_asi_signal_segmenter,
@@ -23,7 +18,6 @@ from .witnesses import (
     witness_thresholdbasedsignalsegmentation,
 )
 
-
 @register_atom(witness_thresholdbasedsignalsegmentation)  # type: ignore[untyped-decorator]
 @icontract.require(lambda sampling_rate: isinstance(sampling_rate, (float, int, np.number)), "sampling_rate must be numeric")
 @icontract.require(lambda Pth: isinstance(Pth, (float, int, np.number)), "Pth must be numeric")
@@ -33,18 +27,18 @@ def threshold_based_signal_segmentation(
     sampling_rate: float = 1000.0,
     Pth: float = 5.0,
 ) -> np.ndarray:
+    from biosppy.signals.ecg import ASI_segmenter
     """Run the BioSPPy ASI detector and return R-peak indices."""
     return ASI_segmenter(signal=signal, sampling_rate=sampling_rate, Pth=Pth)["rpeaks"]
-
 
 @register_atom(witness_asi_signal_segmenter)  # type: ignore[untyped-decorator]
 @icontract.require(lambda sampling_rate: isinstance(sampling_rate, (float, int, np.number)), "sampling_rate must be numeric")
 @icontract.require(lambda Pth: isinstance(Pth, (float, int, np.number)), "Pth must be numeric")
 @icontract.ensure(lambda result: result is not None, "ASI_signal_segmenter output must not be None")
 def asi_signal_segmenter(signal: np.ndarray, sampling_rate: float, Pth: float) -> np.ndarray:
+    from biosppy.signals.ecg import ASI_segmenter
     """Run the ASI ECG segmenter and return detected R-peaks."""
     return ASI_segmenter(signal=signal, sampling_rate=sampling_rate, Pth=Pth)["rpeaks"]
-
 
 @register_atom(witness_christovqrsdetect)
 @icontract.require(lambda signal: np.isfinite(signal).all(), "signal must be finite")
@@ -55,17 +49,17 @@ def asi_signal_segmenter(signal: np.ndarray, sampling_rate: float, Pth: float) -
 @icontract.ensure(lambda result: isinstance(result, np.ndarray), "result must be ndarray")
 @icontract.ensure(lambda result: result.ndim == 1, "result must be 1-D")
 def christov_qrs_detect(signal: np.ndarray, sampling_rate: float) -> np.ndarray:
+    from biosppy.signals.ecg import christov_segmenter as _christov_segmenter
     """Run the Christov QRS detector and return detected R-peaks."""
     return _christov_segmenter(signal=signal, sampling_rate=sampling_rate)["rpeaks"]
-
 
 @register_atom(witness_christov_qrs_segmenter)  # type: ignore[untyped-decorator]
 @icontract.require(lambda sampling_rate: isinstance(sampling_rate, (float, int, np.number)), "sampling_rate must be numeric")
 @icontract.ensure(lambda result: result is not None, "christov_qrs_segmenter output must not be None")
 def christov_qrs_segmenter(signal: np.ndarray, sampling_rate: float) -> np.ndarray:
+    from biosppy.signals.ecg import christov_segmenter as _christov_segmenter
     """Alias the Christov QRS detector under the segmenter naming surface."""
     return _christov_segmenter(signal=signal, sampling_rate=sampling_rate)["rpeaks"]
-
 
 @register_atom(witness_engzee_signal_segmentation)
 @icontract.require(lambda signal: np.isfinite(signal).all(), "signal must be finite")
@@ -78,17 +72,17 @@ def christov_qrs_segmenter(signal: np.ndarray, sampling_rate: float) -> np.ndarr
 @icontract.ensure(lambda result: isinstance(result, np.ndarray), "result must be ndarray")
 @icontract.ensure(lambda result: result.ndim == 1, "result must be 1-D")
 def engzee_signal_segmentation(signal: np.ndarray, sampling_rate: float, threshold: float) -> np.ndarray:
+    from biosppy.signals.ecg import engzee_segmenter as _engzee_segmenter
     """Run the Engzee detector and return detected R-peaks."""
     return _engzee_segmenter(signal=signal, sampling_rate=sampling_rate, threshold=threshold)["rpeaks"]
-
 
 @register_atom(witness_engzee_qrs_segmentation)  # type: ignore[untyped-decorator]
 @icontract.require(lambda sampling_rate: isinstance(sampling_rate, (float, int, np.number)), "sampling_rate must be numeric")
 @icontract.ensure(lambda result: result is not None, "engzee_qrs_segmentation output must not be None")
 def engzee_qrs_segmentation(signal: np.ndarray, sampling_rate: float, threshold: float) -> np.ndarray:
+    from biosppy.signals.ecg import engzee_segmenter as _engzee_segmenter
     """Alias the Engzee detector under the QRS segmentation naming surface."""
     return _engzee_segmenter(signal=signal, sampling_rate=sampling_rate, threshold=threshold)["rpeaks"]
-
 
 @register_atom(witness_gamboa_segmentation)
 @icontract.require(lambda signal: isinstance(signal, np.ndarray), "signal must be a numpy array")
@@ -96,29 +90,30 @@ def engzee_qrs_segmentation(signal: np.ndarray, sampling_rate: float, threshold:
 @icontract.require(lambda tol: isinstance(tol, (float, int, np.number)), "tol must be numeric")
 @icontract.ensure(lambda result: result is not None, "gamboa_segmentation output must not be None")
 def gamboa_segmentation(signal: np.ndarray, sampling_rate: float, tol: float) -> np.ndarray:
+    from biosppy.signals.ecg import gamboa_segmenter as _gamboa_segmenter
     """Run the Gamboa detector and return detected R-peaks."""
     return _gamboa_segmenter(signal=signal, sampling_rate=sampling_rate, tol=tol)["rpeaks"]
-
 
 @register_atom(witness_gamboa_segmenter)
 @icontract.require(lambda tol: isinstance(tol, (float, int, np.number)), "tol must be numeric")
 @icontract.ensure(lambda result: result is not None, "gamboa_segmenter output must not be None")
 def gamboa_segmenter(signal: np.ndarray, sampling_rate: float, tol: float) -> np.ndarray:
+    from biosppy.signals.ecg import gamboa_segmenter as _gamboa_segmenter
     """Alias the Gamboa detector under the segmenter naming surface."""
     return _gamboa_segmenter(signal=signal, sampling_rate=sampling_rate, tol=tol)["rpeaks"]
-
 
 @register_atom(witness_hamilton_segmentation)
 @icontract.require(lambda signal: isinstance(signal, np.ndarray), "signal must be a numpy array")
 @icontract.ensure(lambda result: result is not None, "hamilton_segmentation output must not be None")
 def hamilton_segmentation(signal: np.ndarray, sampling_rate: int) -> np.ndarray:
+    from biosppy.signals.ecg import hamilton_segmenter as _hamilton_segmenter
     """Run the Hamilton detector and return detected R-peaks."""
     return np.asarray(_hamilton_segmenter(signal=signal, sampling_rate=sampling_rate)["rpeaks"], dtype=int)
-
 
 @register_atom(witness_hamilton_segmenter)  # type: ignore[untyped-decorator]
 @icontract.require(lambda sampling_rate: isinstance(sampling_rate, (float, int, np.number)), "sampling_rate must be numeric")
 @icontract.ensure(lambda result: result is not None, "hamilton_segmenter output must not be None")
 def hamilton_segmenter(signal: np.ndarray, sampling_rate: float) -> np.ndarray:
+    from biosppy.signals.ecg import hamilton_segmenter as _hamilton_segmenter
     """Alias the Hamilton detector under the segmenter naming surface."""
     return _hamilton_segmenter(signal=signal, sampling_rate=sampling_rate)["rpeaks"]

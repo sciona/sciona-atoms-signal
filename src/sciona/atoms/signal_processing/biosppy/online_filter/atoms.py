@@ -6,22 +6,18 @@ import numpy as np
 
 import icontract
 from sciona.ghost.registry import register_atom
-from biosppy.signals.tools import OnlineFilter
 
 from .state_models import FilterState
 from .witnesses import witness_filter_chunk, witness_initialize_filter
 
-
 def _is_vector(array: np.ndarray) -> bool:
     return isinstance(array, np.ndarray) and array.ndim == 1 and array.size >= 1
-
 
 def _as_numeric_vector(array: np.ndarray, name: str) -> np.ndarray:
     vector = np.asarray(array, dtype=float)
     if vector.ndim != 1 or vector.size < 1:
         raise ValueError(f"{name} must be a non-empty 1D numeric array")
     return vector
-
 
 @register_atom(witness_initialize_filter)
 @icontract.require(lambda b: b is None or _is_vector(b), "b must be None or a non-empty 1D numpy array")
@@ -32,6 +28,7 @@ def filter_state_init(
     b: np.ndarray | None = None,
     a: np.ndarray | None = None,
 ) -> tuple[tuple[np.ndarray, np.ndarray, np.ndarray | None], FilterState]:
+    from biosppy.signals.tools import OnlineFilter
     """Initialize an OnlineFilter coefficient/state bundle for chunked use.
 
     Args:
@@ -52,7 +49,6 @@ def filter_state_init(
     state = FilterState(b=coeff_b, a=coeff_a, zi=obj.zi)
     return (state.b, state.a, state.zi), state
 
-
 @register_atom(witness_filter_chunk)
 @icontract.require(lambda signal: signal is None or _is_vector(signal), "signal must be None or a non-empty 1D numpy array")
 @icontract.require(lambda state: state is not None, "state cannot be None")
@@ -62,6 +58,7 @@ def filter_step(
     signal: np.ndarray | None = None,
     state: FilterState | None = None,
 ) -> tuple[tuple[np.ndarray, np.ndarray], FilterState]:
+    from biosppy.signals.tools import OnlineFilter
     """Filter one signal chunk and return the next immutable filter state.
 
     Args:
