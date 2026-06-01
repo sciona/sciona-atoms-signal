@@ -1,0 +1,72 @@
+{
+  "cdg_id": "direct_convolution_correlation",
+  "name": "direct_convolution_correlation",
+  "priority": "medium",
+  "decomposition_rationale": "Decompose into separate boundary padding and sliding-window dot-product operators to allow changing boundary styles independently from the computational kernel.",
+  "family_directory_hint": "src/sciona/atoms/signal/filtering/",
+  "atomic_nodes": [
+    {
+      "name": "pad_array_boundaries",
+      "semantic_role": "Applies chosen boundary conditions (e.g. constant, wrap, symmetric) to pad an array prior to spatial filtering.",
+      "source_targets": [
+        "numpy.pad"
+      ],
+      "inputs": [
+        {
+          "name": "array",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "pad_width",
+          "type_desc": "tuple[tuple[int, int], ...]",
+          "required": true
+        },
+        {
+          "name": "mode",
+          "type_desc": "str",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "array.ndim == len(pad_width)"
+      ],
+      "postcondition_candidates": [
+        "result.ndim == array.ndim"
+      ],
+      "witness_shape_semantics": "Expands the spatial dimensions of the input array by the specified pad widths.",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Allocates and populates a new padded array containing elements of the original.",
+      "complexity_confidence": 95
+    }
+  ],
+  "edges": [],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "in1",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "in2",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "result",
+        "type_desc": "NDArray[np.float64]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

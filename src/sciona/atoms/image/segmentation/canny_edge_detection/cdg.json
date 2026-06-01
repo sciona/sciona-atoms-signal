@@ -1,0 +1,169 @@
+{
+  "cdg_id": "canny_edge_detection",
+  "name": "canny_edge_detection",
+  "priority": "medium",
+  "decomposition_rationale": "Canny edge detection is a multi-stage pipeline: Gaussian smoothing, gradient magnitude/angle computation, non-maximum suppression, double thresholding, and hysteresis edge tracking. Decomposing these allows testing each step independently.",
+  "family_directory_hint": "src/sciona/atoms/image/segmentation/",
+  "atomic_nodes": [
+    {
+      "name": "compute_image_gradients",
+      "semantic_role": "Computes the horizontal and vertical image gradients using Sobel or Scharr operators.",
+      "source_targets": [
+        "scipy.ndimage.sobel",
+        "skimage.filters.sobel"
+      ],
+      "inputs": [
+        {
+          "name": "image",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "grad_x",
+          "type_desc": "NDArray[np.float64]"
+        },
+        {
+          "name": "grad_y",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "image.ndim == 2"
+      ],
+      "postcondition_candidates": [
+        "grad_x.shape == image.shape",
+        "grad_y.shape == image.shape"
+      ],
+      "witness_shape_semantics": "Returns two gradient maps of the same shape as the input image.",
+      "time_complexity": "O(w * h)",
+      "space_complexity": "O(w * h)",
+      "complexity_reasoning": "Applies simple small-kernel spatial convolving filters over the image.",
+      "complexity_confidence": 98
+    },
+    {
+      "name": "apply_non_maximum_suppression",
+      "semantic_role": "Thins gradient magnitude maps along the direction of the gradient.",
+      "source_targets": [
+        "skimage.feature.canny"
+      ],
+      "inputs": [
+        {
+          "name": "grad_x",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "grad_y",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "grad_x.shape == grad_y.shape"
+      ],
+      "postcondition_candidates": [
+        "result.shape == grad_x.shape"
+      ],
+      "witness_shape_semantics": "Maintains the 2D shape of the gradients.",
+      "time_complexity": "O(w * h)",
+      "space_complexity": "O(w * h)",
+      "complexity_reasoning": "Interpolates along gradient directions for each pixel location.",
+      "complexity_confidence": 92
+    },
+    {
+      "name": "apply_hysteresis_thresholding",
+      "semantic_role": "Applies low/high thresholds and tracks edges using connectivity.",
+      "source_targets": [
+        "skimage.filters.apply_hysteresis_threshold"
+      ],
+      "inputs": [
+        {
+          "name": "suppressed_image",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "low_threshold",
+          "type_desc": "float",
+          "required": true
+        },
+        {
+          "name": "high_threshold",
+          "type_desc": "float",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.bool_]"
+        }
+      ],
+      "precondition_candidates": [
+        "low_threshold <= high_threshold"
+      ],
+      "postcondition_candidates": [
+        "result.shape == suppressed_image.shape"
+      ],
+      "witness_shape_semantics": "Returns a boolean edge map of the same shape.",
+      "time_complexity": "O(w * h)",
+      "space_complexity": "O(w * h)",
+      "complexity_reasoning": "Connected component BFS/DFS scan over thresholded pixels.",
+      "complexity_confidence": 95
+    }
+  ],
+  "edges": [
+    {
+      "source": "compute_image_gradients",
+      "target": "apply_non_maximum_suppression",
+      "output_name": "grad_x",
+      "input_name": "grad_x"
+    },
+    {
+      "source": "compute_image_gradients",
+      "target": "apply_non_maximum_suppression",
+      "output_name": "grad_y",
+      "input_name": "grad_y"
+    },
+    {
+      "source": "apply_non_maximum_suppression",
+      "target": "apply_hysteresis_thresholding",
+      "output_name": "result",
+      "input_name": "suppressed_image"
+    }
+  ],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "image",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "low_threshold",
+        "type_desc": "float",
+        "required": true
+      },
+      {
+        "name": "high_threshold",
+        "type_desc": "float",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "edges",
+        "type_desc": "NDArray[np.bool_]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.image.segmentation.watershed_segmentation.compute_distance_transform@sciona/atoms/image/segmentation/watershed_segmentation/atoms.py:18": {
+      "references": [
+        {
+          "ref_id": "repo_scikit_image",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.ndimage.distance_transform_edt"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.ndimage.distance_transform_edt']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.image.segmentation.watershed_segmentation.find_watershed_markers@sciona/atoms/image/segmentation/watershed_segmentation/atoms.py:33": {
+      "references": [
+        {
+          "ref_id": "repo_scikit_image",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.ndimage.label",
+              "skimage.feature.peak_local_max"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.ndimage.label', 'skimage.feature.peak_local_max']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.image.segmentation.watershed_segmentation.apply_watershed_flooding@sciona/atoms/image/segmentation/watershed_segmentation/atoms.py:50": {
+      "references": [
+        {
+          "ref_id": "repo_scikit_image",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "skimage.segmentation.watershed"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['skimage.segmentation.watershed']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

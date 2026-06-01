@@ -1,0 +1,134 @@
+{
+  "cdg_id": "zero_phase_filtfilt_pipeline",
+  "name": "zero_phase_filtfilt_pipeline",
+  "priority": "medium",
+  "decomposition_rationale": "Filtfilt requires computing initial filter states, applying the filter forward, reversing the result, applying it again, and reversing back. Decomposing these lets us reuse the underlying forward filtering atoms.",
+  "family_directory_hint": "src/sciona/atoms/signal/filtering/",
+  "atomic_nodes": [
+    {
+      "name": "compute_gustafsson_initial_conditions",
+      "semantic_role": "Computes initial conditions for forward-backward filtering to minimize edge transients.",
+      "source_targets": [
+        "scipy.signal.lfiltic",
+        "scipy.signal.filtfilt"
+      ],
+      "inputs": [
+        {
+          "name": "b",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "a",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "b.ndim == 1",
+        "a.ndim == 1",
+        "signal.ndim >= 1"
+      ],
+      "postcondition_candidates": [
+        "result.ndim == 1"
+      ],
+      "witness_shape_semantics": "Returns initial state vector matching filter order.",
+      "time_complexity": "O(order^2)",
+      "space_complexity": "O(order)",
+      "complexity_reasoning": "Solving a small linear system of equations matching the filter order.",
+      "complexity_confidence": 88
+    },
+    {
+      "name": "apply_zero_phase_forward_backward",
+      "semantic_role": "Applies double-filtering forward and backward with padding.",
+      "source_targets": [
+        "scipy.signal.filtfilt"
+      ],
+      "inputs": [
+        {
+          "name": "b",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "a",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "zi",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "b.ndim == 1",
+        "a.ndim == 1"
+      ],
+      "postcondition_candidates": [
+        "result.shape == signal.shape"
+      ],
+      "witness_shape_semantics": "Maintains the shape of the input signal.",
+      "time_complexity": "O(n * order)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Two linear filtering sweeps (forward and backward) across n samples.",
+      "complexity_confidence": 96
+    }
+  ],
+  "edges": [
+    {
+      "source": "compute_gustafsson_initial_conditions",
+      "target": "apply_zero_phase_forward_backward",
+      "output_name": "result",
+      "input_name": "zi"
+    }
+  ],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "signal",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "b",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "a",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "zero_phase_signal",
+        "type_desc": "NDArray[np.float64]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

@@ -1,0 +1,69 @@
+{
+  "cdg_id": "blob_log_dog_detection",
+  "name": "blob_log_dog_detection",
+  "priority": "medium",
+  "decomposition_rationale": "Decompose into scale-space volume calculation (filtering) and 3D non-maximum suppression peak picking to isolate the heavy filtering from coordinate searching.",
+  "family_directory_hint": "src/sciona/atoms/image/segmentation/",
+  "atomic_nodes": [
+    {
+      "name": "generate_log_scale_space",
+      "semantic_role": "Generates a 3D volume of scale-normalized Laplacian of Gaussian filters.",
+      "source_targets": [
+        "skimage.feature.blob_log"
+      ],
+      "inputs": [
+        {
+          "name": "image",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "sigmas",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "image.ndim == 2",
+        "sigmas.ndim == 1"
+      ],
+      "postcondition_candidates": [
+        "result.ndim == 3",
+        "result.shape[0] == sigmas.shape[0]"
+      ],
+      "witness_shape_semantics": "Creates a 3D volume of shape (num_sigmas, image_h, image_w).",
+      "time_complexity": "O(n_sigmas * w * h log(w * h))",
+      "space_complexity": "O(n_sigmas * w * h)",
+      "complexity_reasoning": "Applies FFT-based Gaussian/Laplacian filters for each target scale layer.",
+      "complexity_confidence": 92
+    }
+  ],
+  "edges": [],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "image",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "sigmas",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "blobs",
+        "type_desc": "NDArray[np.float64]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

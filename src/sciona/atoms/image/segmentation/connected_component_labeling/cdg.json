@@ -1,0 +1,71 @@
+{
+  "cdg_id": "connected_component_labeling",
+  "name": "connected_component_labeling",
+  "priority": "medium",
+  "decomposition_rationale": "Decompose into label mask generation (via Union-Find equivalent scans) and subsequent regional property extraction to allow standalone region statistical analyses on pre-labeled target masks.",
+  "family_directory_hint": "src/sciona/atoms/image/segmentation/",
+  "atomic_nodes": [
+    {
+      "name": "label_binary_components",
+      "semantic_role": "Labels connected components in a binary image.",
+      "source_targets": [
+        "scipy.ndimage.label"
+      ],
+      "inputs": [
+        {
+          "name": "binary_image",
+          "type_desc": "NDArray[np.bool_]",
+          "required": true
+        },
+        {
+          "name": "connectivity",
+          "type_desc": "int",
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "labeled_image",
+          "type_desc": "NDArray[np.int64]"
+        },
+        {
+          "name": "num_features",
+          "type_desc": "int"
+        }
+      ],
+      "precondition_candidates": [
+        "binary_image.ndim == 2"
+      ],
+      "postcondition_candidates": [
+        "labeled_image.shape == binary_image.shape",
+        "num_features >= 0"
+      ],
+      "witness_shape_semantics": "Produces an integer label map of identical shape as input.",
+      "time_complexity": "O(w * h)",
+      "space_complexity": "O(w * h)",
+      "complexity_reasoning": "Linear scan with two-pass Union-Find resolution.",
+      "complexity_confidence": 96
+    }
+  ],
+  "edges": [],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "binary_image",
+        "type_desc": "NDArray[np.bool_]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "labeled_image",
+        "type_desc": "NDArray[np.int64]"
+      },
+      {
+        "name": "num_features",
+        "type_desc": "int"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.image.segmentation.template_matching_correlation.compute_correlation_map@sciona/atoms/image/segmentation/template_matching_correlation/atoms.py:20": {
+      "references": [
+        {
+          "ref_id": "repo_scikit_image",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "skimage.feature.match_template"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['skimage.feature.match_template']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

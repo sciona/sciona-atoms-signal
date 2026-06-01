@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.image.segmentation.hough_transform_detection.compute_hough_accumulator@sciona/atoms/image/segmentation/hough_transform_detection/atoms.py:16": {
+      "references": [
+        {
+          "ref_id": "repo_scikit_image",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "skimage.transform.hough_line"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['skimage.transform.hough_line']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

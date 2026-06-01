@@ -1,0 +1,121 @@
+{
+  "cdg_id": "gaussian_filter_smoothing",
+  "name": "gaussian_filter_smoothing",
+  "priority": "medium",
+  "decomposition_rationale": "Gaussian filtering can be implemented efficiently as sequential 1D separable convolutions or in the frequency domain. Decomposing it into 1D kernel generation and 1D direction-wise convolution is numerically stable and faster.",
+  "family_directory_hint": "src/sciona/atoms/image/filters/",
+  "atomic_nodes": [
+    {
+      "name": "compute_gaussian_1d_kernel",
+      "semantic_role": "Computes a normalized 1D Gaussian kernel for a given standard deviation.",
+      "source_targets": [
+        "scipy.ndimage.gaussian_filter"
+      ],
+      "inputs": [
+        {
+          "name": "sigma",
+          "type_desc": "float",
+          "required": true,
+          "constraints": "Positive float"
+        },
+        {
+          "name": "truncate",
+          "type_desc": "float",
+          "required": false,
+          "constraints": "Truncation radius in standard deviations (default 4.0)"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "sigma > 0",
+        "truncate > 0"
+      ],
+      "postcondition_candidates": [
+        "result.ndim == 1",
+        "result.shape[0] % 2 == 1"
+      ],
+      "witness_shape_semantics": "Produces an odd-length 1D kernel.",
+      "time_complexity": "O(sigma * truncate)",
+      "space_complexity": "O(sigma * truncate)",
+      "complexity_reasoning": "Generates values from standard Gaussian equations over the window length.",
+      "complexity_confidence": 95
+    },
+    {
+      "name": "apply_separable_convolution_2d",
+      "semantic_role": "Convolves a 2D image sequentially along rows and columns with 1D kernels.",
+      "source_targets": [
+        "scipy.ndimage.convolve1d"
+      ],
+      "inputs": [
+        {
+          "name": "image",
+          "type_desc": "NDArray[np.float64]",
+          "required": true,
+          "constraints": "2D image"
+        },
+        {
+          "name": "kernel",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "mode",
+          "type_desc": "str",
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "image.ndim == 2",
+        "kernel.ndim == 1"
+      ],
+      "postcondition_candidates": [
+        "result.shape == image.shape"
+      ],
+      "witness_shape_semantics": "Maintains the shape of the 2D input image.",
+      "time_complexity": "O(w * h * len(kernel))",
+      "space_complexity": "O(w * h)",
+      "complexity_reasoning": "Applies two 1D spatial sweeps over the image of size w by h.",
+      "complexity_confidence": 96
+    }
+  ],
+  "edges": [
+    {
+      "source": "compute_gaussian_1d_kernel",
+      "target": "apply_separable_convolution_2d",
+      "output_name": "result",
+      "input_name": "kernel"
+    }
+  ],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "image",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "sigma",
+        "type_desc": "float",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "smoothed_image",
+        "type_desc": "NDArray[np.float64]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

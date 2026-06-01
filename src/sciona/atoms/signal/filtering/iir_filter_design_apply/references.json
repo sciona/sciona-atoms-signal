@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.signal.filtering.iir_filter_design_apply.design_iir_sos_coefficients@sciona/atoms/signal/filtering/iir_filter_design_apply/atoms.py:18": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.signal.iirfilter",
+              "scipy.signal.butter",
+              "scipy.signal.cheby1"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.signal.iirfilter', 'scipy.signal.butter', 'scipy.signal.cheby1']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.signal.filtering.iir_filter_design_apply.apply_iir_sosfilter@sciona/atoms/signal/filtering/iir_filter_design_apply/atoms.py:38": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.signal.sosfilt"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.signal.sosfilt']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "cdg_id": "savitzky_golay_smoothing",
+  "name": "savitzky_golay_smoothing",
+  "priority": "medium",
+  "decomposition_rationale": "Savitzky-Golay filtering requires computing polynomial coefficients for a given window and degree, followed by a sliding window convolution with specific edge-handling filters. Separating coefficient computation from filtering facilitates reuse for derivative estimation.",
+  "family_directory_hint": "src/sciona/atoms/signal/filtering/",
+  "atomic_nodes": [
+    {
+      "name": "compute_savgol_coefficients",
+      "semantic_role": "Computes the convolution coefficients for Savitzky-Golay smoothing and derivatives.",
+      "source_targets": [
+        "scipy.signal.savgol_coeffs"
+      ],
+      "inputs": [
+        {
+          "name": "window_length",
+          "type_desc": "int",
+          "required": true,
+          "constraints": "Must be a positive odd integer"
+        },
+        {
+          "name": "polyorder",
+          "type_desc": "int",
+          "required": true,
+          "constraints": "Must be less than window_length"
+        },
+        {
+          "name": "deriv",
+          "type_desc": "int",
+          "required": false,
+          "constraints": "Order of derivative (default 0)"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "window_length % 2 == 1",
+        "window_length > polyorder",
+        "deriv >= 0"
+      ],
+      "postcondition_candidates": [
+        "result.shape[0] == window_length"
+      ],
+      "witness_shape_semantics": "Returns 1D array of convolution coefficients of length window_length.",
+      "time_complexity": "O(window_length * polyorder^2)",
+      "space_complexity": "O(window_length * polyorder)",
+      "complexity_reasoning": "Solving a small linear least-squares system of size window_length by polyorder.",
+      "complexity_confidence": 90
+    },
+    {
+      "name": "apply_savgol_convolution",
+      "semantic_role": "Convolves a signal with Savitzky-Golay coefficients, handling boundary effects.",
+      "source_targets": [
+        "scipy.signal.savgol_filter"
+      ],
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "coeffs",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "mode",
+          "type_desc": "str",
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "signal.ndim == 1",
+        "coeffs.ndim == 1"
+      ],
+      "postcondition_candidates": [
+        "result.shape == signal.shape"
+      ],
+      "witness_shape_semantics": "Maintains the shape of the input signal.",
+      "time_complexity": "O(n * window_length)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Computes sliding window convolving dot products along n samples.",
+      "complexity_confidence": 96
+    }
+  ],
+  "edges": [
+    {
+      "source": "compute_savgol_coefficients",
+      "target": "apply_savgol_convolution",
+      "output_name": "result",
+      "input_name": "coeffs"
+    }
+  ],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "signal",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "window_length",
+        "type_desc": "int",
+        "required": true
+      },
+      {
+        "name": "polyorder",
+        "type_desc": "int",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "smoothed_signal",
+        "type_desc": "NDArray[np.float64]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

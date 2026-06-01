@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.signal.spectral.lomb_scargle_periodogram.compute_lomb_scargle_power@sciona/atoms/signal/spectral/lomb_scargle_periodogram/atoms.py:20": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.signal.lombscargle"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.signal.lombscargle']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

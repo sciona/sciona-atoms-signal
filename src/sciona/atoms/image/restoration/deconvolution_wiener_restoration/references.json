@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.image.restoration.deconvolution_wiener_restoration.compute_psf_to_otf@sciona/atoms/image/restoration/deconvolution_wiener_restoration/atoms.py:18": {
+      "references": [
+        {
+          "ref_id": "repo_scikit_image",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.fft.fft2",
+              "skimage.restoration.wiener"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.fft.fft2', 'skimage.restoration.wiener']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.image.restoration.deconvolution_wiener_restoration.compute_wiener_filter_kernel@sciona/atoms/image/restoration/deconvolution_wiener_restoration/atoms.py:34": {
+      "references": [
+        {
+          "ref_id": "repo_scikit_image",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "skimage.restoration.wiener"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['skimage.restoration.wiener']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.image.restoration.deconvolution_wiener_restoration.apply_spectral_wiener_filtering@sciona/atoms/image/restoration/deconvolution_wiener_restoration/atoms.py:51": {
+      "references": [
+        {
+          "ref_id": "repo_scikit_image",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.fft.fft2",
+              "scipy.fft.ifft2"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.fft.fft2', 'scipy.fft.ifft2']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

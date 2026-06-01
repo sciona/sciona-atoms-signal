@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.signal.analysis.peak_detection_prominence_width.find_local_maxima@sciona/atoms/signal/analysis/peak_detection_prominence_width/atoms.py:19": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.signal.find_peaks"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.signal.find_peaks']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.signal.analysis.peak_detection_prominence_width.compute_peak_prominences@sciona/atoms/signal/analysis/peak_detection_prominence_width/atoms.py:36": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.signal.peak_prominences"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.signal.peak_prominences']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.signal.analysis.peak_detection_prominence_width.compute_peak_widths@sciona/atoms/signal/analysis/peak_detection_prominence_width/atoms.py:53": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.signal.peak_widths"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.signal.peak_widths']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

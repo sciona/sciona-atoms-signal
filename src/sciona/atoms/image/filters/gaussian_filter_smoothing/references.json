@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.image.filters.gaussian_filter_smoothing.compute_gaussian_1d_kernel@sciona/atoms/image/filters/gaussian_filter_smoothing/atoms.py:19": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.ndimage.gaussian_filter"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.ndimage.gaussian_filter']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.image.filters.gaussian_filter_smoothing.apply_separable_convolution_2d@sciona/atoms/image/filters/gaussian_filter_smoothing/atoms.py:36": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.ndimage.convolve1d"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.ndimage.convolve1d']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

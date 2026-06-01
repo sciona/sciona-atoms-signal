@@ -1,0 +1,165 @@
+{
+  "cdg_id": "peak_detection_prominence_width",
+  "name": "peak_detection_prominence_width",
+  "priority": "medium",
+  "decomposition_rationale": "Peak detection is naturally decomposed into local maxima detection, height/distance filtering, prominence calculation, and width estimation. This modularity allows users to inspect or use intermediate prominences for custom filtering.",
+  "family_directory_hint": "src/sciona/atoms/signal/analysis/",
+  "atomic_nodes": [
+    {
+      "name": "find_local_maxima",
+      "semantic_role": "Identifies indices of all local maximum peaks in a 1D signal.",
+      "source_targets": [
+        "scipy.signal.find_peaks"
+      ],
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.int64]"
+        }
+      ],
+      "precondition_candidates": [
+        "signal.ndim == 1"
+      ],
+      "postcondition_candidates": [
+        "result.ndim == 1",
+        "np.all(result >= 0)"
+      ],
+      "witness_shape_semantics": "Returns a vector of indices of length at most N.",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Linear scan comparison with left and right neighbors.",
+      "complexity_confidence": 98
+    },
+    {
+      "name": "compute_peak_prominences",
+      "semantic_role": "Calculates the prominence of each detected peak.",
+      "source_targets": [
+        "scipy.signal.peak_prominences"
+      ],
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "peaks",
+          "type_desc": "NDArray[np.int64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "tuple[NDArray[np.float64], NDArray[np.int64], NDArray[np.int64]]"
+        }
+      ],
+      "precondition_candidates": [
+        "signal.ndim == 1",
+        "peaks.ndim == 1"
+      ],
+      "postcondition_candidates": [
+        "len(result) == 3",
+        "result[0].shape == peaks.shape"
+      ],
+      "witness_shape_semantics": "Returns prominences, left bases, and right bases matching the number of peaks.",
+      "time_complexity": "O(n * len(peaks))",
+      "space_complexity": "O(len(peaks))",
+      "complexity_reasoning": "Searches for left and right valley contours for each peak.",
+      "complexity_confidence": 90
+    },
+    {
+      "name": "compute_peak_widths",
+      "semantic_role": "Calculates the width of each peak at a relative height.",
+      "source_targets": [
+        "scipy.signal.peak_widths"
+      ],
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "peaks",
+          "type_desc": "NDArray[np.int64]",
+          "required": true
+        },
+        {
+          "name": "prominences",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "rel_height",
+          "type_desc": "float",
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "tuple[NDArray[np.float64], NDArray[np.float64], NDArray[np.float64], NDArray[np.float64]]"
+        }
+      ],
+      "precondition_candidates": [
+        "signal.ndim == 1",
+        "peaks.ndim == 1"
+      ],
+      "postcondition_candidates": [
+        "len(result) == 4"
+      ],
+      "witness_shape_semantics": "Returns widths, width heights, and left/right intersection points.",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(len(peaks))",
+      "complexity_reasoning": "Linear scan to interpolate widths on both sides of each peak.",
+      "complexity_confidence": 92
+    }
+  ],
+  "edges": [
+    {
+      "source": "find_local_maxima",
+      "target": "compute_peak_prominences",
+      "output_name": "result",
+      "input_name": "peaks"
+    },
+    {
+      "source": "compute_peak_prominences",
+      "target": "compute_peak_widths",
+      "output_name": "result",
+      "input_name": "prominences"
+    }
+  ],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "signal",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "rel_height",
+        "type_desc": "float",
+        "required": false
+      }
+    ],
+    "outputs": [
+      {
+        "name": "peaks",
+        "type_desc": "NDArray[np.int64]"
+      },
+      {
+        "name": "widths",
+        "type_desc": "NDArray[np.float64]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

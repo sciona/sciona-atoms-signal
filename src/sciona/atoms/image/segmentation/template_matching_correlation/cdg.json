@@ -1,0 +1,71 @@
+{
+  "cdg_id": "template_matching_correlation",
+  "name": "template_matching_correlation",
+  "priority": "medium",
+  "decomposition_rationale": "Decompose into local cross-correlation map computation and coordinate argmax extraction. Allows utilizing custom peak-thresholding strategies rather than just a single argmax coordinate.",
+  "family_directory_hint": "src/sciona/atoms/image/segmentation/",
+  "atomic_nodes": [
+    {
+      "name": "compute_correlation_map",
+      "semantic_role": "Computes 2D normalized cross-correlation coefficients map.",
+      "source_targets": [
+        "skimage.feature.match_template"
+      ],
+      "inputs": [
+        {
+          "name": "image",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "template",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "image.ndim == 2",
+        "template.ndim == 2",
+        "template.shape[0] <= image.shape[0]",
+        "template.shape[1] <= image.shape[1]"
+      ],
+      "postcondition_candidates": [
+        "np.all(result >= -1.0)",
+        "np.all(result <= 1.0)"
+      ],
+      "witness_shape_semantics": "Produces a 2D map of size (image_w - template_w + 1, image_h - template_h + 1).",
+      "time_complexity": "O(w * h * tw * th)",
+      "space_complexity": "O(w * h)",
+      "complexity_reasoning": "Sliding window covariance calculation over the entire image grid.",
+      "complexity_confidence": 94
+    }
+  ],
+  "edges": [],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "image",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "template",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "correlation_map",
+        "type_desc": "NDArray[np.float64]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

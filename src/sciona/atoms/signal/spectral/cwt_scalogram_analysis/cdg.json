@@ -1,0 +1,69 @@
+{
+  "cdg_id": "cwt_scalogram_analysis",
+  "name": "cwt_scalogram_analysis",
+  "priority": "medium",
+  "decomposition_rationale": "Decompose scale-to-kernel generation and spatial convolution stages to allow switching between direct time-domain and FFT-based multi-scale convolving operators.",
+  "family_directory_hint": "src/sciona/atoms/signal/spectral/",
+  "atomic_nodes": [
+    {
+      "name": "generate_cwt_kernels",
+      "semantic_role": "Generates normalized 1D wavelet kernels for a set of continuous scales.",
+      "source_targets": [
+        "scipy.signal.morlet2",
+        "scipy.signal.ricker"
+      ],
+      "inputs": [
+        {
+          "name": "scales",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "wavelet_type",
+          "type_desc": "str",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "list[NDArray[np.float64]]"
+        }
+      ],
+      "precondition_candidates": [
+        "scales.ndim == 1",
+        "np.all(scales > 0)"
+      ],
+      "postcondition_candidates": [
+        "len(result) == scales.shape[0]"
+      ],
+      "witness_shape_semantics": "Creates a list of 1D filter arrays matching the length of the scales vector.",
+      "time_complexity": "O(sum(scale_lengths))",
+      "space_complexity": "O(sum(scale_lengths))",
+      "complexity_reasoning": "Evaluates the analytical wavelet equations for each scale size.",
+      "complexity_confidence": 90
+    }
+  ],
+  "edges": [],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "signal",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "scales",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "cwt_matrix",
+        "type_desc": "NDArray[np.complex128]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

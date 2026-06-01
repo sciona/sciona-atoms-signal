@@ -1,0 +1,61 @@
+{
+  "cdg_id": "hilbert_envelope_phase",
+  "name": "hilbert_envelope_phase",
+  "priority": "medium",
+  "decomposition_rationale": "Decompose into analytic signal generation (via FFT) and attribute extraction (magnitude/phase/frequency calculation) to isolate the complex-domain math from real-valued diagnostics.",
+  "family_directory_hint": "src/sciona/atoms/signal/analysis/",
+  "atomic_nodes": [
+    {
+      "name": "compute_analytic_signal",
+      "semantic_role": "Computes the complex analytic signal of a real sequence via the Hilbert transform.",
+      "source_targets": [
+        "scipy.signal.hilbert"
+      ],
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.complex128]"
+        }
+      ],
+      "precondition_candidates": [
+        "signal.ndim == 1"
+      ],
+      "postcondition_candidates": [
+        "result.shape == signal.shape"
+      ],
+      "witness_shape_semantics": "Converts real input of length n to complex analytic signal of length n.",
+      "time_complexity": "O(n log(n))",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Dominated by forward and backward fast Fourier transforms.",
+      "complexity_confidence": 95
+    }
+  ],
+  "edges": [],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "signal",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "envelope",
+        "type_desc": "NDArray[np.float64]"
+      },
+      {
+        "name": "phase",
+        "type_desc": "NDArray[np.float64]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.signal.spectral.cwt_scalogram_analysis.generate_cwt_kernels@sciona/atoms/signal/spectral/cwt_scalogram_analysis/atoms.py:17": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.signal.morlet2",
+              "scipy.signal.ricker"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.signal.morlet2', 'scipy.signal.ricker']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

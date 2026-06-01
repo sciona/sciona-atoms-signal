@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.image.filters.image_histogram_equalization.compute_tile_cdfs@sciona/atoms/image/filters/image_histogram_equalization/atoms.py:17": {
+      "references": [
+        {
+          "ref_id": "repo_scikit_image",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "skimage.exposure.equalize_adapthist"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['skimage.exposure.equalize_adapthist']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

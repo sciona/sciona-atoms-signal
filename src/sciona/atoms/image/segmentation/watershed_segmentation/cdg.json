@@ -1,0 +1,155 @@
+{
+  "cdg_id": "watershed_segmentation",
+  "name": "watershed_segmentation",
+  "priority": "medium",
+  "decomposition_rationale": "Watershed segmentation requires gradient magnitude calculation, thresholding/distance transform to find local minima/markers, and the watershed flooding algorithm. Decomposing these allows using custom seeds or markers.",
+  "family_directory_hint": "src/sciona/atoms/image/segmentation/",
+  "atomic_nodes": [
+    {
+      "name": "compute_distance_transform",
+      "semantic_role": "Computes the Euclidean distance transform of a binary mask to identify marker centers.",
+      "source_targets": [
+        "scipy.ndimage.distance_transform_edt"
+      ],
+      "inputs": [
+        {
+          "name": "binary_mask",
+          "type_desc": "NDArray[np.bool_]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "binary_mask.ndim == 2"
+      ],
+      "postcondition_candidates": [
+        "result.shape == binary_mask.shape"
+      ],
+      "witness_shape_semantics": "Returns the spatial distance map with the same shape.",
+      "time_complexity": "O(w * h)",
+      "space_complexity": "O(w * h)",
+      "complexity_reasoning": "Linear-time Euclidean distance transform sweep.",
+      "complexity_confidence": 95
+    },
+    {
+      "name": "find_watershed_markers",
+      "semantic_role": "Identifies and labels local maxima of the distance transform as seeds.",
+      "source_targets": [
+        "scipy.ndimage.label",
+        "skimage.feature.peak_local_max"
+      ],
+      "inputs": [
+        {
+          "name": "distance_map",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "min_distance",
+          "type_desc": "int",
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.int64]"
+        }
+      ],
+      "precondition_candidates": [
+        "distance_map.ndim == 2"
+      ],
+      "postcondition_candidates": [
+        "result.shape == distance_map.shape"
+      ],
+      "witness_shape_semantics": "Returns labeled mask of seeds with the same shape.",
+      "time_complexity": "O(w * h)",
+      "space_complexity": "O(w * h)",
+      "complexity_reasoning": "Local neighborhood scans followed by connected components labeling.",
+      "complexity_confidence": 92
+    },
+    {
+      "name": "apply_watershed_flooding",
+      "semantic_role": "Applies the watershed flooding algorithm from markers on a gradient surface.",
+      "source_targets": [
+        "skimage.segmentation.watershed"
+      ],
+      "inputs": [
+        {
+          "name": "image",
+          "type_desc": "NDArray[np.float64]",
+          "required": true,
+          "constraints": "Gradient magnitude or original image"
+        },
+        {
+          "name": "markers",
+          "type_desc": "NDArray[np.int64]",
+          "required": true
+        },
+        {
+          "name": "mask",
+          "type_desc": "NDArray[np.bool_]",
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.int64]"
+        }
+      ],
+      "precondition_candidates": [
+        "image.ndim == 2",
+        "markers.shape == image.shape"
+      ],
+      "postcondition_candidates": [
+        "result.shape == image.shape"
+      ],
+      "witness_shape_semantics": "Returns labeled region segmentations with the same shape.",
+      "time_complexity": "O(w * h * log(w * h))",
+      "space_complexity": "O(w * h)",
+      "complexity_reasoning": "Priority-queue-based boundary flooding algorithm.",
+      "complexity_confidence": 96
+    }
+  ],
+  "edges": [
+    {
+      "source": "compute_distance_transform",
+      "target": "find_watershed_markers",
+      "output_name": "result",
+      "input_name": "distance_map"
+    },
+    {
+      "source": "find_watershed_markers",
+      "target": "apply_watershed_flooding",
+      "output_name": "result",
+      "input_name": "markers"
+    }
+  ],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "image",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "binary_mask",
+        "type_desc": "NDArray[np.bool_]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "labels",
+        "type_desc": "NDArray[np.int64]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

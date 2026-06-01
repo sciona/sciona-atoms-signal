@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.image.segmentation.connected_component_labeling.label_binary_components@sciona/atoms/image/segmentation/connected_component_labeling/atoms.py:17": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.ndimage.label"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.ndimage.label']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

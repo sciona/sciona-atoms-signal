@@ -1,0 +1,162 @@
+{
+  "cdg_id": "deconvolution_wiener_restoration",
+  "name": "deconvolution_wiener_restoration",
+  "priority": "medium",
+  "decomposition_rationale": "Wiener deconvolution is naturally split into PSF conversion to OTF, frequency-domain Wiener filter coefficient calculation, and filtering via 2D FFT/IFFT. This modularity allows reusing OTF calculations.",
+  "family_directory_hint": "src/sciona/atoms/image/restoration/",
+  "atomic_nodes": [
+    {
+      "name": "compute_psf_to_otf",
+      "semantic_role": "Converts a spatial Point Spread Function (PSF) to the frequency-domain Optical Transfer Function (OTF).",
+      "source_targets": [
+        "scipy.fft.fft2",
+        "skimage.restoration.wiener"
+      ],
+      "inputs": [
+        {
+          "name": "psf",
+          "type_desc": "NDArray[np.float64]",
+          "required": true,
+          "constraints": "2D spatial kernel"
+        },
+        {
+          "name": "target_shape",
+          "type_desc": "tuple[int, int]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.complex128]"
+        }
+      ],
+      "precondition_candidates": [
+        "psf.ndim == 2"
+      ],
+      "postcondition_candidates": [
+        "result.shape == target_shape"
+      ],
+      "witness_shape_semantics": "Pads the PSF to the target shape and returns its complex Fourier transform.",
+      "time_complexity": "O(w * h log(w * h))",
+      "space_complexity": "O(w * h)",
+      "complexity_reasoning": "2D FFT calculation of the padded spatial kernel.",
+      "complexity_confidence": 96
+    },
+    {
+      "name": "compute_wiener_filter_kernel",
+      "semantic_role": "Computes the Wiener deconvolution transfer function.",
+      "source_targets": [
+        "skimage.restoration.wiener"
+      ],
+      "inputs": [
+        {
+          "name": "otf",
+          "type_desc": "NDArray[np.complex128]",
+          "required": true
+        },
+        {
+          "name": "nsr",
+          "type_desc": "float",
+          "required": true,
+          "constraints": "Noise-to-signal ratio, positive float"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.complex128]"
+        }
+      ],
+      "precondition_candidates": [
+        "nsr >= 0"
+      ],
+      "postcondition_candidates": [
+        "result.shape == otf.shape"
+      ],
+      "witness_shape_semantics": "Returns the complex transfer function with the same shape.",
+      "time_complexity": "O(w * h)",
+      "space_complexity": "O(w * h)",
+      "complexity_reasoning": "Element-wise calculations of complex division and multiplication of size w by h.",
+      "complexity_confidence": 98
+    },
+    {
+      "name": "apply_spectral_wiener_filtering",
+      "semantic_role": "Applies the Wiener filter to the blurred image in the frequency domain.",
+      "source_targets": [
+        "scipy.fft.fft2",
+        "scipy.fft.ifft2"
+      ],
+      "inputs": [
+        {
+          "name": "image",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "filter_kernel",
+          "type_desc": "NDArray[np.complex128]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "image.ndim == 2",
+        "filter_kernel.shape == image.shape"
+      ],
+      "postcondition_candidates": [
+        "result.shape == image.shape"
+      ],
+      "witness_shape_semantics": "Maintains the shape of the blurred image.",
+      "time_complexity": "O(w * h log(w * h))",
+      "space_complexity": "O(w * h)",
+      "complexity_reasoning": "Computes forward and backward 2D fast Fourier transforms.",
+      "complexity_confidence": 96
+    }
+  ],
+  "edges": [
+    {
+      "source": "compute_psf_to_otf",
+      "target": "compute_wiener_filter_kernel",
+      "output_name": "result",
+      "input_name": "otf"
+    },
+    {
+      "source": "compute_wiener_filter_kernel",
+      "target": "apply_spectral_wiener_filtering",
+      "output_name": "result",
+      "input_name": "filter_kernel"
+    }
+  ],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "image",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "psf",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "nsr",
+        "type_desc": "float",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "restored_image",
+        "type_desc": "NDArray[np.float64]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

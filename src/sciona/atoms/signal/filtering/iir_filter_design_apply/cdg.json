@@ -1,0 +1,132 @@
+{
+  "cdg_id": "iir_filter_design_apply",
+  "name": "iir_filter_design_apply",
+  "priority": "medium",
+  "decomposition_rationale": "IIR filter design involves continuous-to-discrete warping, bilinear transformation, and Second-Order Sections (SOS) formatting, which is separated from the application atom for modularity and numerical stability checks.",
+  "family_directory_hint": "src/sciona/atoms/signal/filtering/",
+  "atomic_nodes": [
+    {
+      "name": "design_iir_sos_coefficients",
+      "semantic_role": "Designs IIR filter coefficients in second-order sections (SOS) format for numerical stability.",
+      "source_targets": [
+        "scipy.signal.iirfilter",
+        "scipy.signal.butter",
+        "scipy.signal.cheby1"
+      ],
+      "inputs": [
+        {
+          "name": "order",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "Wn",
+          "type_desc": "float | NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "btype",
+          "type_desc": "str",
+          "required": false
+        },
+        {
+          "name": "ftype",
+          "type_desc": "str",
+          "required": false,
+          "constraints": "e.g. 'butter', 'cheby1', 'cheby2', 'ellip'"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "order > 0"
+      ],
+      "postcondition_candidates": [
+        "result.ndim == 2",
+        "result.shape[1] == 6"
+      ],
+      "witness_shape_semantics": "Produces an L-by-6 matrix representing L second-order sections.",
+      "time_complexity": "O(order)",
+      "space_complexity": "O(order)",
+      "complexity_reasoning": "Roots calculation and grouping into second-order cascades proportional to order.",
+      "complexity_confidence": 90
+    },
+    {
+      "name": "apply_iir_sosfilter",
+      "semantic_role": "Filters a signal along one axis using second-order sections (SOS) format.",
+      "source_targets": [
+        "scipy.signal.sosfilt"
+      ],
+      "inputs": [
+        {
+          "name": "sos",
+          "type_desc": "NDArray[np.float64]",
+          "required": true,
+          "constraints": "L-by-6 matrix of second-order sections"
+        },
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "sos.ndim == 2",
+        "sos.shape[1] == 6",
+        "signal.ndim >= 1"
+      ],
+      "postcondition_candidates": [
+        "result.shape == signal.shape"
+      ],
+      "witness_shape_semantics": "Maintains the shape of the input signal.",
+      "time_complexity": "O(n * L)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Applies L biquad difference equations to each of the n samples.",
+      "complexity_confidence": 96
+    }
+  ],
+  "edges": [
+    {
+      "source": "design_iir_sos_coefficients",
+      "target": "apply_iir_sosfilter",
+      "output_name": "result",
+      "input_name": "sos"
+    }
+  ],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "signal",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "order",
+        "type_desc": "int",
+        "required": true
+      },
+      {
+        "name": "Wn",
+        "type_desc": "float",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "filtered_signal",
+        "type_desc": "NDArray[np.float64]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

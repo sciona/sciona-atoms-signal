@@ -1,0 +1,163 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "sciona.atoms.signal.review_bundle.fft_transform.core.v1",
+  "provider_repo": "sciona-atoms-signal",
+  "family_batch": "fft_transform",
+  "review_status": "reviewed",
+  "review_semantic_verdict": "pass_with_limits",
+  "review_developer_semantic_verdict": "pass_with_limits",
+  "trust_readiness": "reviewed_with_limits",
+  "authoritative_sources": [
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/signal/spectral/fft_transform/atoms.py"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/signal/spectral/fft_transform/references.json"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/signal/spectral/fft_transform/cdg.json"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_fft_transform_behavior.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_fft_transform_review_bundle.py"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_fft_transform_references_metadata.py"
+    }
+  ],
+  "limitations": [
+    "The FFT transform family wraps SciPy's discrete Fourier transform helpers. It assumes 1D float64 real inputs and enforces standard conjugate symmetry shapes. High-frequency or highly dynamic inputs can suffer from spectral leakage, which should be mitigated using appropriate window types."
+  ],
+  "blocking_findings": [],
+  "required_actions": [],
+  "review_record_path": "data/review_bundles/fft_transform.review_bundle.json",
+  "rows": [
+    {
+      "atom_key": "sciona.atoms.signal.spectral.fft_transform.apply_spectral_window",
+      "atom_name": "sciona.atoms.signal.spectral.fft_transform.apply_spectral_window",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal/spectral/fft_transform/atoms.py",
+        "tests/test_fft_transform_behavior.py"
+      ],
+      "overall_verdict": "pass",
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "runtime_status": "pass",
+      "developer_semantics_status": "pass",
+      "risk_tier": "low",
+      "risk_score": 10,
+      "risk_dimensions": {
+        "provenance": "low",
+        "semantic_drift": "low"
+      },
+      "risk_reasons": [],
+      "acceptability_score": 95,
+      "acceptability_band": "review_ready",
+      "parity_coverage_level": "positive_path",
+      "parity_test_status": "pass",
+      "parity_fixture_count": 1,
+      "parity_case_count": 3,
+      "review_limitations": [],
+      "review_required_actions": [],
+      "trust_blockers": [],
+      "has_references": true,
+      "references_status": "pass",
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/fft_transform.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal.spectral.fft_transform.optimize_fft_length",
+      "atom_name": "sciona.atoms.signal.spectral.fft_transform.optimize_fft_length",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal/spectral/fft_transform/atoms.py",
+        "tests/test_fft_transform_behavior.py"
+      ],
+      "overall_verdict": "pass",
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "runtime_status": "pass",
+      "developer_semantics_status": "pass",
+      "risk_tier": "low",
+      "risk_score": 5,
+      "risk_dimensions": {
+        "provenance": "low",
+        "semantic_drift": "low"
+      },
+      "risk_reasons": [],
+      "acceptability_score": 98,
+      "acceptability_band": "review_ready",
+      "parity_coverage_level": "positive_path",
+      "parity_test_status": "pass",
+      "parity_fixture_count": 1,
+      "parity_case_count": 3,
+      "review_limitations": [],
+      "review_required_actions": [],
+      "trust_blockers": [],
+      "has_references": true,
+      "references_status": "pass",
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/fft_transform.review_bundle.json"
+    },
+    {
+      "atom_key": "sciona.atoms.signal.spectral.fft_transform.compute_forward_rfft",
+      "atom_name": "sciona.atoms.signal.spectral.fft_transform.compute_forward_rfft",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "catalog_ready",
+      "source_paths": [
+        "src/sciona/atoms/signal/spectral/fft_transform/atoms.py",
+        "tests/test_fft_transform_behavior.py"
+      ],
+      "overall_verdict": "pass",
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "runtime_status": "pass_with_limits",
+      "developer_semantics_status": "pass_with_limits",
+      "risk_tier": "low",
+      "risk_score": 15,
+      "risk_dimensions": {
+        "provenance": "low",
+        "semantic_drift": "low"
+      },
+      "risk_reasons": [],
+      "acceptability_score": 90,
+      "acceptability_band": "review_ready",
+      "parity_coverage_level": "positive_path",
+      "parity_test_status": "pass",
+      "parity_fixture_count": 1,
+      "parity_case_count": 3,
+      "review_limitations": [
+        "Real FFT computation requires n >= signal length and enforces conjugate-symmetric output shape of n // 2 + 1."
+      ],
+      "review_required_actions": [],
+      "trust_blockers": [],
+      "has_references": true,
+      "references_status": "pass",
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/fft_transform.review_bundle.json"
+    }
+  ]
+}

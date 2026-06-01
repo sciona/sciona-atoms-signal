@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.signal.spectral.fft_transform.atoms.apply_spectral_window@sciona/atoms/signal/spectral/fft_transform/atoms.py:22": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Wraps scipy.signal.windows.get_window to generate window coefficients dynamically."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.signal.spectral.fft_transform.atoms.optimize_fft_length@sciona/atoms/signal/spectral/fft_transform/atoms.py:49": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Wraps scipy.fft.next_fast_len to find composite fast Fourier lengths."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.signal.spectral.fft_transform.atoms.compute_forward_rfft@sciona/atoms/signal/spectral/fft_transform/atoms.py:70": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Uses scipy.fft.rfft for optimized real discrete Fourier transform."
+          }
+        },
+        {
+          "ref_id": "numpy_fft_docs",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Reference for the conjugate-symmetric real FFT output length mapping of n // 2 + 1."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

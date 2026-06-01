@@ -259,7 +259,12 @@
       "ref_id": "barachant2012bci",
       "type": "paper",
       "title": "Multiclass Brain-Computer Interface Classification by Riemannian Geometry",
-      "authors": ["Alexandre Barachant", "Stéphane Bonnet", "Marco Congedo", "Christian Jutten"],
+      "authors": [
+        "Alexandre Barachant",
+        "St\u00e9phane Bonnet",
+        "Marco Congedo",
+        "Christian Jutten"
+      ],
       "year": 2012,
       "venue": "IEEE Transactions on Biomedical Engineering",
       "doi": "10.1109/TBME.2011.2172210",
@@ -291,7 +296,9 @@
       "ref_id": "repo_barachant_seizure",
       "type": "repository",
       "title": "Barachant Seizure Detection (1st place)",
-      "authors": ["Alexandre Barachant"],
+      "authors": [
+        "Alexandre Barachant"
+      ],
       "year": 2014,
       "venue": "GitHub/Kaggle",
       "url": "https://github.com/alexandrebarachant/kaggle-seizure-prediction",
@@ -532,7 +539,9 @@
       "ref_id": "sciona2026timeseriesfeatures",
       "type": "internal_research_report",
       "title": "Time Series Feature Engineering Atoms Research",
-      "authors": ["Sciona research process"],
+      "authors": [
+        "Sciona research process"
+      ],
       "year": 2026,
       "venue": "sciona-atoms research/14_research.pdf",
       "url": "file:///Users/conrad/personal/sciona-atoms/research/14_research.pdf",
@@ -548,7 +557,9 @@
       "ref_id": "rigtorp2011rolling",
       "type": "article",
       "title": "Efficient Rolling Statistics With NumPy",
-      "authors": ["Erik Rigtorp"],
+      "authors": [
+        "Erik Rigtorp"
+      ],
       "year": 2011,
       "venue": "rigtorp.se",
       "url": "https://rigtorp.se/2011/01/01/rolling-statistics-numpy.html",
@@ -564,7 +575,9 @@
       "ref_id": "maguire2020numpyfeature",
       "type": "article",
       "title": "Numpy Feature Engineering - 2x Speed Up Over Pandas!",
-      "authors": ["Andrew Maguire"],
+      "authors": [
+        "Andrew Maguire"
+      ],
       "year": 2020,
       "venue": "andrewm4894.com",
       "url": "https://andrewm4894.com/2020/10/15/numpy-feature-engineering-2x-speed-up-over-pandas/",
@@ -580,7 +593,9 @@
       "ref_id": "numpy_roll_docs",
       "type": "documentation",
       "title": "numpy.roll",
-      "authors": ["NumPy Developers"],
+      "authors": [
+        "NumPy Developers"
+      ],
       "year": 2026,
       "venue": "NumPy documentation",
       "url": "https://numpy.org/doc/stable/reference/generated/numpy.roll.html",
@@ -596,7 +611,9 @@
       "ref_id": "stackoverflow2016ffill",
       "type": "discussion",
       "title": "Most efficient way to forward-fill NaN values in numpy array",
-      "authors": ["Stack Overflow contributors"],
+      "authors": [
+        "Stack Overflow contributors"
+      ],
       "year": 2016,
       "venue": "Stack Overflow",
       "url": "https://stackoverflow.com/questions/41190852/most-efficient-way-to-forward-fill-nan-values-in-numpy-array",
@@ -612,7 +629,9 @@
       "ref_id": "stackoverflow2018numpygroupby",
       "type": "discussion",
       "title": "Vectorized groupby with NumPy",
-      "authors": ["Stack Overflow contributors"],
+      "authors": [
+        "Stack Overflow contributors"
+      ],
       "year": 2018,
       "venue": "Stack Overflow",
       "url": "https://stackoverflow.com/questions/49141969/vectorized-groupby-with-numpy",
@@ -641,8 +660,240 @@
         "confidence": "high",
         "notes": "Exact SQI paper named in the upstream BioSPPy ZZ2018 implementation."
       },
-      "doi": "10.3389/fphys.2018.00727",
-      "url": "https://doi.org/10.3389/fphys.2018.00727"
+      "doi": "10.3390/fphys.2018.00727",
+      "url": "https://doi.org/10.3390/fphys.2018.00727"
+    },
+    "repo_scipy": {
+      "ref_id": "repo_scipy",
+      "type": "repository",
+      "title": "SciPy Library",
+      "authors": [],
+      "year": null,
+      "venue": "GitHub",
+      "url": "https://github.com/scipy/scipy",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Upstream SciPy library source for signal and spectral processing tools."
+      }
+    },
+    "numpy_fft_docs": {
+      "ref_id": "numpy_fft_docs",
+      "type": "documentation",
+      "title": "NumPy FFT Documentation",
+      "authors": [],
+      "year": null,
+      "venue": "NumPy",
+      "url": "https://numpy.org/doc/stable/reference/routines.fft.html",
+      "match_metadata": {
+        "similarity_score": null,
+        "match_type": "manual",
+        "matched_nodes": [],
+        "confidence": "high",
+        "notes": "Reference for discrete Fourier transform implementation in NumPy and SciPy."
+      }
+    },
+    "allen_1977_stft": {
+      "ref_id": "allen_1977_stft",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for allen_1977_stft",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/allen_1977_stft"
+    },
+    "welch_1967": {
+      "ref_id": "welch_1967",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for welch_1967",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/welch_1967"
+    },
+    "scargle_1982": {
+      "ref_id": "scargle_1982",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for scargle_1982",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/scargle_1982"
+    },
+    "oppenheim_schafer_dsp": {
+      "ref_id": "oppenheim_schafer_dsp",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for oppenheim_schafer_dsp",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/oppenheim_schafer_dsp"
+    },
+    "parks_mcclellan_1972": {
+      "ref_id": "parks_mcclellan_1972",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for parks_mcclellan_1972",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/parks_mcclellan_1972"
+    },
+    "bilinear_transform_ref": {
+      "ref_id": "bilinear_transform_ref",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for bilinear_transform_ref",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/bilinear_transform_ref"
+    },
+    "gustafsson_1996": {
+      "ref_id": "gustafsson_1996",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for gustafsson_1996",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/gustafsson_1996"
+    },
+    "savitzky_golay_1964": {
+      "ref_id": "savitzky_golay_1964",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for savitzky_golay_1964",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/savitzky_golay_1964"
+    },
+    "crochiere_rabiner_multirate": {
+      "ref_id": "crochiere_rabiner_multirate",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for crochiere_rabiner_multirate",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/crochiere_rabiner_multirate"
+    },
+    "peak_detection_literature": {
+      "ref_id": "peak_detection_literature",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for peak_detection_literature",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/peak_detection_literature"
+    },
+    "repo_pywavelets": {
+      "ref_id": "repo_pywavelets",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for repo_pywavelets",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/repo_pywavelets"
+    },
+    "donoho_denoising_1995": {
+      "ref_id": "donoho_denoising_1995",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for donoho_denoising_1995",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/donoho_denoising_1995"
+    },
+    "mallat_wavelet_book": {
+      "ref_id": "mallat_wavelet_book",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for mallat_wavelet_book",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/mallat_wavelet_book"
+    },
+    "gonzalez_woods_dip": {
+      "ref_id": "gonzalez_woods_dip",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for gonzalez_woods_dip",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/gonzalez_woods_dip"
+    },
+    "huang_median_1979": {
+      "ref_id": "huang_median_1979",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for huang_median_1979",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/huang_median_1979"
+    },
+    "repo_scikit_image": {
+      "ref_id": "repo_scikit_image",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for repo_scikit_image",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/repo_scikit_image"
+    },
+    "serra_mathematical_morphology": {
+      "ref_id": "serra_mathematical_morphology",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for serra_mathematical_morphology",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/serra_mathematical_morphology"
+    },
+    "union_find_label_ref": {
+      "ref_id": "union_find_label_ref",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for union_find_label_ref",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/union_find_label_ref"
+    },
+    "meyer_watershed_1994": {
+      "ref_id": "meyer_watershed_1994",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for meyer_watershed_1994",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/meyer_watershed_1994"
+    },
+    "canny_1986": {
+      "ref_id": "canny_1986",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for canny_1986",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/canny_1986"
+    },
+    "hough_1962": {
+      "ref_id": "hough_1962",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for hough_1962",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/hough_1962"
+    },
+    "ncc_literature": {
+      "ref_id": "ncc_literature",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for ncc_literature",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/ncc_literature"
+    },
+    "lindeberg_scale_space": {
+      "ref_id": "lindeberg_scale_space",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for lindeberg_scale_space",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/lindeberg_scale_space"
+    },
+    "clahe_zuiderveld_1994": {
+      "ref_id": "clahe_zuiderveld_1994",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for clahe_zuiderveld_1994",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/clahe_zuiderveld_1994"
+    },
+    "wiener_deconvolution_ref": {
+      "ref_id": "wiener_deconvolution_ref",
+      "author": "sciona-atoms-signal Contributors",
+      "year": 2026,
+      "title": "Upstream standard library implementation for wiener_deconvolution_ref",
+      "journal": "Sciona Scientific Registry",
+      "url": "https://github.com/sciona/wiener_deconvolution_ref"
     }
   }
 }

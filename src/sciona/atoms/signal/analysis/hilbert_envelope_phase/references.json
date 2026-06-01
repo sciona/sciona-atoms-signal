@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.signal.analysis.hilbert_envelope_phase.compute_analytic_signal@sciona/atoms/signal/analysis/hilbert_envelope_phase/atoms.py:16": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.signal.hilbert"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.signal.hilbert']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

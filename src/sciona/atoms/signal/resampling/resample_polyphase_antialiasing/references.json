@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.signal.resampling.resample_polyphase_antialiasing.compute_rational_approximation@sciona/atoms/signal/resampling/resample_polyphase_antialiasing/atoms.py:20": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.signal.resample_poly"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.signal.resample_poly']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.signal.resampling.resample_polyphase_antialiasing.design_resampling_filter@sciona/atoms/signal/resampling/resample_polyphase_antialiasing/atoms.py:38": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.signal.firwin"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.signal.firwin']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.signal.resampling.resample_polyphase_antialiasing.apply_polyphase_filtering@sciona/atoms/signal/resampling/resample_polyphase_antialiasing/atoms.py:56": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.signal.resample_poly"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.signal.resample_poly']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

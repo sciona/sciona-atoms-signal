@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.image.segmentation.blob_log_dog_detection.generate_log_scale_space@sciona/atoms/image/segmentation/blob_log_dog_detection/atoms.py:18": {
+      "references": [
+        {
+          "ref_id": "repo_scikit_image",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "skimage.feature.blob_log"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['skimage.feature.blob_log']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

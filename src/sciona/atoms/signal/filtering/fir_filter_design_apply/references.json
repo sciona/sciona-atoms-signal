@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.signal.filtering.fir_filter_design_apply.design_fir_coefficients_window@sciona/atoms/signal/filtering/fir_filter_design_apply/atoms.py:17": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.signal.firwin"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.signal.firwin']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.signal.filtering.fir_filter_design_apply.apply_fir_lfilter@sciona/atoms/signal/filtering/fir_filter_design_apply/atoms.py:35": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.signal.lfilter"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.signal.lfilter']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "cdg_id": "resample_polyphase_antialiasing",
+  "name": "resample_polyphase_antialiasing",
+  "priority": "medium",
+  "decomposition_rationale": "Polyphase resampling splits into determining upsampling/downsampling ratios, designing an anti-aliasing lowpass filter with suitable cutoff, and executing the polyphase filter bank. Splitting allows reuse of filter design and rational approximation.",
+  "family_directory_hint": "src/sciona/atoms/signal/resampling/",
+  "atomic_nodes": [
+    {
+      "name": "compute_rational_approximation",
+      "semantic_role": "Approximates a floating-point resampling ratio with a rational fraction P/Q.",
+      "source_targets": [
+        "scipy.signal.resample_poly"
+      ],
+      "inputs": [
+        {
+          "name": "up",
+          "type_desc": "float",
+          "required": true
+        },
+        {
+          "name": "down",
+          "type_desc": "float",
+          "required": true
+        },
+        {
+          "name": "max_len",
+          "type_desc": "int",
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "tuple[int, int]"
+        }
+      ],
+      "precondition_candidates": [
+        "up > 0",
+        "down > 0"
+      ],
+      "postcondition_candidates": [
+        "result[0] > 0",
+        "result[1] > 0"
+      ],
+      "witness_shape_semantics": "Returns two integers indicating upsampling (P) and downsampling (Q) factors.",
+      "time_complexity": "O(log(max_len))",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Uses continued fraction expansion to approximate the rational fraction.",
+      "complexity_confidence": 95
+    },
+    {
+      "name": "design_resampling_filter",
+      "semantic_role": "Designs an interpolation filter for rational resampling.",
+      "source_targets": [
+        "scipy.signal.firwin"
+      ],
+      "inputs": [
+        {
+          "name": "up",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "down",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "numtaps",
+          "type_desc": "int",
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "up > 0",
+        "down > 0"
+      ],
+      "postcondition_candidates": [
+        "result.ndim == 1"
+      ],
+      "witness_shape_semantics": "Returns a 1D filter coefficient vector.",
+      "time_complexity": "O(numtaps)",
+      "space_complexity": "O(numtaps)",
+      "complexity_reasoning": "Linear calculation of sinc filter weights.",
+      "complexity_confidence": 90
+    },
+    {
+      "name": "apply_polyphase_filtering",
+      "semantic_role": "Applies rational resampling using polyphase decomposition.",
+      "source_targets": [
+        "scipy.signal.resample_poly"
+      ],
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "up",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "down",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "window_coeffs",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "signal.ndim == 1",
+        "window_coeffs.ndim == 1"
+      ],
+      "postcondition_candidates": [
+        "result.ndim == signal.ndim"
+      ],
+      "witness_shape_semantics": "Rescales the length along the resampled axis by P/Q.",
+      "time_complexity": "O(n * len(window_coeffs) / down)",
+      "space_complexity": "O(n * up / down)",
+      "complexity_reasoning": "Only filters samples that survive downsampling step, maintaining computational efficiency.",
+      "complexity_confidence": 96
+    }
+  ],
+  "edges": [
+    {
+      "source": "compute_rational_approximation",
+      "target": "apply_polyphase_filtering",
+      "output_name": "result",
+      "input_name": "up"
+    },
+    {
+      "source": "design_resampling_filter",
+      "target": "apply_polyphase_filtering",
+      "output_name": "result",
+      "input_name": "window_coeffs"
+    }
+  ],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "signal",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "up_ratio",
+        "type_desc": "float",
+        "required": true
+      },
+      {
+        "name": "down_ratio",
+        "type_desc": "float",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "resampled_signal",
+        "type_desc": "NDArray[np.float64]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

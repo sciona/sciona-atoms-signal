@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.image.filters.morphological_open_close.generate_structuring_element@sciona/atoms/image/filters/morphological_open_close/atoms.py:17": {
+      "references": [
+        {
+          "ref_id": "repo_scikit_image",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "skimage.morphology.disk",
+              "skimage.morphology.square"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['skimage.morphology.disk', 'skimage.morphology.square']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

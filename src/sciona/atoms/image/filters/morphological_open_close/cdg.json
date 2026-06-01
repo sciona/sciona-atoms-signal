@@ -1,0 +1,74 @@
+{
+  "cdg_id": "morphological_open_close",
+  "name": "morphological_open_close",
+  "priority": "medium",
+  "decomposition_rationale": "Decompose morphology into structuring element creation, erosion, and dilation. This enables compiling opening/closing as sequences of these fundamental building blocks.",
+  "family_directory_hint": "src/sciona/atoms/image/filters/",
+  "atomic_nodes": [
+    {
+      "name": "generate_structuring_element",
+      "semantic_role": "Creates a binary footprint mask of a chosen shape and size.",
+      "source_targets": [
+        "skimage.morphology.disk",
+        "skimage.morphology.square"
+      ],
+      "inputs": [
+        {
+          "name": "shape",
+          "type_desc": "str",
+          "required": true
+        },
+        {
+          "name": "radius",
+          "type_desc": "int",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.bool_]"
+        }
+      ],
+      "precondition_candidates": [
+        "radius > 0"
+      ],
+      "postcondition_candidates": [
+        "result.ndim == 2",
+        "result.shape[0] % 2 == 1"
+      ],
+      "witness_shape_semantics": "Returns an odd-shaped structuring element array.",
+      "time_complexity": "O(radius^2)",
+      "space_complexity": "O(radius^2)",
+      "complexity_reasoning": "Allocates and fills a 2D neighborhood footprint grid.",
+      "complexity_confidence": 95
+    }
+  ],
+  "edges": [],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "image",
+        "type_desc": "NDArray[np.bool_]",
+        "required": true
+      },
+      {
+        "name": "footprint_shape",
+        "type_desc": "str",
+        "required": true
+      },
+      {
+        "name": "radius",
+        "type_desc": "int",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "result",
+        "type_desc": "NDArray[np.bool_]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

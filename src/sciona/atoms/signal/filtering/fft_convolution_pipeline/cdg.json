@@ -1,0 +1,110 @@
+{
+  "cdg_id": "fft_convolution_pipeline",
+  "name": "fft_convolution_pipeline",
+  "priority": "medium",
+  "decomposition_rationale": "FFT convolution is decomposed into zero-padding calculation, forward FFTs, element-wise complex multiplication, and IFFT with real-part cropping. This matches standard DSP architectures.",
+  "family_directory_hint": "src/sciona/atoms/signal/filtering/",
+  "atomic_nodes": [
+    {
+      "name": "compute_convolving_padding",
+      "semantic_role": "Determines the optimal zero-padding size for linear convolution of two arrays.",
+      "source_targets": [
+        "scipy.signal.fftconvolve"
+      ],
+      "inputs": [
+        {
+          "name": "in1_shape",
+          "type_desc": "tuple[int, ...]",
+          "required": true
+        },
+        {
+          "name": "in2_shape",
+          "type_desc": "tuple[int, ...]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "tuple[int, ...]"
+        }
+      ],
+      "precondition_candidates": [
+        "len(in1_shape) == len(in2_shape)"
+      ],
+      "postcondition_candidates": [
+        "all(r >= in1 + in2 - 1 for r, in1, in2 in zip(result, in1_shape, in2_shape))"
+      ],
+      "witness_shape_semantics": "Returns the shape representing the minimum fast Fourier length required along each dimension.",
+      "time_complexity": "O(1)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Arithmetic comparison of tuple shapes.",
+      "complexity_confidence": 99
+    },
+    {
+      "name": "multiply_spectral_coefficients",
+      "semantic_role": "Element-wise multiplication of two complex spectra in the frequency domain.",
+      "source_targets": [
+        "numpy.multiply"
+      ],
+      "inputs": [
+        {
+          "name": "spec1",
+          "type_desc": "NDArray[np.complex128]",
+          "required": true
+        },
+        {
+          "name": "spec2",
+          "type_desc": "NDArray[np.complex128]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.complex128]"
+        }
+      ],
+      "precondition_candidates": [
+        "spec1.shape == spec2.shape"
+      ],
+      "postcondition_candidates": [
+        "result.shape == spec1.shape"
+      ],
+      "witness_shape_semantics": "Preserves the shape of the complex input spectra.",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Linear element-wise complex multiplication of size n.",
+      "complexity_confidence": 98
+    }
+  ],
+  "edges": [
+    {
+      "source": "compute_convolving_padding",
+      "target": "multiply_spectral_coefficients",
+      "output_name": "result",
+      "input_name": "spec1"
+    }
+  ],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "in1",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "in2",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "convolved_signal",
+        "type_desc": "NDArray[np.float64]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

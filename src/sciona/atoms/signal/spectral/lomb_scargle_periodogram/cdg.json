@@ -1,0 +1,84 @@
+{
+  "cdg_id": "lomb_scargle_periodogram",
+  "name": "lomb_scargle_periodogram",
+  "priority": "medium",
+  "decomposition_rationale": "Decompose into core least-squares power fitting and statistical significance threshold computation (FAP) to enable decoupling spectrum calculation from hypothesis testing.",
+  "family_directory_hint": "src/sciona/atoms/signal/spectral/",
+  "atomic_nodes": [
+    {
+      "name": "compute_lomb_scargle_power",
+      "semantic_role": "Computes the Lomb-Scargle power spectrum for irregularly spaced time series.",
+      "source_targets": [
+        "scipy.signal.lombscargle"
+      ],
+      "inputs": [
+        {
+          "name": "t",
+          "type_desc": "NDArray[np.float64]",
+          "required": true,
+          "constraints": "1D array of sample times"
+        },
+        {
+          "name": "y",
+          "type_desc": "NDArray[np.float64]",
+          "required": true,
+          "constraints": "1D array of observations"
+        },
+        {
+          "name": "freqs",
+          "type_desc": "NDArray[np.float64]",
+          "required": true,
+          "constraints": "1D array of target frequencies"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "precondition_candidates": [
+        "t.ndim == 1",
+        "y.ndim == 1",
+        "t.shape[0] == y.shape[0]",
+        "np.all(np.diff(t) > 0)"
+      ],
+      "postcondition_candidates": [
+        "result.shape == freqs.shape",
+        "np.all(result >= 0)"
+      ],
+      "witness_shape_semantics": "Maps input vectors to a power spectrum of length matching the target frequencies.",
+      "time_complexity": "O(n_t * n_f)",
+      "space_complexity": "O(n_f)",
+      "complexity_reasoning": "Standard algorithm computes sinusoids for every combination of time samples and target frequencies.",
+      "complexity_confidence": 95
+    }
+  ],
+  "edges": [],
+  "cdg_io": {
+    "inputs": [
+      {
+        "name": "t",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "y",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      },
+      {
+        "name": "freqs",
+        "type_desc": "NDArray[np.float64]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "power",
+        "type_desc": "NDArray[np.float64]"
+      }
+    ]
+  },
+  "state_model_needed": false
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.image.filters.median_filter_denoising.apply_median_filtering_pass@sciona/atoms/image/filters/median_filter_denoising/atoms.py:18": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.ndimage.median_filter"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.ndimage.median_filter']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

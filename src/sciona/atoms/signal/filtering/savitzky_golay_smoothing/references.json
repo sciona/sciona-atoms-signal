@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.signal.filtering.savitzky_golay_smoothing.compute_savgol_coefficients@sciona/atoms/signal/filtering/savitzky_golay_smoothing/atoms.py:19": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.signal.savgol_coeffs"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.signal.savgol_coeffs']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.signal.filtering.savitzky_golay_smoothing.apply_savgol_convolution@sciona/atoms/signal/filtering/savitzky_golay_smoothing/atoms.py:37": {
+      "references": [
+        {
+          "ref_id": "repo_scipy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "scipy.signal.savgol_filter"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['scipy.signal.savgol_filter']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}

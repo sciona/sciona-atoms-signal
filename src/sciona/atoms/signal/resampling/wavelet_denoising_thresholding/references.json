@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.1",
+  "atoms": {
+    "sciona.atoms.signal.resampling.wavelet_denoising_thresholding.compute_hierarchical_dwt@sciona/atoms/signal/resampling/wavelet_denoising_thresholding/atoms.py:16": {
+      "references": [
+        {
+          "ref_id": "repo_pywavelets",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [
+              "pywt.wavedec"
+            ],
+            "confidence": "high",
+            "notes": "Wraps standard numeric implementation in ['pywt.wavedec']"
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    }
+  }
+}
