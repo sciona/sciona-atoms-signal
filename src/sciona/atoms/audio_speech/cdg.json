@@ -84,9 +84,9 @@
       "conceptual_summary": "Reduces sample-rate ratios and applies scipy polyphase resampling.",
       "critic_notes": "",
       "decomposition_rationale": "",
-      "time_complexity": "O(n log n)",
-      "space_complexity": "O(n)",
-      "complexity_reasoning": "Resampling using polyphase anti-alias filtering via FFT/filtering runs in O(n log n) time and linear space.",
+      "time_complexity": "O(n * max(up, down))",
+      "space_complexity": "O(n * (up / down) + max(up, down))",
+      "complexity_reasoning": "scipy.signal.resample_poly designs an FIR filter of length proportional to max(up, down) and uses polyphase decomposition via upfirdn to resample the signal of length n, taking O(n * max(up, down)) time. The space complexity is O(n * (up / down)) to store the output signal plus O(max(up, down)) for the filter coefficients. (derived from analyzing the actual function scipy.signal.resample_poly rather than the opaque wrapper)",
       "complexity_confidence": 95
     },
     {
@@ -134,7 +134,7 @@
       "decomposition_rationale": "",
       "time_complexity": "O(1)",
       "space_complexity": "O(1)",
-      "complexity_reasoning": "Exposing overlapping windows as a strided view is a metadata-only operation, taking constant time and space.",
+      "complexity_reasoning": "numpy.lib.stride_tricks.sliding_window_view constructs a new strided array view pointing to the same memory block by updating metadata strides, requiring constant O(1) time and O(1) space. (derived from analyzing the actual function numpy.lib.stride_tricks.sliding_window_view rather than the opaque wrapper)",
       "complexity_confidence": 100
     },
     {
@@ -185,9 +185,9 @@
       "conceptual_summary": "Applies a Hann or rectangular taper to each window and takes rfft magnitude.",
       "critic_notes": "",
       "decomposition_rationale": "",
-      "time_complexity": "O(f * w log w)",
+      "time_complexity": "O(f * w * log(w))",
       "space_complexity": "O(f * w)",
-      "complexity_reasoning": "Computing the one-sided STFT over f frames of window size w takes O(f * w log w) time and O(f * w) space.",
+      "complexity_reasoning": "numpy.fft.rfft computes the 1D real Fast Fourier Transform along the window axis of size w for all f frames, taking O(f * w * log(w)) time and O(f * w) space to allocate the resulting spectral magnitude arrays. (derived from analyzing the actual function numpy.fft.rfft rather than the opaque wrapper)",
       "complexity_confidence": 95
     },
     {
@@ -258,7 +258,7 @@
       ],
       "time_complexity": "O(m * w)",
       "space_complexity": "O(m * w)",
-      "complexity_reasoning": "Generating the triangular mel filterbank weights of size m x (1 + w/2) runs in O(m * w) time and space.",
+      "complexity_reasoning": "librosa.filters.mel constructs a triangular mel-frequency filterbank matrix of size m x (1 + w/2), where m is the number of mel bands and w is the FFT window size, running in O(m * w) time and requiring O(m * w) space. (derived from analyzing the actual function librosa.filters.mel rather than the opaque wrapper)",
       "complexity_confidence": 100
     },
     {
@@ -314,7 +314,7 @@
       ],
       "time_complexity": "O(m * b * f)",
       "space_complexity": "O(m * f)",
-      "complexity_reasoning": "Projecting the power spectrogram of b bins and f frames onto m mel bands takes O(m * b * f) time.",
+      "complexity_reasoning": "numpy.dot computes the matrix dot product between a mel-filterbank matrix of shape m x b and a power spectrum of shape b x f, executing in standard matrix multiplication time of O(m * b * f) and requiring O(m * f) space for the resulting mel-frequency spectrogram. (derived from analyzing the actual function numpy.dot rather than the opaque wrapper)",
       "complexity_confidence": 100
     },
     {
@@ -384,7 +384,7 @@
       ],
       "time_complexity": "O(m * f)",
       "space_complexity": "O(m * f)",
-      "complexity_reasoning": "Applying element-wise log scaling and dynamic range clipping runs in linear time and space relative to spectrogram size.",
+      "complexity_reasoning": "librosa.power_to_db scales a mel spectrogram of shape m x f element-wise into decibels and applies reference-relative dynamic range clipping, executing in O(m * f) time and requiring O(m * f) space to store the output decibel spectrogram. (derived from analyzing the actual function librosa.power_to_db rather than the opaque wrapper)",
       "complexity_confidence": 100
     },
     {
@@ -425,9 +425,9 @@
       "conceptual_summary": "Runs an orthonormal DCT along the mel axis and keeps the first coefficients.",
       "critic_notes": "",
       "decomposition_rationale": "",
-      "time_complexity": "O(f * m log m)",
+      "time_complexity": "O(f * m * log(m))",
       "space_complexity": "O(m * f)",
-      "complexity_reasoning": "Computing the 1-D DCT-II along the frequency axis for each of the f frames takes O(f * m log m) time and O(m * f) space.",
+      "complexity_reasoning": "scipy.fft.dct computes the 1-D Discrete Cosine Transform (type II) of size m along the frequency axis for each of the f frames, running in O(f * m * log(m)) time via FFT-based algorithms and requiring O(m * f) space for the output cepstral coefficients. (derived from analyzing the actual function scipy.fft.dct rather than the opaque wrapper)",
       "complexity_confidence": 95
     },
     {
@@ -485,7 +485,7 @@
       "decomposition_rationale": "",
       "time_complexity": "O(m * f + k * m * w_t)",
       "space_complexity": "O(m * f)",
-      "complexity_reasoning": "Copying the spectrogram and applying k contiguous time-axis masks of max width w_t scales as O(m * f + k * m * w_t) in time.",
+      "complexity_reasoning": "SpecAugment time masking copies the spectrogram of size m x f and applies k time-axis masks of maximum width w_t by assigning the mask value element-wise, running in O(m * f + k * m * w_t) time and requiring O(m * f) space. (derived from analyzing the actual function SpecAugment time masking rather than the opaque wrapper)",
       "complexity_confidence": 95
     },
     {
@@ -543,7 +543,7 @@
       "decomposition_rationale": "",
       "time_complexity": "O(m * f + k * f * w_f)",
       "space_complexity": "O(m * f)",
-      "complexity_reasoning": "Copying the spectrogram and applying k contiguous frequency-axis masks of max width w_f scales as O(m * f + k * f * w_f) in time.",
+      "complexity_reasoning": "SpecAugment frequency masking copies the spectrogram of size m x f and applies k frequency-axis masks of maximum width w_f by assigning the mask value element-wise, running in O(m * f + k * f * w_f) time and requiring O(m * f) space. (derived from analyzing the actual function SpecAugment frequency masking rather than the opaque wrapper)",
       "complexity_confidence": 95
     },
     {
@@ -585,8 +585,8 @@
       "critic_notes": "",
       "decomposition_rationale": "",
       "time_complexity": "O(n * k)",
-      "space_complexity": "O(n * k)",
-      "complexity_reasoning": "Computing the median over sliding windows of size k for a sequence of length n takes O(n * k) time and space.",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "scipy.signal.medfilt filters a sequence of length n using sliding windows of size k, running in O(n * k) time via quickselect-based window selection and requiring O(n) space to return the filtered output sequence. (derived from analyzing the actual function scipy.signal.medfilt rather than the opaque wrapper)",
       "complexity_confidence": 95
     },
     {
@@ -634,7 +634,7 @@
       "decomposition_rationale": "",
       "time_complexity": "O(n)",
       "space_complexity": "O(n)",
-      "complexity_reasoning": "Filtering with low-order IIR filters, computing block-wise gated integrated loudness, and gain scaling run in linear time and space.",
+      "complexity_reasoning": "ITU-R BS.1770 48 kHz coefficients normalization filters a signal of length n using low-order IIR filters (linear time O(n)) and computes gated integrated loudness in overlapping fixed-length blocks (overall O(n) operations), requiring O(n) space to allocate the filtered arrays and normalized output. (derived from analyzing the actual function ITU-R BS.1770 48 kHz coefficients rather than the opaque wrapper)",
       "complexity_confidence": 95
     },
     {
@@ -687,7 +687,7 @@
       "decomposition_rationale": "",
       "time_complexity": "O(b * f)",
       "space_complexity": "O(b * f)",
-      "complexity_reasoning": "Element-wise power calculations and soft-mask scaling over a spectrogram of size b x f take linear time and space.",
+      "complexity_reasoning": "ideal ratio mask computes element-wise power ratio masks and soft scales a complex spectrogram of shape b x f, taking linear O(b * f) time and requiring O(b * f) space for the intermediate mask and final masked spectrum. (derived from analyzing the actual function ideal ratio mask rather than the opaque wrapper)",
       "complexity_confidence": 100
     },
     {
@@ -730,7 +730,7 @@
       "decomposition_rationale": "",
       "time_complexity": "O(r * n^2)",
       "space_complexity": "O(n)",
-      "complexity_reasoning": "Iteratively matching the ordered ruleset of size r using regex context searches on a string of length n runs in O(r * n^2) worst-case time.",
+      "complexity_reasoning": "rule-based G2P converts text of length n using a ruleset of size r, matching graphemes and performing regular expression searches on left and right contexts of length up to n, taking worst-case O(r * n^2) time and requiring O(n) space to store the sliced strings and the output phonemes. (derived from analyzing the actual function rule-based G2P rather than the opaque wrapper)",
       "complexity_confidence": 95
     },
     {
@@ -773,7 +773,7 @@
       "decomposition_rationale": "",
       "time_complexity": "O(f * t)",
       "space_complexity": "O(f * t)",
-      "complexity_reasoning": "Standard dynamic programming for DTW alignment between f frames and t tokens takes quadratic O(f * t) time and space.",
+      "complexity_reasoning": "dynamic time warping uses dynamic programming to align f frames and t phoneme tokens, filling a cost and backpointer grid of shape f x t in O(f * t) time and requiring O(f * t) space. (derived from analyzing the actual function dynamic time warping rather than the opaque wrapper)",
       "complexity_confidence": 100
     },
     {
@@ -821,7 +821,7 @@
       "decomposition_rationale": "",
       "time_complexity": "O(b * t * f)",
       "space_complexity": "O(b * t * f)",
-      "complexity_reasoning": "Monotonic alignment search via dynamic programming over a batch of size b, t tokens, and f frames takes O(b * t * f) time and space.",
+      "complexity_reasoning": "monotonic alignment search implements dynamic programming to compute maximum score alignment paths for a batch of size b, with t tokens and f frames, running in O(b * t * f) time and requiring O(b * t * f) space to store the DP and alignment grids. (derived from analyzing the actual function monotonic alignment search rather than the opaque wrapper)",
       "complexity_confidence": 100
     },
     {
@@ -864,7 +864,7 @@
       "decomposition_rationale": "",
       "time_complexity": "O(f * v)",
       "space_complexity": "O(f)",
-      "complexity_reasoning": "Finding the maximum probability token per frame for f frames over a vocabulary of size v takes linear O(f * v) time.",
+      "complexity_reasoning": "CTC greedy decoding finds the maximum probability token per frame from a log probability array of shape f x v (where f is frames and v is vocabulary size) taking O(f * v) time, and collapses duplicates in linear O(f) time, requiring O(f) space for the decoded sequence. (derived from analyzing the actual function CTC greedy decoding rather than the opaque wrapper)",
       "complexity_confidence": 100
     },
     {
@@ -920,9 +920,9 @@
       "conceptual_summary": "Tracks blank and non-blank prefix scores separately and prunes by total log score.",
       "critic_notes": "No language model object is accepted, so alpha is reserved and beta acts as insertion bonus.",
       "decomposition_rationale": "",
-      "time_complexity": "O(f * b_w * v * log(b_w * v))",
-      "space_complexity": "O(b_w * v)",
-      "complexity_reasoning": "Decoding via prefix beam search over f frames with beam width b_w and vocabulary size v scales as O(f * b_w * v log(b_w * v)) in time.",
+      "time_complexity": "O(f * B * v * log(B * v))",
+      "space_complexity": "O(B * v)",
+      "complexity_reasoning": "CTC prefix beam search processes f frames with beam width B and vocabulary size v. In each step, it expands all active prefixes and sorts the top candidates, taking O(f * B * v * log(B * v)) time and requiring O(B * v) space to hold the beam state. (derived from analyzing the actual function CTC prefix beam search rather than the opaque wrapper)",
       "complexity_confidence": 95
     }
   ],
