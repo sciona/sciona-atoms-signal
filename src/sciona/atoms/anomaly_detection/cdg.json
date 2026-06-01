@@ -70,7 +70,11 @@
       "parallelizable": false,
       "conceptual_summary": "Runs STOMP via stumpy.stump, penalizes low-variation windows, normalizes by matched-neighbor profile distance, and smooths the result.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n^2)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Computing the self-join matrix-profile anomaly score via STOMP scales quadratically with series length n.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "multiscale_anomaly_aggregation",
@@ -116,7 +120,11 @@
       "parallelizable": false,
       "conceptual_summary": "Computes per-scale normalized matrix-profile scores, lifts them onto the time axis, and max-pools across scales.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(k * n^2)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Aggregating scores across k window sizes runs the quadratic STOMP matrix-profile calculation k times.",
+      "complexity_confidence": 95
     }
   ],
   "edges": [],

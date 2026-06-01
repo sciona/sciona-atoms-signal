@@ -66,7 +66,11 @@
       "parallelizable": true,
       "conceptual_summary": "Square-root quadratic variation summary over a log-return vector.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Summing the squared elements of the returns vector of size n runs in linear time.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "realized_quadpower_quarticity",
@@ -105,7 +109,11 @@
       "parallelizable": true,
       "conceptual_summary": "Adapts the Optiver log-domain convolution heuristic to a log-return interface with kernel [1, 0, 1, 0, 1].",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Vectorized log-transform, convolution with a fixed-size kernel, and summation scale linearly with return size n.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "weighted_average_price",
@@ -165,7 +173,11 @@
       "parallelizable": true,
       "conceptual_summary": "Uses opposite-side size weighting to estimate executable price from the best bid/ask.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Element-wise arithmetic operations on four aligned price and size arrays run in linear time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "linear_trend_feature",
@@ -204,7 +216,11 @@
       "parallelizable": true,
       "conceptual_summary": "Solves a two-parameter linear least-squares problem over the time index to recover the trend slope.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Fitting a least-squares linear trend using a design matrix of shape n x 2 takes linear time and space in series length n.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "book_imbalance_features",
@@ -250,7 +266,11 @@
       "parallelizable": true,
       "conceptual_summary": "Normalizes bid minus ask liquidity by total displayed size.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Element-wise division and subtraction on the two size arrays run in linear time and space.",
+      "complexity_confidence": 100
     }
   ],
   "edges": [],

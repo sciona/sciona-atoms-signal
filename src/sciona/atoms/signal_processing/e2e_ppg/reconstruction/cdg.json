@@ -171,7 +171,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(1)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Deriving the reconstruction parameters and initializing scalar state lists takes constant time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "evaluate_reconstruction_completion",
@@ -209,7 +213,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(1)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Evaluating length-comparison boolean conditions takes constant time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "normalize_and_batch_clean_context",
@@ -257,7 +265,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n_c)",
+      "space_complexity": "O(n_c)",
+      "complexity_reasoning": "Scaling the clean signal context of size n_c and replicating it to a fixed batch size 256 runs in linear time and space.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "generate_noise_candidate_patch",
@@ -300,7 +312,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n_c)",
+      "space_complexity": "O(n_c)",
+      "complexity_reasoning": "Evaluating the neural network generator over a sequence of length n_c runs in linear time and space.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "align_and_stitch_signals_by_peak_boundaries",
@@ -353,7 +369,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n_c log n_c)",
+      "space_complexity": "O(n_c)",
+      "complexity_reasoning": "Resampling with FFT of length n_c dominates the peak alignment and stitching time complexity.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "resample_stitched_signal_to_native_scale",
@@ -391,7 +411,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n_c log n_c)",
+      "space_complexity": "O(n_c)",
+      "complexity_reasoning": "FFT-based downsampling of the stitched signal back to the native rate scales as O(n_c log n_c).",
+      "complexity_confidence": 95
     },
     {
       "node_id": "update_iteration_state_from_stitched_signal",
@@ -459,7 +483,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(l)",
+      "space_complexity": "O(l)",
+      "complexity_reasoning": "Accumulating the newly generated chunk and updating state parameters scales linearly with total noise length l.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "windowed_signal_reconstruction",
@@ -577,7 +605,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(1)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Loading the fixed-size trained neural network model weights from disk takes constant time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "harmonize_sampling_and_partitions",
@@ -660,7 +692,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n log n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "FFT signal resampling and index conversion routines scale as O(n log n) in time and O(n) in space.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "apply_optional_bandpass_filter",
@@ -703,7 +739,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Filtering a signal of length n with a linear bandpass filter runs in linear time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "derive_scaled_signal_and_window_budget",
@@ -751,7 +791,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Standard scaling of a signal of length n takes linear time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "identify_eligible_noise_windows",
@@ -794,7 +838,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Checking clean-context membership and eligibility across segments runs in linear time and space relative to signal length n.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "generate_noise_reconstructions",
@@ -847,7 +895,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(l * n_c log n_c)",
+      "space_complexity": "O(l + n_c)",
+      "complexity_reasoning": "Running GAN reconstructions iteratively over total noise length l with context size n_c runs in O(l * n_c log n_c) time.",
+      "complexity_confidence": 90
     },
     {
       "node_id": "build_upsampled_alignment_context",
@@ -895,7 +947,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n_c log n_c)",
+      "space_complexity": "O(n_c)",
+      "complexity_reasoning": "FFT upsampling of clean preceding and succeeding segments and reconstructed noise runs in O(n_c log n_c) time.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "merge_segments_with_peak_alignment",
@@ -938,7 +994,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n_c)",
+      "space_complexity": "O(n_c)",
+      "complexity_reasoning": "Finding peaks and concatenating upsampled segments takes linear time and space relative to context size n_c.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "backproject_descale_and_reassess_quality",
@@ -991,7 +1051,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n log n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Downsampling, descaling, and running SQA to re-estimate quality partitions takes O(n log n) time and O(n) space.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "select_effective_signal_and_partitions",
@@ -1054,7 +1118,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(1)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Conditional selection of final signal and partition object references takes constant time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "finalize_output_rate_and_partition_groups",
@@ -1127,7 +1195,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n log n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "FFT downsampling to native rate and grouping indices into consecutive groups scales as O(n log n).",
+      "complexity_confidence": 95
     }
   ],
   "edges": [

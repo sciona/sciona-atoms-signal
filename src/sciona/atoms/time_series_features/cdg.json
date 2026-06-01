@@ -57,7 +57,11 @@
         "rolling_feature_aggregation",
         "time_series_feature_extraction",
         "summary_statistics"
-      ]
+      ],
+      "time_complexity": "O(s * n * w)",
+      "space_complexity": "O(s * n)",
+      "complexity_reasoning": "Computing each of the s rolling statistics over sliding windows of size w takes O(s * n * w) time and O(s * n) space.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "create_lag_features",
@@ -88,7 +92,11 @@
       "aliases": [
         "lag_difference_features",
         "lagged_features"
-      ]
+      ],
+      "time_complexity": "O(k * n)",
+      "space_complexity": "O(k * n)",
+      "complexity_reasoning": "Slicing and copying the input vector of size n for each of the k lags runs in O(k * n) time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "technical_indicators_macd",
@@ -125,7 +133,11 @@
           "name": "result",
           "type_desc": "tuple[NDArray[np.float64], NDArray[np.float64], NDArray[np.float64]]"
         }
-      ]
+      ],
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Exponential moving average calculations scan the signal of length n linearly, taking O(n) time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "seasonal_decompose_additive",
@@ -152,7 +164,11 @@
           "name": "result",
           "type_desc": "tuple[NDArray[np.float64], NDArray[np.float64], NDArray[np.float64]]"
         }
-      ]
+      ],
+      "time_complexity": "O(n * p)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Calculating the rolling trend average over a window of size p for a series of size n dominates the decomposition time complexity.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "grouped_temporal_diff",
@@ -184,7 +200,11 @@
           "name": "result",
           "type_desc": "NDArray[np.float64]"
         }
-      ]
+      ],
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Vectorized subtraction of aligned time slices of size n takes linear time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "entity_time_aggregate",
@@ -216,7 +236,11 @@
           "name": "result",
           "type_desc": "NDArray[np.float64]"
         }
-      ]
+      ],
+      "time_complexity": "O(u * n)",
+      "space_complexity": "O(u * s + n)",
+      "complexity_reasoning": "Grouping the series of size n by each of the u unique entities takes O(u * n) time, producing an aggregated summary matrix of size O(u * s).",
+      "complexity_confidence": 95
     },
     {
       "node_id": "forward_fill",
@@ -247,7 +271,11 @@
       "aliases": [
         "forward_fill_imputation",
         "streaming_imputation"
-      ]
+      ],
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Accumulating indices of last valid entries and array projection with take_along_axis runs in O(n) time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "log1p_transform",
@@ -269,7 +297,11 @@
           "name": "result",
           "type_desc": "NDArray[np.float64]"
         }
-      ]
+      ],
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Applying the element-wise log1p function on an array of size n runs in linear time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "expm1_inverse",
@@ -291,7 +323,11 @@
           "name": "result",
           "type_desc": "NDArray[np.float64]"
         }
-      ]
+      ],
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Applying the element-wise expm1 function on an array of size n runs in linear time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "exogenous_feature_concat",
@@ -318,7 +354,11 @@
           "name": "result",
           "type_desc": "NDArray[np.float64]"
         }
-      ]
+      ],
+      "time_complexity": "O(n * e)",
+      "space_complexity": "O(n * e)",
+      "complexity_reasoning": "Broadcasting and concatenating a vector of e exogenous features across a sequence of length n takes O(n * e) time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "interpolate_to_timestamps",
@@ -355,7 +395,11 @@
         "sensor_alignment",
         "timestamp_interpolation",
         "resample_to_timestamps"
-      ]
+      ],
+      "time_complexity": "O(n_t * log(n_s))",
+      "space_complexity": "O(n_t)",
+      "complexity_reasoning": "Performing linear interpolation using binary search over the sorted source timestamps takes O(n_t log n_s) time and O(n_t) space.",
+      "complexity_confidence": 95
     }
   ],
   "edges": [],

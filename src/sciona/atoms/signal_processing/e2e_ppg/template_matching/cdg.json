@@ -54,7 +54,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(b * w)",
+      "space_complexity": "O(b * w)",
+      "complexity_reasoning": "Averaging all b heart cycles of length w to build the template and computing distance/correlation per beat scales as O(b * w) in both time and space.",
+      "complexity_confidence": 95
     }
   ],
   "edges": [],

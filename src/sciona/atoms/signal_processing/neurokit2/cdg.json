@@ -91,7 +91,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n + d_1 * d_2 * w)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Calculates statistical and spectral features (PSD, kurtosis, and detector agreement) over the ECG trace, taking linear time in signal length n and quadratic in peak count.",
+      "complexity_confidence": 90
     },
     {
       "node_id": "average_qrs_template",
@@ -144,7 +148,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(r * w)",
+      "space_complexity": "O(r * w)",
+      "complexity_reasoning": "Extracts and averages fixed-length QRS window segments around each of the r detected peak indices, taking time proportional to peak count r and segment window width w.",
+      "complexity_confidence": 90
     }
   ],
   "edges": [],

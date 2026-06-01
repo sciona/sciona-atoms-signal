@@ -75,7 +75,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(l * n_c log n_c)",
+      "space_complexity": "O(n_c + l)",
+      "complexity_reasoning": "The iterative GAN generation loop reconstructs the noise in steps, running FFT-based resampling and peak-finding of complexity O(n_c log n_c) in each step.",
+      "complexity_confidence": 90
     },
     {
       "node_id": "gan_reconstruction",
@@ -128,7 +132,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(l * n_c log n_c)",
+      "space_complexity": "O(n_c + l)",
+      "complexity_reasoning": "The iterative GAN generation loop reconstructs the noise in steps, running FFT-based resampling and peak-finding of complexity O(n_c log n_c) in each step.",
+      "complexity_confidence": 90
     }
   ],
   "edges": [],

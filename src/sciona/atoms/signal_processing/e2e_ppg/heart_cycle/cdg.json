@@ -60,7 +60,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n log n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Upsampling the normalized input signal via FFT-based resampling takes O(n log n) time, while the peak-based heart cycle segmentation runs in linear time.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "heart_cycle_detection",
@@ -98,7 +102,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n log n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Upsampling the normalized input signal via FFT-based resampling takes O(n log n) time, while the peak-based heart cycle segmentation runs in linear time.",
+      "complexity_confidence": 95
     }
   ],
   "edges": [],

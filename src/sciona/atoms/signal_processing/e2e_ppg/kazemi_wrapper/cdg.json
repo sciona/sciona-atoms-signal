@@ -62,7 +62,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "Source-aligned to the vendored E2E-PPG Kazemi Wrapper_function post-processing loop; model loading and segmenting remain outside this atom.",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Post-processing the model score and raw traces using sliding window peak search and list filtration runs in linear time and space relative to signal length n.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "signal_array_normalization",
@@ -96,7 +100,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Standard scaling or min-max normalization over an array of size n runs in linear time and space.",
+      "complexity_confidence": 100
     }
   ],
   "edges": [],

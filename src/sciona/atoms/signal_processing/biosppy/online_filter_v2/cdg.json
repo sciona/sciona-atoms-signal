@@ -80,7 +80,11 @@
       "parallelizable": false,
       "conceptual_summary": "Prepare a reusable filter state bundle for chunked linear filtering.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(p)",
+      "space_complexity": "O(p)",
+      "complexity_reasoning": "Initializing the filter coefficients and delay-line state scales linearly with the number of filter coefficients p.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "filter_step",
@@ -131,7 +135,11 @@
       "parallelizable": false,
       "conceptual_summary": "Apply the configured filter to one chunk while threading the updated delay line.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(c * p)",
+      "space_complexity": "O(c + p)",
+      "complexity_reasoning": "Filtering a signal chunk of size c with a linear filter of order p takes O(c * p) time and O(c + p) space.",
+      "complexity_confidence": 95
     }
   ],
   "edges": [

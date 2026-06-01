@@ -93,7 +93,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(d_1 * d_2 * w)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Iterates through peaks of the first detector and searches within a window of size w in the second detector.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "compute_frequency_sqi",
@@ -167,7 +171,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n * log m)",
+      "space_complexity": "O(m)",
+      "complexity_reasoning": "Dominated by Welch's power spectral density calculation over the input signal of length n.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "compute_kurtosis_sqi",
@@ -213,7 +221,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Calculating statistical kurtosis over a signal of length n takes linear time.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "assemble_zz2018_sqi",
@@ -294,7 +306,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n + d_1 * d_2 * w)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Dominated by Welch's PSD calculation over the signal of length n and the peak agreement search.",
+      "complexity_confidence": 95
     }
   ],
   "edges": [],

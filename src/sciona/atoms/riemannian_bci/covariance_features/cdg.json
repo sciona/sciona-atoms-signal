@@ -72,7 +72,11 @@
       "parallelizable": false,
       "conceptual_summary": "Stacks each channel at K lags to form a Hankel-like matrix, then computes the covariance.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O((c * k)^2 * n)",
+      "space_complexity": "O(c * k * n)",
+      "complexity_reasoning": "Forming the augmented Hankel matrix and computing its self-product scales quadratically with channel-lag count c*k and linearly with sample count n.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "cross_frequency_coherence_matrix",
@@ -132,7 +136,11 @@
       "parallelizable": false,
       "conceptual_summary": "Uses scipy.signal.coherence for each channel pair and bins into frequency bands.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(c^2 * (n log m + b * m))",
+      "space_complexity": "O(b * c^2 + m)",
+      "complexity_reasoning": "Computing the magnitude-squared coherence between all channel pairs via Welch's method scales quadratically with channel count c.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "tangent_space_projection",
@@ -178,7 +186,11 @@
       "parallelizable": false,
       "conceptual_summary": "Whitens each matrix by ref^{-1/2}, applies logm, extracts upper triangle with sqrt(2) off-diag scaling.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(m * p^3)",
+      "space_complexity": "O(m * p^2)",
+      "complexity_reasoning": "Matrix whitening and matrix logarithm (logm) via eigendecomposition take O(p^3) time per matrix, scaling as O(m * p^3) overall.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "riemannian_mean_spd",
@@ -231,7 +243,11 @@
       "parallelizable": false,
       "conceptual_summary": "Initialize with arithmetic mean, iterate log-map / average / exp-map until convergence.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(i * m * p^3)",
+      "space_complexity": "O(m * p^2)",
+      "complexity_reasoning": "Iterative Karcher mean estimation runs for up to i iterations, where each step computes logm and expm operations taking O(m * p^3) time.",
+      "complexity_confidence": 95
     }
   ],
   "edges": [

@@ -83,7 +83,11 @@
       "parallelizable": true,
       "conceptual_summary": "Reduces sample-rate ratios and applies scipy polyphase resampling.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n log n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Resampling using polyphase anti-alias filtering via FFT/filtering runs in O(n log n) time and linear space.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "audio_windows",
@@ -127,7 +131,11 @@
       "parallelizable": false,
       "conceptual_summary": "Creates a frame-by-sample view and locks writes to preserve purity.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(1)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Exposing overlapping windows as a strided view is a metadata-only operation, taking constant time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "stft_magnitude",
@@ -176,7 +184,11 @@
       "parallelizable": true,
       "conceptual_summary": "Applies a Hann or rectangular taper to each window and takes rfft magnitude.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(f * w log w)",
+      "space_complexity": "O(f * w)",
+      "complexity_reasoning": "Computing the one-sided STFT over f frames of window size w takes O(f * w log w) time and O(f * w) space.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "mel_filterbank",
@@ -243,7 +255,11 @@
           "ordering": "sequential",
           "when": "Stage describes computing mel spectrogram from audio"
         }
-      ]
+      ],
+      "time_complexity": "O(m * w)",
+      "space_complexity": "O(m * w)",
+      "complexity_reasoning": "Generating the triangular mel filterbank weights of size m x (1 + w/2) runs in O(m * w) time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "apply_mel_filterbank",
@@ -295,7 +311,11 @@
           "ordering": "sequential",
           "when": "Stage describes computing mel spectrogram from audio"
         }
-      ]
+      ],
+      "time_complexity": "O(m * b * f)",
+      "space_complexity": "O(m * f)",
+      "complexity_reasoning": "Projecting the power spectrogram of b bins and f frames onto m mel bands takes O(m * b * f) time.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "log_mel_spectrogram",
@@ -361,7 +381,11 @@
           "ordering": "sequential",
           "when": "Stage describes computing mel spectrogram from audio"
         }
-      ]
+      ],
+      "time_complexity": "O(m * f)",
+      "space_complexity": "O(m * f)",
+      "complexity_reasoning": "Applying element-wise log scaling and dynamic range clipping runs in linear time and space relative to spectrogram size.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "mfcc",
@@ -400,7 +424,11 @@
       "parallelizable": true,
       "conceptual_summary": "Runs an orthonormal DCT along the mel axis and keeps the first coefficients.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(f * m log m)",
+      "space_complexity": "O(m * f)",
+      "complexity_reasoning": "Computing the 1-D DCT-II along the frequency axis for each of the f frames takes O(f * m log m) time and O(m * f) space.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "spec_augment_time_mask",
@@ -454,7 +482,11 @@
       "parallelizable": false,
       "conceptual_summary": "Uses a local seeded generator to replace time spans with a fixed value.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(m * f + k * m * w_t)",
+      "space_complexity": "O(m * f)",
+      "complexity_reasoning": "Copying the spectrogram and applying k contiguous time-axis masks of max width w_t scales as O(m * f + k * m * w_t) in time.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "spec_augment_freq_mask",
@@ -508,7 +540,11 @@
       "parallelizable": false,
       "conceptual_summary": "Uses a local seeded generator to replace frequency spans with a fixed value.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(m * f + k * f * w_f)",
+      "space_complexity": "O(m * f)",
+      "complexity_reasoning": "Copying the spectrogram and applying k contiguous frequency-axis masks of max width w_f scales as O(m * f + k * f * w_f) in time.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "median_filter_1d",
@@ -547,7 +583,11 @@
       "parallelizable": true,
       "conceptual_summary": "Computes medians over edge-padded sliding windows.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n * k)",
+      "space_complexity": "O(n * k)",
+      "complexity_reasoning": "Computing the median over sliding windows of size k for a sequence of length n takes O(n * k) time and space.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "ebu_r128_normalize",
@@ -591,7 +631,11 @@
       "parallelizable": true,
       "conceptual_summary": "Applies fixed 48 kHz K-weighting filters, absolute gate, relative gate, and gain scaling.",
       "critic_notes": "The atom intentionally requires sr == 48000 because the research provided fixed 48 kHz coefficients.",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Filtering with low-order IIR filters, computing block-wise gated integrated loudness, and gain scaling run in linear time and space.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "wiener_soft_mask",
@@ -640,7 +684,11 @@
       "parallelizable": true,
       "conceptual_summary": "Builds a target power mask and applies it to the original complex phase.",
       "critic_notes": "This is the single-pass soft mask primitive, not a full iterative multichannel separator.",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(b * f)",
+      "space_complexity": "O(b * f)",
+      "complexity_reasoning": "Element-wise power calculations and soft-mask scaling over a spectrogram of size b x f take linear time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "rule_based_g2p",
@@ -679,7 +727,11 @@
       "parallelizable": false,
       "conceptual_summary": "Runs longest-match grapheme rules with explicit left and right regex context.",
       "critic_notes": "The caller owns language-specific rules; unmatched characters map to code points.",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(r * n^2)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Iteratively matching the ordered ruleset of size r using regex context searches on a string of length n runs in O(r * n^2) worst-case time.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "dtw_alignment",
@@ -718,7 +770,11 @@
       "parallelizable": false,
       "conceptual_summary": "Uses a stay-or-advance dynamic program over target-token likelihoods.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(f * t)",
+      "space_complexity": "O(f * t)",
+      "complexity_reasoning": "Standard dynamic programming for DTW alignment between f frames and t tokens takes quadratic O(f * t) time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "monotonic_alignment_search",
@@ -762,7 +818,11 @@
       "parallelizable": false,
       "conceptual_summary": "Maximizes a monotonic score path through token-by-frame tensors.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(b * t * f)",
+      "space_complexity": "O(b * t * f)",
+      "complexity_reasoning": "Monotonic alignment search via dynamic programming over a batch of size b, t tokens, and f frames takes O(b * t * f) time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "ctc_greedy_decode",
@@ -801,7 +861,11 @@
       "parallelizable": false,
       "conceptual_summary": "Argmaxes frames, removes repeated labels, and drops blanks.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(f * v)",
+      "space_complexity": "O(f)",
+      "complexity_reasoning": "Finding the maximum probability token per frame for f frames over a vocabulary of size v takes linear O(f * v) time.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "ctc_beam_decode",
@@ -855,7 +919,11 @@
       "parallelizable": false,
       "conceptual_summary": "Tracks blank and non-blank prefix scores separately and prunes by total log score.",
       "critic_notes": "No language model object is accepted, so alpha is reserved and beta acts as insertion bonus.",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(f * b_w * v * log(b_w * v))",
+      "space_complexity": "O(b_w * v)",
+      "complexity_reasoning": "Decoding via prefix beam search over f frames with beam width b_w and vocabulary size v scales as O(f * b_w * v log(b_w * v)) in time.",
+      "complexity_confidence": 95
     }
   ],
   "edges": [

@@ -63,7 +63,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Standard min-max scaling of the input array of size n runs in linear time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "wrapper_evaluate",
@@ -109,7 +113,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "Iterative peak detection and candidate refinement processes the input signal of length n in linear time and space.",
+      "complexity_confidence": 95
     }
   ],
   "edges": [],

@@ -97,7 +97,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(t)",
+      "space_complexity": "O(t)",
+      "complexity_reasoning": "Element-wise arithmetic computations over rate metrics at t decision thresholds take linear time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "get_id_rates",
@@ -164,7 +168,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(t)",
+      "space_complexity": "O(t)",
+      "complexity_reasoning": "Element-wise arithmetic computations over identification metrics at t decision thresholds take linear time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "get_subject_results",
@@ -238,7 +246,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(t * s)",
+      "space_complexity": "O(t * s)",
+      "complexity_reasoning": "Extracting confusion metrics and calculating rates per subject over t thresholds runs in O(t * s) time and space.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "assess_classification",
@@ -284,7 +296,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n * t)",
+      "space_complexity": "O(t)",
+      "complexity_reasoning": "Calculating rates and scores from prediction predictions of size n across t thresholds takes O(n * t) time.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "assess_runs",
@@ -330,7 +346,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(r * s * t)",
+      "space_complexity": "O(r * s * t)",
+      "complexity_reasoning": "Aggregating performance metrics across r classification runs, s subjects, and t thresholds scales as O(r * s * t).",
+      "complexity_confidence": 95
     },
     {
       "node_id": "combination",
@@ -376,7 +396,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(m * n)",
+      "space_complexity": "O(m * n)",
+      "complexity_reasoning": "Combining predictions across m classifiers for n samples runs in linear time and space relative to classifier-sample size.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "majority_rule",
@@ -422,7 +446,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(l)",
+      "space_complexity": "O(l)",
+      "complexity_reasoning": "Finding the most frequent label in a list of size l takes linear time and space using a hash map or array.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "cross_validation",
@@ -501,7 +529,11 @@
           "ordering": "sequential",
           "when": "Stage describes cross-validated training with fold averaging"
         }
-      ]
+      ],
+      "time_complexity": "O(k * n)",
+      "space_complexity": "O(k * n)",
+      "complexity_reasoning": "Generating k stratified randomized shuffle-split folds over n sample labels runs in O(k * n) time.",
+      "complexity_confidence": 95
     }
   ],
   "edges": [],

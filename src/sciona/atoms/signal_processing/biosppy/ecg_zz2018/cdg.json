@@ -132,7 +132,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(1)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Checking whether detector inputs are empty takes constant time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "calculatebasesqis",
@@ -205,7 +209,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n + d_1 * d_2 * w)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "The time complexity is dominated by Welch's PSD estimation over the signal and the peak agreement search.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "classifysqisheuristically",
@@ -263,7 +271,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(d_1)",
+      "space_complexity": "O(d_1)",
+      "complexity_reasoning": "Applying heuristic classification rules on the four scalar SQIs and computing the diff of the first detector peaks takes linear time with respect to the peak count.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "aggregateheuristicclasses",
@@ -296,7 +308,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(1)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Aggregating the fixed-size classification array takes constant time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "calculatefuzzymemberships",
@@ -344,7 +360,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(1)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Computing fuzzy membership functions for the four scalar SQI scores takes constant time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "aggregatefuzzymemberships",
@@ -377,7 +397,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(1)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Matrix operations on a fixed 4x3 fuzzy evaluation matrix take constant time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "calculate_beat_agreement_sqi",
@@ -472,7 +496,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(1)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Converting a time-domain window in milliseconds to sample count takes constant time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "countmutualdetections",
@@ -515,7 +543,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(d_1 * d_2 * w)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "The nested loops search for mutual beat detections within a window of size w around each of the d_1 peaks, taking O(d_1 * d_2 * w) time.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "calculateagreementscore",
@@ -563,7 +595,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(1)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Computing the final agreement score from counts of mutual and total detections takes constant time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "calculate_frequency_power_sqi",
@@ -673,7 +709,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n * log m)",
+      "space_complexity": "O(m)",
+      "complexity_reasoning": "Computing the PSD via Welch's method on a signal of length n with segment length m takes O(n log m) time and O(m) space.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "integrate_power_in_band",
@@ -716,7 +756,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(m)",
+      "space_complexity": "O(m)",
+      "complexity_reasoning": "Integrating the PSD power density across the specified band using the trapezoidal rule takes linear time and space in the PSD length.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "calculate_power_ratio",
@@ -759,7 +803,11 @@
       "parallelizable": false,
       "conceptual_summary": "",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(1)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Computing the final power ratio or baseline ratio from two scalar power values takes constant time and space.",
+      "complexity_confidence": 100
     },
     {
       "node_id": "calculate_kurtosis_sqi",
@@ -797,7 +845,11 @@
       "parallelizable": false,
       "conceptual_summary": "MeasureDistributionTailedness. Computes the fourth standardized moment of a 1D numerical array. This scalar value quantifies the 'tailedness' of the distribution, measuring the propensity for values to be concentrated far from the mean (outliers) relative to a Gaussian distribution. A boolean flag selects between the raw moment and the excess moment (adjusted by a constant).. Applications: Quantitative Finance: Assessing the tail risk of an asset's return distribution. High kurtosis indicates a greater probability of extreme market movements than predicted by simpler models., Industrial Process Control: Monitoring sensor data for anomalies. A change in the kurtosis of pressure or temperature readings can signal a deviation from stable operation and predict system failures., Geophysics: Characterizing the impulsiveness of seismic signals. The kurtosis of ground acceleration time-series helps differentiate between background noise and sharp, high-impact tremor events., Neuroscience: Analyzing neuronal firing patterns. The kurtosis of inter-spike interval distributions can distinguish between regular, rhythmic firing and bursty, irregular activity.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(1)",
+      "complexity_reasoning": "Calculating statistical kurtosis over a signal of length n takes linear time and constant auxiliary space.",
+      "complexity_confidence": 95
     }
   ],
   "edges": [

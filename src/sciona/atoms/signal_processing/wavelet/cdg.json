@@ -61,7 +61,11 @@
       "parallelizable": true,
       "conceptual_summary": "DWT-based denoising with universal thresholding on detail coefficients.",
       "critic_notes": "",
-      "decomposition_rationale": "Leaf atom — single pure function."
+      "decomposition_rationale": "Leaf atom \u2014 single pure function.",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "complexity_reasoning": "The discrete wavelet decomposition and reconstruction algorithms (Mallat's pyramid) run in linear time and space relative to signal length n.",
+      "complexity_confidence": 95
     }
   ],
   "edges": [],

@@ -85,7 +85,11 @@
       "parallelizable": false,
       "conceptual_summary": "Assigns each window prediction to its sample range and takes element-wise max of overlapping assignments.",
       "critic_notes": "",
-      "decomposition_rationale": ""
+      "decomposition_rationale": "",
+      "time_complexity": "O(w * v * c)",
+      "space_complexity": "O(n * c)",
+      "complexity_reasoning": "Assigning and taking maximums over sliding windows of size v for w windows with c classes runs in O(w * v * c) time and O(n * c) space.",
+      "complexity_confidence": 95
     },
     {
       "node_id": "ranked_prediction_blend",
@@ -145,7 +149,11 @@
           "ordering": "alternatives",
           "when": "Stage describes ensembling, blending, or averaging model predictions"
         }
-      ]
+      ],
+      "time_complexity": "O(m * n log n)",
+      "space_complexity": "O(m * n)",
+      "complexity_reasoning": "Ranking the n prediction values for each of the m models dominates the blend time complexity, scaling as O(m * n log n).",
+      "complexity_confidence": 100
     },
     {
       "node_id": "xgb_per_branch_classifier",
@@ -167,8 +175,12 @@
       "is_external": true,
       "parallelizable": false,
       "conceptual_summary": "Conceptual node representing an XGBoost classifier operating on per-branch features in a Riemannian BCI pipeline.",
-      "critic_notes": "External tool node — no implementation provided. Wraps XGBoost.",
-      "decomposition_rationale": ""
+      "critic_notes": "External tool node \u2014 no implementation provided. Wraps XGBoost.",
+      "decomposition_rationale": "",
+      "time_complexity": "O(t * d * n * f)",
+      "space_complexity": "O(n * f + t * d)",
+      "complexity_reasoning": "Standard XGBoost model training scales as O(t * d * n * f) and inference as O(n * t * d) using t trees of depth d over f features.",
+      "complexity_confidence": 90
     }
   ],
   "edges": [],
