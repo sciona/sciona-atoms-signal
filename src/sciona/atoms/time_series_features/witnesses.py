@@ -128,3 +128,17 @@ def witness_interpolate_to_timestamps(
     if source_times.shape[0] < 2:
         raise ValueError("source_times must contain at least two samples")
     return AbstractArray(shape=target_times.shape, dtype="float64")
+
+
+def witness_overlapping_window_ensemble(
+    predictions: list[tuple[int, AbstractArray]],
+    length: int,
+    aggregation: str = "mean",
+    weights: list[float] | None = None,
+) -> AbstractArray:
+    """Describe ensembled overlapping window prediction output."""
+    del predictions, aggregation, weights
+    if length <= 0:
+        raise ValueError("length must be positive")
+    return AbstractArray(shape=(length,), dtype="float64")
+

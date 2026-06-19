@@ -19,6 +19,7 @@ from .witnesses import (
     witness_grouped_temporal_diff,
     witness_interpolate_to_timestamps,
     witness_log1p_transform,
+    witness_overlapping_window_ensemble,
     witness_rolling_window_features,
     witness_seasonal_decompose_additive,
     witness_technical_indicators_macd,
@@ -304,3 +305,79 @@ def interpolate_to_timestamps(
 ) -> NDArray[np.float64]:
     """Linearly interpolate signal values to target timestamps."""
     return np.interp(target_times, source_times, source_values)
+
+
+def _predictions_valid(predictions: list[tuple[int, NDArray[np.float64]]], length: int) -> bool:
+    if not isinstance(predictions, list) or len(predictions) == 0:
+        return False
+    for item in predictions:
+        if not isinstance(item, tuple) or len(item) != 2:
+            return False
+        start_idx, preds = item
+        if not isinstance(start_idx, int) or start_idx < 0:
+            return False
+        if not isinstance(preds, np.ndarray) or preds.ndim != 1:
+            return False
+        if start_idx + preds.shape[0] > length:
+            return False
+    return True
+
+
+def _weights_valid(weights: list[float] | None, predictions: list[tuple[int, NDArray[np.float64]]]) -> bool:
+    if weights is None:
+        return True
+    if not isinstance(weights, list):
+        return False
+    if len(weights) != len(predictions):
+        return False
+    for w in weights:
+        if not isinstance(w, (int, float)) or float(w) < 0.0:
+            return False
+    return True
+
+
+@register_atom(witness_overlapping_window_ensemble)
+@icontract.require(lambda predictions, length: _predictions_valid(predictions, length), "predictions must be valid start_idx and 1D prediction tuples within length bounds")
+@icontract.require(lambda length: isinstance(length, int) and length > 0, "length must be a positive integer")
+@icontract.require(lambda aggregation: aggregation in {"mean", "median", "sum"}, "aggregation must be mean, median, or sum")
+@icontract.require(lambda weights, predictions: _weights_valid(weights, predictions), "weights must match the predictions list if provided")
+@icontract.ensure(lambda result, length: isinstance(result, np.ndarray) and result.shape == (length,), "result must be a 1-D array of shape (length,)")
+def overlapping_window_ensemble(
+    predictions: list[tuple[int, NDArray[np.float64]]],
+    length: int,
+    aggregation: str = "mean",
+    weights: list[float] | None = None,
+) -> NDArray[np.float64]:
+    """Aggregate predictions from multiple overlapping temporal windows."""
+    preds_at_t: list[list[float]] = [[] for _ in range(length)]
+    weights_at_t: list[list[float]] = [[] for _ in range(length)]
+
+    for idx, (start_idx, preds) in enumerate(predictions):
+        w = float(weights[idx]) if weights is not None else 1.0
+        for offset, val in enumerate(preds):
+            t = start_idx + offset
+            if 0 <= t < length:
+                preds_at_t[t].append(float(val))
+                weights_at_t[t].append(w)
+
+    result = np.full((length,), np.nan, dtype=np.float64)
+    for t in range(length):
+        vals = preds_at_t[t]
+        if not vals:
+            continue
+        if aggregation == "sum":
+            result[t] = sum(vals)
+        elif aggregation == "median":
+            result[t] = np.median(vals)
+        elif aggregation == "mean":
+            if weights is not None:
+                ws = weights_at_t[t]
+                sum_w = sum(ws)
+                if sum_w > 0:
+                    result[t] = sum(v * w for v, w in zip(vals, ws)) / sum_w
+                else:
+                    result[t] = np.mean(vals)
+            else:
+                result[t] = np.mean(vals)
+    return result
+

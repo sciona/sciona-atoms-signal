@@ -9,6 +9,7 @@ from .atoms import (
     grouped_temporal_diff,
     interpolate_to_timestamps,
     log1p_transform,
+    overlapping_window_ensemble,
     rolling_window_features,
     seasonal_decompose_additive,
     technical_indicators_macd,
@@ -23,7 +24,9 @@ __all__ = [
     "grouped_temporal_diff",
     "interpolate_to_timestamps",
     "log1p_transform",
+    "overlapping_window_ensemble",
     "rolling_window_features",
     "seasonal_decompose_additive",
     "technical_indicators_macd",
 ]
+

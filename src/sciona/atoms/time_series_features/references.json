@@ -240,6 +240,47 @@
         }
       ],
       "auto_attribution_runs": []
+    },
+    "sciona.atoms.time_series_features.overlapping_window_ensemble@sciona/atoms/time_series_features/atoms.py:330": {
+      "references": [
+        {
+          "ref_id": "sciona2026timeseriesfeatures",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": ["overlapping_window_ensemble"],
+            "confidence": "high",
+            "notes": "Local report specifies temporal overlapping window prediction ensembling and aggregation."
+          }
+        },
+        {
+          "ref_id": "numpy_docs",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Uses NumPy median and mean methods for multi-window aggregation."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.time_series_features.interpolate_to_timestamps@sciona/atoms/time_series_features/atoms.py:296": {
+      "references": [
+        {
+          "ref_id": "numpy_docs",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "Linear interpolation using numpy.interp."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
     }
   }
 }
+

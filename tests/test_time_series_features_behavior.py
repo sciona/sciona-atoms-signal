@@ -12,6 +12,7 @@ from sciona.atoms.time_series_features import (
     forward_fill,
     grouped_temporal_diff,
     log1p_transform,
+    overlapping_window_ensemble,
     rolling_window_features,
     seasonal_decompose_additive,
     technical_indicators_macd,
@@ -129,3 +130,25 @@ def test_exogenous_feature_concat_broadcasts_static_values() -> None:
         dtype=np.float64,
     )
     np.testing.assert_allclose(result, expected)
+
+
+def test_overlapping_window_ensemble_behavior() -> None:
+    predictions = [
+        (0, np.array([1.0, 2.0, 3.0], dtype=np.float64)),
+        (1, np.array([10.0, 20.0], dtype=np.float64)),
+    ]
+
+    # length = 4
+    # t=0: predictions[0][0] = 1.0
+    # t=1: predictions[0][1] = 2.0, predictions[1][0] = 10.0 -> mean is 6.0
+    # t=2: predictions[0][2] = 3.0, predictions[1][1] = 20.0 -> mean is 11.5
+    # t=3: no predictions -> nan
+    res_mean = overlapping_window_ensemble(predictions, length=4, aggregation="mean")
+    np.testing.assert_allclose(res_mean, [1.0, 6.0, 11.5, np.nan], equal_nan=True)
+
+    # Test weighted mean
+    res_weighted = overlapping_window_ensemble(predictions, length=4, aggregation="mean", weights=[1.0, 3.0])
+    # t=1: (2.0 * 1.0 + 10.0 * 3.0) / 4.0 = 32.0 / 4.0 = 8.0
+    # t=2: (3.0 * 1.0 + 20.0 * 3.0) / 4.0 = 63.0 / 4.0 = 15.75
+    np.testing.assert_allclose(res_weighted, [1.0, 8.0, 15.75, np.nan], equal_nan=True)
+

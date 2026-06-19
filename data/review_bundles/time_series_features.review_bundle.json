@@ -173,6 +173,36 @@
       "review_record_path": "data/review_bundles/time_series_features.review_bundle.json",
       "has_references": true,
       "references_status": "pass"
+    },
+    {
+      "atom_key": "sciona.atoms.time_series_features.interpolate_to_timestamps",
+      "atom_name": "sciona.atoms.time_series_features.interpolate_to_timestamps",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass",
+      "trust_readiness": "catalog_ready",
+      "source_paths": ["src/sciona/atoms/time_series_features/atoms.py", "src/sciona/atoms/time_series_features/witnesses.py", "src/sciona/atoms/time_series_features/references.json", "src/sciona/atoms/time_series_features/cdg.json", "tests/test_time_series_features_behavior.py"],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/time_series_features.review_bundle.json",
+      "has_references": true,
+      "references_status": "pass"
+    },
+    {
+      "atom_key": "sciona.atoms.time_series_features.overlapping_window_ensemble",
+      "atom_name": "sciona.atoms.time_series_features.overlapping_window_ensemble",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass",
+      "review_developer_semantic_verdict": "pass",
+      "trust_readiness": "catalog_ready",
+      "source_paths": ["src/sciona/atoms/time_series_features/atoms.py", "src/sciona/atoms/time_series_features/witnesses.py", "src/sciona/atoms/time_series_features/references.json", "src/sciona/atoms/time_series_features/cdg.json", "tests/test_time_series_features_behavior.py"],
+      "limitations": [],
+      "blocking_findings": [],
+      "required_actions": [],
+      "review_record_path": "data/review_bundles/time_series_features.review_bundle.json",
+      "has_references": true,
+      "references_status": "pass"
     }
   ]
 }
