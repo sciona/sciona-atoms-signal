@@ -37,7 +37,9 @@ def segment_into_overlapping_frames(signal: NDArray[np.float64], frame_length: i
 @icontract.ensure(lambda result, frames, window_type: result.ndim == 2, "Postcondition failed: result.ndim == 2")
 @icontract.ensure(lambda result, frames, window_type: result.shape[0] == frames.shape[0] // 2 + 1, "Postcondition failed: result.shape[0] == frames.shape[0] // 2 + 1")
 def compute_frame_fft(frames: NDArray[np.float64], window_type: str) -> NDArray[np.complex128]:
-    """Applies a window and computes the DFT for each signal frame.
+    """Applies a window and computes the DFT / Fast Fourier Transform (FFT) for each signal frame.
+
+    This corresponds to the Fourier Transform / Fourier Transform Windowed / compute_fft step of spectral analysis.
 
     Args:
         frames: 2D array of shape (frame_length, num_frames)

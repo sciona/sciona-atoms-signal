@@ -17,6 +17,9 @@ from .witnesses import (
 def design_fir_coefficients_window(numtaps: int, cutoff: float | NDArray[np.float64], window_type: str = None) -> NDArray[np.float64]:
     """Designs linear-phase FIR filter coefficients using the window method.
 
+    Can be used to design stable bandpass filter coefficients for ECG samples or other signals,
+    matching the "Design Filter" / "design_bandpass_filter" step in benchmarks.
+
     Args:
         numtaps: Positive integer, odd for linear phase type I
         cutoff: Normalized cutoff frequency (0 to 1)
@@ -34,6 +37,9 @@ def design_fir_coefficients_window(numtaps: int, cutoff: float | NDArray[np.floa
 @icontract.ensure(lambda result, b, signal: result.shape == signal.shape, "Postcondition failed: result.shape == signal.shape")
 def apply_fir_lfilter(b: NDArray[np.float64], signal: NDArray[np.float64]) -> NDArray[np.float64]:
     """Applies a designed FIR filter to a signal using direct-form II transposed structure.
+
+    Filters a sequence using numerator coefficients `b`. This corresponds to the "Apply Filter"
+    / "apply_bandpass_filter" step of a bandpass filter application in benchmarks.
 
     Args:
         b: Filter numerator coefficients (FIR taps)

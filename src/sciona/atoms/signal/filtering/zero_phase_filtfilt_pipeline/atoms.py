@@ -35,7 +35,10 @@ def compute_gustafsson_initial_conditions(b: NDArray[np.float64], a: NDArray[np.
 @icontract.require(lambda b, a, signal, zi: a.ndim == 1, "Precondition failed: a.ndim == 1")
 @icontract.ensure(lambda result, b, a, signal, zi: result.shape == signal.shape, "Postcondition failed: result.shape == signal.shape")
 def apply_zero_phase_forward_backward(b: NDArray[np.float64], a: NDArray[np.float64], signal: NDArray[np.float64], zi: NDArray[np.float64]) -> NDArray[np.float64]:
-    """Applies double-filtering forward and backward with padding.
+    """Applies double-filtering forward and backward with padding to achieve zero phase shift.
+
+    Used to apply a stable bandpass filter to ECG samples or other signals,
+    matching the "Apply Filter" / "apply_bandpass_filter" step in benchmarks.
 
     Args:
         b: NDArray[np.float64]

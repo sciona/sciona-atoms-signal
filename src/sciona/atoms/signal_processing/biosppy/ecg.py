@@ -41,6 +41,10 @@ def witness_peak_correction(
     tol: AbstractScalar,
 ) -> AbstractArray:
     """Describe corrected peaks as an integer index array aligned to the input peaks."""
+    if not isinstance(signal, AbstractSignal):
+        raise TypeError("signal must be an AbstractSignal")
+    if not isinstance(rpeaks, AbstractArray) or isinstance(rpeaks, AbstractSignal):
+        raise TypeError("rpeaks must be an AbstractArray (not AbstractSignal)")
     return AbstractArray(
         shape=rpeaks.shape,
         dtype='int64',
@@ -187,7 +191,7 @@ def _plausible_segmenter_output(rpeaks: np.ndarray, sampling_rate: float) -> boo
 @icontract.require(_valid_sampling_rate, 'sampling_rate must be positive')
 @icontract.ensure(lambda result: result is not None, 'Bandpass Filter output must not be None')
 def bandpass_filter(signal: np.ndarray, *, sampling_rate: float = 1000.0) -> np.ndarray:
-    """Apply FIR bandpass filtering to an ECG waveform."""
+    """Apply a Finite Impulse Response (FIR) bandpass filter to an ECG waveform. This is the primary bandpass_filter atom for ECG signals."""
     order = int(0.3 * float(sampling_rate))
     filtered, _, _ = biosppy_tools.filter_signal(
         signal=signal,

@@ -20,6 +20,9 @@ from .witnesses import (
 def compute_frame_periodograms(stft_matrix: NDArray[np.complex128], window_norm: float) -> NDArray[np.float64]:
     """Computes the squared magnitude of the windowed FFT for each frame to obtain the periodogram.
 
+    This corresponds to extracting the magnitude spectrum from complex Fourier/FFT output,
+    matching the "Magnitude Spectrum" / "extract_magnitude" step in benchmarks.
+
     Args:
         stft_matrix: NDArray[np.complex128]
         window_norm: Energy norm of the window function

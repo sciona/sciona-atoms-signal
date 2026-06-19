@@ -18,6 +18,9 @@ from .witnesses import (
 def design_iir_sos_coefficients(order: int, Wn: float | NDArray[np.float64], btype: str = None, ftype: str = None) -> NDArray[np.float64]:
     """Designs IIR filter coefficients in second-order sections (SOS) format for numerical stability.
 
+    Can design a stable bandpass filter to apply to ECG samples, matching the "Design Filter"
+    / "design_bandpass_filter" step in benchmarks.
+
     Args:
         order: int
         Wn: float | NDArray[np.float64]
@@ -37,6 +40,9 @@ def design_iir_sos_coefficients(order: int, Wn: float | NDArray[np.float64], bty
 @icontract.ensure(lambda result, sos, signal: result.shape == signal.shape, "Postcondition failed: result.shape == signal.shape")
 def apply_iir_sosfilter(sos: NDArray[np.float64], signal: NDArray[np.float64]) -> NDArray[np.float64]:
     """Filters a signal along one axis using second-order sections (SOS) format.
+
+    Useful for applying a stable bandpass filter to ECG samples or other signals,
+    matching the "Apply Filter" / "apply_bandpass_filter" step in benchmarks.
 
     Args:
         sos: L-by-6 matrix of second-order sections

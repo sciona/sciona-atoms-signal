@@ -23,7 +23,11 @@ def apply_spectral_window(
     signal: NDArray[np.float64],
     window_type: str = "hann",
 ) -> NDArray[np.float64]:
-    """Applies a specified window to the input signal to reduce spectral leakage.
+    """Applies a specified window (such as a Hann window) to the input signal to reduce spectral leakage.
+
+    This operation prepares a signal segment by applying a window function, e.g., to implement
+    the "Apply Hann Window" / "Hann Window Signal" / "apply_hann_window" step of a spectral
+    analysis pipeline before performing a Fourier Transform (FFT).
 
     Parameters
     ----------
@@ -72,6 +76,9 @@ def compute_forward_rfft(
     n: int,
 ) -> NDArray[np.complex128]:
     """Computes the one-dimensional discrete Fourier Transform for real input (RFFT).
+
+    This performs the Fast Fourier Transform (FFT) / Fourier Transform of a windowed signal,
+    corresponding to "Fourier Transform Windowed" / "compute_fft" in benchmark pipelines.
 
     Parameters
     ----------
