@@ -1,6 +1,51 @@
 {
   "schema_version": "1.1",
   "atoms": {
+    "sciona.atoms.signal_processing.biosppy.ecg.bandpass_filter@sciona/atoms/signal_processing/biosppy/ecg.py:193": {
+      "references": [
+        {
+          "ref_id": "repo_biosppy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "BioSPPy repository attribution for the ECG FIR bandpass-filter wrapper."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.signal_processing.biosppy.ecg.r_peak_detection@sciona/atoms/signal_processing/biosppy/ecg.py:211": {
+      "references": [
+        {
+          "ref_id": "repo_biosppy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "BioSPPy repository attribution for the Hamilton ECG R-peak detector wrapper."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
+    "sciona.atoms.signal_processing.biosppy.ecg.heart_rate_computation@sciona/atoms/signal_processing/biosppy/ecg.py:315": {
+      "references": [
+        {
+          "ref_id": "repo_biosppy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "BioSPPy repository attribution for converting ECG R-peak intervals to instantaneous heart rate."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
     "sciona.atoms.signal_processing.biosppy.ecg.heart_rate_computation_median_smoothed@sciona/atoms/signal_processing/biosppy/ecg.py:321": {
       "references": [
         {
