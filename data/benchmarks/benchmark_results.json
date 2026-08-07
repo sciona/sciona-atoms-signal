@@ -199,12 +199,12 @@
     "semver": "1.0.0",
     "metric_name": "mae_bpm",
     "metric_value": 1.084476,
-    "slice_key": "real_ahi_train_3_holdout_window",
+    "slice_key": "private_ecg_holdout_v1",
     "measured_at": "2026-08-07T20:00:00Z",
     "runner": "matcher-real-edf-benchmark-v1",
     "run_config_hash": "3b05b1f2bee5f58405dfeb6bbe822d8864f657a3e464f8a1050adc7065711067",
     "status": "completed",
-    "evidence_uri": "AHI_train_3/HHSS_06022023_640597_1/REM.edf#start=1800&duration=300",
+    "evidence_uri": "private-evidence://ecg-holdout-v1",
     "notes": "Real EDF holdout window distinct from the agent benchmark evaluation window at 3600 seconds. Compared ECG-derived rate against the EDF Pulse channel."
   },
   {
