@@ -3,5 +3,103 @@
   "verdict": "PASS",
   "risk_tier": "low",
   "rationale": "Automated verification passed. Numerical behavior matches upstream library expectations.",
-  "limitations": "Subject to standard machine precision and float limits."
+  "limitations": "Subject to standard machine precision and float limits.",
+  "schema_version": "1.0",
+  "bundle_id": "sciona.atoms.signal.analysis.peak_detection_prominence_width.review_bundle.peak_detection_prominence_width.legacy.v1",
+  "provider_repo": "sciona-atoms-signal",
+  "family_batch": "peak_detection_prominence_width",
+  "review_status": "reviewed",
+  "review_semantic_verdict": "pass_with_limits",
+  "review_developer_semantic_verdict": "pass_with_limits",
+  "trust_readiness": "reviewed_with_limits",
+  "authoritative_sources": [
+    {
+      "kind": "local_wrapper",
+      "path": "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/atoms.py"
+    },
+    {
+      "kind": "local_wrapper",
+      "path": "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/witnesses.py"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/references.json"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/cdg.json"
+    }
+  ],
+  "review_record_path": "data/review_bundles/peak_detection_prominence_width.review_bundle.json",
+  "rows": [
+    {
+      "atom_name": "sciona.atoms.signal.analysis.peak_detection_prominence_width.find_local_maxima",
+      "atom_key": "sciona.atoms.signal.analysis.peak_detection_prominence_width.find_local_maxima",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "needs_followup",
+      "source_paths": [
+        "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/atoms.py",
+        "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/witnesses.py",
+        "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/references.json",
+        "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/cdg.json"
+      ],
+      "review_record_path": "data/review_bundles/peak_detection_prominence_width.review_bundle.json",
+      "limitations": [
+        "Subject to standard machine precision and float limits."
+      ],
+      "required_actions": [
+        "Automated verification passed. Numerical behavior matches upstream library expectations.",
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "runtime_status": "unknown"
+    },
+    {
+      "atom_name": "sciona.atoms.signal.analysis.peak_detection_prominence_width.compute_peak_prominences",
+      "atom_key": "sciona.atoms.signal.analysis.peak_detection_prominence_width.compute_peak_prominences",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "needs_followup",
+      "source_paths": [
+        "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/atoms.py",
+        "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/witnesses.py",
+        "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/references.json",
+        "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/cdg.json"
+      ],
+      "review_record_path": "data/review_bundles/peak_detection_prominence_width.review_bundle.json",
+      "limitations": [
+        "Subject to standard machine precision and float limits."
+      ],
+      "required_actions": [
+        "Automated verification passed. Numerical behavior matches upstream library expectations.",
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "runtime_status": "unknown"
+    },
+    {
+      "atom_name": "sciona.atoms.signal.analysis.peak_detection_prominence_width.compute_peak_widths",
+      "atom_key": "sciona.atoms.signal.analysis.peak_detection_prominence_width.compute_peak_widths",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "needs_followup",
+      "source_paths": [
+        "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/atoms.py",
+        "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/witnesses.py",
+        "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/references.json",
+        "src/sciona/atoms/signal/analysis/peak_detection_prominence_width/cdg.json"
+      ],
+      "review_record_path": "data/review_bundles/peak_detection_prominence_width.review_bundle.json",
+      "limitations": [
+        "Subject to standard machine precision and float limits."
+      ],
+      "required_actions": [
+        "Automated verification passed. Numerical behavior matches upstream library expectations.",
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "runtime_status": "unknown"
+    }
+  ]
 }

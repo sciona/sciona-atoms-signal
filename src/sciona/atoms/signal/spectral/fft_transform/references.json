@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "atoms": {
-    "sciona.atoms.signal.spectral.fft_transform.atoms.apply_spectral_window@sciona/atoms/signal/spectral/fft_transform/atoms.py:22": {
+    "sciona.atoms.signal.spectral.fft_transform.apply_spectral_window@sciona/atoms/signal/spectral/fft_transform/atoms.py:22": {
       "references": [
         {
           "ref_id": "repo_scipy",
@@ -16,7 +16,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal.spectral.fft_transform.atoms.optimize_fft_length@sciona/atoms/signal/spectral/fft_transform/atoms.py:49": {
+    "sciona.atoms.signal.spectral.fft_transform.optimize_fft_length@sciona/atoms/signal/spectral/fft_transform/atoms.py:49": {
       "references": [
         {
           "ref_id": "repo_scipy",
@@ -31,7 +31,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.signal.spectral.fft_transform.atoms.compute_forward_rfft@sciona/atoms/signal/spectral/fft_transform/atoms.py:70": {
+    "sciona.atoms.signal.spectral.fft_transform.compute_forward_rfft@sciona/atoms/signal/spectral/fft_transform/atoms.py:70": {
       "references": [
         {
           "ref_id": "repo_scipy",

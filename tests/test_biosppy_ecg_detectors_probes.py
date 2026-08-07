@@ -17,9 +17,9 @@ def test_ecg_detectors_probe_records_resolve_to_live_symbols() -> None:
 def test_ecg_detectors_probe_records_publish_expected_symbols() -> None:
     wrapper_symbols = {str(record["wrapper_symbol"]) for record in probe_records()}
     assert wrapper_symbols == {
-        "thresholdbasedsignalsegmentation",
+        "threshold_based_signal_segmentation",
         "asi_signal_segmenter",
-        "christovqrsdetect",
+        "christov_qrs_detect",
         "christov_qrs_segmenter",
         "engzee_signal_segmentation",
         "engzee_qrs_segmentation",

@@ -13,9 +13,9 @@ def test_fft_transform_references_cover_all_atoms() -> None:
 
     atoms = payload["atoms"]
     assert set(atoms) == {
-        "sciona.atoms.signal.spectral.fft_transform.atoms.apply_spectral_window@sciona/atoms/signal/spectral/fft_transform/atoms.py:22",
-        "sciona.atoms.signal.spectral.fft_transform.atoms.optimize_fft_length@sciona/atoms/signal/spectral/fft_transform/atoms.py:49",
-        "sciona.atoms.signal.spectral.fft_transform.atoms.compute_forward_rfft@sciona/atoms/signal/spectral/fft_transform/atoms.py:70",
+        "sciona.atoms.signal.spectral.fft_transform.apply_spectral_window@sciona/atoms/signal/spectral/fft_transform/atoms.py:22",
+        "sciona.atoms.signal.spectral.fft_transform.optimize_fft_length@sciona/atoms/signal/spectral/fft_transform/atoms.py:49",
+        "sciona.atoms.signal.spectral.fft_transform.compute_forward_rfft@sciona/atoms/signal/spectral/fft_transform/atoms.py:70",
     }
 
     # Verify that registry.json has these ref_ids

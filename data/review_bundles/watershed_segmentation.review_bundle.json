@@ -3,5 +3,103 @@
   "verdict": "PASS",
   "risk_tier": "low",
   "rationale": "Automated verification passed. Numerical behavior matches upstream library expectations.",
-  "limitations": "Subject to standard machine precision and float limits."
+  "limitations": "Subject to standard machine precision and float limits.",
+  "schema_version": "1.0",
+  "bundle_id": "sciona.atoms.image.segmentation.watershed_segmentation.review_bundle.watershed_segmentation.legacy.v1",
+  "provider_repo": "sciona-atoms-signal",
+  "family_batch": "watershed_segmentation",
+  "review_status": "reviewed",
+  "review_semantic_verdict": "pass_with_limits",
+  "review_developer_semantic_verdict": "pass_with_limits",
+  "trust_readiness": "reviewed_with_limits",
+  "authoritative_sources": [
+    {
+      "kind": "local_wrapper",
+      "path": "src/sciona/atoms/image/segmentation/watershed_segmentation/atoms.py"
+    },
+    {
+      "kind": "local_wrapper",
+      "path": "src/sciona/atoms/image/segmentation/watershed_segmentation/witnesses.py"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/image/segmentation/watershed_segmentation/references.json"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/image/segmentation/watershed_segmentation/cdg.json"
+    }
+  ],
+  "review_record_path": "data/review_bundles/watershed_segmentation.review_bundle.json",
+  "rows": [
+    {
+      "atom_name": "sciona.atoms.image.segmentation.watershed_segmentation.compute_distance_transform",
+      "atom_key": "sciona.atoms.image.segmentation.watershed_segmentation.compute_distance_transform",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "needs_followup",
+      "source_paths": [
+        "src/sciona/atoms/image/segmentation/watershed_segmentation/atoms.py",
+        "src/sciona/atoms/image/segmentation/watershed_segmentation/witnesses.py",
+        "src/sciona/atoms/image/segmentation/watershed_segmentation/references.json",
+        "src/sciona/atoms/image/segmentation/watershed_segmentation/cdg.json"
+      ],
+      "review_record_path": "data/review_bundles/watershed_segmentation.review_bundle.json",
+      "limitations": [
+        "Subject to standard machine precision and float limits."
+      ],
+      "required_actions": [
+        "Automated verification passed. Numerical behavior matches upstream library expectations.",
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "runtime_status": "unknown"
+    },
+    {
+      "atom_name": "sciona.atoms.image.segmentation.watershed_segmentation.find_watershed_markers",
+      "atom_key": "sciona.atoms.image.segmentation.watershed_segmentation.find_watershed_markers",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "needs_followup",
+      "source_paths": [
+        "src/sciona/atoms/image/segmentation/watershed_segmentation/atoms.py",
+        "src/sciona/atoms/image/segmentation/watershed_segmentation/witnesses.py",
+        "src/sciona/atoms/image/segmentation/watershed_segmentation/references.json",
+        "src/sciona/atoms/image/segmentation/watershed_segmentation/cdg.json"
+      ],
+      "review_record_path": "data/review_bundles/watershed_segmentation.review_bundle.json",
+      "limitations": [
+        "Subject to standard machine precision and float limits."
+      ],
+      "required_actions": [
+        "Automated verification passed. Numerical behavior matches upstream library expectations.",
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "runtime_status": "unknown"
+    },
+    {
+      "atom_name": "sciona.atoms.image.segmentation.watershed_segmentation.apply_watershed_flooding",
+      "atom_key": "sciona.atoms.image.segmentation.watershed_segmentation.apply_watershed_flooding",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "needs_followup",
+      "source_paths": [
+        "src/sciona/atoms/image/segmentation/watershed_segmentation/atoms.py",
+        "src/sciona/atoms/image/segmentation/watershed_segmentation/witnesses.py",
+        "src/sciona/atoms/image/segmentation/watershed_segmentation/references.json",
+        "src/sciona/atoms/image/segmentation/watershed_segmentation/cdg.json"
+      ],
+      "review_record_path": "data/review_bundles/watershed_segmentation.review_bundle.json",
+      "limitations": [
+        "Subject to standard machine precision and float limits."
+      ],
+      "required_actions": [
+        "Automated verification passed. Numerical behavior matches upstream library expectations.",
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "runtime_status": "unknown"
+    }
+  ]
 }

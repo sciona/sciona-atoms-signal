@@ -179,7 +179,7 @@
       "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
     },
     {
-      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapperpredictionsignalcomputation",
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapper_prediction_signal_computation",
       "review_status": "approved",
       "review_semantic_verdict": "pass_with_limits",
       "review_developer_semantic_verdict": "pass_with_limits",
@@ -226,7 +226,7 @@
       "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
     },
     {
-      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.signalarraynormalization",
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.signal_array_normalization",
       "review_status": "approved",
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass_with_limits",
@@ -260,8 +260,11 @@
       ],
       "limitations": [],
       "blocking_findings": [],
-      "required_actions": [],
-      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+      "required_actions": [
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json",
+      "runtime_status": "unknown"
     },
     {
       "atom_key": "sciona.atoms.signal_processing.e2e_ppg.reconstruction.windowed_signal_reconstruction",
@@ -275,11 +278,14 @@
       ],
       "limitations": [],
       "blocking_findings": [],
-      "required_actions": [],
-      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+      "required_actions": [
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json",
+      "runtime_status": "unknown"
     },
     {
-      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.gan_reconstruction.generatereconstructedppg",
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.gan_reconstruction.generate_reconstructed_ppg",
       "review_status": "reviewed",
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass_with_limits",
@@ -294,8 +300,11 @@
       ],
       "limitations": [],
       "blocking_findings": [],
-      "required_actions": [],
-      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+      "required_actions": [
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json",
+      "runtime_status": "unknown"
     },
     {
       "atom_key": "sciona.atoms.signal_processing.e2e_ppg.gan_reconstruction.gan_reconstruction",
@@ -313,11 +322,14 @@
       ],
       "limitations": [],
       "blocking_findings": [],
-      "required_actions": [],
-      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+      "required_actions": [
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json",
+      "runtime_status": "unknown"
     },
     {
-      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.normalizesignal",
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.normalize_signal",
       "review_status": "reviewed",
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass_with_limits",
@@ -332,11 +344,14 @@
       ],
       "limitations": [],
       "blocking_findings": [],
-      "required_actions": [],
-      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+      "required_actions": [
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json",
+      "runtime_status": "unknown"
     },
     {
-      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.wrapperevaluate",
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.wrapper_evaluate",
       "review_status": "reviewed",
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass_with_limits",
@@ -351,11 +366,14 @@
       ],
       "limitations": [],
       "blocking_findings": [],
-      "required_actions": [],
-      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+      "required_actions": [
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json",
+      "runtime_status": "unknown"
     },
     {
-      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.template_matching.templatefeaturecomputation",
+      "atom_key": "sciona.atoms.signal_processing.e2e_ppg.template_matching.template_feature_computation",
       "review_status": "reviewed",
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass_with_limits",
@@ -370,8 +388,11 @@
       ],
       "limitations": [],
       "blocking_findings": [],
-      "required_actions": [],
-      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json"
+      "required_actions": [
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "review_record_path": "data/review_bundles/e2e_ppg.review_bundle.json",
+      "runtime_status": "unknown"
     }
   ]
 }

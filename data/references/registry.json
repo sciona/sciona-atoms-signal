@@ -666,9 +666,11 @@
     "repo_scipy": {
       "ref_id": "repo_scipy",
       "type": "repository",
-      "title": "SciPy Library",
-      "authors": [],
-      "year": null,
+      "title": "SciPy",
+      "authors": [
+        "The SciPy developers"
+      ],
+      "year": 2026,
       "venue": "GitHub",
       "url": "https://github.com/scipy/scipy",
       "match_metadata": {
@@ -817,11 +819,14 @@
     },
     "repo_scikit_image": {
       "ref_id": "repo_scikit_image",
-      "author": "sciona-atoms-signal Contributors",
-      "year": 2026,
-      "title": "Upstream standard library implementation for repo_scikit_image",
-      "journal": "Sciona Scientific Registry",
-      "url": "https://github.com/sciona/repo_scikit_image"
+      "type": "repository",
+      "title": "scikit-image",
+      "authors": [
+        "scikit-image Developers"
+      ],
+      "year": null,
+      "venue": "GitHub",
+      "url": "https://github.com/scikit-image/scikit-image"
     },
     "serra_mathematical_morphology": {
       "ref_id": "serra_mathematical_morphology",

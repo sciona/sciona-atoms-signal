@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "atoms": {
-    "sciona.atoms.anomaly_detection.atoms.matrix_profile_anomaly_score@sciona/atoms/anomaly_detection/atoms.py:145": {
+    "sciona.atoms.anomaly_detection.matrix_profile_anomaly_score@sciona/atoms/anomaly_detection/atoms.py:145": {
       "references": [
         {
           "ref_id": "repo_kddcup2021_anomaly",
@@ -26,7 +26,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.anomaly_detection.atoms.multiscale_anomaly_aggregation@sciona/atoms/anomaly_detection/atoms.py:161": {
+    "sciona.atoms.anomaly_detection.multiscale_anomaly_aggregation@sciona/atoms/anomaly_detection/atoms.py:161": {
       "references": [
         {
           "ref_id": "repo_kddcup2021_anomaly",

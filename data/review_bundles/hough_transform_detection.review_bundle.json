@@ -3,5 +3,57 @@
   "verdict": "PASS",
   "risk_tier": "low",
   "rationale": "Automated verification passed. Numerical behavior matches upstream library expectations.",
-  "limitations": "Subject to standard machine precision and float limits."
+  "limitations": "Subject to standard machine precision and float limits.",
+  "schema_version": "1.0",
+  "bundle_id": "sciona.atoms.image.segmentation.hough_transform_detection.review_bundle.hough_transform_detection.legacy.v1",
+  "provider_repo": "sciona-atoms-signal",
+  "family_batch": "hough_transform_detection",
+  "review_status": "reviewed",
+  "review_semantic_verdict": "pass_with_limits",
+  "review_developer_semantic_verdict": "pass_with_limits",
+  "trust_readiness": "reviewed_with_limits",
+  "authoritative_sources": [
+    {
+      "kind": "local_wrapper",
+      "path": "src/sciona/atoms/image/segmentation/hough_transform_detection/atoms.py"
+    },
+    {
+      "kind": "local_wrapper",
+      "path": "src/sciona/atoms/image/segmentation/hough_transform_detection/witnesses.py"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/image/segmentation/hough_transform_detection/references.json"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/image/segmentation/hough_transform_detection/cdg.json"
+    }
+  ],
+  "review_record_path": "data/review_bundles/hough_transform_detection.review_bundle.json",
+  "rows": [
+    {
+      "atom_name": "sciona.atoms.image.segmentation.hough_transform_detection.compute_hough_accumulator",
+      "atom_key": "sciona.atoms.image.segmentation.hough_transform_detection.compute_hough_accumulator",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "needs_followup",
+      "source_paths": [
+        "src/sciona/atoms/image/segmentation/hough_transform_detection/atoms.py",
+        "src/sciona/atoms/image/segmentation/hough_transform_detection/witnesses.py",
+        "src/sciona/atoms/image/segmentation/hough_transform_detection/references.json",
+        "src/sciona/atoms/image/segmentation/hough_transform_detection/cdg.json"
+      ],
+      "review_record_path": "data/review_bundles/hough_transform_detection.review_bundle.json",
+      "limitations": [
+        "Subject to standard machine precision and float limits."
+      ],
+      "required_actions": [
+        "Automated verification passed. Numerical behavior matches upstream library expectations.",
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "runtime_status": "unknown"
+    }
+  ]
 }

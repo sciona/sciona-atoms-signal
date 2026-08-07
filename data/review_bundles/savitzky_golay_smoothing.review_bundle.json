@@ -3,5 +3,80 @@
   "verdict": "PASS",
   "risk_tier": "low",
   "rationale": "Automated verification passed. Numerical behavior matches upstream library expectations.",
-  "limitations": "Subject to standard machine precision and float limits."
+  "limitations": "Subject to standard machine precision and float limits.",
+  "schema_version": "1.0",
+  "bundle_id": "sciona.atoms.signal.filtering.savitzky_golay_smoothing.review_bundle.savitzky_golay_smoothing.legacy.v1",
+  "provider_repo": "sciona-atoms-signal",
+  "family_batch": "savitzky_golay_smoothing",
+  "review_status": "reviewed",
+  "review_semantic_verdict": "pass_with_limits",
+  "review_developer_semantic_verdict": "pass_with_limits",
+  "trust_readiness": "reviewed_with_limits",
+  "authoritative_sources": [
+    {
+      "kind": "local_wrapper",
+      "path": "src/sciona/atoms/signal/filtering/savitzky_golay_smoothing/atoms.py"
+    },
+    {
+      "kind": "local_wrapper",
+      "path": "src/sciona/atoms/signal/filtering/savitzky_golay_smoothing/witnesses.py"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/signal/filtering/savitzky_golay_smoothing/references.json"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/signal/filtering/savitzky_golay_smoothing/cdg.json"
+    }
+  ],
+  "review_record_path": "data/review_bundles/savitzky_golay_smoothing.review_bundle.json",
+  "rows": [
+    {
+      "atom_name": "sciona.atoms.signal.filtering.savitzky_golay_smoothing.compute_savgol_coefficients",
+      "atom_key": "sciona.atoms.signal.filtering.savitzky_golay_smoothing.compute_savgol_coefficients",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "needs_followup",
+      "source_paths": [
+        "src/sciona/atoms/signal/filtering/savitzky_golay_smoothing/atoms.py",
+        "src/sciona/atoms/signal/filtering/savitzky_golay_smoothing/witnesses.py",
+        "src/sciona/atoms/signal/filtering/savitzky_golay_smoothing/references.json",
+        "src/sciona/atoms/signal/filtering/savitzky_golay_smoothing/cdg.json"
+      ],
+      "review_record_path": "data/review_bundles/savitzky_golay_smoothing.review_bundle.json",
+      "limitations": [
+        "Subject to standard machine precision and float limits."
+      ],
+      "required_actions": [
+        "Automated verification passed. Numerical behavior matches upstream library expectations.",
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "runtime_status": "unknown"
+    },
+    {
+      "atom_name": "sciona.atoms.signal.filtering.savitzky_golay_smoothing.apply_savgol_convolution",
+      "atom_key": "sciona.atoms.signal.filtering.savitzky_golay_smoothing.apply_savgol_convolution",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "needs_followup",
+      "source_paths": [
+        "src/sciona/atoms/signal/filtering/savitzky_golay_smoothing/atoms.py",
+        "src/sciona/atoms/signal/filtering/savitzky_golay_smoothing/witnesses.py",
+        "src/sciona/atoms/signal/filtering/savitzky_golay_smoothing/references.json",
+        "src/sciona/atoms/signal/filtering/savitzky_golay_smoothing/cdg.json"
+      ],
+      "review_record_path": "data/review_bundles/savitzky_golay_smoothing.review_bundle.json",
+      "limitations": [
+        "Subject to standard machine precision and float limits."
+      ],
+      "required_actions": [
+        "Automated verification passed. Numerical behavior matches upstream library expectations.",
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "runtime_status": "unknown"
+    }
+  ]
 }

@@ -16,7 +16,7 @@ def test_signal_references_use_canonical_atoms_module_segments() -> None:
             continue
 
         module_prefix = ".".join(refs_path.parent.relative_to(src_root).parts)
-        canonical_prefix = f"{module_prefix}.atoms."
+        canonical_prefix = f"{module_prefix}."
 
         for atom_key in atoms:
             assert atom_key.startswith(canonical_prefix), (

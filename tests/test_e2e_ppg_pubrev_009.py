@@ -13,8 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBLISHABLE_ATOMS = {
     "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.detect_heart_cycles",
     "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.heart_cycle_detection",
-    "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapperpredictionsignalcomputation",
-    "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.signalarraynormalization",
+    "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapper_prediction_signal_computation",
+    "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.signal_array_normalization",
 }
 
 HELD_ATOMS: set[str] = set()
@@ -29,9 +29,7 @@ def _load_bundle() -> dict:
 
 
 def _package_atom_fqdn(reference_key: str) -> str:
-    fqdn = reference_key.split("@", 1)[0]
-    prefix, _, suffix = fqdn.rpartition(".atoms.")
-    return f"{prefix}.{suffix}" if prefix else fqdn
+    return reference_key.split("@", 1)[0]
 
 
 def test_pubrev_009_bundle_marks_safe_atoms_reference_ready() -> None:
@@ -94,7 +92,7 @@ def test_pubrev_009_heart_cycle_wrappers_delegate_to_upstream_module(monkeypatch
     assert calls == [(ppg, 125.0), (ppg, 125.0)]
 
 
-def test_pubrev_009_signalarraynormalization_loads_kazemi_module_lazily(monkeypatch) -> None:
+def test_pubrev_009_signal_array_normalization_loads_kazemi_module_lazily(monkeypatch) -> None:
     atoms = importlib.import_module("sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.atoms")
     loaded_modules: list[str] = []
 
@@ -105,5 +103,5 @@ def test_pubrev_009_signalarraynormalization_loads_kazemi_module_lazily(monkeypa
     monkeypatch.setattr(atoms, "load_e2e_ppg_module", fake_load)
 
     arr = np.array([0.0, 2.0, 4.0])
-    assert np.allclose(atoms.signalarraynormalization(arr), np.array([0.0, 0.5, 1.0]))
+    assert np.allclose(atoms.signal_array_normalization(arr), np.array([0.0, 0.5, 1.0]))
     assert loaded_modules == ["kazemi_peak_detection"]

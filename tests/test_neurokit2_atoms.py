@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 from neurokit2.ecg.ecg_quality import _ecg_quality_averageQRS, _ecg_quality_zhao2018
 
-from sciona.atoms.signal_processing.neurokit2 import averageqrstemplate, zhao2018hrvanalysis
+from sciona.atoms.signal_processing.neurokit2 import average_qrs_template, zhao_2018_hrv_analysis
 from sciona.probes.signal_processing.neurokit2 import probe_records
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,8 +37,8 @@ def test_neurokit2_probe_records_resolve_to_live_symbols() -> None:
 
 def test_neurokit2_probe_records_publish_expected_symbols() -> None:
     assert {str(record["wrapper_symbol"]) for record in probe_records()} == {
-        "averageqrstemplate",
-        "zhao2018hrvanalysis",
+        "average_qrs_template",
+        "zhao_2018_hrv_analysis",
     }
 
 
@@ -47,19 +47,19 @@ def test_neurokit2_references_map_to_live_atom_fqdns() -> None:
         (ROOT / "src/sciona/atoms/signal_processing/neurokit2/references.json").read_text()
     )
     assert set(references["atoms"]) == {
-        "sciona.atoms.signal_processing.neurokit2.atoms.averageqrstemplate@sciona/atoms/signal_processing/neurokit2/atoms.py:43",
-        "sciona.atoms.signal_processing.neurokit2.atoms.zhao2018hrvanalysis@sciona/atoms/signal_processing/neurokit2/atoms.py:21",
+        "sciona.atoms.signal_processing.neurokit2.average_qrs_template@sciona/atoms/signal_processing/neurokit2/atoms.py:43",
+        "sciona.atoms.signal_processing.neurokit2.zhao_2018_hrv_analysis@sciona/atoms/signal_processing/neurokit2/atoms.py:21",
     }
 
 
-def test_averageqrstemplate_matches_upstream_quality_trace() -> None:
+def test_average_qrs_template_matches_upstream_quality_trace() -> None:
     signal = _synthetic_ecg_signal(
         5000,
         [400, 900, 1400, 1900, 2400, 2900, 3400, 3900, 4400],
     )
     rpeaks = np.array([400, 900, 1400, 1900, 2400, 2900, 3400, 3900, 4400], dtype=int)
 
-    wrapped = averageqrstemplate(signal, rpeaks=rpeaks, sampling_rate=1000)
+    wrapped = average_qrs_template(signal, rpeaks=rpeaks, sampling_rate=1000)
     upstream = _ecg_quality_averageQRS(signal, rpeaks=rpeaks, sampling_rate=1000)
 
     assert wrapped.shape == signal.shape
@@ -67,14 +67,14 @@ def test_averageqrstemplate_matches_upstream_quality_trace() -> None:
     assert np.isfinite(wrapped).all()
 
 
-def test_zhao2018hrvanalysis_matches_upstream_label() -> None:
+def test_zhao_2018_hrv_analysis_matches_upstream_label() -> None:
     signal = _synthetic_ecg_signal(
         5000,
         [400, 900, 1400, 1900, 2400, 2900, 3400, 3900, 4400],
     )
     rpeaks = np.array([400, 900, 1400, 1900, 2400, 2900, 3400, 3900, 4400], dtype=int)
 
-    wrapped = zhao2018hrvanalysis(
+    wrapped = zhao_2018_hrv_analysis(
         signal,
         rpeaks=rpeaks,
         sampling_rate=1000,

@@ -33,14 +33,14 @@ def test_online_filter_v2_probe_records_resolve_to_live_symbols() -> None:
 
 def test_online_filter_probe_records_publish_expected_symbols() -> None:
     assert {str(record["wrapper_symbol"]) for record in online_filter_probe_records()} == {
-        "filterstateinit",
-        "filterstep",
+        "filter_state_init",
+        "filter_step",
     }
     assert {str(record["wrapper_symbol"]) for record in online_filter_codex_probe_records()} == {
-        "filterstateinit",
-        "filterstep",
+        "filter_state_init",
+        "filter_step",
     }
     assert {str(record["wrapper_symbol"]) for record in online_filter_v2_probe_records()} == {
-        "filterstateinit",
-        "filterstep",
+        "filter_state_init",
+        "filter_step",
     }

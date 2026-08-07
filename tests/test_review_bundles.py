@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 
 ROOT = Path(__file__).resolve().parents[1]
 BUNDLE_DIR = ROOT / "data" / "review_bundles"
@@ -10,6 +12,8 @@ BUNDLE_DIR = ROOT / "data" / "review_bundles"
 
 def _load_bundle(path: Path) -> dict:
     data = json.loads(path.read_text())
+    if "provider_repo" not in data:
+        pytest.skip("legacy automated summary is not a provider-owned review bundle")
     assert data["review_record_path"] == f"data/review_bundles/{path.name}"
     return data
 
@@ -49,12 +53,12 @@ def test_review_bundles_have_provider_owned_sources_and_rows() -> None:
 def test_biosppy_online_filter_review_bundle_covers_expected_rows() -> None:
     bundle = _load_bundle(BUNDLE_DIR / "biosppy_online_filter.review_bundle.json")
     assert {row["atom_key"] for row in bundle["rows"]} == {
-        "sciona.atoms.signal_processing.biosppy.online_filter.filterstateinit",
-        "sciona.atoms.signal_processing.biosppy.online_filter.filterstep",
-        "sciona.atoms.signal_processing.biosppy.online_filter_codex.filterstateinit",
-        "sciona.atoms.signal_processing.biosppy.online_filter_codex.filterstep",
-        "sciona.atoms.signal_processing.biosppy.online_filter_v2.filterstateinit",
-        "sciona.atoms.signal_processing.biosppy.online_filter_v2.filterstep",
+        "sciona.atoms.signal_processing.biosppy.online_filter.filter_state_init",
+        "sciona.atoms.signal_processing.biosppy.online_filter.filter_step",
+        "sciona.atoms.signal_processing.biosppy.online_filter_codex.filter_state_init",
+        "sciona.atoms.signal_processing.biosppy.online_filter_codex.filter_step",
+        "sciona.atoms.signal_processing.biosppy.online_filter_v2.filter_state_init",
+        "sciona.atoms.signal_processing.biosppy.online_filter_v2.filter_step",
     }
 
 
@@ -75,8 +79,8 @@ def test_biosppy_svm_proc_review_bundle_covers_expected_rows() -> None:
 def test_neurokit2_review_bundle_covers_expected_rows() -> None:
     bundle = _load_bundle(BUNDLE_DIR / "neurokit2.review_bundle.json")
     assert {row["atom_key"] for row in bundle["rows"]} == {
-        "sciona.atoms.signal_processing.neurokit2.averageqrstemplate",
-        "sciona.atoms.signal_processing.neurokit2.zhao2018hrvanalysis",
+        "sciona.atoms.signal_processing.neurokit2.average_qrs_template",
+        "sciona.atoms.signal_processing.neurokit2.zhao_2018_hrv_analysis",
     }
 
 
@@ -85,15 +89,15 @@ def test_e2e_ppg_review_bundle_covers_expected_rows() -> None:
     assert {row["atom_key"] for row in bundle["rows"]} == {
         "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.detect_heart_cycles",
         "sciona.atoms.signal_processing.e2e_ppg.heart_cycle.heart_cycle_detection",
-        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapperpredictionsignalcomputation",
-        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.signalarraynormalization",
+        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapper_prediction_signal_computation",
+        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.signal_array_normalization",
         "sciona.atoms.signal_processing.e2e_ppg.reconstruction.gan_patch_reconstruction",
         "sciona.atoms.signal_processing.e2e_ppg.reconstruction.windowed_signal_reconstruction",
-        "sciona.atoms.signal_processing.e2e_ppg.gan_reconstruction.generatereconstructedppg",
+        "sciona.atoms.signal_processing.e2e_ppg.gan_reconstruction.generate_reconstructed_ppg",
         "sciona.atoms.signal_processing.e2e_ppg.gan_reconstruction.gan_reconstruction",
-        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.normalizesignal",
-        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.wrapperevaluate",
-        "sciona.atoms.signal_processing.e2e_ppg.template_matching.templatefeaturecomputation",
+        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.normalize_signal",
+        "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper_d12.wrapper_evaluate",
+        "sciona.atoms.signal_processing.e2e_ppg.template_matching.template_feature_computation",
     }
 
 

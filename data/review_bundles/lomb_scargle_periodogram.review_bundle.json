@@ -3,5 +3,57 @@
   "verdict": "PASS",
   "risk_tier": "low",
   "rationale": "Automated verification passed. Numerical behavior matches upstream library expectations.",
-  "limitations": "Subject to standard machine precision and float limits."
+  "limitations": "Subject to standard machine precision and float limits.",
+  "schema_version": "1.0",
+  "bundle_id": "sciona.atoms.signal.spectral.lomb_scargle_periodogram.review_bundle.lomb_scargle_periodogram.legacy.v1",
+  "provider_repo": "sciona-atoms-signal",
+  "family_batch": "lomb_scargle_periodogram",
+  "review_status": "reviewed",
+  "review_semantic_verdict": "pass_with_limits",
+  "review_developer_semantic_verdict": "pass_with_limits",
+  "trust_readiness": "reviewed_with_limits",
+  "authoritative_sources": [
+    {
+      "kind": "local_wrapper",
+      "path": "src/sciona/atoms/signal/spectral/lomb_scargle_periodogram/atoms.py"
+    },
+    {
+      "kind": "local_wrapper",
+      "path": "src/sciona/atoms/signal/spectral/lomb_scargle_periodogram/witnesses.py"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/signal/spectral/lomb_scargle_periodogram/references.json"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/signal/spectral/lomb_scargle_periodogram/cdg.json"
+    }
+  ],
+  "review_record_path": "data/review_bundles/lomb_scargle_periodogram.review_bundle.json",
+  "rows": [
+    {
+      "atom_name": "sciona.atoms.signal.spectral.lomb_scargle_periodogram.compute_lomb_scargle_power",
+      "atom_key": "sciona.atoms.signal.spectral.lomb_scargle_periodogram.compute_lomb_scargle_power",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "needs_followup",
+      "source_paths": [
+        "src/sciona/atoms/signal/spectral/lomb_scargle_periodogram/atoms.py",
+        "src/sciona/atoms/signal/spectral/lomb_scargle_periodogram/witnesses.py",
+        "src/sciona/atoms/signal/spectral/lomb_scargle_periodogram/references.json",
+        "src/sciona/atoms/signal/spectral/lomb_scargle_periodogram/cdg.json"
+      ],
+      "review_record_path": "data/review_bundles/lomb_scargle_periodogram.review_bundle.json",
+      "limitations": [
+        "Subject to standard machine precision and float limits."
+      ],
+      "required_actions": [
+        "Automated verification passed. Numerical behavior matches upstream library expectations.",
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "runtime_status": "unknown"
+    }
+  ]
 }

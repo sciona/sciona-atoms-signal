@@ -11,15 +11,15 @@ def test_financial_signals_references_cover_all_atoms() -> None:
 
     atoms = payload["atoms"]
     assert set(atoms) == {
-        "sciona.atoms.financial_signals.atoms.realized_volatility@sciona/atoms/financial_signals/atoms.py:45",
-        "sciona.atoms.financial_signals.atoms.realized_quadpower_quarticity@sciona/atoms/financial_signals/atoms.py:55",
-        "sciona.atoms.financial_signals.atoms.weighted_average_price@sciona/atoms/financial_signals/atoms.py:79",
-        "sciona.atoms.financial_signals.atoms.linear_trend_feature@sciona/atoms/financial_signals/atoms.py:101",
-        "sciona.atoms.financial_signals.atoms.book_imbalance_features@sciona/atoms/financial_signals/atoms.py:115",
+        "sciona.atoms.financial_signals.realized_volatility@sciona/atoms/financial_signals/atoms.py:45",
+        "sciona.atoms.financial_signals.realized_quadpower_quarticity@sciona/atoms/financial_signals/atoms.py:55",
+        "sciona.atoms.financial_signals.weighted_average_price@sciona/atoms/financial_signals/atoms.py:79",
+        "sciona.atoms.financial_signals.linear_trend_feature@sciona/atoms/financial_signals/atoms.py:101",
+        "sciona.atoms.financial_signals.book_imbalance_features@sciona/atoms/financial_signals/atoms.py:115",
     }
 
     linear_refs = {
         ref["ref_id"]
-        for ref in atoms["sciona.atoms.financial_signals.atoms.linear_trend_feature@sciona/atoms/financial_signals/atoms.py:101"]["references"]
+        for ref in atoms["sciona.atoms.financial_signals.linear_trend_feature@sciona/atoms/financial_signals/atoms.py:101"]["references"]
     }
     assert linear_refs == {"repo_optiver_orvp", "scipy2020"}

@@ -3,5 +3,80 @@
   "verdict": "PASS",
   "risk_tier": "low",
   "rationale": "Automated verification passed. Numerical behavior matches upstream library expectations.",
-  "limitations": "Subject to standard machine precision and float limits."
+  "limitations": "Subject to standard machine precision and float limits.",
+  "schema_version": "1.0",
+  "bundle_id": "sciona.atoms.image.filters.gaussian_filter_smoothing.review_bundle.gaussian_filter_smoothing.legacy.v1",
+  "provider_repo": "sciona-atoms-signal",
+  "family_batch": "gaussian_filter_smoothing",
+  "review_status": "reviewed",
+  "review_semantic_verdict": "pass_with_limits",
+  "review_developer_semantic_verdict": "pass_with_limits",
+  "trust_readiness": "reviewed_with_limits",
+  "authoritative_sources": [
+    {
+      "kind": "local_wrapper",
+      "path": "src/sciona/atoms/image/filters/gaussian_filter_smoothing/atoms.py"
+    },
+    {
+      "kind": "local_wrapper",
+      "path": "src/sciona/atoms/image/filters/gaussian_filter_smoothing/witnesses.py"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/image/filters/gaussian_filter_smoothing/references.json"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/image/filters/gaussian_filter_smoothing/cdg.json"
+    }
+  ],
+  "review_record_path": "data/review_bundles/gaussian_filter_smoothing.review_bundle.json",
+  "rows": [
+    {
+      "atom_name": "sciona.atoms.image.filters.gaussian_filter_smoothing.compute_gaussian_1d_kernel",
+      "atom_key": "sciona.atoms.image.filters.gaussian_filter_smoothing.compute_gaussian_1d_kernel",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "needs_followup",
+      "source_paths": [
+        "src/sciona/atoms/image/filters/gaussian_filter_smoothing/atoms.py",
+        "src/sciona/atoms/image/filters/gaussian_filter_smoothing/witnesses.py",
+        "src/sciona/atoms/image/filters/gaussian_filter_smoothing/references.json",
+        "src/sciona/atoms/image/filters/gaussian_filter_smoothing/cdg.json"
+      ],
+      "review_record_path": "data/review_bundles/gaussian_filter_smoothing.review_bundle.json",
+      "limitations": [
+        "Subject to standard machine precision and float limits."
+      ],
+      "required_actions": [
+        "Automated verification passed. Numerical behavior matches upstream library expectations.",
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "runtime_status": "unknown"
+    },
+    {
+      "atom_name": "sciona.atoms.image.filters.gaussian_filter_smoothing.apply_separable_convolution_2d",
+      "atom_key": "sciona.atoms.image.filters.gaussian_filter_smoothing.apply_separable_convolution_2d",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "needs_followup",
+      "source_paths": [
+        "src/sciona/atoms/image/filters/gaussian_filter_smoothing/atoms.py",
+        "src/sciona/atoms/image/filters/gaussian_filter_smoothing/witnesses.py",
+        "src/sciona/atoms/image/filters/gaussian_filter_smoothing/references.json",
+        "src/sciona/atoms/image/filters/gaussian_filter_smoothing/cdg.json"
+      ],
+      "review_record_path": "data/review_bundles/gaussian_filter_smoothing.review_bundle.json",
+      "limitations": [
+        "Subject to standard machine precision and float limits."
+      ],
+      "required_actions": [
+        "Automated verification passed. Numerical behavior matches upstream library expectations.",
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "runtime_status": "unknown"
+    }
+  ]
 }

@@ -8,11 +8,26 @@
   "review_developer_semantic_verdict": "pass_with_limits",
   "trust_readiness": "reviewed_with_limits",
   "authoritative_sources": [
-    {"kind": "local_source", "path": "src/sciona/atoms/time_series_features/atoms.py"},
-    {"kind": "local_wrapper", "path": "src/sciona/atoms/time_series_features/witnesses.py"},
-    {"kind": "local_references", "path": "src/sciona/atoms/time_series_features/references.json"},
-    {"kind": "local_cdg", "path": "src/sciona/atoms/time_series_features/cdg.json"},
-    {"kind": "local_test", "path": "tests/test_time_series_features_behavior.py"}
+    {
+      "kind": "local_source",
+      "path": "src/sciona/atoms/time_series_features/atoms.py"
+    },
+    {
+      "kind": "local_wrapper",
+      "path": "src/sciona/atoms/time_series_features/witnesses.py"
+    },
+    {
+      "kind": "local_references",
+      "path": "src/sciona/atoms/time_series_features/references.json"
+    },
+    {
+      "kind": "local_cdg",
+      "path": "src/sciona/atoms/time_series_features/cdg.json"
+    },
+    {
+      "kind": "local_test",
+      "path": "tests/test_time_series_features_behavior.py"
+    }
   ],
   "limitations": [
     "rolling_window_features currently supports one-dimensional series with time on axis 0; two-dimensional panel features should use explicit per-column orchestration.",
@@ -31,8 +46,16 @@
       "review_semantic_verdict": "pass_with_limits",
       "review_developer_semantic_verdict": "pass_with_limits",
       "trust_readiness": "catalog_ready",
-      "source_paths": ["src/sciona/atoms/time_series_features/atoms.py", "src/sciona/atoms/time_series_features/witnesses.py", "src/sciona/atoms/time_series_features/references.json", "src/sciona/atoms/time_series_features/cdg.json", "tests/test_time_series_features_behavior.py"],
-      "limitations": ["Supports one-dimensional inputs and returns a same-length feature matrix with leading NaNs."],
+      "source_paths": [
+        "src/sciona/atoms/time_series_features/atoms.py",
+        "src/sciona/atoms/time_series_features/witnesses.py",
+        "src/sciona/atoms/time_series_features/references.json",
+        "src/sciona/atoms/time_series_features/cdg.json",
+        "tests/test_time_series_features_behavior.py"
+      ],
+      "limitations": [
+        "Supports one-dimensional inputs and returns a same-length feature matrix with leading NaNs."
+      ],
       "blocking_findings": [],
       "required_actions": [],
       "review_record_path": "data/review_bundles/time_series_features.review_bundle.json",
@@ -46,7 +69,13 @@
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass",
       "trust_readiness": "catalog_ready",
-      "source_paths": ["src/sciona/atoms/time_series_features/atoms.py", "src/sciona/atoms/time_series_features/witnesses.py", "src/sciona/atoms/time_series_features/references.json", "src/sciona/atoms/time_series_features/cdg.json", "tests/test_time_series_features_behavior.py"],
+      "source_paths": [
+        "src/sciona/atoms/time_series_features/atoms.py",
+        "src/sciona/atoms/time_series_features/witnesses.py",
+        "src/sciona/atoms/time_series_features/references.json",
+        "src/sciona/atoms/time_series_features/cdg.json",
+        "tests/test_time_series_features_behavior.py"
+      ],
       "limitations": [],
       "blocking_findings": [],
       "required_actions": [],
@@ -61,8 +90,16 @@
       "review_semantic_verdict": "pass_with_limits",
       "review_developer_semantic_verdict": "pass_with_limits",
       "trust_readiness": "catalog_ready",
-      "source_paths": ["src/sciona/atoms/time_series_features/atoms.py", "src/sciona/atoms/time_series_features/witnesses.py", "src/sciona/atoms/time_series_features/references.json", "src/sciona/atoms/time_series_features/cdg.json", "tests/test_time_series_features_behavior.py"],
-      "limitations": ["Implements MACD only, seeded from the first observed price."],
+      "source_paths": [
+        "src/sciona/atoms/time_series_features/atoms.py",
+        "src/sciona/atoms/time_series_features/witnesses.py",
+        "src/sciona/atoms/time_series_features/references.json",
+        "src/sciona/atoms/time_series_features/cdg.json",
+        "tests/test_time_series_features_behavior.py"
+      ],
+      "limitations": [
+        "Implements MACD only, seeded from the first observed price."
+      ],
       "blocking_findings": [],
       "required_actions": [],
       "review_record_path": "data/review_bundles/time_series_features.review_bundle.json",
@@ -76,8 +113,16 @@
       "review_semantic_verdict": "pass_with_limits",
       "review_developer_semantic_verdict": "pass_with_limits",
       "trust_readiness": "catalog_ready",
-      "source_paths": ["src/sciona/atoms/time_series_features/atoms.py", "src/sciona/atoms/time_series_features/witnesses.py", "src/sciona/atoms/time_series_features/references.json", "src/sciona/atoms/time_series_features/cdg.json", "tests/test_time_series_features_behavior.py"],
-      "limitations": ["Classical additive decomposition with NaN edge trend values; multiplicative decomposition is intentionally excluded."],
+      "source_paths": [
+        "src/sciona/atoms/time_series_features/atoms.py",
+        "src/sciona/atoms/time_series_features/witnesses.py",
+        "src/sciona/atoms/time_series_features/references.json",
+        "src/sciona/atoms/time_series_features/cdg.json",
+        "tests/test_time_series_features_behavior.py"
+      ],
+      "limitations": [
+        "Classical additive decomposition with NaN edge trend values; multiplicative decomposition is intentionally excluded."
+      ],
       "blocking_findings": [],
       "required_actions": [],
       "review_record_path": "data/review_bundles/time_series_features.review_bundle.json",
@@ -91,7 +136,13 @@
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass",
       "trust_readiness": "catalog_ready",
-      "source_paths": ["src/sciona/atoms/time_series_features/atoms.py", "src/sciona/atoms/time_series_features/witnesses.py", "src/sciona/atoms/time_series_features/references.json", "src/sciona/atoms/time_series_features/cdg.json", "tests/test_time_series_features_behavior.py"],
+      "source_paths": [
+        "src/sciona/atoms/time_series_features/atoms.py",
+        "src/sciona/atoms/time_series_features/witnesses.py",
+        "src/sciona/atoms/time_series_features/references.json",
+        "src/sciona/atoms/time_series_features/cdg.json",
+        "tests/test_time_series_features_behavior.py"
+      ],
       "limitations": [],
       "blocking_findings": [],
       "required_actions": [],
@@ -106,8 +157,16 @@
       "review_semantic_verdict": "pass_with_limits",
       "review_developer_semantic_verdict": "pass_with_limits",
       "trust_readiness": "catalog_ready",
-      "source_paths": ["src/sciona/atoms/time_series_features/atoms.py", "src/sciona/atoms/time_series_features/witnesses.py", "src/sciona/atoms/time_series_features/references.json", "src/sciona/atoms/time_series_features/cdg.json", "tests/test_time_series_features_behavior.py"],
-      "limitations": ["Entity ids are sorted internally and not returned as a companion vector."],
+      "source_paths": [
+        "src/sciona/atoms/time_series_features/atoms.py",
+        "src/sciona/atoms/time_series_features/witnesses.py",
+        "src/sciona/atoms/time_series_features/references.json",
+        "src/sciona/atoms/time_series_features/cdg.json",
+        "tests/test_time_series_features_behavior.py"
+      ],
+      "limitations": [
+        "Entity ids are sorted internally and not returned as a companion vector."
+      ],
       "blocking_findings": [],
       "required_actions": [],
       "review_record_path": "data/review_bundles/time_series_features.review_bundle.json",
@@ -121,7 +180,13 @@
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass",
       "trust_readiness": "catalog_ready",
-      "source_paths": ["src/sciona/atoms/time_series_features/atoms.py", "src/sciona/atoms/time_series_features/witnesses.py", "src/sciona/atoms/time_series_features/references.json", "src/sciona/atoms/time_series_features/cdg.json", "tests/test_time_series_features_behavior.py"],
+      "source_paths": [
+        "src/sciona/atoms/time_series_features/atoms.py",
+        "src/sciona/atoms/time_series_features/witnesses.py",
+        "src/sciona/atoms/time_series_features/references.json",
+        "src/sciona/atoms/time_series_features/cdg.json",
+        "tests/test_time_series_features_behavior.py"
+      ],
       "limitations": [],
       "blocking_findings": [],
       "required_actions": [],
@@ -136,7 +201,13 @@
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass",
       "trust_readiness": "catalog_ready",
-      "source_paths": ["src/sciona/atoms/time_series_features/atoms.py", "src/sciona/atoms/time_series_features/witnesses.py", "src/sciona/atoms/time_series_features/references.json", "src/sciona/atoms/time_series_features/cdg.json", "tests/test_time_series_features_behavior.py"],
+      "source_paths": [
+        "src/sciona/atoms/time_series_features/atoms.py",
+        "src/sciona/atoms/time_series_features/witnesses.py",
+        "src/sciona/atoms/time_series_features/references.json",
+        "src/sciona/atoms/time_series_features/cdg.json",
+        "tests/test_time_series_features_behavior.py"
+      ],
       "limitations": [],
       "blocking_findings": [],
       "required_actions": [],
@@ -151,7 +222,13 @@
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass",
       "trust_readiness": "catalog_ready",
-      "source_paths": ["src/sciona/atoms/time_series_features/atoms.py", "src/sciona/atoms/time_series_features/witnesses.py", "src/sciona/atoms/time_series_features/references.json", "src/sciona/atoms/time_series_features/cdg.json", "tests/test_time_series_features_behavior.py"],
+      "source_paths": [
+        "src/sciona/atoms/time_series_features/atoms.py",
+        "src/sciona/atoms/time_series_features/witnesses.py",
+        "src/sciona/atoms/time_series_features/references.json",
+        "src/sciona/atoms/time_series_features/cdg.json",
+        "tests/test_time_series_features_behavior.py"
+      ],
       "limitations": [],
       "blocking_findings": [],
       "required_actions": [],
@@ -166,7 +243,13 @@
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass",
       "trust_readiness": "catalog_ready",
-      "source_paths": ["src/sciona/atoms/time_series_features/atoms.py", "src/sciona/atoms/time_series_features/witnesses.py", "src/sciona/atoms/time_series_features/references.json", "src/sciona/atoms/time_series_features/cdg.json", "tests/test_time_series_features_behavior.py"],
+      "source_paths": [
+        "src/sciona/atoms/time_series_features/atoms.py",
+        "src/sciona/atoms/time_series_features/witnesses.py",
+        "src/sciona/atoms/time_series_features/references.json",
+        "src/sciona/atoms/time_series_features/cdg.json",
+        "tests/test_time_series_features_behavior.py"
+      ],
       "limitations": [],
       "blocking_findings": [],
       "required_actions": [],
@@ -181,13 +264,22 @@
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass",
       "trust_readiness": "catalog_ready",
-      "source_paths": ["src/sciona/atoms/time_series_features/atoms.py", "src/sciona/atoms/time_series_features/witnesses.py", "src/sciona/atoms/time_series_features/references.json", "src/sciona/atoms/time_series_features/cdg.json", "tests/test_time_series_features_behavior.py"],
+      "source_paths": [
+        "src/sciona/atoms/time_series_features/atoms.py",
+        "src/sciona/atoms/time_series_features/witnesses.py",
+        "src/sciona/atoms/time_series_features/references.json",
+        "src/sciona/atoms/time_series_features/cdg.json",
+        "tests/test_time_series_features_behavior.py"
+      ],
       "limitations": [],
       "blocking_findings": [],
-      "required_actions": [],
+      "required_actions": [
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
       "review_record_path": "data/review_bundles/time_series_features.review_bundle.json",
       "has_references": true,
-      "references_status": "pass"
+      "references_status": "pass",
+      "runtime_status": "unknown"
     },
     {
       "atom_key": "sciona.atoms.time_series_features.overlapping_window_ensemble",
@@ -196,7 +288,13 @@
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass",
       "trust_readiness": "catalog_ready",
-      "source_paths": ["src/sciona/atoms/time_series_features/atoms.py", "src/sciona/atoms/time_series_features/witnesses.py", "src/sciona/atoms/time_series_features/references.json", "src/sciona/atoms/time_series_features/cdg.json", "tests/test_time_series_features_behavior.py"],
+      "source_paths": [
+        "src/sciona/atoms/time_series_features/atoms.py",
+        "src/sciona/atoms/time_series_features/witnesses.py",
+        "src/sciona/atoms/time_series_features/references.json",
+        "src/sciona/atoms/time_series_features/cdg.json",
+        "tests/test_time_series_features_behavior.py"
+      ],
       "limitations": [],
       "blocking_findings": [],
       "required_actions": [],

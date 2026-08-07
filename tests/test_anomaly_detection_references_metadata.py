@@ -11,8 +11,8 @@ def test_anomaly_detection_references_cover_all_atoms() -> None:
 
     atoms = payload["atoms"]
     assert set(atoms) == {
-        "sciona.atoms.anomaly_detection.atoms.matrix_profile_anomaly_score@sciona/atoms/anomaly_detection/atoms.py:145",
-        "sciona.atoms.anomaly_detection.atoms.multiscale_anomaly_aggregation@sciona/atoms/anomaly_detection/atoms.py:161",
+        "sciona.atoms.anomaly_detection.matrix_profile_anomaly_score@sciona/atoms/anomaly_detection/atoms.py:145",
+        "sciona.atoms.anomaly_detection.multiscale_anomaly_aggregation@sciona/atoms/anomaly_detection/atoms.py:161",
     }
 
     for atom_key in atoms:

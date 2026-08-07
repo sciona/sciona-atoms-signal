@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "atoms": {
-    "sciona.atoms.financial_signals.atoms.realized_volatility@sciona/atoms/financial_signals/atoms.py:45": {
+    "sciona.atoms.financial_signals.realized_volatility@sciona/atoms/financial_signals/atoms.py:45": {
       "references": [
         {
           "ref_id": "repo_optiver_orvp",
@@ -16,7 +16,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.financial_signals.atoms.realized_quadpower_quarticity@sciona/atoms/financial_signals/atoms.py:55": {
+    "sciona.atoms.financial_signals.realized_quadpower_quarticity@sciona/atoms/financial_signals/atoms.py:55": {
       "references": [
         {
           "ref_id": "repo_optiver_orvp",
@@ -31,7 +31,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.financial_signals.atoms.weighted_average_price@sciona/atoms/financial_signals/atoms.py:79": {
+    "sciona.atoms.financial_signals.weighted_average_price@sciona/atoms/financial_signals/atoms.py:79": {
       "references": [
         {
           "ref_id": "repo_optiver_orvp",
@@ -46,7 +46,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.financial_signals.atoms.linear_trend_feature@sciona/atoms/financial_signals/atoms.py:101": {
+    "sciona.atoms.financial_signals.linear_trend_feature@sciona/atoms/financial_signals/atoms.py:101": {
       "references": [
         {
           "ref_id": "repo_optiver_orvp",
@@ -71,7 +71,7 @@
       ],
       "auto_attribution_runs": []
     },
-    "sciona.atoms.financial_signals.atoms.book_imbalance_features@sciona/atoms/financial_signals/atoms.py:115": {
+    "sciona.atoms.financial_signals.book_imbalance_features@sciona/atoms/financial_signals/atoms.py:115": {
       "references": [
         {
           "ref_id": "repo_optiver_orvp",

@@ -3,5 +3,80 @@
   "verdict": "PASS",
   "risk_tier": "low",
   "rationale": "Automated verification passed. Numerical behavior matches upstream library expectations.",
-  "limitations": "Subject to standard machine precision and float limits."
+  "limitations": "Subject to standard machine precision and float limits.",
+  "schema_version": "1.0",
+  "bundle_id": "sciona.atoms.signal.filtering.fft_convolution_pipeline.review_bundle.fft_convolution_pipeline.legacy.v1",
+  "provider_repo": "sciona-atoms-signal",
+  "family_batch": "fft_convolution_pipeline",
+  "review_status": "reviewed",
+  "review_semantic_verdict": "pass_with_limits",
+  "review_developer_semantic_verdict": "pass_with_limits",
+  "trust_readiness": "reviewed_with_limits",
+  "authoritative_sources": [
+    {
+      "kind": "local_wrapper",
+      "path": "src/sciona/atoms/signal/filtering/fft_convolution_pipeline/atoms.py"
+    },
+    {
+      "kind": "local_wrapper",
+      "path": "src/sciona/atoms/signal/filtering/fft_convolution_pipeline/witnesses.py"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/signal/filtering/fft_convolution_pipeline/references.json"
+    },
+    {
+      "kind": "local_metadata",
+      "path": "src/sciona/atoms/signal/filtering/fft_convolution_pipeline/cdg.json"
+    }
+  ],
+  "review_record_path": "data/review_bundles/fft_convolution_pipeline.review_bundle.json",
+  "rows": [
+    {
+      "atom_name": "sciona.atoms.signal.filtering.fft_convolution_pipeline.compute_convolving_padding",
+      "atom_key": "sciona.atoms.signal.filtering.fft_convolution_pipeline.compute_convolving_padding",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "needs_followup",
+      "source_paths": [
+        "src/sciona/atoms/signal/filtering/fft_convolution_pipeline/atoms.py",
+        "src/sciona/atoms/signal/filtering/fft_convolution_pipeline/witnesses.py",
+        "src/sciona/atoms/signal/filtering/fft_convolution_pipeline/references.json",
+        "src/sciona/atoms/signal/filtering/fft_convolution_pipeline/cdg.json"
+      ],
+      "review_record_path": "data/review_bundles/fft_convolution_pipeline.review_bundle.json",
+      "limitations": [
+        "Subject to standard machine precision and float limits."
+      ],
+      "required_actions": [
+        "Automated verification passed. Numerical behavior matches upstream library expectations.",
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "runtime_status": "unknown"
+    },
+    {
+      "atom_name": "sciona.atoms.signal.filtering.fft_convolution_pipeline.multiply_spectral_coefficients",
+      "atom_key": "sciona.atoms.signal.filtering.fft_convolution_pipeline.multiply_spectral_coefficients",
+      "review_status": "reviewed",
+      "review_semantic_verdict": "pass_with_limits",
+      "review_developer_semantic_verdict": "pass_with_limits",
+      "trust_readiness": "needs_followup",
+      "source_paths": [
+        "src/sciona/atoms/signal/filtering/fft_convolution_pipeline/atoms.py",
+        "src/sciona/atoms/signal/filtering/fft_convolution_pipeline/witnesses.py",
+        "src/sciona/atoms/signal/filtering/fft_convolution_pipeline/references.json",
+        "src/sciona/atoms/signal/filtering/fft_convolution_pipeline/cdg.json"
+      ],
+      "review_record_path": "data/review_bundles/fft_convolution_pipeline.review_bundle.json",
+      "limitations": [
+        "Subject to standard machine precision and float limits."
+      ],
+      "required_actions": [
+        "Automated verification passed. Numerical behavior matches upstream library expectations.",
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "runtime_status": "unknown"
+    }
+  ]
 }

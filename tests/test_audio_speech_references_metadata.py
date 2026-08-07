@@ -40,7 +40,7 @@ def test_audio_speech_references_resolve_to_local_registry() -> None:
     assert leaf_names == EXPECTED_ATOMS
 
     for atom_key, entry in atom_refs.items():
-        assert atom_key.startswith("sciona.atoms.audio_speech.atoms.")
+        assert atom_key.startswith("sciona.atoms.audio_speech.")
         assert entry["references"]
         for ref in entry["references"]:
             assert ref["ref_id"] in registry_ids

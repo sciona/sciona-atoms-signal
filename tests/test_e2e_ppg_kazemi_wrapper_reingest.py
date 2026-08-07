@@ -5,12 +5,12 @@ from pathlib import Path
 
 import numpy as np
 
-from sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper import wrapperpredictionsignalcomputation
+from sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper import wrapper_prediction_signal_computation
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ATOM = "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapperpredictionsignalcomputation"
-REFERENCE_ATOM = "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.atoms.wrapperpredictionsignalcomputation"
+ATOM = "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapper_prediction_signal_computation"
+REFERENCE_ATOM = "sciona.atoms.signal_processing.e2e_ppg.kazemi_wrapper.wrapper_prediction_signal_computation"
 
 
 def test_wrapper_prediction_signal_computation_extracts_source_aligned_peak_indices() -> None:
@@ -24,7 +24,7 @@ def test_wrapper_prediction_signal_computation_extracts_source_aligned_peak_indi
     raw_signal[20] = 1.0
     raw_signal[50] = 3.0
 
-    result = wrapperpredictionsignalcomputation(prediction, raw_signal)
+    result = wrapper_prediction_signal_computation(prediction, raw_signal)
 
     assert result.dtype.kind in {"i", "u"}
     assert np.array_equal(result, np.array([10, 50]))
@@ -36,7 +36,7 @@ def test_wrapper_prediction_signal_computation_filters_nonpositive_candidates() 
     raw_signal = np.ones(24, dtype=float)
     raw_signal[5] = 0.0
 
-    assert np.array_equal(wrapperpredictionsignalcomputation(prediction, raw_signal), np.array([], dtype=np.intp))
+    assert np.array_equal(wrapper_prediction_signal_computation(prediction, raw_signal), np.array([], dtype=np.intp))
 
 
 def test_wrapper_prediction_signal_computation_preserves_upstream_tail_tie_rule() -> None:
@@ -44,19 +44,19 @@ def test_wrapper_prediction_signal_computation_preserves_upstream_tail_tie_rule(
     prediction[18] = 1.0
     raw_signal = np.ones(24, dtype=float)
 
-    assert np.array_equal(wrapperpredictionsignalcomputation(prediction, raw_signal), np.array([], dtype=np.intp))
+    assert np.array_equal(wrapper_prediction_signal_computation(prediction, raw_signal), np.array([], dtype=np.intp))
 
     prediction[20] = 1.0
     raw_signal[18] = 1.0
     raw_signal[20] = 2.0
-    assert np.array_equal(wrapperpredictionsignalcomputation(prediction, raw_signal), np.array([20]))
+    assert np.array_equal(wrapper_prediction_signal_computation(prediction, raw_signal), np.array([20]))
 
 
 def test_wrapper_prediction_signal_computation_accepts_column_vectors_and_constant_scores() -> None:
     prediction = np.ones((24, 1), dtype=float)
     raw_signal = np.ones((24, 1), dtype=float)
 
-    assert np.array_equal(wrapperpredictionsignalcomputation(prediction, raw_signal), np.array([], dtype=np.intp))
+    assert np.array_equal(wrapper_prediction_signal_computation(prediction, raw_signal), np.array([], dtype=np.intp))
 
 
 def test_kazemi_wrapper_reingest_metadata_marks_atom_publishable() -> None:

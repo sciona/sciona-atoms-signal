@@ -214,7 +214,7 @@
       "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
     },
     {
-      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_detectors.christovqrsdetect",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_detectors.christov_qrs_detect",
       "review_status": "reviewed",
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass_with_limits",
@@ -319,7 +319,7 @@
       "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
     },
     {
-      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_detectors.thresholdbasedsignalsegmentation",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_detectors.threshold_based_signal_segmentation",
       "review_status": "reviewed",
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass_with_limits",
@@ -334,7 +334,7 @@
       "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
     },
     {
-      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018.calculatebeatagreementsqi",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018.calculate_beat_agreement_sqi",
       "review_status": "reviewed",
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass_with_limits",
@@ -364,7 +364,7 @@
       "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
     },
     {
-      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018.calculatefrequencypowersqi",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018.calculate_frequency_power_sqi",
       "review_status": "reviewed",
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass_with_limits",
@@ -375,11 +375,14 @@
       ],
       "limitations": [],
       "blocking_findings": [],
-      "required_actions": [],
-      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
+      "required_actions": [
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json",
+      "runtime_status": "unknown"
     },
     {
-      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018.calculatekurtosissqi",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018.calculate_kurtosis_sqi",
       "review_status": "reviewed",
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass_with_limits",
@@ -390,11 +393,14 @@
       ],
       "limitations": [],
       "blocking_findings": [],
-      "required_actions": [],
-      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
+      "required_actions": [
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json",
+      "runtime_status": "unknown"
     },
     {
-      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.assemblezz2018sqi",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.assemble_zz2018_sqi",
       "review_status": "reviewed",
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass_with_limits",
@@ -409,7 +415,7 @@
       "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
     },
     {
-      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.computebeatagreementsqi",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.compute_beat_agreement_sqi",
       "review_status": "reviewed",
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass_with_limits",
@@ -424,7 +430,7 @@
       "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
     },
     {
-      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.computefrequencysqi",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.compute_frequency_sqi",
       "review_status": "reviewed",
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass_with_limits",
@@ -435,11 +441,14 @@
       ],
       "limitations": [],
       "blocking_findings": [],
-      "required_actions": [],
-      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
+      "required_actions": [
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json",
+      "runtime_status": "unknown"
     },
     {
-      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.computekurtosissqi",
+      "atom_key": "sciona.atoms.signal_processing.biosppy.ecg_zz2018_d12.compute_kurtosis_sqi",
       "review_status": "reviewed",
       "review_semantic_verdict": "pass",
       "review_developer_semantic_verdict": "pass_with_limits",
@@ -450,8 +459,11 @@
       ],
       "limitations": [],
       "blocking_findings": [],
-      "required_actions": [],
-      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json"
+      "required_actions": [
+        "Add a focused behavioral test before claiming runtime pass."
+      ],
+      "review_record_path": "data/review_bundles/biosppy_ecg.review_bundle.json",
+      "runtime_status": "unknown"
     }
   ]
 }
