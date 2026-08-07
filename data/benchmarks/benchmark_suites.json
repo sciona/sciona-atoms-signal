@@ -23,5 +23,28 @@
     "notes": [
       "This suite should admit both direct atom implementations and published CDG pipelines that satisfy the same top-level contract."
     ]
+  },
+  {
+    "suite_id": "signal.event_rate.generic.v1",
+    "title": "Generic Sampled Event Rate Estimation",
+    "artifact_scope": "cdg",
+    "contract_id": "signal_to_event_rate",
+    "contract_summary": "Estimate the repetition rate of salient events in an unlabeled sampled waveform without assuming a scientific or clinical modality.",
+    "domain_tags": ["signal_processing"],
+    "family_tags": ["signal_detect_measure"],
+    "modality_tags": ["sampled_waveform", "periodic_events"],
+    "dataset_tag": "synthetic_unlabeled_periodic_events",
+    "dataset_version": "v1",
+    "protocol_version": "v1",
+    "comparability_class": "within_suite_only",
+    "metrics": [
+      {"metric_name": "mae_bpm", "direction": "lower_is_better", "unit": "events_per_minute", "primary": true, "aggregation": "mean"}
+    ],
+    "slices": ["clean", "noisy"],
+    "owner_repo": "sciona-atoms-signal",
+    "status": "draft",
+    "notes": [
+      "The generated waveform is intentionally unlabeled and contains no ECG morphology; this suite supports the reusable scaffold rather than a discipline-specific solution."
+    ]
   }
 ]

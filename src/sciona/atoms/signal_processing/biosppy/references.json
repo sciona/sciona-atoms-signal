@@ -31,6 +31,21 @@
       ],
       "auto_attribution_runs": []
     },
+    "sciona.atoms.signal_processing.biosppy.ecg.peak_correction": {
+      "references": [
+        {
+          "ref_id": "repo_biosppy",
+          "match_metadata": {
+            "similarity_score": null,
+            "match_type": "manual",
+            "matched_nodes": [],
+            "confidence": "high",
+            "notes": "BioSPPy repository attribution for correcting detected ECG R peaks against the filtered waveform."
+          }
+        }
+      ],
+      "auto_attribution_runs": []
+    },
     "sciona.atoms.signal_processing.biosppy.ecg.heart_rate_computation@sciona/atoms/signal_processing/biosppy/ecg.py:315": {
       "references": [
         {

@@ -1,0 +1,188 @@
+{
+  "artifact_kind": "cdg",
+  "asset_id": "signal.ecg.heart_rate.biosppy",
+  "asset_version": "1.0.0",
+  "fqdn": "cdg.sciona_atoms_signal.ecg_heart_rate_biosppy",
+  "family": "signal_event_rate",
+  "paradigm": "signal_filter",
+  "name": "BioSPPy ECG Heart Rate Pipeline",
+  "description": "A concrete ECG pipeline that bandpass-filters a waveform, detects and corrects R peaks, rejects implausible intervals, and computes a robust heart-rate trace.",
+  "dejargonized_summary": "Clean an ECG trace, find each heartbeat, correct and check the beat locations, then calculate a stable heart rate.",
+  "domain_tags": [
+    "signal_processing",
+    "cardiology",
+    "ecg",
+    "heart_rate",
+    "biosppy"
+  ],
+  "required_context_tags": [
+    "ecg"
+  ],
+  "variant_aliases": [
+    "ecg_heart_rate",
+    "qrs_heart_rate",
+    "biosppy_ecg"
+  ],
+  "planning_constraints": [
+    "Use this concrete graph only when ECG modality is established by the request or upstream evidence.",
+    "Preserve the filtered waveform until R-peak correction is complete.",
+    "Reject implausible intervals before the final lossy rate calculation."
+  ],
+  "stages": [
+    {
+      "stage_id": "ecg_bandpass_filter",
+      "name": "Bandpass Filter ECG",
+      "description": "Apply the reviewed BioSPPy FIR bandpass filter to the ECG waveform.",
+      "dejargonized_description": "Remove baseline drift and high-frequency noise while preserving heartbeat timing.",
+      "concept_type": "signal_filter",
+      "inputs": [
+        {"name": "signal", "type_desc": "np.ndarray", "required": true},
+        {"name": "sampling_rate", "type_desc": "float", "required": true}
+      ],
+      "outputs": [
+        {"name": "filtered", "type_desc": "np.ndarray", "required": true}
+      ],
+      "matched_primitive": "sciona.atoms.signal_processing.biosppy.ecg.bandpass_filter"
+    },
+    {
+      "stage_id": "ecg_r_peak_detection",
+      "name": "Detect ECG R Peaks",
+      "description": "Detect R-peak sample indices with the reviewed BioSPPy Hamilton detector wrapper.",
+      "dejargonized_description": "Locate each heartbeat in the cleaned ECG trace.",
+      "concept_type": "analysis",
+      "inputs": [
+        {"name": "filtered", "type_desc": "np.ndarray", "required": true},
+        {"name": "sampling_rate", "type_desc": "float", "required": true}
+      ],
+      "outputs": [
+        {"name": "rpeaks", "type_desc": "np.ndarray", "required": true}
+      ],
+      "matched_primitive": "sciona.atoms.signal_processing.biosppy.ecg.r_peak_detection"
+    },
+    {
+      "stage_id": "ecg_peak_correction",
+      "name": "Correct ECG R Peaks",
+      "description": "Correct candidate R-peak locations against the filtered waveform.",
+      "dejargonized_description": "Nudge detected beats onto the best nearby waveform location.",
+      "concept_type": "analysis",
+      "inputs": [
+        {"name": "signal", "type_desc": "np.ndarray", "required": true},
+        {"name": "rpeaks", "type_desc": "np.ndarray", "required": true},
+        {"name": "sampling_rate", "type_desc": "float", "required": true}
+      ],
+      "outputs": [
+        {"name": "corrected_rpeaks", "type_desc": "np.ndarray", "required": true}
+      ],
+      "matched_primitive": "sciona.atoms.signal_processing.biosppy.ecg.peak_correction"
+    },
+    {
+      "stage_id": "ecg_interval_rejection",
+      "name": "Reject Implausible ECG Intervals",
+      "description": "Remove R peaks that create physiologically implausible or strongly outlying beat intervals.",
+      "dejargonized_description": "Discard beat locations that would imply implausible timing.",
+      "concept_type": "analysis",
+      "inputs": [
+        {"name": "rpeaks", "type_desc": "np.ndarray", "required": true},
+        {"name": "sampling_rate", "type_desc": "float", "required": true}
+      ],
+      "outputs": [
+        {"name": "cleaned_rpeaks", "type_desc": "np.ndarray", "required": true}
+      ],
+      "matched_primitive": "sciona.atoms.signal_processing.biosppy.ecg.reject_outlier_intervals"
+    },
+    {
+      "stage_id": "ecg_heart_rate",
+      "name": "Compute Robust ECG Heart Rate",
+      "description": "Compute instantaneous heart rate from cleaned R peaks and apply median smoothing.",
+      "dejargonized_description": "Turn the checked heartbeat locations into a stable beats-per-minute trace.",
+      "concept_type": "analysis",
+      "inputs": [
+        {"name": "rpeaks", "type_desc": "np.ndarray", "required": true},
+        {"name": "sampling_rate", "type_desc": "float", "required": true}
+      ],
+      "outputs": [
+        {"name": "rate", "type_desc": "tuple[np.ndarray, np.ndarray]", "required": true}
+      ],
+      "matched_primitive": "sciona.atoms.signal_processing.biosppy.ecg.heart_rate_computation_median_smoothed"
+    }
+  ],
+  "edges": [
+    {
+      "source_stage_id": "ecg_bandpass_filter",
+      "target_stage_id": "ecg_r_peak_detection",
+      "output_name": "filtered",
+      "input_name": "filtered",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "data_kind": "ecg_waveform",
+      "loss_class": "preserving"
+    },
+    {
+      "source_stage_id": "ecg_bandpass_filter",
+      "target_stage_id": "ecg_peak_correction",
+      "output_name": "filtered",
+      "input_name": "signal",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "data_kind": "ecg_waveform",
+      "loss_class": "preserving"
+    },
+    {
+      "source_stage_id": "ecg_r_peak_detection",
+      "target_stage_id": "ecg_peak_correction",
+      "output_name": "rpeaks",
+      "input_name": "rpeaks",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "data_kind": "event_sequence",
+      "loss_class": "preserving"
+    },
+    {
+      "source_stage_id": "ecg_peak_correction",
+      "target_stage_id": "ecg_interval_rejection",
+      "output_name": "corrected_rpeaks",
+      "input_name": "rpeaks",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "data_kind": "event_sequence",
+      "loss_class": "lossy_but_allowed"
+    },
+    {
+      "source_stage_id": "ecg_interval_rejection",
+      "target_stage_id": "ecg_heart_rate",
+      "output_name": "cleaned_rpeaks",
+      "input_name": "rpeaks",
+      "source_type": "np.ndarray",
+      "target_type": "np.ndarray",
+      "data_kind": "event_sequence",
+      "loss_class": "lossy_but_allowed"
+    }
+  ],
+  "audit": {
+    "source_kind": "provider_solution_cdg",
+    "review_status": "transitional",
+    "rationale": "Promotes the reviewed BioSPPy ECG atoms into a concrete graph without specializing the generic signal-event-rate family.",
+    "dejargonized_summary": "This is the ECG-specific implementation. Generic waveform-rate tasks should continue to use the generic family scaffold.",
+    "provenance_notes": [
+      "Provider-owned concrete solution assembled from catalog-ready BioSPPy ECG atoms."
+    ],
+    "uncertainty_notes": [
+      "Requires ECG modality evidence and should not be selected for unlabeled generic waveforms."
+    ],
+    "references": [
+      {
+        "title": "BioSPPy ECG signal processing",
+        "url": "https://biosppy.readthedocs.io/en/stable/biosppy.signals.html#biosppy-signals-ecg",
+        "note": "Upstream implementation family wrapped by the bound atoms."
+      },
+      {
+        "title": "Provider ECG semantic review",
+        "url": "data/review_bundles/biosppy_ecg.review_bundle.json",
+        "note": "Local provider review record for every bound ECG atom."
+      }
+    ],
+    "maintainers": [
+      "sciona-atoms-signal"
+    ]
+  }
+}

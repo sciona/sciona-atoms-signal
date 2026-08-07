@@ -190,5 +190,37 @@
     "status": "completed",
     "evidence_uri": "",
     "notes": "Deterministic synthetic ECG evaluation over the contract-level signal atom."
+  },
+  {
+    "suite_id": "signal.event_rate.ecg.v1",
+    "artifact_fqdn": "cdg.sciona_atoms_signal.ecg_heart_rate_biosppy",
+    "artifact_kind": "cdg",
+    "content_hash": "a26816a47cc91167bc51e956552481790d8962b40bf851fa7589eeb080cd20cb",
+    "semver": "1.0.0",
+    "metric_name": "mae_bpm",
+    "metric_value": 1.084476,
+    "slice_key": "real_ahi_train_3_holdout_window",
+    "measured_at": "2026-08-07T20:00:00Z",
+    "runner": "matcher-real-edf-benchmark-v1",
+    "run_config_hash": "3b05b1f2bee5f58405dfeb6bbe822d8864f657a3e464f8a1050adc7065711067",
+    "status": "completed",
+    "evidence_uri": "AHI_train_3/HHSS_06022023_640597_1/REM.edf#start=1800&duration=300",
+    "notes": "Real EDF holdout window distinct from the agent benchmark evaluation window at 3600 seconds. Compared ECG-derived rate against the EDF Pulse channel."
+  },
+  {
+    "suite_id": "signal.event_rate.generic.v1",
+    "artifact_fqdn": "cdg.skeleton.signal_detect_measure",
+    "artifact_kind": "cdg",
+    "content_hash": "ad890b2fbff8f7826a736e9e137c0bfa2b5215850740667c3365e06e41a6ed45",
+    "semver": "phase2.v1",
+    "metric_name": "mae_bpm",
+    "metric_value": 2.208569,
+    "slice_key": "noisy",
+    "measured_at": "2026-08-07T21:00:00Z",
+    "runner": "matcher-generic-waveform-benchmark-v1",
+    "run_config_hash": "87ec3710b6333511425f7a41e4e49a6027a17187a24f1968af01974372d98809",
+    "status": "completed",
+    "evidence_uri": "synthetic://unlabeled-periodic-events/v1?seed=20260807&rate=96&duration=180&sampling_rate=250",
+    "notes": "Gaussian event pulses plus seeded additive noise. The benchmark contains no ECG morphology or discipline label. Estimated 286 intervals with median 96.153846 events per minute."
   }
 ]
