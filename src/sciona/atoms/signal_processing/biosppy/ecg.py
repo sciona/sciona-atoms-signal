@@ -119,7 +119,6 @@ def witness_heart_rate_computation(
 def witness_heart_rate_computation_median_smoothed(
     rpeaks: AbstractArray,
     sampling_rate: AbstractScalar,
-    smoothing_window: AbstractScalar,
 ) -> tuple[AbstractArray, AbstractSignal]:
     """Describe median-smoothed instantaneous heart-rate outputs."""
     return witness_heart_rate_computation(rpeaks, sampling_rate)

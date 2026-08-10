@@ -89,21 +89,23 @@ def witness_gamboa_segmenter(signal: AbstractSignal, sampling_rate: AbstractSign
     )
 
 
-def witness_hamilton_segmentation(signal: AbstractSignal, sampling_rate: AbstractScalar) -> AbstractSignal:
-    """Describe Hamilton detector output as a time-domain signal."""
-    return AbstractSignal(
-        shape=signal.shape,
-        dtype="float64",
-        sampling_rate=getattr(signal, "sampling_rate_prime", 44100.0),
-        domain="time",
+def witness_hamilton_segmentation(
+    signal: AbstractSignal,
+    sampling_rate: AbstractScalar,
+) -> AbstractArray:
+    """Describe Hamilton detector output as sorted integer peak indices."""
+    return AbstractArray(
+        shape=(signal.shape[0],),
+        dtype="int64",
+        is_sorted=True,
+        min_val=0,
+        max_val=max(signal.shape[0] - 1, 0),
     )
 
 
-def witness_hamilton_segmenter(signal: AbstractSignal, sampling_rate: AbstractSignal) -> AbstractSignal:
-    """Describe the alias Hamilton segmenter output as a time-domain signal."""
-    return AbstractSignal(
-        shape=signal.shape,
-        dtype="float64",
-        sampling_rate=getattr(signal, "sampling_rate_prime", 44100.0),
-        domain="time",
-    )
+def witness_hamilton_segmenter(
+    signal: AbstractSignal,
+    sampling_rate: AbstractScalar,
+) -> AbstractArray:
+    """Describe the Hamilton alias output as sorted integer peak indices."""
+    return witness_hamilton_segmentation(signal, sampling_rate)

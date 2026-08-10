@@ -6,10 +6,22 @@ from sciona.atoms.signal_processing.biosppy.ecg import (
     bandpass_filter,
     heart_rate_computation,
     heart_rate_computation_median_smoothed,
+    witness_heart_rate_computation_median_smoothed,
     peak_correction,
     reject_outlier_intervals,
     template_extraction,
 )
+
+
+def test_median_smoothed_witness_uses_runtime_default_window() -> None:
+    from sciona.ghost.abstract import AbstractArray, AbstractScalar
+
+    indices, rate = witness_heart_rate_computation_median_smoothed(
+        AbstractArray(shape=(8,), dtype="int64", is_sorted=True, min_val=0, max_val=700),
+        AbstractScalar(dtype="float64", min_val=1000.0, max_val=1000.0),
+    )
+
+    assert indices.shape == rate.shape
 
 
 def _synthetic_ecg_signal(length: int, peak_indices: list[int]) -> np.ndarray:
