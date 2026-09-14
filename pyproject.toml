@@ -12,6 +12,7 @@ dependencies = [
   "biosppy",
   "icontract",
   "numpy",
+  "pandas",
   "peakutils",
   "sciona",
   "scipy",
