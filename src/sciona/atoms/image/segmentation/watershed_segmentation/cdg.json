@@ -4,9 +4,50 @@
   "priority": "medium",
   "decomposition_rationale": "Watershed segmentation requires gradient magnitude calculation, thresholding/distance transform to find local minima/markers, and the watershed flooding algorithm. Decomposing these allows using custom seeds or markers.",
   "family_directory_hint": "src/sciona/atoms/image/segmentation/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "watershed_segmentation_root",
+      "parent_id": null,
+      "name": "watershed_segmentation",
+      "description": "Watershed segmentation requires gradient magnitude calculation, thresholding/distance transform to find local minima/markers, and the watershed flooding algorithm. Decomposing these allows using custom seeds or markers.",
+      "concept_type": "custom",
+      "inputs": [
+        {
+          "name": "image",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "binary_mask",
+          "type_desc": "NDArray[np.bool_]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "labels",
+          "type_desc": "NDArray[np.int64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "compute_distance_transform",
+        "find_watershed_markers",
+        "apply_watershed_flooding"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Watershed segmentation requires gradient magnitude calculation, thresholding/distance transform to find local minima/markers, and the watershed flooding algorithm. Decomposing these allows using custom seeds or markers."
+    },
+    {
+      "node_id": "compute_distance_transform",
+      "parent_id": "watershed_segmentation_root",
       "name": "compute_distance_transform",
+      "description": "Computes the Euclidean distance transform of a binary mask to identify marker centers.",
+      "concept_type": "custom",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(binary_mask: NDArray[np.bool_]) -> NDArray[np.float64]",
+      "matched_primitive": "compute_distance_transform",
       "semantic_role": "Computes the Euclidean distance transform of a binary mask to identify marker centers.",
       "source_targets": [
         "scipy.ndimage.distance_transform_edt"
@@ -37,7 +78,15 @@
       "complexity_confidence": 95
     },
     {
+      "node_id": "find_watershed_markers",
+      "parent_id": "watershed_segmentation_root",
       "name": "find_watershed_markers",
+      "description": "Identifies and labels local maxima of the distance transform as seeds.",
+      "concept_type": "custom",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(distance_map: NDArray[np.float64], min_distance: int = ...) -> NDArray[np.int64]",
+      "matched_primitive": "find_watershed_markers",
       "semantic_role": "Identifies and labels local maxima of the distance transform as seeds.",
       "source_targets": [
         "scipy.ndimage.label",
@@ -74,7 +123,15 @@
       "complexity_confidence": 92
     },
     {
+      "node_id": "apply_watershed_flooding",
+      "parent_id": "watershed_segmentation_root",
       "name": "apply_watershed_flooding",
+      "description": "Applies the watershed flooding algorithm from markers on a gradient surface.",
+      "concept_type": "custom",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(image: NDArray[np.float64], markers: NDArray[np.int64], mask: NDArray[np.bool_] = ...) -> NDArray[np.int64]",
+      "matched_primitive": "apply_watershed_flooding",
       "semantic_role": "Applies the watershed flooding algorithm from markers on a gradient surface.",
       "source_targets": [
         "skimage.segmentation.watershed"
@@ -119,16 +176,26 @@
   ],
   "edges": [
     {
-      "source": "compute_distance_transform",
-      "target": "find_watershed_markers",
+      "source_id": "compute_distance_transform",
+      "target_id": "find_watershed_markers",
       "output_name": "result",
-      "input_name": "distance_map"
+      "input_name": "distance_map",
+      "source_type": "NDArray[np.float64]",
+      "target_type": "NDArray[np.float64]",
+      "requires_glue": false,
+      "source": "compute_distance_transform",
+      "target": "find_watershed_markers"
     },
     {
-      "source": "find_watershed_markers",
-      "target": "apply_watershed_flooding",
+      "source_id": "find_watershed_markers",
+      "target_id": "apply_watershed_flooding",
       "output_name": "result",
-      "input_name": "markers"
+      "input_name": "markers",
+      "source_type": "NDArray[np.int64]",
+      "target_type": "NDArray[np.int64]",
+      "requires_glue": false,
+      "source": "find_watershed_markers",
+      "target": "apply_watershed_flooding"
     }
   ],
   "cdg_io": {

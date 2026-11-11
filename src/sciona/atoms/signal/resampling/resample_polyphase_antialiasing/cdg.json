@@ -4,9 +4,55 @@
   "priority": "medium",
   "decomposition_rationale": "Polyphase resampling splits into determining upsampling/downsampling ratios, designing an anti-aliasing lowpass filter with suitable cutoff, and executing the polyphase filter bank. Splitting allows reuse of filter design and rational approximation.",
   "family_directory_hint": "src/sciona/atoms/signal/resampling/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "resample_polyphase_antialiasing_root",
+      "parent_id": null,
+      "name": "resample_polyphase_antialiasing",
+      "description": "Polyphase resampling splits into determining upsampling/downsampling ratios, designing an anti-aliasing lowpass filter with suitable cutoff, and executing the polyphase filter bank. Splitting allows reuse of filter design and rational approximation.",
+      "concept_type": "signal_filter",
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "up_ratio",
+          "type_desc": "float",
+          "required": true
+        },
+        {
+          "name": "down_ratio",
+          "type_desc": "float",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "resampled_signal",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "compute_rational_approximation",
+        "design_resampling_filter",
+        "apply_polyphase_filtering"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Polyphase resampling splits into determining upsampling/downsampling ratios, designing an anti-aliasing lowpass filter with suitable cutoff, and executing the polyphase filter bank. Splitting allows reuse of filter design and rational approximation."
+    },
+    {
+      "node_id": "compute_rational_approximation",
+      "parent_id": "resample_polyphase_antialiasing_root",
       "name": "compute_rational_approximation",
+      "description": "Approximates a floating-point resampling ratio with a rational fraction P/Q.",
+      "concept_type": "sampler",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(up: float, down: float, max_len: int = ...) -> tuple[int, int]",
+      "matched_primitive": "compute_rational_approximation",
       "semantic_role": "Approximates a floating-point resampling ratio with a rational fraction P/Q.",
       "source_targets": [
         "scipy.signal.resample_poly"
@@ -49,7 +95,15 @@
       "complexity_confidence": 95
     },
     {
+      "node_id": "design_resampling_filter",
+      "parent_id": "resample_polyphase_antialiasing_root",
       "name": "design_resampling_filter",
+      "description": "Designs an interpolation filter for rational resampling.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(up: int, down: int, numtaps: int = ...) -> NDArray[np.float64]",
+      "matched_primitive": "design_resampling_filter",
       "semantic_role": "Designs an interpolation filter for rational resampling.",
       "source_targets": [
         "scipy.signal.firwin"
@@ -91,7 +145,15 @@
       "complexity_confidence": 90
     },
     {
+      "node_id": "apply_polyphase_filtering",
+      "parent_id": "resample_polyphase_antialiasing_root",
       "name": "apply_polyphase_filtering",
+      "description": "Applies rational resampling using polyphase decomposition.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(signal: NDArray[np.float64], up: int, down: int, window_coeffs: NDArray[np.float64]) -> NDArray[np.float64]",
+      "matched_primitive": "apply_polyphase_filtering",
       "semantic_role": "Applies rational resampling using polyphase decomposition.",
       "source_targets": [
         "scipy.signal.resample_poly"
@@ -140,16 +202,26 @@
   ],
   "edges": [
     {
-      "source": "compute_rational_approximation",
-      "target": "apply_polyphase_filtering",
+      "source_id": "compute_rational_approximation",
+      "target_id": "apply_polyphase_filtering",
       "output_name": "result",
-      "input_name": "up"
+      "input_name": "up",
+      "source_type": "tuple[int, int]",
+      "target_type": "int",
+      "requires_glue": false,
+      "source": "compute_rational_approximation",
+      "target": "apply_polyphase_filtering"
     },
     {
-      "source": "design_resampling_filter",
-      "target": "apply_polyphase_filtering",
+      "source_id": "design_resampling_filter",
+      "target_id": "apply_polyphase_filtering",
       "output_name": "result",
-      "input_name": "window_coeffs"
+      "input_name": "window_coeffs",
+      "source_type": "NDArray[np.float64]",
+      "target_type": "NDArray[np.float64]",
+      "requires_glue": false,
+      "source": "design_resampling_filter",
+      "target": "apply_polyphase_filtering"
     }
   ],
   "cdg_io": {

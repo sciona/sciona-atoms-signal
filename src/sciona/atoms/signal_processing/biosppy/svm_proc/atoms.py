@@ -40,7 +40,6 @@ def get_auth_rates(
     FN: np.ndarray,
     thresholds: np.ndarray,
 ) -> dict[str, object]:
-    import biosppy.biometrics as biometrics
     """Compute authentication rates from correct and incorrect prediction counts at each threshold.
 
     Args:
@@ -53,6 +52,7 @@ def get_auth_rates(
     Returns:
         rate metrics at each threshold
     """
+    import biosppy.biometrics as biometrics
     return _as_dict(
         biometrics.get_auth_rates(
             TP=TP,
@@ -77,7 +77,6 @@ def get_id_rates(
     N: int,
     thresholds: np.ndarray,
 ) -> dict[str, object]:
-    import biosppy.biometrics as biometrics
     """Compute identification rates for a Support Vector Machine (SVM) biometric classifier. Derives accuracy, miss rate, reject rate, and Equal Error Rate (EER) from hits, misses, and rejections at each decision threshold.
 
     Args:
@@ -90,6 +89,7 @@ def get_id_rates(
     Returns:
         Identification performance metrics at each threshold.
     """
+    import biosppy.biometrics as biometrics
     return _as_dict(
         biometrics.get_id_rates(
             H=H,
@@ -116,7 +116,6 @@ def get_subject_results(
     subject_dict: _SubjectDictionary,
     subject_idx: Sequence[int],
 ) -> dict[str, object]:
-    import biosppy.biometrics as biometrics
     """Compute authentication and identification performance metrics for a
 given subject.
 
@@ -151,6 +150,7 @@ assessment : dict
     Returns:
         Result data.
     """
+    import biosppy.biometrics as biometrics
     assessment = biometrics.get_subject_results(
         results=results,
         subject=subject,
@@ -168,7 +168,6 @@ assessment : dict
 @icontract.require(lambda thresholds: thresholds is not None, "thresholds cannot be None")
 @icontract.ensure(lambda result: result is not None, "Assess Classification output must not be None")
 def assess_classification(results: dict[str, object], thresholds: np.ndarray) -> dict[str, object]:
-    import biosppy.biometrics as biometrics
     """Assess the performance of a biometric classification test.
 
 Parameters
@@ -190,6 +189,7 @@ assessment : dict
     Returns:
         Result data.
     """
+    import biosppy.biometrics as biometrics
     assessment = biometrics.assess_classification(results=results, thresholds=thresholds)[0]
     if not isinstance(assessment, dict):
         raise TypeError("BioSPPy assess_classification returned a non-dict assessment.")
@@ -200,7 +200,6 @@ assessment : dict
 @icontract.require(lambda subjects: subjects is not None, "subjects cannot be None")
 @icontract.ensure(lambda result: result is not None, "Assess Runs output must not be None")
 def assess_runs(results: Sequence[dict[str, object]], subjects: Sequence[Hashable]) -> dict[str, object]:
-    import biosppy.biometrics as biometrics
     """Assess the performance of multiple biometric classification runs.
 
 Parameters
@@ -222,6 +221,7 @@ assessment : dict
     Returns:
         Result data.
     """
+    import biosppy.biometrics as biometrics
     assessment = biometrics.assess_runs(results=results, subjects=subjects)[0]
     if not isinstance(assessment, dict):
         raise TypeError("BioSPPy assess_runs returned a non-dict assessment.")
@@ -234,7 +234,6 @@ def combination(
     results: Mapping[Hashable, Sequence[object] | np.ndarray],
     weights: Mapping[Hashable, float] | None = None,
 ) -> tuple[object, object, object, object]:
-    import biosppy.biometrics as biometrics
     """Combine results from multiple classifiers.
 
 Parameters
@@ -262,6 +261,7 @@ classes : array
     Returns:
         Result data.
     """
+    import biosppy.biometrics as biometrics
     return tuple(biometrics.combination(results=results, weights=weights))
 
 @register_atom(witness_majority_rule)
@@ -269,7 +269,6 @@ classes : array
 @icontract.require(lambda random: random is not None, "random cannot be None")
 @icontract.ensure(lambda result: result is not None, "Majority Rule output must not be None")
 def majority_rule(labels: Union[np.ndarray, Sequence[object]], random: bool) -> tuple[object, object]:
-    import biosppy.biometrics as biometrics
     """Determine the most frequent class label.
 
 Parameters
@@ -294,6 +293,7 @@ Returns
     Returns:
         Result data.
     """
+    import biosppy.biometrics as biometrics
     return tuple(biometrics.majority_rule(labels=labels, random=random))
 
 @register_atom(witness_cross_validation)
@@ -308,7 +308,6 @@ def cross_validation(
     train_size: Union[float, int, None] = None,
     random_state: Union[int, None] = None,
 ) -> Iterator[tuple[np.ndarray, np.ndarray]]:
-    import biosppy.biometrics as biometrics
     """Return a Cross Validation (CV) iterator.
 
 Wraps the StratifiedShuffleSplit iterator from sklearn.model_selection.
@@ -346,6 +345,7 @@ cv : CV iterator
     Returns:
         Result data.
     """
+    import biosppy.biometrics as biometrics
     return biometrics.cross_validation(
         labels=labels,
         n_iter=n_iter,

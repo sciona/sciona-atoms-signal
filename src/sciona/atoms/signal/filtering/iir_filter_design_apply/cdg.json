@@ -4,9 +4,54 @@
   "priority": "medium",
   "decomposition_rationale": "IIR filter design involves continuous-to-discrete warping, bilinear transformation, and Second-Order Sections (SOS) formatting, which is separated from the application atom for modularity and numerical stability checks.",
   "family_directory_hint": "src/sciona/atoms/signal/filtering/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "iir_filter_design_apply_root",
+      "parent_id": null,
+      "name": "iir_filter_design_apply",
+      "description": "IIR filter design involves continuous-to-discrete warping, bilinear transformation, and Second-Order Sections (SOS) formatting, which is separated from the application atom for modularity and numerical stability checks.",
+      "concept_type": "signal_filter",
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "order",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "Wn",
+          "type_desc": "float",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "filtered_signal",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "design_iir_sos_coefficients",
+        "apply_iir_sosfilter"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "IIR filter design involves continuous-to-discrete warping, bilinear transformation, and Second-Order Sections (SOS) formatting, which is separated from the application atom for modularity and numerical stability checks."
+    },
+    {
+      "node_id": "design_iir_sos_coefficients",
+      "parent_id": "iir_filter_design_apply_root",
       "name": "design_iir_sos_coefficients",
+      "description": "Designs IIR filter coefficients in second-order sections (SOS) format for numerical stability.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(order: int, Wn: float | NDArray[np.float64], btype: str = ..., ftype: str = ...) -> NDArray[np.float64]",
+      "matched_primitive": "design_iir_sos_coefficients",
       "semantic_role": "Designs IIR filter coefficients in second-order sections (SOS) format for numerical stability.",
       "source_targets": [
         "scipy.signal.iirfilter",
@@ -56,7 +101,15 @@
       "complexity_confidence": 90
     },
     {
+      "node_id": "apply_iir_sosfilter",
+      "parent_id": "iir_filter_design_apply_root",
       "name": "apply_iir_sosfilter",
+      "description": "Filters a signal along one axis using second-order sections (SOS) format.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(sos: NDArray[np.float64], signal: NDArray[np.float64]) -> NDArray[np.float64]",
+      "matched_primitive": "apply_iir_sosfilter",
       "semantic_role": "Filters a signal along one axis using second-order sections (SOS) format.",
       "source_targets": [
         "scipy.signal.sosfilt"
@@ -97,10 +150,15 @@
   ],
   "edges": [
     {
-      "source": "design_iir_sos_coefficients",
-      "target": "apply_iir_sosfilter",
+      "source_id": "design_iir_sos_coefficients",
+      "target_id": "apply_iir_sosfilter",
       "output_name": "result",
-      "input_name": "sos"
+      "input_name": "sos",
+      "source_type": "NDArray[np.float64]",
+      "target_type": "NDArray[np.float64]",
+      "requires_glue": false,
+      "source": "design_iir_sos_coefficients",
+      "target": "apply_iir_sosfilter"
     }
   ],
   "cdg_io": {

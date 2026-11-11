@@ -4,9 +4,54 @@
   "priority": "medium",
   "decomposition_rationale": "Filtfilt requires computing initial filter states, applying the filter forward, reversing the result, applying it again, and reversing back. Decomposing these lets us reuse the underlying forward filtering atoms.",
   "family_directory_hint": "src/sciona/atoms/signal/filtering/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "zero_phase_filtfilt_pipeline_root",
+      "parent_id": null,
+      "name": "zero_phase_filtfilt_pipeline",
+      "description": "Filtfilt requires computing initial filter states, applying the filter forward, reversing the result, applying it again, and reversing back. Decomposing these lets us reuse the underlying forward filtering atoms.",
+      "concept_type": "signal_filter",
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "b",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "a",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "zero_phase_signal",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "compute_gustafsson_initial_conditions",
+        "apply_zero_phase_forward_backward"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Filtfilt requires computing initial filter states, applying the filter forward, reversing the result, applying it again, and reversing back. Decomposing these lets us reuse the underlying forward filtering atoms."
+    },
+    {
+      "node_id": "compute_gustafsson_initial_conditions",
+      "parent_id": "zero_phase_filtfilt_pipeline_root",
       "name": "compute_gustafsson_initial_conditions",
+      "description": "Computes initial conditions for forward-backward filtering to minimize edge transients.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(b: NDArray[np.float64], a: NDArray[np.float64], signal: NDArray[np.float64]) -> NDArray[np.float64]",
+      "matched_primitive": "compute_gustafsson_initial_conditions",
       "semantic_role": "Computes initial conditions for forward-backward filtering to minimize edge transients.",
       "source_targets": [
         "scipy.signal.lfiltic",
@@ -50,7 +95,15 @@
       "complexity_confidence": 88
     },
     {
+      "node_id": "apply_zero_phase_forward_backward",
+      "parent_id": "zero_phase_filtfilt_pipeline_root",
       "name": "apply_zero_phase_forward_backward",
+      "description": "Applies double-filtering forward and backward with padding.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(b: NDArray[np.float64], a: NDArray[np.float64], signal: NDArray[np.float64], zi: NDArray[np.float64]) -> NDArray[np.float64]",
+      "matched_primitive": "apply_zero_phase_forward_backward",
       "semantic_role": "Applies double-filtering forward and backward with padding.",
       "source_targets": [
         "scipy.signal.filtfilt"
@@ -99,10 +152,15 @@
   ],
   "edges": [
     {
-      "source": "compute_gustafsson_initial_conditions",
-      "target": "apply_zero_phase_forward_backward",
+      "source_id": "compute_gustafsson_initial_conditions",
+      "target_id": "apply_zero_phase_forward_backward",
       "output_name": "result",
-      "input_name": "zi"
+      "input_name": "zi",
+      "source_type": "NDArray[np.float64]",
+      "target_type": "NDArray[np.float64]",
+      "requires_glue": false,
+      "source": "compute_gustafsson_initial_conditions",
+      "target": "apply_zero_phase_forward_backward"
     }
   ],
   "cdg_io": {

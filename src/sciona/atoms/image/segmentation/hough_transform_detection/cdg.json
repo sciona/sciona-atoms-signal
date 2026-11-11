@@ -4,9 +4,43 @@
   "priority": "medium",
   "decomposition_rationale": "Decompose into accumulator generation and local peak finding in Hough parameter space. This allows testing voting math separate from peak extraction heuristics.",
   "family_directory_hint": "src/sciona/atoms/image/segmentation/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "hough_transform_detection_root",
+      "parent_id": null,
+      "name": "hough_transform_detection",
+      "description": "Decompose into accumulator generation and local peak finding in Hough parameter space. This allows testing voting math separate from peak extraction heuristics.",
+      "concept_type": "custom",
+      "inputs": [
+        {
+          "name": "binary_image",
+          "type_desc": "NDArray[np.bool_]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "lines",
+          "type_desc": "list[tuple[float, float]]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "compute_hough_accumulator"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Decompose into accumulator generation and local peak finding in Hough parameter space. This allows testing voting math separate from peak extraction heuristics."
+    },
+    {
+      "node_id": "compute_hough_accumulator",
+      "parent_id": "hough_transform_detection_root",
       "name": "compute_hough_accumulator",
+      "description": "Populates the 2D Hough parameter accumulator from a binary edge image.",
+      "concept_type": "custom",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(binary_image: NDArray[np.bool_]) -> tuple[NDArray[np.int64], NDArray[np.float64], NDArray[np.float64]]",
+      "matched_primitive": "compute_hough_accumulator",
       "semantic_role": "Populates the 2D Hough parameter accumulator from a binary edge image.",
       "source_targets": [
         "skimage.transform.hough_line"

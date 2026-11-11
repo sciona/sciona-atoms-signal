@@ -4,9 +4,54 @@
   "priority": "medium",
   "decomposition_rationale": "Savitzky-Golay filtering requires computing polynomial coefficients for a given window and degree, followed by a sliding window convolution with specific edge-handling filters. Separating coefficient computation from filtering facilitates reuse for derivative estimation.",
   "family_directory_hint": "src/sciona/atoms/signal/filtering/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "savitzky_golay_smoothing_root",
+      "parent_id": null,
+      "name": "savitzky_golay_smoothing",
+      "description": "Savitzky-Golay filtering requires computing polynomial coefficients for a given window and degree, followed by a sliding window convolution with specific edge-handling filters. Separating coefficient computation from filtering facilitates reuse for derivative estimation.",
+      "concept_type": "signal_filter",
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "window_length",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "polyorder",
+          "type_desc": "int",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "smoothed_signal",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "compute_savgol_coefficients",
+        "apply_savgol_convolution"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Savitzky-Golay filtering requires computing polynomial coefficients for a given window and degree, followed by a sliding window convolution with specific edge-handling filters. Separating coefficient computation from filtering facilitates reuse for derivative estimation."
+    },
+    {
+      "node_id": "compute_savgol_coefficients",
+      "parent_id": "savitzky_golay_smoothing_root",
       "name": "compute_savgol_coefficients",
+      "description": "Computes the convolution coefficients for Savitzky-Golay smoothing and derivatives.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(window_length: int, polyorder: int, deriv: int = ...) -> NDArray[np.float64]",
+      "matched_primitive": "compute_savgol_coefficients",
       "semantic_role": "Computes the convolution coefficients for Savitzky-Golay smoothing and derivatives.",
       "source_targets": [
         "scipy.signal.savgol_coeffs"
@@ -52,7 +97,15 @@
       "complexity_confidence": 90
     },
     {
+      "node_id": "apply_savgol_convolution",
+      "parent_id": "savitzky_golay_smoothing_root",
       "name": "apply_savgol_convolution",
+      "description": "Convolves a signal with Savitzky-Golay coefficients, handling boundary effects.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(signal: NDArray[np.float64], coeffs: NDArray[np.float64], mode: str = ...) -> NDArray[np.float64]",
+      "matched_primitive": "apply_savgol_convolution",
       "semantic_role": "Convolves a signal with Savitzky-Golay coefficients, handling boundary effects.",
       "source_targets": [
         "scipy.signal.savgol_filter"
@@ -96,10 +149,15 @@
   ],
   "edges": [
     {
-      "source": "compute_savgol_coefficients",
-      "target": "apply_savgol_convolution",
+      "source_id": "compute_savgol_coefficients",
+      "target_id": "apply_savgol_convolution",
       "output_name": "result",
-      "input_name": "coeffs"
+      "input_name": "coeffs",
+      "source_type": "NDArray[np.float64]",
+      "target_type": "NDArray[np.float64]",
+      "requires_glue": false,
+      "source": "compute_savgol_coefficients",
+      "target": "apply_savgol_convolution"
     }
   ],
   "cdg_io": {

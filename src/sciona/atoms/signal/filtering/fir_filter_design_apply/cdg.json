@@ -4,9 +4,54 @@
   "priority": "medium",
   "decomposition_rationale": "Splitting filter coefficient design from the actual filtering operation is crucial because filter design is typically done once, whereas filtering is applied repeatedly to incoming blocks or multiple signals.",
   "family_directory_hint": "src/sciona/atoms/signal/filtering/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "fir_filter_design_apply_root",
+      "parent_id": null,
+      "name": "fir_filter_design_apply",
+      "description": "Splitting filter coefficient design from the actual filtering operation is crucial because filter design is typically done once, whereas filtering is applied repeatedly to incoming blocks or multiple signals.",
+      "concept_type": "signal_filter",
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "numtaps",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "cutoff",
+          "type_desc": "float",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "filtered_signal",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "design_fir_coefficients_window",
+        "apply_fir_lfilter"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Splitting filter coefficient design from the actual filtering operation is crucial because filter design is typically done once, whereas filtering is applied repeatedly to incoming blocks or multiple signals."
+    },
+    {
+      "node_id": "design_fir_coefficients_window",
+      "parent_id": "fir_filter_design_apply_root",
       "name": "design_fir_coefficients_window",
+      "description": "Designs linear-phase FIR filter coefficients using the window method.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(numtaps: int, cutoff: float | NDArray[np.float64], window_type: str = ...) -> NDArray[np.float64]",
+      "matched_primitive": "design_fir_coefficients_window",
       "semantic_role": "Designs linear-phase FIR filter coefficients using the window method.",
       "source_targets": [
         "scipy.signal.firwin"
@@ -49,7 +94,15 @@
       "complexity_confidence": 95
     },
     {
+      "node_id": "apply_fir_lfilter",
+      "parent_id": "fir_filter_design_apply_root",
       "name": "apply_fir_lfilter",
+      "description": "Applies a designed FIR filter to a signal using direct-form II transposed structure.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(b: NDArray[np.float64], signal: NDArray[np.float64]) -> NDArray[np.float64]",
+      "matched_primitive": "apply_fir_lfilter",
       "semantic_role": "Applies a designed FIR filter to a signal using direct-form II transposed structure.",
       "source_targets": [
         "scipy.signal.lfilter"
@@ -89,10 +142,15 @@
   ],
   "edges": [
     {
-      "source": "design_fir_coefficients_window",
-      "target": "apply_fir_lfilter",
+      "source_id": "design_fir_coefficients_window",
+      "target_id": "apply_fir_lfilter",
       "output_name": "result",
-      "input_name": "b"
+      "input_name": "b",
+      "source_type": "NDArray[np.float64]",
+      "target_type": "NDArray[np.float64]",
+      "requires_glue": false,
+      "source": "design_fir_coefficients_window",
+      "target": "apply_fir_lfilter"
     }
   ],
   "cdg_io": {

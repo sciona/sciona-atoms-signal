@@ -4,9 +4,49 @@
   "priority": "medium",
   "decomposition_rationale": "Welch's method decomposes into framing, periodogram calculation per windowed frame, and averaging across frames. This separation allows reusing the STFT or frame-level FFT atoms.",
   "family_directory_hint": "src/sciona/atoms/signal/spectral/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "welch_power_spectral_density_root",
+      "parent_id": null,
+      "name": "welch_power_spectral_density",
+      "description": "Welch's method decomposes into framing, periodogram calculation per windowed frame, and averaging across frames. This separation allows reusing the STFT or frame-level FFT atoms.",
+      "concept_type": "signal_transform",
+      "inputs": [
+        {
+          "name": "stft_matrix",
+          "type_desc": "NDArray[np.complex128]",
+          "required": true
+        },
+        {
+          "name": "window_norm",
+          "type_desc": "float",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "psd",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "compute_frame_periodograms",
+        "average_periodograms"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Welch's method decomposes into framing, periodogram calculation per windowed frame, and averaging across frames. This separation allows reusing the STFT or frame-level FFT atoms."
+    },
+    {
+      "node_id": "compute_frame_periodograms",
+      "parent_id": "welch_power_spectral_density_root",
       "name": "compute_frame_periodograms",
+      "description": "Computes the squared magnitude of the windowed FFT for each frame to obtain the periodogram.",
+      "concept_type": "signal_transform",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(stft_matrix: NDArray[np.complex128], window_norm: float) -> NDArray[np.float64]",
+      "matched_primitive": "compute_frame_periodograms",
       "semantic_role": "Computes the squared magnitude of the windowed FFT for each frame to obtain the periodogram.",
       "source_targets": [
         "scipy.signal.welch"
@@ -46,7 +86,15 @@
       "complexity_confidence": 97
     },
     {
+      "node_id": "average_periodograms",
+      "parent_id": "welch_power_spectral_density_root",
       "name": "average_periodograms",
+      "description": "Averages periodograms across all frames to reduce spectral variance.",
+      "concept_type": "signal_transform",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(periodograms: NDArray[np.float64]) -> NDArray[np.float64]",
+      "matched_primitive": "average_periodograms",
       "semantic_role": "Averages periodograms across all frames to reduce spectral variance.",
       "source_targets": [
         "numpy.mean"
@@ -80,10 +128,15 @@
   ],
   "edges": [
     {
-      "source": "compute_frame_periodograms",
-      "target": "average_periodograms",
+      "source_id": "compute_frame_periodograms",
+      "target_id": "average_periodograms",
       "output_name": "result",
-      "input_name": "periodograms"
+      "input_name": "periodograms",
+      "source_type": "NDArray[np.float64]",
+      "target_type": "NDArray[np.float64]",
+      "requires_glue": false,
+      "source": "compute_frame_periodograms",
+      "target": "average_periodograms"
     }
   ],
   "cdg_io": {

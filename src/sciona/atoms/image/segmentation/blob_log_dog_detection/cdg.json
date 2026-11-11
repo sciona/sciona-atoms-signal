@@ -4,9 +4,48 @@
   "priority": "medium",
   "decomposition_rationale": "Decompose into scale-space volume calculation (filtering) and 3D non-maximum suppression peak picking to isolate the heavy filtering from coordinate searching.",
   "family_directory_hint": "src/sciona/atoms/image/segmentation/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "blob_log_dog_detection_root",
+      "parent_id": null,
+      "name": "blob_log_dog_detection",
+      "description": "Decompose into scale-space volume calculation (filtering) and 3D non-maximum suppression peak picking to isolate the heavy filtering from coordinate searching.",
+      "concept_type": "searching",
+      "inputs": [
+        {
+          "name": "image",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "sigmas",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "blobs",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "generate_log_scale_space"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Decompose into scale-space volume calculation (filtering) and 3D non-maximum suppression peak picking to isolate the heavy filtering from coordinate searching."
+    },
+    {
+      "node_id": "generate_log_scale_space",
+      "parent_id": "blob_log_dog_detection_root",
       "name": "generate_log_scale_space",
+      "description": "Generates a 3D volume of scale-normalized Laplacian of Gaussian filters.",
+      "concept_type": "graph_traversal",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(image: NDArray[np.float64], sigmas: NDArray[np.float64]) -> NDArray[np.float64]",
+      "matched_primitive": "generate_log_scale_space",
       "semantic_role": "Generates a 3D volume of scale-normalized Laplacian of Gaussian filters.",
       "source_targets": [
         "skimage.feature.blob_log"

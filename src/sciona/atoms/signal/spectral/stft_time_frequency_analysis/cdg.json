@@ -4,9 +4,59 @@
   "priority": "medium",
   "decomposition_rationale": "STFT requires frame segmentation with overlap, and a forward DFT per frame.ISTFT requires the inverse DFT and overlap-add synthesis. Decomposing these allows reusing individual framing/unframing operations for non-spectral frame-based analyses.",
   "family_directory_hint": "src/sciona/atoms/signal/spectral/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "stft_time_frequency_analysis_root",
+      "parent_id": null,
+      "name": "stft_time_frequency_analysis",
+      "description": "STFT requires frame segmentation with overlap, and a forward DFT per frame.ISTFT requires the inverse DFT and overlap-add synthesis. Decomposing these allows reusing individual framing/unframing operations for non-spectral frame-based analyses.",
+      "concept_type": "signal_transform",
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "frame_length",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "hop_length",
+          "type_desc": "int",
+          "required": true
+        },
+        {
+          "name": "window_type",
+          "type_desc": "str",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "stft_matrix",
+          "type_desc": "NDArray[np.complex128]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "segment_into_overlapping_frames",
+        "compute_frame_fft"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "STFT requires frame segmentation with overlap, and a forward DFT per frame.ISTFT requires the inverse DFT and overlap-add synthesis. Decomposing these allows reusing individual framing/unframing operations for non-spectral frame-based analyses."
+    },
+    {
+      "node_id": "segment_into_overlapping_frames",
+      "parent_id": "stft_time_frequency_analysis_root",
       "name": "segment_into_overlapping_frames",
+      "description": "Segments a 1D signal into overlapping frames with specified window size and hop length.",
+      "concept_type": "signal_transform",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(signal: NDArray[np.float64], frame_length: int, hop_length: int) -> NDArray[np.float64]",
+      "matched_primitive": "segment_into_overlapping_frames",
       "semantic_role": "Segments a 1D signal into overlapping frames with specified window size and hop length.",
       "source_targets": [
         "scipy.signal.stft",
@@ -52,7 +102,15 @@
       "complexity_confidence": 92
     },
     {
+      "node_id": "compute_frame_fft",
+      "parent_id": "stft_time_frequency_analysis_root",
       "name": "compute_frame_fft",
+      "description": "Applies a window and computes the DFT for each signal frame.",
+      "concept_type": "signal_transform",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(frames: NDArray[np.float64], window_type: str) -> NDArray[np.complex128]",
+      "matched_primitive": "compute_frame_fft",
       "semantic_role": "Applies a window and computes the DFT for each signal frame.",
       "source_targets": [
         "scipy.fft.rfft"
@@ -92,10 +150,15 @@
   ],
   "edges": [
     {
-      "source": "segment_into_overlapping_frames",
-      "target": "compute_frame_fft",
+      "source_id": "segment_into_overlapping_frames",
+      "target_id": "compute_frame_fft",
       "output_name": "result",
-      "input_name": "frames"
+      "input_name": "frames",
+      "source_type": "NDArray[np.float64]",
+      "target_type": "NDArray[np.float64]",
+      "requires_glue": false,
+      "source": "segment_into_overlapping_frames",
+      "target": "compute_frame_fft"
     }
   ],
   "cdg_io": {

@@ -4,9 +4,55 @@
   "priority": "medium",
   "decomposition_rationale": "Wiener deconvolution is naturally split into PSF conversion to OTF, frequency-domain Wiener filter coefficient calculation, and filtering via 2D FFT/IFFT. This modularity allows reusing OTF calculations.",
   "family_directory_hint": "src/sciona/atoms/image/restoration/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "deconvolution_wiener_restoration_root",
+      "parent_id": null,
+      "name": "deconvolution_wiener_restoration",
+      "description": "Wiener deconvolution is naturally split into PSF conversion to OTF, frequency-domain Wiener filter coefficient calculation, and filtering via 2D FFT/IFFT. This modularity allows reusing OTF calculations.",
+      "concept_type": "signal_filter",
+      "inputs": [
+        {
+          "name": "image",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "psf",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "nsr",
+          "type_desc": "float",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "restored_image",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "compute_psf_to_otf",
+        "compute_wiener_filter_kernel",
+        "apply_spectral_wiener_filtering"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Wiener deconvolution is naturally split into PSF conversion to OTF, frequency-domain Wiener filter coefficient calculation, and filtering via 2D FFT/IFFT. This modularity allows reusing OTF calculations."
+    },
+    {
+      "node_id": "compute_psf_to_otf",
+      "parent_id": "deconvolution_wiener_restoration_root",
       "name": "compute_psf_to_otf",
+      "description": "Converts a spatial Point Spread Function (PSF) to the frequency-domain Optical Transfer Function (OTF).",
+      "concept_type": "custom",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(psf: NDArray[np.float64], target_shape: tuple[int, int]) -> NDArray[np.complex128]",
+      "matched_primitive": "compute_psf_to_otf",
       "semantic_role": "Converts a spatial Point Spread Function (PSF) to the frequency-domain Optical Transfer Function (OTF).",
       "source_targets": [
         "scipy.fft.fft2",
@@ -44,7 +90,15 @@
       "complexity_confidence": 96
     },
     {
+      "node_id": "compute_wiener_filter_kernel",
+      "parent_id": "deconvolution_wiener_restoration_root",
       "name": "compute_wiener_filter_kernel",
+      "description": "Computes the Wiener deconvolution transfer function.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(otf: NDArray[np.complex128], nsr: float) -> NDArray[np.complex128]",
+      "matched_primitive": "compute_wiener_filter_kernel",
       "semantic_role": "Computes the Wiener deconvolution transfer function.",
       "source_targets": [
         "skimage.restoration.wiener"
@@ -81,7 +135,15 @@
       "complexity_confidence": 98
     },
     {
+      "node_id": "apply_spectral_wiener_filtering",
+      "parent_id": "deconvolution_wiener_restoration_root",
       "name": "apply_spectral_wiener_filtering",
+      "description": "Applies the Wiener filter to the blurred image in the frequency domain.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(image: NDArray[np.float64], filter_kernel: NDArray[np.complex128]) -> NDArray[np.float64]",
+      "matched_primitive": "apply_spectral_wiener_filtering",
       "semantic_role": "Applies the Wiener filter to the blurred image in the frequency domain.",
       "source_targets": [
         "scipy.fft.fft2",
@@ -121,16 +183,26 @@
   ],
   "edges": [
     {
-      "source": "compute_psf_to_otf",
-      "target": "compute_wiener_filter_kernel",
+      "source_id": "compute_psf_to_otf",
+      "target_id": "compute_wiener_filter_kernel",
       "output_name": "result",
-      "input_name": "otf"
+      "input_name": "otf",
+      "source_type": "NDArray[np.complex128]",
+      "target_type": "NDArray[np.complex128]",
+      "requires_glue": false,
+      "source": "compute_psf_to_otf",
+      "target": "compute_wiener_filter_kernel"
     },
     {
-      "source": "compute_wiener_filter_kernel",
-      "target": "apply_spectral_wiener_filtering",
+      "source_id": "compute_wiener_filter_kernel",
+      "target_id": "apply_spectral_wiener_filtering",
       "output_name": "result",
-      "input_name": "filter_kernel"
+      "input_name": "filter_kernel",
+      "source_type": "NDArray[np.complex128]",
+      "target_type": "NDArray[np.complex128]",
+      "requires_glue": false,
+      "source": "compute_wiener_filter_kernel",
+      "target": "apply_spectral_wiener_filtering"
     }
   ],
   "cdg_io": {

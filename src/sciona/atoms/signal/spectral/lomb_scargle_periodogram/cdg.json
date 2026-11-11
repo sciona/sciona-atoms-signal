@@ -4,9 +4,53 @@
   "priority": "medium",
   "decomposition_rationale": "Decompose into core least-squares power fitting and statistical significance threshold computation (FAP) to enable decoupling spectrum calculation from hypothesis testing.",
   "family_directory_hint": "src/sciona/atoms/signal/spectral/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "lomb_scargle_periodogram_root",
+      "parent_id": null,
+      "name": "lomb_scargle_periodogram",
+      "description": "Decompose into core least-squares power fitting and statistical significance threshold computation (FAP) to enable decoupling spectrum calculation from hypothesis testing.",
+      "concept_type": "signal_transform",
+      "inputs": [
+        {
+          "name": "t",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "y",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "freqs",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "power",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "compute_lomb_scargle_power"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Decompose into core least-squares power fitting and statistical significance threshold computation (FAP) to enable decoupling spectrum calculation from hypothesis testing."
+    },
+    {
+      "node_id": "compute_lomb_scargle_power",
+      "parent_id": "lomb_scargle_periodogram_root",
       "name": "compute_lomb_scargle_power",
+      "description": "Computes the Lomb-Scargle power spectrum for irregularly spaced time series.",
+      "concept_type": "signal_transform",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(t: NDArray[np.float64], y: NDArray[np.float64], freqs: NDArray[np.float64]) -> NDArray[np.float64]",
+      "matched_primitive": "compute_lomb_scargle_power",
       "semantic_role": "Computes the Lomb-Scargle power spectrum for irregularly spaced time series.",
       "source_targets": [
         "scipy.signal.lombscargle"

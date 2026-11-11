@@ -4,9 +4,49 @@
   "priority": "medium",
   "decomposition_rationale": "FFT convolution is decomposed into zero-padding calculation, forward FFTs, element-wise complex multiplication, and IFFT with real-part cropping. This matches standard DSP architectures.",
   "family_directory_hint": "src/sciona/atoms/signal/filtering/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "fft_convolution_pipeline_root",
+      "parent_id": null,
+      "name": "fft_convolution_pipeline",
+      "description": "FFT convolution is decomposed into zero-padding calculation, forward FFTs, element-wise complex multiplication, and IFFT with real-part cropping. This matches standard DSP architectures.",
+      "concept_type": "signal_filter",
+      "inputs": [
+        {
+          "name": "in1",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "in2",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "convolved_signal",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "compute_convolving_padding",
+        "multiply_spectral_coefficients"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "FFT convolution is decomposed into zero-padding calculation, forward FFTs, element-wise complex multiplication, and IFFT with real-part cropping. This matches standard DSP architectures."
+    },
+    {
+      "node_id": "compute_convolving_padding",
+      "parent_id": "fft_convolution_pipeline_root",
       "name": "compute_convolving_padding",
+      "description": "Determines the optimal zero-padding size for linear convolution of two arrays.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(in1_shape: tuple[int, ...], in2_shape: tuple[int, ...]) -> tuple[int, ...]",
+      "matched_primitive": "compute_convolving_padding",
       "semantic_role": "Determines the optimal zero-padding size for linear convolution of two arrays.",
       "source_targets": [
         "scipy.signal.fftconvolve"
@@ -42,7 +82,15 @@
       "complexity_confidence": 99
     },
     {
+      "node_id": "multiply_spectral_coefficients",
+      "parent_id": "fft_convolution_pipeline_root",
       "name": "multiply_spectral_coefficients",
+      "description": "Element-wise multiplication of two complex spectra in the frequency domain.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(spec1: NDArray[np.complex128], spec2: NDArray[np.complex128]) -> NDArray[np.complex128]",
+      "matched_primitive": "multiply_spectral_coefficients",
       "semantic_role": "Element-wise multiplication of two complex spectra in the frequency domain.",
       "source_targets": [
         "numpy.multiply"
@@ -80,10 +128,15 @@
   ],
   "edges": [
     {
-      "source": "compute_convolving_padding",
-      "target": "multiply_spectral_coefficients",
+      "source_id": "compute_convolving_padding",
+      "target_id": "multiply_spectral_coefficients",
       "output_name": "result",
-      "input_name": "spec1"
+      "input_name": "spec1",
+      "source_type": "tuple[int, ...]",
+      "target_type": "NDArray[np.complex128]",
+      "requires_glue": false,
+      "source": "compute_convolving_padding",
+      "target": "multiply_spectral_coefficients"
     }
   ],
   "cdg_io": {

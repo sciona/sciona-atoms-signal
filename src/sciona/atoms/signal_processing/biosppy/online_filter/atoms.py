@@ -28,7 +28,6 @@ def filter_state_init(
     b: np.ndarray | None = None,
     a: np.ndarray | None = None,
 ) -> tuple[tuple[np.ndarray, np.ndarray, np.ndarray | None], FilterState]:
-    from biosppy.signals.tools import OnlineFilter
     """Initialize an OnlineFilter coefficient/state bundle for chunked use.
 
     Args:
@@ -39,6 +38,7 @@ def filter_state_init(
         A tuple ``((b, a, zi), state)`` where ``zi`` is initially ``None`` and
         ``state`` carries the immutable chunk-to-chunk filter state.
     """
+    from biosppy.signals.tools import OnlineFilter
     if b is None:
         raise TypeError("Please specify the numerator coefficients.")
     if a is None:
@@ -58,7 +58,6 @@ def filter_step(
     signal: np.ndarray | None = None,
     state: FilterState | None = None,
 ) -> tuple[tuple[np.ndarray, np.ndarray], FilterState]:
-    from biosppy.signals.tools import OnlineFilter
     """Filter one signal chunk and return the next immutable filter state.
 
     Args:
@@ -70,6 +69,7 @@ def filter_step(
         A tuple ``((filtered_signal, zi_out), next_state)`` with the filtered
         chunk and the updated delay-line state for the next chunk.
     """
+    from biosppy.signals.tools import OnlineFilter
     if signal is None:
         raise TypeError("Please specify the input signal.")
     chunk = _as_numeric_vector(signal, "signal")

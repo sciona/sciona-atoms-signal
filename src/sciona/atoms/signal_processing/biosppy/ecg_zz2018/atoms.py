@@ -30,7 +30,6 @@ def calculatecompositesqi_zz2018(
     nseg: int,
     mode: str,
 ) -> float:
-    from biosppy.signals.ecg import ZZ2018
     """Calculates a composite Signal Quality Index (SQI) for a signal, using multiple detectors and parameters. This likely serves as an orchestrator or a specific implementation from a paper.
 
     Args:
@@ -45,6 +44,7 @@ def calculatecompositesqi_zz2018(
     Returns:
         The final composite SQI score.
     """
+    from biosppy.signals.ecg import ZZ2018
     _ensure_scipy_trapz()
     return ZZ2018(signal=signal, detector_1=detector_1, detector_2=detector_2, fs=fs, search_window=search_window, nseg=nseg, mode=mode)
 
@@ -58,7 +58,6 @@ def calculate_beat_agreement_sqi(
     mode: str,
     search_window: int,
 ) -> float:
-    from biosppy.signals.ecg import bSQI
     """Calculates a beat-based Signal Quality Index (bSQI) based on the agreement between two beat detectors.
 
 Args:
@@ -70,6 +69,7 @@ Args:
 
 Returns:
     The beat agreement Signal Quality Index (SQI) score."""
+    from biosppy.signals.ecg import bSQI
     return bSQI(detector_1=detector_1, detector_2=detector_2, fs=fs, mode=mode, search_window=search_window)
 
 @register_atom(witness_calculatefrequencypowersqi)
@@ -83,7 +83,6 @@ def calculate_frequency_power_sqi(
     dem_spectrum: ArrayLike,
     mode: str,
 ) -> float:
-    from biosppy.signals.ecg import fSQI
     """Calculates a frequency-based Signal Quality Index (fSQI) using the power spectrum of the electrocardiogram (ECG) signal.
 
 Args:
@@ -96,6 +95,7 @@ Args:
 
 Returns:
     The frequency power Signal Quality Index (SQI) score."""
+    from biosppy.signals.ecg import fSQI
     _ensure_scipy_trapz()
     return fSQI(ecg_signal=ecg_signal, fs=fs, nseg=nseg, num_spectrum=num_spectrum, dem_spectrum=dem_spectrum, mode=mode)
 
@@ -104,7 +104,6 @@ Returns:
 @icontract.require(lambda fisher: fisher is not None, "fisher cannot be None")
 @icontract.ensure(lambda result: result is not None, "CalculateKurtosisSQI output must not be None")
 def calculate_kurtosis_sqi(signal: ArrayLike, fisher: bool) -> float:
-    from biosppy.signals.ecg import kSQI
     """Calculates a Signal Quality Index (kSQI) based on the statistical kurtosis of the signal.
 
 Args:
@@ -113,4 +112,5 @@ Args:
 
 Returns:
     The kurtosis-based Signal Quality Index (SQI) score."""
+    from biosppy.signals.ecg import kSQI
     return kSQI(signal=signal, fisher=fisher)

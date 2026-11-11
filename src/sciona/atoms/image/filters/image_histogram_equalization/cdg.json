@@ -4,9 +4,48 @@
   "priority": "medium",
   "decomposition_rationale": "Decompose CLAHE into grid-wise contrast-clipped CDF calculation and subsequent spatial bilinear interpolation. This allows substituting alternative local enhancement mapping equations.",
   "family_directory_hint": "src/sciona/atoms/image/filters/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "image_histogram_equalization_root",
+      "parent_id": null,
+      "name": "image_histogram_equalization",
+      "description": "Decompose CLAHE into grid-wise contrast-clipped CDF calculation and subsequent spatial bilinear interpolation. This allows substituting alternative local enhancement mapping equations.",
+      "concept_type": "signal_filter",
+      "inputs": [
+        {
+          "name": "image",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "clip_limit",
+          "type_desc": "float",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "enhanced_image",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "compute_tile_cdfs"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Decompose CLAHE into grid-wise contrast-clipped CDF calculation and subsequent spatial bilinear interpolation. This allows substituting alternative local enhancement mapping equations."
+    },
+    {
+      "node_id": "compute_tile_cdfs",
+      "parent_id": "image_histogram_equalization_root",
       "name": "compute_tile_cdfs",
+      "description": "Computes local, contrast-limited cumulative distribution functions in a grid.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(image: NDArray[np.float64], kernel_size: tuple[int, int], clip_limit: float) -> NDArray[np.float64]",
+      "matched_primitive": "compute_tile_cdfs",
       "semantic_role": "Computes local, contrast-limited cumulative distribution functions in a grid.",
       "source_targets": [
         "skimage.exposure.equalize_adapthist"

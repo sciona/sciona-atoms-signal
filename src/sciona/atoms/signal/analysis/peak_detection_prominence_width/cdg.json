@@ -4,9 +4,54 @@
   "priority": "medium",
   "decomposition_rationale": "Peak detection is naturally decomposed into local maxima detection, height/distance filtering, prominence calculation, and width estimation. This modularity allows users to inspect or use intermediate prominences for custom filtering.",
   "family_directory_hint": "src/sciona/atoms/signal/analysis/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "peak_detection_prominence_width_root",
+      "parent_id": null,
+      "name": "peak_detection_prominence_width",
+      "description": "Peak detection is naturally decomposed into local maxima detection, height/distance filtering, prominence calculation, and width estimation. This modularity allows users to inspect or use intermediate prominences for custom filtering.",
+      "concept_type": "signal_filter",
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "rel_height",
+          "type_desc": "float",
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "name": "peaks",
+          "type_desc": "NDArray[np.int64]"
+        },
+        {
+          "name": "widths",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "find_local_maxima",
+        "compute_peak_prominences",
+        "compute_peak_widths"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Peak detection is naturally decomposed into local maxima detection, height/distance filtering, prominence calculation, and width estimation. This modularity allows users to inspect or use intermediate prominences for custom filtering."
+    },
+    {
+      "node_id": "find_local_maxima",
+      "parent_id": "peak_detection_prominence_width_root",
       "name": "find_local_maxima",
+      "description": "Identifies indices of all local maximum peaks in a 1D signal.",
+      "concept_type": "custom",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(signal: NDArray[np.float64]) -> NDArray[np.int64]",
+      "matched_primitive": "find_local_maxima",
       "semantic_role": "Identifies indices of all local maximum peaks in a 1D signal.",
       "source_targets": [
         "scipy.signal.find_peaks"
@@ -38,7 +83,15 @@
       "complexity_confidence": 98
     },
     {
+      "node_id": "compute_peak_prominences",
+      "parent_id": "peak_detection_prominence_width_root",
       "name": "compute_peak_prominences",
+      "description": "Calculates the prominence of each detected peak.",
+      "concept_type": "custom",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(signal: NDArray[np.float64], peaks: NDArray[np.int64]) -> tuple[NDArray[np.float64], NDArray[np.int64], NDArray[np.int64]]",
+      "matched_primitive": "compute_peak_prominences",
       "semantic_role": "Calculates the prominence of each detected peak.",
       "source_targets": [
         "scipy.signal.peak_prominences"
@@ -76,7 +129,15 @@
       "complexity_confidence": 90
     },
     {
+      "node_id": "compute_peak_widths",
+      "parent_id": "peak_detection_prominence_width_root",
       "name": "compute_peak_widths",
+      "description": "Calculates the width of each peak at a relative height.",
+      "concept_type": "custom",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(signal: NDArray[np.float64], peaks: NDArray[np.int64], prominences: NDArray[np.float64], rel_height: float = ...) -> tuple[NDArray[np.float64], NDArray[np.float64], NDArray[np.float64], NDArray[np.float64]]",
+      "matched_primitive": "compute_peak_widths",
       "semantic_role": "Calculates the width of each peak at a relative height.",
       "source_targets": [
         "scipy.signal.peak_widths"
@@ -125,16 +186,26 @@
   ],
   "edges": [
     {
-      "source": "find_local_maxima",
-      "target": "compute_peak_prominences",
+      "source_id": "find_local_maxima",
+      "target_id": "compute_peak_prominences",
       "output_name": "result",
-      "input_name": "peaks"
+      "input_name": "peaks",
+      "source_type": "NDArray[np.int64]",
+      "target_type": "NDArray[np.int64]",
+      "requires_glue": false,
+      "source": "find_local_maxima",
+      "target": "compute_peak_prominences"
     },
     {
-      "source": "compute_peak_prominences",
-      "target": "compute_peak_widths",
+      "source_id": "compute_peak_prominences",
+      "target_id": "compute_peak_widths",
       "output_name": "result",
-      "input_name": "prominences"
+      "input_name": "prominences",
+      "source_type": "tuple[NDArray[np.float64], NDArray[np.int64], NDArray[np.int64]]",
+      "target_type": "NDArray[np.float64]",
+      "requires_glue": false,
+      "source": "compute_peak_prominences",
+      "target": "compute_peak_widths"
     }
   ],
   "cdg_io": {

@@ -4,9 +4,47 @@
   "priority": "medium",
   "decomposition_rationale": "Decompose into label mask generation (via Union-Find equivalent scans) and subsequent regional property extraction to allow standalone region statistical analyses on pre-labeled target masks.",
   "family_directory_hint": "src/sciona/atoms/image/segmentation/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "connected_component_labeling_root",
+      "parent_id": null,
+      "name": "connected_component_labeling",
+      "description": "Decompose into label mask generation (via Union-Find equivalent scans) and subsequent regional property extraction to allow standalone region statistical analyses on pre-labeled target masks.",
+      "concept_type": "custom",
+      "inputs": [
+        {
+          "name": "binary_image",
+          "type_desc": "NDArray[np.bool_]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "labeled_image",
+          "type_desc": "NDArray[np.int64]"
+        },
+        {
+          "name": "num_features",
+          "type_desc": "int"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "label_binary_components"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Decompose into label mask generation (via Union-Find equivalent scans) and subsequent regional property extraction to allow standalone region statistical analyses on pre-labeled target masks."
+    },
+    {
+      "node_id": "label_binary_components",
+      "parent_id": "connected_component_labeling_root",
       "name": "label_binary_components",
+      "description": "Labels connected components in a binary image.",
+      "concept_type": "custom",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(binary_image: NDArray[np.bool_], connectivity: int = ...) -> tuple[NDArray[np.int64], int]",
+      "matched_primitive": "label_binary_components",
       "semantic_role": "Labels connected components in a binary image.",
       "source_targets": [
         "scipy.ndimage.label"

@@ -4,9 +4,48 @@
   "priority": "medium",
   "decomposition_rationale": "Decompose scale-to-kernel generation and spatial convolution stages to allow switching between direct time-domain and FFT-based multi-scale convolving operators.",
   "family_directory_hint": "src/sciona/atoms/signal/spectral/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "cwt_scalogram_analysis_root",
+      "parent_id": null,
+      "name": "cwt_scalogram_analysis",
+      "description": "Decompose scale-to-kernel generation and spatial convolution stages to allow switching between direct time-domain and FFT-based multi-scale convolving operators.",
+      "concept_type": "signal_transform",
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "scales",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "cwt_matrix",
+          "type_desc": "NDArray[np.complex128]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "generate_cwt_kernels"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Decompose scale-to-kernel generation and spatial convolution stages to allow switching between direct time-domain and FFT-based multi-scale convolving operators."
+    },
+    {
+      "node_id": "generate_cwt_kernels",
+      "parent_id": "cwt_scalogram_analysis_root",
       "name": "generate_cwt_kernels",
+      "description": "Generates normalized 1D wavelet kernels for a set of continuous scales.",
+      "concept_type": "signal_transform",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(scales: NDArray[np.float64], wavelet_type: str) -> list[NDArray[np.float64]]",
+      "matched_primitive": "generate_cwt_kernels",
       "semantic_role": "Generates normalized 1D wavelet kernels for a set of continuous scales.",
       "source_targets": [
         "scipy.signal.morlet2",

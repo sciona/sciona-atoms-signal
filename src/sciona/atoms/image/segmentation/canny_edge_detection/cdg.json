@@ -4,9 +4,55 @@
   "priority": "medium",
   "decomposition_rationale": "Canny edge detection is a multi-stage pipeline: Gaussian smoothing, gradient magnitude/angle computation, non-maximum suppression, double thresholding, and hysteresis edge tracking. Decomposing these allows testing each step independently.",
   "family_directory_hint": "src/sciona/atoms/image/segmentation/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "canny_edge_detection_root",
+      "parent_id": null,
+      "name": "canny_edge_detection",
+      "description": "Canny edge detection is a multi-stage pipeline: Gaussian smoothing, gradient magnitude/angle computation, non-maximum suppression, double thresholding, and hysteresis edge tracking. Decomposing these allows testing each step independently.",
+      "concept_type": "custom",
+      "inputs": [
+        {
+          "name": "image",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "low_threshold",
+          "type_desc": "float",
+          "required": true
+        },
+        {
+          "name": "high_threshold",
+          "type_desc": "float",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "edges",
+          "type_desc": "NDArray[np.bool_]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "compute_image_gradients",
+        "apply_non_maximum_suppression",
+        "apply_hysteresis_thresholding"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Canny edge detection is a multi-stage pipeline: Gaussian smoothing, gradient magnitude/angle computation, non-maximum suppression, double thresholding, and hysteresis edge tracking. Decomposing these allows testing each step independently."
+    },
+    {
+      "node_id": "compute_image_gradients",
+      "parent_id": "canny_edge_detection_root",
       "name": "compute_image_gradients",
+      "description": "Computes the horizontal and vertical image gradients using Sobel or Scharr operators.",
+      "concept_type": "custom",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(image: NDArray[np.float64]) -> tuple[NDArray[np.float64], NDArray[np.float64]]",
+      "matched_primitive": "compute_image_gradients",
       "semantic_role": "Computes the horizontal and vertical image gradients using Sobel or Scharr operators.",
       "source_targets": [
         "scipy.ndimage.sobel",
@@ -43,7 +89,15 @@
       "complexity_confidence": 98
     },
     {
+      "node_id": "apply_non_maximum_suppression",
+      "parent_id": "canny_edge_detection_root",
       "name": "apply_non_maximum_suppression",
+      "description": "Thins gradient magnitude maps along the direction of the gradient.",
+      "concept_type": "custom",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(grad_x: NDArray[np.float64], grad_y: NDArray[np.float64]) -> NDArray[np.float64]",
+      "matched_primitive": "apply_non_maximum_suppression",
       "semantic_role": "Thins gradient magnitude maps along the direction of the gradient.",
       "source_targets": [
         "skimage.feature.canny"
@@ -79,7 +133,15 @@
       "complexity_confidence": 92
     },
     {
+      "node_id": "apply_hysteresis_thresholding",
+      "parent_id": "canny_edge_detection_root",
       "name": "apply_hysteresis_thresholding",
+      "description": "Applies low/high thresholds and tracks edges using connectivity.",
+      "concept_type": "custom",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(suppressed_image: NDArray[np.float64], low_threshold: float, high_threshold: float) -> NDArray[np.bool_]",
+      "matched_primitive": "apply_hysteresis_thresholding",
       "semantic_role": "Applies low/high thresholds and tracks edges using connectivity.",
       "source_targets": [
         "skimage.filters.apply_hysteresis_threshold"
@@ -122,22 +184,37 @@
   ],
   "edges": [
     {
-      "source": "compute_image_gradients",
-      "target": "apply_non_maximum_suppression",
+      "source_id": "compute_image_gradients",
+      "target_id": "apply_non_maximum_suppression",
       "output_name": "grad_x",
-      "input_name": "grad_x"
-    },
-    {
+      "input_name": "grad_x",
+      "source_type": "NDArray[np.float64]",
+      "target_type": "NDArray[np.float64]",
+      "requires_glue": false,
       "source": "compute_image_gradients",
-      "target": "apply_non_maximum_suppression",
-      "output_name": "grad_y",
-      "input_name": "grad_y"
+      "target": "apply_non_maximum_suppression"
     },
     {
-      "source": "apply_non_maximum_suppression",
-      "target": "apply_hysteresis_thresholding",
+      "source_id": "compute_image_gradients",
+      "target_id": "apply_non_maximum_suppression",
+      "output_name": "grad_y",
+      "input_name": "grad_y",
+      "source_type": "NDArray[np.float64]",
+      "target_type": "NDArray[np.float64]",
+      "requires_glue": false,
+      "source": "compute_image_gradients",
+      "target": "apply_non_maximum_suppression"
+    },
+    {
+      "source_id": "apply_non_maximum_suppression",
+      "target_id": "apply_hysteresis_thresholding",
       "output_name": "result",
-      "input_name": "suppressed_image"
+      "input_name": "suppressed_image",
+      "source_type": "NDArray[np.float64]",
+      "target_type": "NDArray[np.float64]",
+      "requires_glue": false,
+      "source": "apply_non_maximum_suppression",
+      "target": "apply_hysteresis_thresholding"
     }
   ],
   "cdg_io": {

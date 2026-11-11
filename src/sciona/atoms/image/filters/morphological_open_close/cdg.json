@@ -4,9 +4,53 @@
   "priority": "medium",
   "decomposition_rationale": "Decompose morphology into structuring element creation, erosion, and dilation. This enables compiling opening/closing as sequences of these fundamental building blocks.",
   "family_directory_hint": "src/sciona/atoms/image/filters/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "morphological_open_close_root",
+      "parent_id": null,
+      "name": "morphological_open_close",
+      "description": "Decompose morphology into structuring element creation, erosion, and dilation. This enables compiling opening/closing as sequences of these fundamental building blocks.",
+      "concept_type": "signal_filter",
+      "inputs": [
+        {
+          "name": "image",
+          "type_desc": "NDArray[np.bool_]",
+          "required": true
+        },
+        {
+          "name": "footprint_shape",
+          "type_desc": "str",
+          "required": true
+        },
+        {
+          "name": "radius",
+          "type_desc": "int",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type_desc": "NDArray[np.bool_]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "generate_structuring_element"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Decompose morphology into structuring element creation, erosion, and dilation. This enables compiling opening/closing as sequences of these fundamental building blocks."
+    },
+    {
+      "node_id": "generate_structuring_element",
+      "parent_id": "morphological_open_close_root",
       "name": "generate_structuring_element",
+      "description": "Creates a binary footprint mask of a chosen shape and size.",
+      "concept_type": "signal_filter",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(shape: str, radius: int) -> NDArray[np.bool_]",
+      "matched_primitive": "generate_structuring_element",
       "semantic_role": "Creates a binary footprint mask of a chosen shape and size.",
       "source_targets": [
         "skimage.morphology.disk",

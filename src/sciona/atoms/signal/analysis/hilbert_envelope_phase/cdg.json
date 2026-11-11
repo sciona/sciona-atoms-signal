@@ -4,9 +4,47 @@
   "priority": "medium",
   "decomposition_rationale": "Decompose into analytic signal generation (via FFT) and attribute extraction (magnitude/phase/frequency calculation) to isolate the complex-domain math from real-valued diagnostics.",
   "family_directory_hint": "src/sciona/atoms/signal/analysis/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "hilbert_envelope_phase_root",
+      "parent_id": null,
+      "name": "hilbert_envelope_phase",
+      "description": "Decompose into analytic signal generation (via FFT) and attribute extraction (magnitude/phase/frequency calculation) to isolate the complex-domain math from real-valued diagnostics.",
+      "concept_type": "signal_transform",
+      "inputs": [
+        {
+          "name": "signal",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "envelope",
+          "type_desc": "NDArray[np.float64]"
+        },
+        {
+          "name": "phase",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "compute_analytic_signal"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Decompose into analytic signal generation (via FFT) and attribute extraction (magnitude/phase/frequency calculation) to isolate the complex-domain math from real-valued diagnostics."
+    },
+    {
+      "node_id": "compute_analytic_signal",
+      "parent_id": "hilbert_envelope_phase_root",
       "name": "compute_analytic_signal",
+      "description": "Computes the complex analytic signal of a real sequence via the Hilbert transform.",
+      "concept_type": "custom",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(signal: NDArray[np.float64]) -> NDArray[np.complex128]",
+      "matched_primitive": "compute_analytic_signal",
       "semantic_role": "Computes the complex analytic signal of a real sequence via the Hilbert transform.",
       "source_targets": [
         "scipy.signal.hilbert"

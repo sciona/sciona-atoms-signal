@@ -4,9 +4,48 @@
   "priority": "medium",
   "decomposition_rationale": "Wavelet denoising cleanly splits into forward DWT decomposition, statistical threshold calculation with coefficient scaling, and inverse reconstruction. This separation allows substituting custom thresholding algorithms.",
   "family_directory_hint": "src/sciona/atoms/signal/resampling/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "wavelet_denoising_thresholding_root",
+      "parent_id": null,
+      "name": "wavelet_denoising_thresholding",
+      "description": "Wavelet denoising cleanly splits into forward DWT decomposition, statistical threshold calculation with coefficient scaling, and inverse reconstruction. This separation allows substituting custom thresholding algorithms.",
+      "concept_type": "custom",
+      "inputs": [
+        {
+          "name": "data",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "wavelet",
+          "type_desc": "str",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "denoised_data",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "compute_hierarchical_dwt"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Wavelet denoising cleanly splits into forward DWT decomposition, statistical threshold calculation with coefficient scaling, and inverse reconstruction. This separation allows substituting custom thresholding algorithms."
+    },
+    {
+      "node_id": "compute_hierarchical_dwt",
+      "parent_id": "wavelet_denoising_thresholding_root",
       "name": "compute_hierarchical_dwt",
+      "description": "Computes 1D discrete wavelet decomposition coefficients down to a specified level.",
+      "concept_type": "custom",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(data: NDArray[np.float64], wavelet: str, level: int = ...) -> list[NDArray[np.float64]]",
+      "matched_primitive": "compute_hierarchical_dwt",
       "semantic_role": "Computes 1D discrete wavelet decomposition coefficients down to a specified level.",
       "source_targets": [
         "pywt.wavedec"

@@ -4,9 +4,48 @@
   "priority": "medium",
   "decomposition_rationale": "Decompose into local cross-correlation map computation and coordinate argmax extraction. Allows utilizing custom peak-thresholding strategies rather than just a single argmax coordinate.",
   "family_directory_hint": "src/sciona/atoms/image/segmentation/",
-  "atomic_nodes": [
+  "nodes": [
     {
+      "node_id": "template_matching_correlation_root",
+      "parent_id": null,
+      "name": "template_matching_correlation",
+      "description": "Decompose into local cross-correlation map computation and coordinate argmax extraction. Allows utilizing custom peak-thresholding strategies rather than just a single argmax coordinate.",
+      "concept_type": "custom",
+      "inputs": [
+        {
+          "name": "image",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        },
+        {
+          "name": "template",
+          "type_desc": "NDArray[np.float64]",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "name": "correlation_map",
+          "type_desc": "NDArray[np.float64]"
+        }
+      ],
+      "status": "decomposed",
+      "children": [
+        "compute_correlation_map"
+      ],
+      "depth": 0,
+      "decomposition_rationale": "Decompose into local cross-correlation map computation and coordinate argmax extraction. Allows utilizing custom peak-thresholding strategies rather than just a single argmax coordinate."
+    },
+    {
+      "node_id": "compute_correlation_map",
+      "parent_id": "template_matching_correlation_root",
       "name": "compute_correlation_map",
+      "description": "Computes 2D normalized cross-correlation coefficients map.",
+      "concept_type": "custom",
+      "status": "atomic",
+      "depth": 1,
+      "type_signature": "(image: NDArray[np.float64], template: NDArray[np.float64]) -> NDArray[np.float64]",
+      "matched_primitive": "compute_correlation_map",
       "semantic_role": "Computes 2D normalized cross-correlation coefficients map.",
       "source_targets": [
         "skimage.feature.match_template"
